@@ -20,3 +20,10 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+### IDE和编辑器配置 ###
+.idea/
+
+### Node.js ###
+node_modules/
+package-lock.json
