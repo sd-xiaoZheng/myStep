@@ -27,3 +27,6 @@ TestResults.xml
 ### Node.js ###
 node_modules/
 package-lock.json
+
+# Maven 生成的扁平化 POM 文件
+.flattened-pom.xml
