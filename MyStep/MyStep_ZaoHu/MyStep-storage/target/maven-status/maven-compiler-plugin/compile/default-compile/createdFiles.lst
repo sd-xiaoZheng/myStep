@@ -1,6 +1,0 @@
-org\zaohu\zaohustorage\mapper\StorageMapper.class
-org\zaohu\zaohustorage\ZaohuStorageApplication.class
-org\zaohu\zaohustorage\service\impl\StorageServiceImpl.class
-org\zaohu\zaohustorage\controller\StorageController.class
-org\zaohu\zaohustorage\service\StorageService.class
-org\zaohu\zaohustorage\dto\StorageDTO.class

@@ -6,6 +6,7 @@
     <groupId>org.zaohu</groupId>
     <artifactId>MyStep_2024</artifactId>
     <version>${revision}</version>
+    <!--jar/war/pom-->
     <packaging>pom</packaging>
 
     <properties>
@@ -47,6 +48,8 @@
         <module>MyStep_ZaoHu/MyStep-step</module>
     </modules>
 
+    <!--dependencyManagement 依赖管理 如果dependencies没有被这个包围 那么子模块会无条件的继承这些依赖，
+    但被这个包围子模块只需dependency选择依赖包 不需要指定版本 因为这里已经指定版本了-->
     <dependencyManagement>
         <dependencies>
             <!-- Spring Boot Starter父依赖 -->

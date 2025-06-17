@@ -30,3 +30,5 @@ package-lock.json
 
 # Maven 生成的扁平化 POM 文件
 .flattened-pom.xml
+# 排除Maven构建生成的target目录
+target/

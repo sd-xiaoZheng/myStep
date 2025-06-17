@@ -109,11 +109,12 @@
             <scope>test</scope>
         </dependency>
 
-        <!--添加lombok注解-->
+        <!--添加lombok注解 范围：provided 编译时使用，运行时不需要-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- mybatisPlus 核心库 最新版，哈哈-->
