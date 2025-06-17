@@ -46,7 +46,15 @@ export function editPhotoType(data) {
     })
 }
 
-// 添加查询
+// 获取类型和短语
+export function getPhotoTypeAndPhrase(params) {
+    return request({
+        url: '/photoType/getPhotoTypeAndPhrase',
+        method: 'get',
+        params
+    })
+}
+// 获取类型
 export function getPhotoTypeList(params) {
     return request({
         url: '/photoType/getPhotoType',

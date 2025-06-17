@@ -12,7 +12,6 @@ spring:
       # 设置总上传的文件大小
       max-request-size: 50MB
 
-
   config:
     import:
       - optional:nacos:${spring.application.name}.yml
@@ -38,9 +37,6 @@ spring:
             enable: true
           socketFactory:
             port: 465
-
-
-
 
 #https://juejin.cn/post/6850418115382738958 rocket详细使用
 rocketmq:

@@ -3,6 +3,9 @@ package org.zaohu.modules.photo.mapper;
 import org.zaohu.modules.photo.entity.Photo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.zaohu.modules.photoType.entity.PhotoType;
+
+import java.util.ArrayList;
 
 /**
  * <p>
@@ -14,5 +17,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface PhotoMapper extends BaseMapper<Photo> {
-
+    ArrayList<Photo> selectPhraseByTypeId(ArrayList<Integer> typeId);
 }

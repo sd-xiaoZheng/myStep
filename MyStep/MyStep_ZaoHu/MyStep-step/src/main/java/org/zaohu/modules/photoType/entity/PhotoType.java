@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -59,4 +60,7 @@ public class PhotoType {
 
     @TableField(exist = false)
     private MultipartFile tempPhoto;
+
+    @TableField(exist = false)
+    private ArrayList<String> phrases;
 }

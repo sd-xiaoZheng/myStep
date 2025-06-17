@@ -19,7 +19,13 @@ public interface PhotoTypeService extends IService<PhotoType> {
 
     void addPhotoType(PhotoType photoType);
 
-    List<PhotoType> getPhotoType(PhotoType photoType);
+    /**
+     *
+     * @param photoType
+     * @param isPhrase 是否获取里面的短语
+     * @return
+     */
+    List<PhotoType> getPhotoType(PhotoType photoType,Integer isPhrase);
 
     Long selectCount(PhotoType photoType);
 

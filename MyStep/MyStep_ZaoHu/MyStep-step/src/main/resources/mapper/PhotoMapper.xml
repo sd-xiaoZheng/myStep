@@ -2,4 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zaohu.modules.photo.mapper.PhotoMapper">
 
+    <resultMap type="org.zaohu.modules.photo.entity.Photo" id="PhotoEntityResult">
+        <result property="id"            column="id"            />
+        <result property="name"          column="name"          />
+        <result property="filePath"      column="file_path"     />
+        <result property="typeId"        column="type_id"       />
+        <result property="isFavorite"    column="is_favorite"   />
+        <result property="uploadTime"    column="upload_time"   />
+        <result property="phrase"        column="phrase"        />
+        <result property="memory"        column="memory"        />
+        <result property="isDeleted"     column="is_deleted"    />
+        <result property="location"      column="location"      />
+        <result property="shotTime"      column="shot_time"     />
+        <result property="device"        column="device"        />
+    </resultMap>
+
+    <sql id="selectCaptchaTypeVo">
+        select id, name, file_path, type_id, is_favorite, upload_time, phrase, memory, is_deleted, location, shot_time,device from photo
+    </sql>
+
+    <select id="selectPhraseByTypeId" resultMap="PhotoEntityResult">
+        select type_id, phrase from photo where type_id in
+        <foreach item="typeId" collection="collection" open="(" separator="," close=")">
+            #{typeId}
+        </foreach>
+        and phrase is not null
+    </select>
 </mapper>

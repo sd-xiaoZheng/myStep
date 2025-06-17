@@ -13,7 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @SpringBootApplication
 @EnableDiscoveryClient//nacos用于发现服务
-@MapperScan("org.zaohu.*.*.mapper")
+@MapperScan("org.zaohu.modules.**.mapper")
 @Slf4j
 public class ZaohuStepApplication {
     public static void main(String[] args) {

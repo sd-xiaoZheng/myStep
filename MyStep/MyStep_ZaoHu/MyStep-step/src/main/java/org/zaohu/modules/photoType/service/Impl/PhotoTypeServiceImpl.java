@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.zaohu.common.entity.FileWrapper;
 import org.zaohu.common.entity.PhotoBatch;
+import org.zaohu.modules.photo.entity.Photo;
+import org.zaohu.modules.photo.mapper.PhotoMapper;
 import org.zaohu.modules.photoType.entity.PhotoType;
 import org.zaohu.modules.photoType.mapper.PhotoTypeMapper;
 import org.zaohu.modules.photoType.service.PhotoTypeService;
@@ -19,6 +21,7 @@ import org.zaohu.utils.text.StringUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,6 +36,8 @@ import java.util.List;
 public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType> implements PhotoTypeService {
     @Autowired
     private PhotoTypeMapper photoTypeMapper;
+    @Autowired
+    private PhotoMapper photoMapper;
 
     @Override
     public void addPhotoType(PhotoType photoType) {
@@ -42,14 +47,37 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
     }
 
     @Override
-    public List<PhotoType> getPhotoType(PhotoType photoType) {
+    public List<PhotoType> getPhotoType(PhotoType photoType, Integer isPhrase) {
         QueryWrapper<PhotoType> photoTypeQw = new QueryWrapper<>();
         String typeName = photoType.getTypeName();
         if (StringUtils.isNotBlank(typeName)) {
             photoTypeQw.lambda().like(true, PhotoType::getTypeName, typeName);
         }
         photoTypeQw.lambda().orderByAsc(PhotoType::getSortOrder);
-        return photoTypeMapper.selectList(photoTypeQw);
+        List<PhotoType> photoTypes = photoTypeMapper.selectList(photoTypeQw);
+
+        //接下来查出里面照片设置的短语
+        if (isPhrase.equals(1) && !photoTypes.isEmpty()) {
+            getPhraseByTypeId(photoTypes);
+        }
+        return photoTypes;
+    }
+
+    private void getPhraseByTypeId(List<PhotoType> photoTypes) {
+        ArrayList<Integer> typeId = new ArrayList<>();
+        for (PhotoType type : photoTypes) {
+            typeId.add(type.getId());
+        }
+        ArrayList<Photo> photoPhrases = photoMapper.selectPhraseByTypeId(typeId);
+        HashMap<Integer, ArrayList<String>> typePhrase = new HashMap<>();
+        for (Photo photo : photoPhrases) {
+            // 如果typeId不存在，会自动创建列表并放入Map，再返回引用
+            typePhrase.computeIfAbsent(photo.getTypeId(), k -> new ArrayList<>())
+                    .add(photo.getPhrase());
+        }
+        for (PhotoType type : photoTypes) {
+            type.setPhrases(typePhrase.get(type.getId()));
+        }
     }
 
     @Override

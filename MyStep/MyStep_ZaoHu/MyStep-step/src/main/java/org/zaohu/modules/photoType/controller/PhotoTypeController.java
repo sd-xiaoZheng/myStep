@@ -48,13 +48,23 @@ public class PhotoTypeController extends BaseController {
         return Result.success();
     }
 
-    @GetMapping("/getPhotoType")
-    public TableDataInfo getPhotoType(PhotoType photoType) {
+    @GetMapping("/getPhotoTypeAndPhrase")
+    public TableDataInfo getPhotoTypeAndPhrase(PhotoType photoType) {
         //这里有个问题就是利用的这个分页没有返回总数total，所以我自己写的查询总数再赋值total，也可以
         //没有利用自动生成的select count(*),自己的在特殊情况下利用好所以可以使sql加速
 //        startPage();
         startPageNoCount();
-        List<PhotoType> photoTypes = photoTypeService.getPhotoType(photoType);
+        List<PhotoType> photoTypes = photoTypeService.getPhotoType(photoType, 1);
+        Long total = photoTypeService.selectCount(photoType);
+        TableDataInfo dataTable = getDataTableNoTotal(photoTypes);
+        dataTable.setTotal(total);
+        return dataTable;
+    }
+
+    @GetMapping("/getPhotoType")
+    public TableDataInfo getPhotoType(PhotoType photoType) {
+        startPageNoCount();
+        List<PhotoType> photoTypes = photoTypeService.getPhotoType(photoType, 0);
         Long total = photoTypeService.selectCount(photoType);
         TableDataInfo dataTable = getDataTableNoTotal(photoTypes);
         dataTable.setTotal(total);

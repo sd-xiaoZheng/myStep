@@ -7,13 +7,28 @@
           <p>{{ photoType.phrase }}</p>
           <span class="photo-count">{{ photoType.photoCount }}张照片</span>
         </div>
+        <div class="danmaku-container" v-if="photoType.phrases && photoType.phrases.length">
+          <div v-for="(phrase, pIndex) in photoType.phrases" 
+               :key="pIndex" 
+               class="danmaku-item"
+               :style="{
+                 top: `${Math.random() * 80}%`,
+                 animationDuration: `${Math.random() * 2 + 2}s`,
+                 animationDelay: `${Math.random() * 5}s`,
+                 left: '100%'
+               }"
+               @mouseenter="pauseAnimation"
+               @mouseleave="resumeAnimation">
+            {{ phrase }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {getPhotoTypeList } from '@/apis/api/lifeTimeManage' // 假设添加了获取类型列表的 API
+import {getPhotoTypeAndPhrase } from '@/apis/api/lifeTimeManage' // 假设添加了获取类型列表的 API
 export default {
   name: 'LifeTime',
   data() {
@@ -22,13 +37,18 @@ export default {
       currentPage: 1,
       pageSize: 20,
       total: 0,
+      loading: false,
+      hasMore: true
     }
   },
   methods: {
-    async getPhotoTypeList(isSearch = false) {
+    async getPhotoTypeAndPhrase(isSearch = false) {
       if (isSearch) {
         this.currentPage = 1
+        this.photoTypeList = []
       }
+      if (this.loading || !this.hasMore) return
+      
       this.loading = true
       let params = {
         pageNum: this.currentPage,
@@ -36,11 +56,18 @@ export default {
         typeName: this.searchTypeName || undefined
       }
       try {
-        const response = await getPhotoTypeList(params)
+        const response = await getPhotoTypeAndPhrase(params)
         if (response.code === 200) {
-          this.photoTypeList = response.rows
+          if (isSearch) {
+            this.photoTypeList = response.rows
+          } else {
+            this.photoTypeList = [...this.photoTypeList, ...response.rows]
+          }
           this.total = response.total
-          console.log(this.photoTypeList)
+          this.hasMore = this.photoTypeList.length < this.total
+          if (this.hasMore) {
+            this.currentPage++
+          }
         }
       } catch (error) {
         this.$message.error('获取照片类型列表失败')
@@ -48,9 +75,32 @@ export default {
         this.loading = false
       }
     },
+    handleScroll() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+      
+      // Calculate scroll percentage
+      const scrollPercentage = (scrollTop + windowHeight) / documentHeight
+      
+      // Load more when scrolled past 75%
+      if (scrollPercentage > 0.75 && !this.loading && this.hasMore) {
+        this.getPhotoTypeAndPhrase()
+      }
+    },
+    pauseAnimation(event) {
+      event.target.style.animationPlayState = 'paused';
+    },
+    resumeAnimation(event) {
+      event.target.style.animationPlayState = 'running';
+    }
   },
   mounted() {
-    this.getPhotoTypeList();
+    this.getPhotoTypeAndPhrase();
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 }
 </script>
@@ -72,6 +122,10 @@ export default {
       .card-content {
         opacity: 0;
         transform: translate(-50%, -50%);
+      }
+
+      .danmaku-container {
+        opacity: 1;
       }
     }
   }
@@ -149,6 +203,51 @@ export default {
         background: rgba(255, 255, 255, 0.25);
       }
     }
+  }
+
+  .danmaku-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 3;
+    overflow: visible;
+  }
+
+  .danmaku-item {
+    position: absolute;
+    white-space: nowrap;
+    color: white;
+    font-size: 14px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    animation: danmaku-move linear infinite;
+    opacity: 0.8;
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    backdrop-filter: blur(2px);
+    transform: translateX(0);
+    cursor: default;
+    pointer-events: auto;
+    z-index: 4;
+  }
+
+  @keyframes danmaku-move {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-600%);
+    }
+  }
+
+  .category-card:hover .danmaku-container {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 </style>
