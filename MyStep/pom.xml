@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.zaohu</groupId>
+    <artifactId>MyStep_2024</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <properties>
+
+        <java.version>21</java.version>
+        <!-- Project revision -->
+        <revision>1.0.1</revision>
+
+        <druid.version>1.1.10</druid.version>
+        <mybatis.version>3.0.3</mybatis.version>
+
+        <!-- 微服务版本 -->
+        <spring.boot.version>3.2.4</spring.boot.version>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
+        <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
+
+
+        <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
+
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
+
+
+    <!--    这里也配置一遍该模块下包含的子模块，不然右侧的Maven管理工具会把父子模块显示在同一级，而且后面会有一个灰色的 root标识
+    当然，子模块也需要配置<parent>如:
+        <parent>
+            <groupId>org.zaohu</groupId>
+            <artifactId>MyStep_2024</artifactId>
+            <version>${revision}</version>
+            <relativePath>../../pom.xml</relativePath>
+        </parent>-->
+    <modules>
+        <module>MyStep_ZaoHu/MyStep-account</module>
+        <module>MyStep_ZaoHu/MyStep-common</module>
+        <module>MyStep_ZaoHu/MyStep-order</module>
+        <module>MyStep_ZaoHu/MyStep-storage</module>
+        <module>MyStep_ZaoHu/MyStep-gateway</module>
+        <module>MyStep_ZaoHu/MyStep-step</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot Starter父依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Spring Cloud依赖 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Cloud Alibaba依赖版本管理器 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>2.3.5.RELEASE</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
+
+
+</project>

@@ -1,0 +1,32 @@
+server:
+  port: 8020
+
+spring:
+  application:
+    name: MyStep-account
+  cloud:
+    nacos:
+#      discovery:
+#        server-addr: localhost:8848
+
+      config:
+        server-addr: localhost:8848
+
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yml
+      - optional:nacos:db-common.yml
+      - nacos:nacos-discovery.yml
+      - optional:nacos:seata-client.yml
+
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/mystep_account?useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: 123456
+#  main:
+#    allow-bean-definition-overriding: true
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+

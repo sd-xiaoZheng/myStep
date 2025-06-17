@@ -1,0 +1,18 @@
+/* 全局字体样式定义 */
+:root {
+  --primary-font: "HYRoundFont", "YouYuan", "Yuanti SC", "Comic Sans MS", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 应用全局字体 */
+body {
+  font-family: var(--primary-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 900;
+  font-size: 18px;
+}
+
+/* 确保所有元素继承字体 */
+* {
+  font-family: inherit;
+}

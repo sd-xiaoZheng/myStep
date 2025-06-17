@@ -1,0 +1,40 @@
+server:
+  port: 8030
+
+spring:
+  application:
+    name: MyStep-order
+  cloud:
+    nacos:
+#      discovery:
+#        server-addr: localhost:8848
+#    loadbalancer:
+#      nacos:
+#        enabled: true
+      config:
+        server-addr: localhost:8848
+
+
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yml
+      - optional:nacos:db-common.yml
+      - nacos:nacos-discovery.yml
+      - optional:nacos:seata-client.yml
+      - optional:nacos:sentinel-dashboard.yml
+
+
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/mystep_order?useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: 123456
+#  main:
+#    allow-bean-definition-overriding: true
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.alibaba.cloud.nacos: debug
+

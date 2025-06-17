@@ -1,0 +1,76 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: MyStep-step
+  servlet:
+    multipart:
+      enabled: true
+      # 单个文件大小
+      max-file-size: 50MB
+      # 设置总上传的文件大小
+      max-request-size: 50MB
+
+
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yml
+      - optional:nacos:db-common.yml
+      - nacos:nacos-discovery.yml
+      - optional:nacos:seata-client.yml
+  mail:
+    host: smtp.qq.com #配置 SMTP 服务器地址
+    port: 465   #SMTP 服务器的端口
+    username: 3331247124@qq.com
+    password: fqoosoqrseukcjgh #配置密码，注意，不是真正的密码，而是刚刚申请到的授权码
+    default-encoding: UTF-8 #默认的邮件编码
+
+    #官方建议使用 465 端口，而 465 端口是 SSL 协议的，所以不仅要换端口，
+    #还需要进行 SSL 协议替换。下面是在 application.properties 进行的邮件发送相关配置，
+    protocol: smtp
+    properties:
+      mail:
+        debug: true #表示开启 DEBUG 模式，这样，邮件发送过程的日志会在控制台打印出来，方便排查错误
+        smtp:
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory #配饰 SSL 加密工厂
+          ssl:
+            enable: true
+          socketFactory:
+            port: 465
+
+
+
+
+#https://juejin.cn/post/6850418115382738958 rocket详细使用
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    group: step
+    send-message-timeout: 3000
+    retry-times-when-send-failed: 3 # 同步发送消息失败重试次数，默认2
+    retry-times-when-send-async-failed: 3 # 异步发送消息失败重试次数，默认2
+
+logging:
+  level:
+    org.zaohu.modules: debug # 指定这个包为debug日志级别 默认是info 为了让feign生效所以使用debug级别
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss #只修改控制台时间格式
+#    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%t] %logger{36} : %msg%n"
+#%d{yyyy-MM-dd HH:mm:ss} → 时间格式
+#%-5level → 日志级别（INFO/DEBUG/WARN/ERROR）
+#[%t] → 线程名（如 [main]）
+#%logger{36} → 日志来源类名（最多显示 36 字符）
+#%msg%n → 日志消息 + 换行
+
+
+
+#日志局部配置 feign
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+
+
+
+
+
