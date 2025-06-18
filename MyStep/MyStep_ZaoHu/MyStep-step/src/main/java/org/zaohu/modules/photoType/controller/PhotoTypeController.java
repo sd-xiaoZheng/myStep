@@ -83,7 +83,7 @@ public class PhotoTypeController extends BaseController {
 
 
     @PostMapping("/addPhotoBatch")
-    public Result addPhotoBatch(@RequestBody PhotoBatch photoBatch) throws IOException {
+    public Result addPhotoBatch(@ModelAttribute PhotoBatch photoBatch) throws IOException {
         photoTypeService.addPhotoBatch(photoBatch);
         return Result.success("添加成功");
     }

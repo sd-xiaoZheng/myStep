@@ -1,21 +1,20 @@
 package org.zaohu.modules.photoType.service.Impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.zaohu.common.entity.FileWrapper;
+import org.zaohu.common.ResultCommon.Result;
 import org.zaohu.common.entity.PhotoBatch;
+import org.zaohu.constant.Constant;
+import org.zaohu.jobs.rocketMq.producer.RocketMQTemplateProducerUtils;
 import org.zaohu.modules.photo.entity.Photo;
 import org.zaohu.modules.photo.mapper.PhotoMapper;
 import org.zaohu.modules.photoType.entity.PhotoType;
 import org.zaohu.modules.photoType.mapper.PhotoTypeMapper;
 import org.zaohu.modules.photoType.service.PhotoTypeService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 import org.zaohu.utils.FileUtils;
 import org.zaohu.utils.text.StringUtils;
 
@@ -38,10 +37,12 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
     private PhotoTypeMapper photoTypeMapper;
     @Autowired
     private PhotoMapper photoMapper;
+    @Autowired
+    private RocketMQTemplateProducerUtils rocketMQTemplateProducerUtils;
 
     @Override
     public void addPhotoType(PhotoType photoType) {
-        String photoPath = FileUtils.uploadPhotoImage(photoType.getTempPhoto());
+        String photoPath = FileUtils.uploadPhotoImage(photoType.getTempPhoto(), Constant.PHOTO_TYPE_PATH);
         photoType.setMainPhoto(photoPath);
         photoTypeMapper.insert(photoType);
     }
@@ -97,22 +98,17 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
 
     @Override
     public void editPhotoType(PhotoType photoType) {
-        String photoPath = FileUtils.uploadPhotoImage(photoType.getTempPhoto());
+        String photoPath = FileUtils.uploadPhotoImage(photoType.getTempPhoto(), Constant.PHOTO_TYPE_PATH);
         photoType.setMainPhoto(photoPath);
         photoTypeMapper.updateById(photoType);
     }
 
     @Override
-    public void addPhotoBatch(PhotoBatch photoBatch) throws IOException {
+    public void addPhotoBatch(PhotoBatch photoBatch) {
         List<MultipartFile> photoTypeList = photoBatch.getPhotoTypeList();
-        List<FileWrapper> fileList = new ArrayList<>();
-        for (MultipartFile file : photoTypeList) {
-            FileWrapper wrapper = new FileWrapper();
-            wrapper.setFilename(file.getOriginalFilename());
-            wrapper.setContentType(file.getContentType());
-            wrapper.setContent(file.getBytes());
-            fileList.add(wrapper);
+        for (MultipartFile multipartFile : photoTypeList) {
+            String photoPath = FileUtils.uploadPhotoImage(multipartFile, Constant.PHOTO_TYPE_TEMP_PATH);
+            rocketMQTemplateProducerUtils.asyncSendMessage(Constant.ROCKET_IMAGE_THUMB_TOPIC, photoPath);
         }
-        System.out.println(fileList);
     }
 }

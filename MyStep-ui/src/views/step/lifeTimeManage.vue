@@ -123,7 +123,7 @@
       <!-- 手动上传按钮 -->
       <el-button
           type="primary"
-          @click="submitUpload"
+          @click="submitUpload()"
           style="margin-top: 20px;"
       >
         上传所有图片
@@ -188,7 +188,13 @@
 </style>
 
 <script>
-import {addPhotoType, getPhotoTypeList, deletePhotoTypeList, editPhotoType, addPhoto} from '@/apis/api/lifeTimeManage'
+import {
+  addPhotoType,
+  getPhotoTypeList,
+  deletePhotoTypeList,
+  editPhotoType,
+  addPhotoBatch
+} from '@/apis/api/lifeTimeManage'
 
 export default {
   data() {
@@ -205,6 +211,7 @@ export default {
       total: 0,
       addTypeDialogVisible: false,
       addPhotoDialogVisible: false,
+      addPhotoType: -1,//批量添加照片的类型id
       dialogMode: 'add',
       newTypeForm: {
         type_name: '',
@@ -230,21 +237,25 @@ export default {
   },
   methods: {
     handleChange(file, fileList) {
-      console.log(file)
-      console.log(fileList)
+      console.log(file,"file")
+      console.log(fileList,"fileList")
       this.fileList = fileList;
     },
     submitUpload() {
-      this.addPhoto();
-      console.log(this.fileList)
+      let formData = new FormData();
+      // 添加文件
+      this.fileList.forEach((file, index) => {
+        formData.append('photoTypeList', file.raw); // 后端参数名要和这里一致
+      });
+      // 添加 typeId
+      formData.append('typeId', this.addPhotoType);
+      addPhotoBatch(formData).then((res) => {
+        console.log(res);
+      });
     },
     addPhoto(row) {
       this.addPhotoDialogVisible = true
-      console.log(row)
-      let data = {
-        photoTypeList: this.fileList,
-        typeId: row
-      }
+      this.addPhotoType=row
     },
     editPhotoType(row) {
       this.dialogMode = 'edit'

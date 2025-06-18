@@ -8,11 +8,10 @@ import org.zaohu.constant.Constant;
 
 @Service
 @Slf4j
-@RocketMQMessageListener(topic = Constant.ROCKET_ImageThumb_TOPIC, selectorExpression = "*", consumerGroup = "imgThumbGroup")
+@RocketMQMessageListener(topic = Constant.ROCKET_IMAGE_THUMB_TOPIC, selectorExpression = "*", consumerGroup = "imgThumbGroup")
 public class ImageThumbConsumer implements RocketMQListener<String> {
-
     @Override
     public void onMessage(String imagePathJson) {
-
+        System.out.println("我消费了消息"+imagePathJson);
     }
 }

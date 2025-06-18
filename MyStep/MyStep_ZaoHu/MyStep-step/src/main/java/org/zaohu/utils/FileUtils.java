@@ -44,13 +44,19 @@ public class FileUtils {
         return "";
     }
 
-    public static String uploadPhotoImage(MultipartFile fileName) {
+    /**
+     *
+     * @param fileName 文件
+     * @param path 年后面的路径 以/开头结尾 如： /Step/temp/
+     * @return
+     */
+    public static String uploadPhotoImage(MultipartFile fileName,String path) {
         try {
             LocalDate currentDate = LocalDate.now();//时间戳
             //获取年月日
             String year = String.valueOf(currentDate.getYear());
 
-            Path directoryPath = Paths.get(Constant.FILE_PATH, year, "/photo/");
+            Path directoryPath = Paths.get(Constant.FILE_PATH, year, path);
             Files.createDirectories(directoryPath);
 
             String originalFilename = fileName.getOriginalFilename();
