@@ -121,5 +121,6 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
             // 拼接完整文件路径，发送消息给 RocketMQ
             rocketMQTemplateProducerUtils.asyncSendMessage(Constant.ROCKET_IMAGE_THUMB_TOPIC, fullPath);
         }
+        System.out.println();
     }
 }
