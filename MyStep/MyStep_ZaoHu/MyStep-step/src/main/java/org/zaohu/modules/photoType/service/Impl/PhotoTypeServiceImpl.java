@@ -1,12 +1,10 @@
 package org.zaohu.modules.photoType.service.Impl;
 
-import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.zaohu.common.ResultCommon.Result;
 import org.zaohu.common.entity.PhotoBatch;
 import org.zaohu.constant.Constant;
 import org.zaohu.jobs.rocketMq.producer.RocketMQTemplateProducerUtils;
@@ -18,7 +16,7 @@ import org.zaohu.modules.photoType.service.PhotoTypeService;
 import org.zaohu.utils.FileUtils;
 import org.zaohu.utils.text.StringUtils;
 
-import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -106,9 +104,22 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
     @Override
     public void addPhotoBatch(PhotoBatch photoBatch) {
         List<MultipartFile> photoTypeList = photoBatch.getPhotoTypeList();
+        LocalDate currentDate = LocalDate.now(); // 当前日期
+        String year = String.valueOf(currentDate.getYear());
+
+        //一个个文件塞给mq
         for (MultipartFile multipartFile : photoTypeList) {
-            String photoPath = FileUtils.uploadPhotoImage(multipartFile, Constant.PHOTO_TYPE_TEMP_PATH);
-            rocketMQTemplateProducerUtils.asyncSendMessage(Constant.ROCKET_IMAGE_THUMB_TOPIC, photoPath);
+            // 先上传原图到Temp，返回的路径时
+            String path = FileUtils.uploadPhotoImage(multipartFile, Constant.PHOTO_TYPE_TEMP_PATH);
+            String[] split = path.split("/");
+            String fileName = split[split.length - 1];
+
+            // 拼接最终的文件路径
+            String photoPath = Constant.FILE_PATH + year + Constant.PHOTO_TYPE_TEMP_PATH;
+            String fullPath = photoPath + fileName;
+
+            // 拼接完整文件路径，发送消息给 RocketMQ
+            rocketMQTemplateProducerUtils.asyncSendMessage(Constant.ROCKET_IMAGE_THUMB_TOPIC, fullPath);
         }
     }
 }

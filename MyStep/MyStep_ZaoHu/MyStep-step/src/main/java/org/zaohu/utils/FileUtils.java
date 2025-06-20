@@ -67,8 +67,8 @@ public class FileUtils {
             // Save file上传
             Path filePath = directoryPath.resolve(newFilename);
             fileName.transferTo(filePath.toFile());//把这个文件创建出来
-            // Optionally save the relative path to database
-            return Constant.RESOURCE_PREFIX.replace("/step", "") + "/" + year + "/photo/" + newFilename;
+            //这里返回的是用户前端访问展示的
+            return Constant.RESOURCE_PREFIX.replace("/step", "") + "/" + year + path + newFilename;
         } catch (IOException e) {
             log.error(e.getMessage());
         }

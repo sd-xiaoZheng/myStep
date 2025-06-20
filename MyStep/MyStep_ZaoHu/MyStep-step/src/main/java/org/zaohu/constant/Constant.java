@@ -15,10 +15,13 @@ public class Constant {
     public static final String ROCKET_IMAGE_THUMB_TOPIC = "rocket_ImageThumb";
 
 
-    //照片路径
+    //图片头路径
     public static final String FILE_PATH = "D:\\step\\file\\image\\";
     //照片类型图片路径
-    public static final String PHOTO_TYPE_PATH = "/photo/";
+    public static final String PHOTO_TYPE_PATH = "/photoType/";
+    //图片路径
+    public static final String PHOTO_PATH = "/photo/";
+    //上传照片原图缓存位置
     public static final String PHOTO_TYPE_TEMP_PATH = "/photoType/Temp/";
     //上传照片资源前缀
     public static final String RESOURCE_PREFIX = "/step/Zaohu";
