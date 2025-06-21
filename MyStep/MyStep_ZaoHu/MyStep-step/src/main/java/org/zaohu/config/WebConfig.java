@@ -27,7 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         /** 本地文件上传路径 */
-        registry.addResourceHandler(Constant.RESOURCE_PREFIX + "/**").addResourceLocations("file:" + Constant.FILE_PATH + "/");
+        registry.addResourceHandler(Constant.RESOURCE_PREFIX + "**").addResourceLocations("file:" + Constant.FILE_PATH);
         /** swagger配置 */
 //        registry.addResourceHandler("/swagger-ui/**")
 //                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/")

@@ -16,7 +16,7 @@ public class Constant {
 
 
     //图片头路径
-    public static final String FILE_PATH = "D:\\step\\file\\image\\";
+    public static final String FILE_PATH = "D:/step/file/image/";
     //照片类型图片路径
     public static final String PHOTO_TYPE_PATH = "/photoType/";
     //图片路径
@@ -24,5 +24,5 @@ public class Constant {
     //上传照片原图缓存位置
     public static final String PHOTO_TYPE_TEMP_PATH = "/photoType/Temp/";
     //上传照片资源前缀
-    public static final String RESOURCE_PREFIX = "/step/Zaohu";
+    public static final String RESOURCE_PREFIX = "/step/Zaohu/";
 }

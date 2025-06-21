@@ -5,7 +5,7 @@ import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.stereotype.Service;
 import org.zaohu.constant.Constant;
-import org.zaohu.utils.PhotoDisposeUtils;
+import org.zaohu.utils.photoutils.PhotoDisposeUtils;
 
 import java.time.LocalDate;
 

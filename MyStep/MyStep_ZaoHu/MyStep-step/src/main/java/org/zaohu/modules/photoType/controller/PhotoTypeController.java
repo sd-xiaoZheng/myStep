@@ -1,6 +1,7 @@
 package org.zaohu.modules.photoType.controller;
 
 import cn.hutool.core.util.PageUtil;
+import com.drew.imaging.ImageProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.zaohu.common.ResultCommon.Result;
@@ -83,7 +84,7 @@ public class PhotoTypeController extends BaseController {
 
 
     @PostMapping("/addPhotoBatch")
-    public Result addPhotoBatch(@ModelAttribute PhotoBatch photoBatch) throws IOException {
+    public Result addPhotoBatch(@ModelAttribute PhotoBatch photoBatch) throws IOException, ImageProcessingException {
         photoTypeService.addPhotoBatch(photoBatch);
         return Result.success("添加成功");
     }

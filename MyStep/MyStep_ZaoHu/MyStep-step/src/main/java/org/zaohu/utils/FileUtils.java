@@ -37,7 +37,7 @@ public class FileUtils {
             Path filePath = directoryPath.resolve(newFilename);
             fileName.transferTo(filePath.toFile());
             // Optionally save the relative path to database
-            return Constant.RESOURCE_PREFIX.replace("/step", "") + "/" + year + "/" + month + "/" + day + "/" + newFilename;
+            return Constant.RESOURCE_PREFIX.replace("/step", "") + year + "/" + month + "/" + day + "/" + newFilename;
         } catch (IOException e) {
             log.error(e.getMessage());
         }
@@ -68,7 +68,7 @@ public class FileUtils {
             Path filePath = directoryPath.resolve(newFilename);
             fileName.transferTo(filePath.toFile());//把这个文件创建出来
             //这里返回的是用户前端访问展示的
-            return Constant.RESOURCE_PREFIX.replace("/step", "") + "/" + year + path + newFilename;
+            return Constant.RESOURCE_PREFIX.replace("/step", "") + year + path + newFilename;
         } catch (IOException e) {
             log.error(e.getMessage());
         }

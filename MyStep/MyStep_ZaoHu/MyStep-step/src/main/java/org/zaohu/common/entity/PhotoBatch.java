@@ -13,5 +13,5 @@ import java.util.List;
 @Data
 public class PhotoBatch {
     private List<MultipartFile> photoTypeList;
-    private long typeId;
+    private Integer typeId;
 }

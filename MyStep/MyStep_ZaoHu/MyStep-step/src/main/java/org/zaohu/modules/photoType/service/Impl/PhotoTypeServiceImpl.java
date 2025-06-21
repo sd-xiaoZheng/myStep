@@ -1,7 +1,9 @@
 package org.zaohu.modules.photoType.service.Impl;
 
+import cn.hutool.core.date.LocalDateTimeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.drew.imaging.ImageProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,8 +16,11 @@ import org.zaohu.modules.photoType.entity.PhotoType;
 import org.zaohu.modules.photoType.mapper.PhotoTypeMapper;
 import org.zaohu.modules.photoType.service.PhotoTypeService;
 import org.zaohu.utils.FileUtils;
+import org.zaohu.utils.photoutils.PhotoInfo;
 import org.zaohu.utils.text.StringUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,14 +107,15 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
     }
 
     @Override
-    public void addPhotoBatch(PhotoBatch photoBatch) {
+    public void addPhotoBatch(PhotoBatch photoBatch) throws ImageProcessingException, IOException {
         List<MultipartFile> photoTypeList = photoBatch.getPhotoTypeList();
         LocalDate currentDate = LocalDate.now(); // 当前日期
         String year = String.valueOf(currentDate.getYear());
-
-        //一个个文件塞给mq
+        String month = String.format("%02d", currentDate.getMonthValue());
+        //一个个文件塞给mq 并且入库
+        ArrayList<Photo> addBatchList = new ArrayList<>();
         for (MultipartFile multipartFile : photoTypeList) {
-            // 先上传原图到Temp，返回的路径时
+            // 先上传原图到Temp
             String path = FileUtils.uploadPhotoImage(multipartFile, Constant.PHOTO_TYPE_TEMP_PATH);
             String[] split = path.split("/");
             String fileName = split[split.length - 1];
@@ -120,7 +126,23 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
 
             // 拼接完整文件路径，发送消息给 RocketMQ
             rocketMQTemplateProducerUtils.asyncSendMessage(Constant.ROCKET_IMAGE_THUMB_TOPIC, fullPath);
+            //把路径入库
+            Photo photo = new Photo();
+            int dotIndex = fileName.lastIndexOf('.');
+            String extension = dotIndex >= 0 ? fileName.substring(dotIndex) : "";
+            if (!extension.isEmpty()) {
+                fileName = fileName.substring(0, dotIndex) + ".webp";
+            } else {
+                // 非目标格式或无扩展名，直接拼接.webp
+                fileName += ".webp";
+            }
+            photo.setName(fileName);
+            photo.setFilePath(Constant.RESOURCE_PREFIX.replace("/step", "") + year + Constant.PHOTO_PATH + month + "/" + fileName);
+            photo.setTypeId(photoBatch.getTypeId());
+            photo.setUploadTime(LocalDateTimeUtil.now());
+            PhotoInfo.getPhotoInfo(new File(Constant.FILE_PATH + path.replace("/Zaohu", "")), photo);
+            addBatchList.add(photo);
         }
-        System.out.println();
+        photoMapper.insert(addBatchList);
     }
 }

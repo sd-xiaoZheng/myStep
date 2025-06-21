@@ -68,9 +68,13 @@ public class Photo {
 
     @ApiModelProperty("拍摄时间，文本格式")
     @TableField("shot_time")
-    private LocalDateTime shotTime;
+    private String shotTime;
 
     @ApiModelProperty("拍摄设备名称")
     @TableField("device")
     private String device;
+
+    @ApiModelProperty("海拔")
+    @TableField("altitude")
+    private Double altitude;
 }

@@ -1,4 +1,4 @@
-package org.zaohu.utils;
+package org.zaohu.utils.photoutils;
 
 import com.luciad.imageio.webp.WebPWriteParam;
 
@@ -54,7 +54,12 @@ public class PhotoDisposeUtils {
      */
     public static void convertWebpWithLossyCompression(String imagePath, String outputPath, float quality) {
         try {
-            BufferedImage image = ImageIO.read(new File(imagePath));
+            File file = new File(imagePath);
+            if (!file.exists()) {
+                System.out.println("文件不存在: " + file.getAbsolutePath());
+                return;
+            }
+            BufferedImage image = ImageIO.read(file);
             ImageWriter writer = ImageIO.getImageWritersByMIMEType("image/webp").next();
             WebPWriteParam writeParam = new WebPWriteParam(writer.getLocale());
             writeParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
