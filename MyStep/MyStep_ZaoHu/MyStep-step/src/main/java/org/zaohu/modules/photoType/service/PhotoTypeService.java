@@ -23,7 +23,7 @@ public interface PhotoTypeService extends IService<PhotoType> {
     /**
      *
      * @param photoType
-     * @param isPhrase 是否获取里面的短语
+     * @param isPhrase 是否获取里面的短语 因为是获取短语 所以是生命瞬间页面不是管理页面 所以不能展示隐藏的
      * @return
      */
     List<PhotoType> getPhotoType(PhotoType photoType,Integer isPhrase);

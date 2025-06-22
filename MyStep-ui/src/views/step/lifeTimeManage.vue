@@ -35,7 +35,7 @@
       <el-table-column prop="phrase" label="定格片语" min-width="200"></el-table-column>
       <el-table-column prop="favoriteCount" label="收藏数" width="100"></el-table-column>
       <el-table-column prop="photoCount" label="照片数" width="100"></el-table-column>
-      <el-table-column prop="isHidden" label="是否隐藏" width="100">
+      <el-table-column prop="isHidden" label="是否展示" width="100">
         <template slot-scope="scope">
           <el-switch
               v-model="scope.row.isHidden"
@@ -82,7 +82,7 @@
         <el-form-item label="排序" prop="sort_order">
           <el-input-number v-model="newTypeForm.sort_order" :min="0"></el-input-number>
         </el-form-item>
-        <el-form-item label="是否隐藏">
+        <el-form-item label="是否展示">
           <el-switch v-model="newTypeForm.is_hidden"></el-switch>
         </el-form-item>
         <el-form-item label="封面图片" prop="tempPhoto">

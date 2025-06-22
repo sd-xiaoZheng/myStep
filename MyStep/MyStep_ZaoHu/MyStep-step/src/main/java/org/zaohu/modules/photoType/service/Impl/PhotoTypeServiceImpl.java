@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
@@ -50,6 +51,11 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
         photoTypeMapper.insert(photoType);
     }
 
+    /**
+     * @param photoType
+     * @param isPhrase  是否获取里面的短语 因为是获取短语 所以是生命瞬间页面不是管理页面 所以不能展示隐藏的
+     * @return
+     */
     @Override
     public List<PhotoType> getPhotoType(PhotoType photoType, Integer isPhrase) {
         QueryWrapper<PhotoType> photoTypeQw = new QueryWrapper<>();
@@ -57,10 +63,15 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
         if (StringUtils.isNotBlank(typeName)) {
             photoTypeQw.lambda().like(true, PhotoType::getTypeName, typeName);
         }
+        Boolean isHidden = photoType.getIsHidden();
+        if (Objects.nonNull(isHidden) && isHidden) {
+            photoTypeQw.lambda().eq(PhotoType::getIsHidden, photoType.getIsHidden());
+        }
+
         photoTypeQw.lambda().orderByAsc(PhotoType::getSortOrder);
         List<PhotoType> photoTypes = photoTypeMapper.selectList(photoTypeQw);
 
-        //接下来查出里面照片设置的短语
+        //
         if (isPhrase.equals(1) && !photoTypes.isEmpty()) {
             getPhraseByTypeId(photoTypes);
         }

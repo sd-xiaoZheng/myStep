@@ -53,7 +53,8 @@ export default {
       let params = {
         pageNum: this.currentPage,
         pageSize: this.pageSize,
-        typeName: this.searchTypeName || undefined
+        typeName: this.searchTypeName || undefined,
+        isHidden: true
       }
       try {
         const response = await getPhotoTypeAndPhrase(params)
