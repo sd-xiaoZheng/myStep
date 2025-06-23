@@ -112,8 +112,11 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
 
     @Override
     public void editPhotoType(PhotoType photoType) {
-        String photoPath = FileUtils.uploadPhotoImage(photoType.getTempPhoto(), Constant.PHOTO_TYPE_PATH);
-        photoType.setMainPhoto(photoPath);
+        MultipartFile tempPhoto = photoType.getTempPhoto();
+        if (Objects.nonNull(tempPhoto)) {
+            String photoPath = FileUtils.uploadPhotoImage(tempPhoto, Constant.PHOTO_TYPE_PATH);
+            photoType.setMainPhoto(photoPath);
+        }
         photoTypeMapper.updateById(photoType);
     }
 

@@ -40,7 +40,8 @@
           <el-switch
               v-model="scope.row.isHidden"
               active-color="#13ce66"
-              inactive-color="#ff4949">
+              inactive-color="#ff4949"
+              @change="handleIsHiddenChange(scope.row.isHidden, scope.row.id)">
           </el-switch>
         </template>
       </el-table-column>
@@ -69,7 +70,7 @@
           @current-change="handleCurrentChange"
       />
     </div>
-
+    d
     <!-- 添加类型对话框 -->
     <el-dialog :visible.sync="addTypeDialogVisible" title="添加照片类型" :modal="false">
       <el-form :model="newTypeForm" :rules="rules" ref="newTypeForm" label-width="120px">
@@ -237,8 +238,8 @@ export default {
   },
   methods: {
     handleChange(file, fileList) {
-      console.log(file,"file")
-      console.log(fileList,"fileList")
+      console.log(file, "file")
+      console.log(fileList, "fileList")
       this.fileList = fileList;
     },
     submitUpload() {
@@ -255,7 +256,7 @@ export default {
     },
     addPhoto(row) {
       this.addPhotoDialogVisible = true
-      this.addPhotoType=row
+      this.addPhotoType = row
     },
     editPhotoType(row) {
       this.dialogMode = 'edit'
@@ -379,8 +380,21 @@ export default {
         this.addTypeDialogVisible = false
         this.getPhotoTypeList()
       } catch (error) {
-        console.error('添加类型失败:', error)
-        this.$message.error('添加类型失败，请稍后重试')
+        this.$message.error('操作失败，请稍后重试')
+      }
+    },
+    handleIsHiddenChange(val, id) {
+      try {
+        const formData = new FormData()
+        formData.append('id', id)
+        formData.append('isHidden', val)
+        editPhotoType(formData).then(res => {
+          res.code === 200 ? this.$message.success(res.message) : this.$message.error(res.message)
+        })
+        val=!val
+        // this.getPhotoTypeList()
+      } catch (error) {
+        this.$message.error('操作失败，请稍后重试')
       }
     }
   },
