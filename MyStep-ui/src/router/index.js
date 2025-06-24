@@ -16,8 +16,8 @@ import home from '@/views/fun/home.vue';
 
 // 成长记录相关
 import messageBoard from '@/views/step/messageBoard.vue';
-import lifeTimeType from '@/views/step/lifeTimeType.vue';
-import lifeTimeManage from '@/views/step/lifeTimeManage.vue';
+import lifeTimeType from '@/views/step/lifeTime/lifeTimeType.vue';
+import lifeTimeManage from '@/views/step/lifeTime/lifeTimeManage.vue';
 
 Vue.use(Router);
 

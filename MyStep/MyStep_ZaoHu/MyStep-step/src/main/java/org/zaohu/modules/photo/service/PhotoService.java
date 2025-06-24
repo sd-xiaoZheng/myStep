@@ -2,6 +2,9 @@ package org.zaohu.modules.photo.service;
 
 import org.zaohu.modules.photo.entity.Photo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.zaohu.modules.photoType.entity.PhotoType;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PhotoService extends IService<Photo> {
 
+    List<Photo> getPhoto(Photo photo);
+
+    Long selectCount(Photo photo);
 }

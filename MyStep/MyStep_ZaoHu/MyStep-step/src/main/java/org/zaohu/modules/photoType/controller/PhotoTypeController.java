@@ -1,6 +1,5 @@
 package org.zaohu.modules.photoType.controller;
 
-import cn.hutool.core.util.PageUtil;
 import com.drew.imaging.ImageProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,14 +7,11 @@ import org.zaohu.common.ResultCommon.Result;
 import org.zaohu.common.entity.PhotoBatch;
 import org.zaohu.common.page.TableDataInfo;
 import org.zaohu.constant.controller.BaseController;
-import org.zaohu.modules.msgWall.entity.MsgWall;
 import org.zaohu.modules.photoType.entity.PhotoType;
 import org.zaohu.modules.photoType.service.PhotoTypeService;
 
 import java.io.IOException;
 import java.util.List;
-
-import static org.zaohu.utils.PageUtils.startPage;
 
 /**
  * <p>
