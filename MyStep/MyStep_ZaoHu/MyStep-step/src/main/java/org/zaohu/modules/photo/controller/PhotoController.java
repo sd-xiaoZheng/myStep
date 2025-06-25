@@ -1,10 +1,7 @@
 package org.zaohu.modules.photo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.zaohu.common.page.TableDataInfo;
 import org.zaohu.constant.controller.BaseController;
 import org.zaohu.modules.photo.entity.Photo;
@@ -31,10 +28,10 @@ public class PhotoController extends BaseController {
     private PhotoService photoService;
 
     @GetMapping("/getPhoto")
-    public TableDataInfo getPhoto(@RequestParam Photo photo) {
+    public TableDataInfo getPhoto(Integer typeId) {
         startPageNoCount();
-        List<Photo> photoList = photoService.getPhoto(photo);
-        Long total = photoService.selectCount(photo);
+        List<Photo> photoList = photoService.getPhoto(typeId);
+        Long total = photoService.selectCount(typeId);
         TableDataInfo dataTable = getDataTableNoTotal(photoList);
         dataTable.setTotal(total);
         return dataTable;

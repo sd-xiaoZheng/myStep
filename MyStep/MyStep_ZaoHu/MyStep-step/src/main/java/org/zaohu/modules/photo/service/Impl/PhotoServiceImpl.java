@@ -24,17 +24,17 @@ public class PhotoServiceImpl extends ServiceImpl<PhotoMapper, Photo> implements
     @Autowired
     private PhotoMapper photoMapper;
     @Override
-    public List<Photo> getPhoto(Photo photoType) {
+    public List<Photo> getPhoto(Integer typeId) {
         QueryWrapper<Photo> photoQueryWrapper = new QueryWrapper<>();
-        photoQueryWrapper.lambda().eq(Photo::getTypeId, photoType.getTypeId());
+        photoQueryWrapper.lambda().eq(Photo::getTypeId, typeId);
         List<Photo> photos = photoMapper.selectList(photoQueryWrapper);
         return photos;
     }
 
     @Override
-    public Long selectCount(Photo photo) {
+    public Long selectCount(Integer typeId) {
         QueryWrapper<Photo> photoQueryWrapper = new QueryWrapper<>();
-        photoQueryWrapper.lambda().eq(Photo::getTypeId, photo.getTypeId());
+        photoQueryWrapper.lambda().eq(Photo::getTypeId, typeId);
         return photoMapper.selectCount(photoQueryWrapper);
     }
 }

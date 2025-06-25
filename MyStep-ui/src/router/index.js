@@ -18,6 +18,7 @@ import home from '@/views/fun/home.vue';
 import messageBoard from '@/views/step/messageBoard.vue';
 import lifeTimeType from '@/views/step/lifeTime/lifeTimeType.vue';
 import lifeTimeManage from '@/views/step/lifeTime/lifeTimeManage.vue';
+import lifeTimePhoto from '@/views/step/lifeTime/lifeTimePhoto.vue';
 
 Vue.use(Router);
 
@@ -110,7 +111,7 @@ const router = new Router({
                     component: lifeTimeType,
                     meta: {
                         title: "生命瞬间"
-                    }
+                    },
                 },
                 {
                     path: '/lifeTimeManage',
@@ -118,6 +119,14 @@ const router = new Router({
                     component: lifeTimeManage,
                     meta: {
                         title: "相册管理"
+                    }
+                },
+                {
+                    path: '/lifeTimePhoto',
+                    name: '/lifeTimePhoto',
+                    component: lifeTimePhoto,
+                    meta: {
+                        title: "生命瞬间"
                     }
                 }
             ]

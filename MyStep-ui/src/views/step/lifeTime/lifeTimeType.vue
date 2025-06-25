@@ -1,6 +1,6 @@
 <template>
   <div class="album-categories">
-    <div class="category-container" v-for="(photoType, index) in photoTypeList" :key="index">
+    <div class="category-container" v-for="(photoType, index) in photoTypeList" :key="index" @click="goToPhoto(photoType.id)">
       <div class="category-card" :style="{ backgroundImage: `url(/api${photoType.mainPhoto})` }">
         <div class="card-content">
           <h3>{{ photoType.typeName }}</h3>
@@ -94,6 +94,9 @@ export default {
     },
     resumeAnimation(event) {
       event.target.style.animationPlayState = 'running';
+    },
+    goToPhoto(id) {
+      this.$router.push({ path: '/lifeTimePhoto', query: { id } });
     }
   },
   mounted() {

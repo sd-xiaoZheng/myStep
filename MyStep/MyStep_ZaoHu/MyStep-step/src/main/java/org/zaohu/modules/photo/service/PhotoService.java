@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface PhotoService extends IService<Photo> {
 
-    List<Photo> getPhoto(Photo photo);
+    List<Photo> getPhoto(Integer typeId);
 
-    Long selectCount(Photo photo);
+    Long selectCount(Integer typeId);
 }
