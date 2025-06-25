@@ -70,7 +70,6 @@
           @current-change="handleCurrentChange"
       />
     </div>
-    d
     <!-- 添加类型对话框 -->
     <el-dialog :visible.sync="addTypeDialogVisible" title="添加照片类型" :modal="false">
       <el-form :model="newTypeForm" :rules="rules" ref="newTypeForm" label-width="120px">
@@ -243,16 +242,29 @@ export default {
       this.fileList = fileList;
     },
     submitUpload() {
-      let formData = new FormData();
+      if (this.fileList.length === 0) {
+        this.$message.warning('请先选择要上传的图片！')
+        return
+      }
+      let formData = new FormData()
       // 添加文件
-      this.fileList.forEach((file, index) => {
-        formData.append('photoTypeList', file.raw); // 后端参数名要和这里一致
-      });
+      this.fileList.forEach((file) => {
+        formData.append('photoTypeList', file.raw) // 后端参数名要和这里一致
+      })
       // 添加 typeId
-      formData.append('typeId', this.addPhotoType);
+      formData.append('typeId', this.addPhotoType)
       addPhotoBatch(formData).then((res) => {
-        console.log(res);
-      });
+        if (res.code === 200) {
+          this.$message.success(res.message || '上传成功!')
+          this.addPhotoDialogVisible = false
+          this.$refs.uploadRef.clearFiles()
+          this.getPhotoTypeList()
+        } else {
+          this.$message.error(res.message || '上传失败!')
+        }
+      }).catch(() => {
+        this.$message.error('上传异常!')
+      })
     },
     addPhoto(row) {
       this.addPhotoDialogVisible = true
