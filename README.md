@@ -28,7 +28,11 @@
 1. 通过webMagic实现爬取百度贴吧发言标题并入库
 2. 通过网关记录访问次数和访问接口、ip、并解析ip地址一齐写入Redis，通过定时任务持久化到数据库
 3. 全局异常捕获
-
+4. 注册时发送邮箱验证码
+5. 上传图片转webp格式再缩略图减少请求流量
+6. security权限验证后期打算改为sa-Token
+7. mp代码生成
+8. 
 #### 安装教程
 
 1. rocketmq win启动：
@@ -36,7 +40,7 @@
 
    1. mqnamesrv.cmd他执行了runserver.cmd，所以修改jvm参数如内存大小等是在runserver.cmd里面修改
 
-   2. 他执行了runborker.cmd，所以修改jvm参数也是在runborker.cmd中修改,还需要配置borker的config参数，文件在rocketmq/config/broker.conf
+   2. 还需要配置borker的config参数，文件在rocketmq/config/broker.conf
       添加两项：
 
       ``` yaml
@@ -74,7 +78,6 @@ Gitee--->@zheng-work4j（我）
 -Dstdout.encoding=UTF-8
 -Dstderr.encoding=UTF-8
 ```
-
 
 #### 3. rocketMQ报错:yarn install报错
 删除pom文件中 frontend-maven-plugin和maven-antrun-plugin插件
