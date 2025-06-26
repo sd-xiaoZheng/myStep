@@ -2,8 +2,31 @@
   <div class="waterfall-album">
     <div class="masonry">
       <div v-for="(photo, idx) in photoList" :key="photo.id || idx" class="masonry-item">
-        <div class="img-wrapper">
+        <div class="img-wrapper" 
+             @mouseenter="showTooltip(idx)" 
+             @mouseleave="hideTooltip(idx)">
           <img :src="'/api' + photo.filePath" :alt="photo.name || '照片'" />
+          <div v-if="photo.showTooltip" 
+               class="memory-tooltip"
+               :data-photo-index="idx"
+               @click="skipTyping(idx)">
+            <div class="scrolling-container" :style="{ transform: `translateY(${photo.scrollOffset}px)` }">
+              <div class="text-content">
+                <div v-if="photo.displayedPhrase" class="field-line">留言：{{ photo.displayedPhrase }}</div>
+                <div v-if="photo.displayedDevice" class="field-line">拍摄设备：{{ photo.displayedDevice }}</div>
+                <div v-if="photo.displayedShotTime" class="field-line">拍摄时间：{{ photo.displayedShotTime }}</div>
+                <div v-if="photo.displayedMemory" class="field-line">记忆：{{ photo.displayedMemory }}</div>
+                <span v-if="photo.isTyping" class="typing-cursor">|</span>
+              </div>
+              <!-- 重复文本用于无缝循环 -->
+              <div v-if="photo.shouldScroll" class="text-content">
+                <div class="field-line">留言：{{ photo.phrase || '' }}</div>
+                <div class="field-line">拍摄设备：{{ photo.device || '' }}</div>
+                <div class="field-line">拍摄时间：{{ photo.shotTime || '' }}</div>
+                <div class="field-line">记忆：{{ photo.memory || '' }}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -26,7 +49,10 @@ export default {
       photoList: [],
       loading: false,
       hasMore: true,
-      typeId: null
+      typeId: null,
+      tooltipTimers: {},
+      typingTimers: {},
+      scrollTimers: {}
     }
   },
   mounted() {
@@ -36,6 +62,16 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll);
+    // 清除所有定时器
+    Object.values(this.tooltipTimers).forEach(timer => {
+      if (timer) clearTimeout(timer);
+    });
+    Object.values(this.typingTimers).forEach(timer => {
+      if (timer) clearInterval(timer);
+    });
+    Object.values(this.scrollTimers).forEach(timer => {
+      if (timer) clearInterval(timer);
+    });
   },
   methods: {
     async getPhoto(id) {
@@ -49,7 +85,20 @@ export default {
       getPhoto(params).then(res => {
         if (res.code === 200) {
           console.log('lifeTimePhoto页面收到的id:', res);
-          this.photoList = [...this.photoList, ...res.rows];
+          // 为每个照片添加tooltip相关属性
+          const photosWithTooltip = res.rows.map(photo => ({
+            ...photo,
+            showTooltip: false,
+            displayedPhrase: '',
+            displayedDevice: '',
+            displayedShotTime: '',
+            displayedMemory: '',
+            isTyping: false,
+            fullText: this.buildFullText(photo),
+            scrollOffset: 0,
+            shouldScroll: false
+          }));
+          this.photoList = [...this.photoList, ...photosWithTooltip];
           this.total = res.total;
           this.hasMore = this.photoList.length < this.total;
           if (this.hasMore) {
@@ -69,6 +118,180 @@ export default {
       if (scrollPercentage > 0.8 && !this.loading && this.hasMore) {
         this.getPhoto(this.typeId);
       }
+    },
+    showTooltip(index) {
+      // 清除之前的定时器
+      if (this.tooltipTimers[index]) {
+        clearTimeout(this.tooltipTimers[index]);
+      }
+      
+      // 设置1秒后显示tooltip并开始打字效果
+      this.tooltipTimers[index] = setTimeout(() => {
+        this.$set(this.photoList[index], 'showTooltip', true);
+        this.$set(this.photoList[index], 'displayedPhrase', '');
+        this.$set(this.photoList[index], 'displayedDevice', '');
+        this.$set(this.photoList[index], 'displayedShotTime', '');
+        this.$set(this.photoList[index], 'displayedMemory', '');
+        this.$set(this.photoList[index], 'isTyping', true);
+        this.$set(this.photoList[index], 'scrollOffset', 0);
+        this.startTyping(index);
+      }, 1000);
+    },
+    hideTooltip(index) {
+      // 清除定时器
+      if (this.tooltipTimers[index]) {
+        clearTimeout(this.tooltipTimers[index]);
+        this.tooltipTimers[index] = null;
+      }
+      
+      // 清除打字定时器
+      if (this.typingTimers[index]) {
+        clearInterval(this.typingTimers[index]);
+        this.typingTimers[index] = null;
+      }
+      
+      // 清除滚动定时器
+      if (this.scrollTimers[index]) {
+        clearInterval(this.scrollTimers[index]);
+        this.scrollTimers[index] = null;
+      }
+      
+      // 立即隐藏tooltip
+      this.$set(this.photoList[index], 'showTooltip', false);
+      this.$set(this.photoList[index], 'isTyping', false);
+      this.$set(this.photoList[index], 'displayedPhrase', '');
+      this.$set(this.photoList[index], 'displayedDevice', '');
+      this.$set(this.photoList[index], 'displayedShotTime', '');
+      this.$set(this.photoList[index], 'displayedMemory', '');
+      this.$set(this.photoList[index], 'scrollOffset', 0);
+      this.$set(this.photoList[index], 'shouldScroll', false);
+    },
+    startTyping(index) {
+      const photo = this.photoList[index];
+      const fields = [
+        { key: 'phrase', label: '留言', value: photo.phrase },
+        { key: 'device', label: '拍摄设备', value: photo.device },
+        { key: 'shotTime', label: '拍摄时间', value: photo.shotTime },
+        { key: 'memory', label: '记忆', value: photo.memory }
+      ];
+      
+      let currentFieldIndex = 0;
+      let currentCharIndex = 0;
+      let currentField = fields[currentFieldIndex];
+      
+      this.typingTimers[index] = setInterval(() => {
+        // 如果当前字段为空，跳到下一个字段
+        if (!currentField.value) {
+          currentFieldIndex++;
+          if (currentFieldIndex < fields.length) {
+            currentField = fields[currentFieldIndex];
+            currentCharIndex = 0;
+          } else {
+            // 所有字段都完成了
+            clearInterval(this.typingTimers[index]);
+            this.typingTimers[index] = null;
+            this.$set(this.photoList[index], 'isTyping', false);
+            
+            // 检查是否需要滚动
+            this.$nextTick(() => {
+              this.checkScrollNeeded(index);
+            });
+            return;
+          }
+        }
+        
+        // 如果当前字段还有字符要打
+        if (currentCharIndex < currentField.value.length) {
+          const displayedText = currentField.value.substring(0, currentCharIndex + 1);
+          this.$set(this.photoList[index], `displayed${currentField.key.charAt(0).toUpperCase() + currentField.key.slice(1)}`, displayedText);
+          currentCharIndex++;
+        } else {
+          // 当前字段打完了，跳到下一个字段
+          currentFieldIndex++;
+          if (currentFieldIndex < fields.length) {
+            currentField = fields[currentFieldIndex];
+            currentCharIndex = 0;
+          } else {
+            // 所有字段都完成了
+            clearInterval(this.typingTimers[index]);
+            this.typingTimers[index] = null;
+            this.$set(this.photoList[index], 'isTyping', false);
+            
+            // 检查是否需要滚动
+            this.$nextTick(() => {
+              this.checkScrollNeeded(index);
+            });
+            return;
+          }
+        }
+        
+        // 在打字过程中实时检查是否需要滚动
+        this.$nextTick(() => {
+          this.checkScrollNeeded(index);
+        });
+      }, 50); // 每50毫秒显示一个字符
+    },
+    skipTyping(index) {
+      const photo = this.photoList[index];
+      
+      // 清除打字定时器
+      if (this.typingTimers[index]) {
+        clearInterval(this.typingTimers[index]);
+        this.typingTimers[index] = null;
+      }
+      
+      // 直接显示所有字段的完整内容
+      this.$set(this.photoList[index], 'displayedPhrase', photo.phrase || '');
+      this.$set(this.photoList[index], 'displayedDevice', photo.device || '');
+      this.$set(this.photoList[index], 'displayedShotTime', photo.shotTime || '');
+      this.$set(this.photoList[index], 'displayedMemory', photo.memory || '');
+      this.$set(this.photoList[index], 'isTyping', false);
+      
+      // 检查是否需要滚动
+      this.$nextTick(() => {
+        this.checkScrollNeeded(index);
+      });
+    },
+    checkScrollNeeded(index) {
+      const photo = this.photoList[index];
+      const tooltipElement = document.querySelector(`[data-photo-index="${index}"] .memory-tooltip`);
+      
+      if (tooltipElement && !photo.shouldScroll) {
+        const textElement = tooltipElement.querySelector('.text-content');
+        if (textElement) {
+          const textHeight = textElement.scrollHeight;
+          const containerHeight = tooltipElement.clientHeight;
+          
+          if (textHeight > containerHeight) {
+            // 需要滚动
+            this.$set(this.photoList[index], 'shouldScroll', true);
+            this.startScrolling(index, textHeight);
+          }
+        }
+      }
+    },
+    startScrolling(index, textHeight) {
+      const photo = this.photoList[index];
+      let scrollOffset = 0;
+      
+      this.scrollTimers[index] = setInterval(() => {
+        scrollOffset -= 1; // 向上滚动1px
+        
+        // 当第一段文字完全滚出顶部时，重置位置
+        if (Math.abs(scrollOffset) >= textHeight) {
+          scrollOffset = 0;
+        }
+        
+        this.$set(this.photoList[index], 'scrollOffset', scrollOffset);
+      }, 30); // 每30毫秒滚动一次，稍微快一点
+    },
+    buildFullText(photo) {
+      const lines = [];
+      if (photo.phrase) lines.push(`留言：${photo.phrase}`);
+      if (photo.device) lines.push(`拍摄设备：${photo.device}`);
+      if (photo.shotTime) lines.push(`拍摄时间：${photo.shotTime}`);
+      if (photo.memory) lines.push(`记忆：${photo.memory}`);
+      return lines.join('\n');
     }
   }
 }
@@ -129,6 +352,79 @@ export default {
 .masonry-item:hover img {
   transform: scale(1.04);
 }
+
+.memory-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  border-radius: 16px;
+  z-index: 10;
+  animation: fadeIn 0.3s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.scrolling-container {
+  width: 100%;
+  transition: transform 0.05s linear;
+}
+
+.text-content {
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.field-line {
+  margin-bottom: 0.5rem;
+  text-align: left;
+  padding: 0.2rem 0;
+}
+
+.field-line:last-child {
+  margin-bottom: 0;
+}
+
+.typing-text {
+  display: inline;
+}
+
+.typing-cursor {
+  display: inline;
+  animation: blink 1s infinite;
+  color: #fff;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .loading, .end, .empty {
   text-align: center;
   color: #888;
