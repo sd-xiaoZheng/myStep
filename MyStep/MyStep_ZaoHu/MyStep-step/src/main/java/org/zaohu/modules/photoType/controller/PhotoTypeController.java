@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.zaohu.common.ResultCommon.Result;
 import org.zaohu.common.entity.PhotoBatch;
+import org.zaohu.common.entity.PhotoNew;
 import org.zaohu.common.page.TableDataInfo;
 import org.zaohu.constant.controller.BaseController;
 import org.zaohu.modules.photoType.entity.PhotoType;
@@ -82,6 +83,21 @@ public class PhotoTypeController extends BaseController {
     @PostMapping("/addPhotoBatch")
     public Result addPhotoBatch(@ModelAttribute PhotoBatch photoBatch) throws IOException, ImageProcessingException {
         photoTypeService.addPhotoBatch(photoBatch);
+        return Result.success("添加成功");
+    }
+
+    /**
+     * @ ModelAttribute:
+     * Spring MVC 在处理 multipart/form-data 时，只能识别表单字段名是 photo.xxx 的嵌套结构，才能正确映射到 PhotoNew.photo 的子字段。
+     * ✅ 你需要这样传字段名：
+     * photo.typeId = 29
+     * photo.phrase = "xxxxx"
+     * photo.memory = "xxxx"
+     * file = (二进制)
+     */
+    @PostMapping("/addPhoto")
+    public Result addPhoto(@ModelAttribute PhotoNew photoNew) throws IOException, ImageProcessingException {
+        photoTypeService.addPhoto(photoNew);
         return Result.success("添加成功");
     }
 }

@@ -46,13 +46,15 @@
         </template>
       </el-table-column>
       <el-table-column prop="updateTime" label="更新时间" width="180"></el-table-column>
-      <el-table-column label="操作" width="125" fixed="right">
+      <el-table-column label="操作" width="170vh" fixed="right">
         <template slot-scope="scope">
-          <el-button type="primary" icon="el-icon-edit" circle size="mini"
+          <el-button type="primary" icon="el-icon-edit" circle size="mini" title="编辑"
                      @click="editPhotoType(scope.row)"></el-button>
-          <el-button type="info" icon="el-icon-brush" circle size="mini"
+          <el-button type="info" icon="el-icon-folder-add" circle size="mini" title="添加一个照片"
                      @click="addPhoto(scope.row.id)"></el-button>
-          <el-button type="danger" icon="el-icon-delete" circle size="mini"
+          <el-button type="info" icon="el-icon-brush" circle size="mini" title="添加一组照片"
+                     @click="addPhotoBatch(scope.row.id)"></el-button>
+          <el-button type="danger" icon="el-icon-delete" circle size="mini" title="删除该类型包括子照片"
                      @click="moveToRecycleBin(scope.row)"></el-button>
         </template>
       </el-table-column>
@@ -106,7 +108,7 @@
       </span>
     </el-dialog>
 
-    <el-dialog :visible.sync="addPhotoDialogVisible" title="添加图片" :modal="false">
+    <el-dialog :visible.sync="addPhotoDialogVisible" title="批量添加图片" :modal="false">
       <!-- 上传区域：支持拖拽 -->
       <el-upload
           ref="uploadRef"
@@ -132,6 +134,42 @@
       <el-dialog :visible.sync="dialogVisible">
         <img height="500px" width="100%" :src="dialogImageUrl" alt="预览图片">
       </el-dialog>
+    </el-dialog>
+
+    <el-dialog :visible.sync="addPhotoDiv" title="添加图片" :modal="false">
+      <el-form :model="newPhotoForm" :rules="photoRules" ref="newPhotoForm" label-width="100px">
+        <el-form-item label="照片名称" prop="name">
+          <el-input v-model="newPhotoForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="所属类型ID" prop="typeId">
+          <el-input v-model="newPhotoForm.typeId" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="留言短语" prop="phrase">
+          <el-input v-model="newPhotoForm.phrase"></el-input>
+        </el-form-item>
+        <el-form-item label="回忆" prop="memory">
+          <el-input v-model="newPhotoForm.memory"></el-input>
+        </el-form-item>
+        <el-form-item label="上传图片" prop="photo">
+          <el-upload
+            action="#"
+            :show-file-list="false"
+            :auto-upload="false"
+            :http-request="() => {}"
+            :on-change="handlePhotoFileChange"
+            accept="image/*"
+          >
+            <img v-if="photoPreview" :src="photoPreview" class="avatar">
+            <div v-else class="avatar-uploader">
+              <i class="el-icon-plus avatar-uploader-icon"></i>
+            </div>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addPhotoDiv = false">取消</el-button>
+        <el-button type="primary" @click="submitNewPhoto">添加</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -193,7 +231,8 @@ import {
   getPhotoTypeList,
   deletePhotoTypeList,
   editPhotoType,
-  addPhotoBatch
+  addPhotoBatch,
+  addPhoto
 } from '@/apis/api/lifeTimeManage'
 
 export default {
@@ -211,6 +250,7 @@ export default {
       total: 0,
       addTypeDialogVisible: false,
       addPhotoDialogVisible: false,
+      addPhotoDiv: false,
       addPhotoType: -1,//批量添加照片的类型id
       dialogMode: 'add',
       newTypeForm: {
@@ -232,7 +272,20 @@ export default {
           {required: true, message: '请输入排序', trigger: 'blur'}
         ]
       },
-      searchTypeName: ''
+      searchTypeName: '',
+      newPhotoForm: {
+        name: '',
+        typeId: null,
+        phrase: '',
+        memory: '',
+        photo: null
+      },
+      photoPreview: '',
+      photoRules: {
+        name: [{ required: true, message: '请输入照片名称', trigger: 'blur' }],
+        phrase: [{ required: true, message: '请输入留言短语', trigger: 'blur' }],
+        memory: [{ required: true, message: '请输入回忆', trigger: 'blur' }]
+      },
     }
   },
   methods: {
@@ -266,9 +319,21 @@ export default {
         this.$message.error('上传异常!')
       })
     },
-    addPhoto(row) {
+    addPhotoBatch(row) {
       this.addPhotoDialogVisible = true
       this.addPhotoType = row
+    },
+    addPhoto(row) {
+      this.addPhotoDiv = true
+      this.addPhotoType = row
+      this.newPhotoForm = {
+        name: '',
+        typeId: row, // 直接赋值
+        phrase: '',
+        memory: '',
+        photo: null
+      }
+      this.photoPreview = ''
     },
     editPhotoType(row) {
       this.dialogMode = 'edit'
@@ -408,7 +473,38 @@ export default {
       } catch (error) {
         this.$message.error('操作失败，请稍后重试')
       }
-    }
+    },
+    handlePhotoFileChange(file) {
+      this.newPhotoForm.photo = file.raw
+      this.photoPreview = URL.createObjectURL(file.raw)
+    },
+    async submitNewPhoto() {
+      try {
+        await new Promise((resolve, reject) => {
+          this.$refs.newPhotoForm.validate((valid) => {
+            if (!valid) return reject('表单验证失败')
+            resolve()
+          })
+        })
+        if (!this.newPhotoForm.photo) {
+          this.$message.error('请上传图片')
+          return
+        }
+        const formData = new FormData()
+        formData.append('photo.name', this.newPhotoForm.name)
+        formData.append('photo.typeId', this.newPhotoForm.typeId)
+        formData.append('photo.phrase', this.newPhotoForm.phrase)
+        formData.append('photo.memory', this.newPhotoForm.memory)
+        formData.append('file', this.newPhotoForm.photo)
+        await addPhoto(formData).then(res => {
+          res.code === 200 ? this.$message.success(res.message) : this.$message.error(res.message)
+        })
+        this.addPhotoDiv = false
+        this.getPhotoTypeList()
+      } catch (error) {
+        this.$message.error('操作失败，请稍后重试')
+      }
+    },
   },
   mounted() {
     this.getPhotoTypeList()

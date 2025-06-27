@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.zaohu.common.entity.PhotoBatch;
+import org.zaohu.common.entity.PhotoNew;
 import org.zaohu.constant.Constant;
 import org.zaohu.jobs.rocketMq.producer.RocketMQTemplateProducerUtils;
 import org.zaohu.modules.photo.entity.Photo;
@@ -71,7 +72,6 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
         photoTypeQw.lambda().orderByAsc(PhotoType::getSortOrder);
         List<PhotoType> photoTypes = photoTypeMapper.selectList(photoTypeQw);
 
-        //
         if (isPhrase.equals(1) && !photoTypes.isEmpty()) {
             getPhraseByTypeId(photoTypes);
         }
@@ -123,40 +123,77 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
     @Override
     public void addPhotoBatch(PhotoBatch photoBatch) throws ImageProcessingException, IOException {
         List<MultipartFile> photoTypeList = photoBatch.getPhotoTypeList();
-        LocalDate currentDate = LocalDate.now(); // 当前日期
+        ArrayList<Photo> addBatchList = new ArrayList<>();
+        LocalDate currentDate = LocalDate.now();
         String year = String.valueOf(currentDate.getYear());
         String month = String.format("%02d", currentDate.getMonthValue());
-        //一个个文件塞给mq 并且入库
-        ArrayList<Photo> addBatchList = new ArrayList<>();
         for (MultipartFile multipartFile : photoTypeList) {
-            // 先上传原图到Temp
-            String path = FileUtils.uploadPhotoImage(multipartFile, Constant.PHOTO_TYPE_TEMP_PATH);
-            String[] split = path.split("/");
-            String fileName = split[split.length - 1];
-
-            // 拼接最终的文件路径
-            String photoPath = Constant.FILE_PATH + year + Constant.PHOTO_TYPE_TEMP_PATH;
-            String fullPath = photoPath + fileName;
-
-            // 拼接完整文件路径，发送消息给 RocketMQ
-            rocketMQTemplateProducerUtils.asyncSendMessage(Constant.ROCKET_IMAGE_THUMB_TOPIC, fullPath);
-            //把路径入库
-            Photo photo = new Photo();
-            int dotIndex = fileName.lastIndexOf('.');
-            String extension = dotIndex >= 0 ? fileName.substring(dotIndex) : "";
-            if (!extension.isEmpty()) {
-                fileName = fileName.substring(0, dotIndex) + ".webp";
-            } else {
-                // 非目标格式或无扩展名，直接拼接.webp
-                fileName += ".webp";
-            }
-            photo.setName(fileName);
-            photo.setFilePath(Constant.RESOURCE_PREFIX.replace("/step", "") + year + Constant.PHOTO_PATH + month + "/" + fileName);
-            photo.setTypeId(photoBatch.getTypeId());
-            photo.setUploadTime(LocalDateTimeUtil.now());
-            PhotoInfo.getPhotoInfo(new File(Constant.FILE_PATH + path.replace("/Zaohu", "")), photo);
+            Photo photo = processAndBuildPhoto(multipartFile, photoBatch.getTypeId(), year, month);
             addBatchList.add(photo);
         }
         photoMapper.insert(addBatchList);
+    }
+
+    @Override
+    public void addPhoto(PhotoNew photoNew) throws ImageProcessingException, IOException {
+        MultipartFile file = photoNew.getFile();
+        Photo photo = photoNew.getPhoto();
+
+        LocalDate currentDate = LocalDate.now();
+        String year = String.valueOf(currentDate.getYear());
+        String month = String.format("%02d", currentDate.getMonthValue());
+
+        Photo processedPhoto = processAndBuildPhoto(file, photo.getTypeId(), year, month);
+        photo.setFilePath(processedPhoto.getFilePath());
+        photo.setUploadTime(processedPhoto.getUploadTime());
+        photo.setUploadTime(LocalDateTimeUtil.now());
+        photo.setLocation(processedPhoto.getLocation());
+        photo.setShotTime(processedPhoto.getShotTime());
+        photo.setDevice(processedPhoto.getDevice());
+        photo.setAltitude(processedPhoto.getAltitude());
+        photoMapper.insert(photo);
+    }
+
+    /**
+     * 处理这张照片原图保存temp 推给mq转缩略webp
+     *
+     * @param file 上传的文件
+     * @param typeId 类型id
+     * @param year 年
+     * @param month 月
+     * @return
+     * @throws IOException
+     * @throws ImageProcessingException
+     */
+    private Photo processAndBuildPhoto(MultipartFile file, Integer typeId, String year, String month)
+            throws IOException, ImageProcessingException {
+
+        String path = FileUtils.uploadPhotoImage(file, Constant.PHOTO_TYPE_TEMP_PATH);
+        String[] split = path.split("/");
+        String fileName = split[split.length - 1];
+
+        String photoPath = Constant.FILE_PATH + year + Constant.PHOTO_TYPE_TEMP_PATH;
+        String fullPath = photoPath + fileName;
+
+        rocketMQTemplateProducerUtils.asyncSendMessage(Constant.ROCKET_IMAGE_THUMB_TOPIC, fullPath);
+
+        Photo photo = new Photo();
+        int dotIndex = fileName.lastIndexOf('.');
+        String extension = dotIndex >= 0 ? fileName.substring(dotIndex) : "";
+        if (!extension.isEmpty()) {
+            fileName = fileName.substring(0, dotIndex) + ".webp";
+        } else {
+            fileName += ".webp";
+        }
+
+        photo.setName(fileName);
+        photo.setTypeId(typeId);
+        photo.setUploadTime(LocalDateTimeUtil.now());
+        photo.setFilePath(Constant.RESOURCE_PREFIX.replace("/step", "") + year + Constant.PHOTO_PATH + month + "/" + fileName);
+
+        File imageFile = new File(Constant.FILE_PATH + path.replace("/Zaohu", ""));
+        //获取照片的信息
+        PhotoInfo.getPhotoInfo(imageFile, photo);
+        return photo;
     }
 }

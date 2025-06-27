@@ -29,6 +29,18 @@ export function addPhotoBatch(data) {
     })
 }
 
+// 批量添加照片
+export function addPhoto(data) {
+    return request({
+        data: data,
+        url: '/photoType/addPhoto',
+        method: 'post',
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+}
+
 // 修改类型
 export function editPhotoType(data) {
     return request({

@@ -2,6 +2,7 @@ package org.zaohu.modules.photoType.service;
 
 import com.drew.imaging.ImageProcessingException;
 import org.zaohu.common.entity.PhotoBatch;
+import org.zaohu.common.entity.PhotoNew;
 import org.zaohu.modules.photoType.entity.PhotoType;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -35,4 +36,7 @@ public interface PhotoTypeService extends IService<PhotoType> {
     void editPhotoType(PhotoType photoType);
 
     void addPhotoBatch(PhotoBatch photoBatch) throws IOException, ImageProcessingException;
+
+    void addPhoto(PhotoNew photoNew) throws ImageProcessingException, IOException;
+
 }

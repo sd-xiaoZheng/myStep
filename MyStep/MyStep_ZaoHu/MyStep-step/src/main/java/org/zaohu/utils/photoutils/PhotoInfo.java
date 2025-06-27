@@ -11,10 +11,6 @@ import org.zaohu.modules.photo.entity.Photo;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * @author myStep
