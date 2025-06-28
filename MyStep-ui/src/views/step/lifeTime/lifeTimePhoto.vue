@@ -108,7 +108,6 @@ export default {
       }).finally(() => {
         this.loading = false;
       });
-
     },
     handleScroll() {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;

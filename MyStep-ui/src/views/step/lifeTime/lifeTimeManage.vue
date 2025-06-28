@@ -46,10 +46,12 @@
         </template>
       </el-table-column>
       <el-table-column prop="updateTime" label="更新时间" width="180"></el-table-column>
-      <el-table-column label="操作" width="170vh" fixed="right">
+      <el-table-column label="操作" width="200vh" fixed="right">
         <template slot-scope="scope">
           <el-button type="primary" icon="el-icon-edit" circle size="mini" title="编辑"
                      @click="editPhotoType(scope.row)"></el-button>
+          <el-button type="info" icon="el-icon-picture" circle size="mini" title="查看照片"
+                     @click="getPhotoByType(scope.row.id)"></el-button>
           <el-button type="info" icon="el-icon-folder-add" circle size="mini" title="添加一个照片"
                      @click="addPhoto(scope.row.id)"></el-button>
           <el-button type="info" icon="el-icon-brush" circle size="mini" title="添加一组照片"
@@ -152,12 +154,12 @@
         </el-form-item>
         <el-form-item label="上传图片" prop="photo">
           <el-upload
-            action="#"
-            :show-file-list="false"
-            :auto-upload="false"
-            :http-request="() => {}"
-            :on-change="handlePhotoFileChange"
-            accept="image/*"
+              action="#"
+              :show-file-list="false"
+              :auto-upload="false"
+              :http-request="() => {}"
+              :on-change="handlePhotoFileChange"
+              accept="image/*"
           >
             <img v-if="photoPreview" :src="photoPreview" class="avatar">
             <div v-else class="avatar-uploader">
@@ -170,6 +172,64 @@
         <el-button @click="addPhotoDiv = false">取消</el-button>
         <el-button type="primary" @click="submitNewPhoto">添加</el-button>
       </span>
+    </el-dialog>
+
+    <!-- 查看照片弹窗 -->
+    <el-dialog :visible.sync="viewPhotoDialogVisible" title="照片列表" width="80%" :modal="false">
+      <el-table
+        v-loading="photoLoading"
+        :data="photoList"
+        style="width: 100%">
+        <el-table-column label="照片" width="120">
+          <template slot-scope="scope">
+            <el-image
+              style="width: 80px; height: 80px"
+              :src="'/api'+scope.row.filePath"
+              :preview-src-list="['/api'+scope.row.filePath]">
+            </el-image>
+          </template>
+        </el-table-column>
+        <el-table-column prop="name" label="照片名称" width="120"></el-table-column>
+        <el-table-column prop="phrase" label="短语" min-width="150"></el-table-column>
+        <el-table-column prop="memory" label="回忆" min-width="200" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="shotTime" label="拍摄时间" width="120">
+          <template slot-scope="scope">
+            {{ formatShotTime(scope.row.shotTime) }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="device" label="拍摄设备" width="100"></el-table-column>
+        <el-table-column prop="altitude" label="海拔" width="80">
+          <template slot-scope="scope">
+            {{ scope.row.altitude ? scope.row.altitude + 'm' : '-' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="uploadTime" label="上传时间" width="150">
+          <template slot-scope="scope">
+            {{ formatUploadTime(scope.row.uploadTime) }}
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" width="90vh" fixed="right">
+          <template slot-scope="scope">
+            <el-button type="primary" icon="el-icon-edit" circle size="mini" title="编辑"
+                       @click="editPhotoType(scope.row)"></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle size="mini" title="删除该类型包括子照片"
+                       @click="moveToRecycleBin(scope.row)"></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      
+      <!-- 照片分页 -->
+      <div class="pagination-container" style="margin-top: 20px;">
+        <el-pagination
+          :current-page="photoCurrentPage"
+          :page-size="photoPageSize"
+          :page-sizes="[10, 20, 50, 100]"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="photoTotal"
+          @size-change="handlePhotoSizeChange"
+          @current-change="handlePhotoCurrentChange"
+        />
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -234,6 +294,7 @@ import {
   addPhotoBatch,
   addPhoto
 } from '@/apis/api/lifeTimeManage'
+import {getPhoto} from "@/apis/api/lifeTimePhoto";
 
 export default {
   data() {
@@ -282,10 +343,18 @@ export default {
       },
       photoPreview: '',
       photoRules: {
-        name: [{ required: true, message: '请输入照片名称', trigger: 'blur' }],
-        phrase: [{ required: true, message: '请输入留言短语', trigger: 'blur' }],
-        memory: [{ required: true, message: '请输入回忆', trigger: 'blur' }]
+        name: [{required: true, message: '请输入照片名称', trigger: 'blur'}],
+        phrase: [{required: true, message: '请输入留言短语', trigger: 'blur'}],
+        memory: [{required: true, message: '请输入回忆', trigger: 'blur'}]
       },
+      // 照片列表相关
+      viewPhotoDialogVisible: false,
+      photoLoading: false,
+      photoList: [],
+      photoCurrentPage: 1,
+      photoPageSize: 20,
+      photoTotal: 0,
+      currentTypeId: null,
     }
   },
   methods: {
@@ -293,6 +362,40 @@ export default {
       console.log(file, "file")
       console.log(fileList, "fileList")
       this.fileList = fileList;
+    },
+    async getPhotoByType(id) {
+      this.currentTypeId = id;
+      this.viewPhotoDialogVisible = true;
+      this.photoCurrentPage = 1;
+      this.photoList = [];
+      await this.loadPhotoList();
+    },
+    async loadPhotoList() {
+      this.photoLoading = true;
+      try {
+        const params = {
+          pageNum: this.photoCurrentPage,
+          pageSize: this.photoPageSize,
+          typeId: this.currentTypeId
+        };
+        const res = await getPhoto(params);
+        if (res.code === 200) {
+          this.photoList = res.rows;
+          this.photoTotal = res.total;
+        }
+      } catch (error) {
+        this.$message.error('获取照片列表失败');
+      } finally {
+        this.photoLoading = false;
+      }
+    },
+    handlePhotoSizeChange(val) {
+      this.photoPageSize = val;
+      this.loadPhotoList();
+    },
+    handlePhotoCurrentChange(val) {
+      this.photoCurrentPage = val;
+      this.loadPhotoList();
     },
     submitUpload() {
       if (this.fileList.length === 0) {
@@ -468,7 +571,7 @@ export default {
         editPhotoType(formData).then(res => {
           res.code === 200 ? this.$message.success(res.message) : this.$message.error(res.message)
         })
-        val=!val
+        val = !val
         // this.getPhotoTypeList()
       } catch (error) {
         this.$message.error('操作失败，请稍后重试')
@@ -504,6 +607,31 @@ export default {
       } catch (error) {
         this.$message.error('操作失败，请稍后重试')
       }
+    },
+    formatShotTime(shotTime) {
+      if (!shotTime) return '-';
+      // 处理格式：2019:07:12 07:51:32
+      const parts = shotTime.split(' ');
+      if (parts.length === 2) {
+        const datePart = parts[0].replace(/:/g, '-');
+        const timePart = parts[1];
+        return `${datePart} ${timePart}`;
+      }
+      return shotTime;
+    },
+    formatUploadTime(uploadTime) {
+      if (!uploadTime) return '-';
+      // 处理格式：2025-06-21T20:19:57.548379
+      const date = new Date(uploadTime);
+      if (isNaN(date.getTime())) return uploadTime;
+      
+      const year = date.getFullYear().toString().slice(-2); // 取年份后两位
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      
+      return `${year}-${month}-${day} ${hours}:${minutes}`;
     },
   },
   mounted() {
