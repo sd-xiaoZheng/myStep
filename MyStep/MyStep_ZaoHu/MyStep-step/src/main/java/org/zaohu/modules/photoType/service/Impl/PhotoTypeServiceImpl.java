@@ -2,6 +2,7 @@ package org.zaohu.modules.photoType.service.Impl;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.drew.imaging.ImageProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * <p>
@@ -44,6 +46,8 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
     private PhotoMapper photoMapper;
     @Autowired
     private RocketMQTemplateProducerUtils rocketMQTemplateProducerUtils;
+
+    private final ReentrantLock lock = new ReentrantLock();
 
     @Override
     public void addPhotoType(PhotoType photoType) {
@@ -131,8 +135,9 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
             Photo photo = processAndBuildPhoto(multipartFile, photoBatch.getTypeId(), year, month);
             addBatchList.add(photo);
         }
-        photoMapper.insert(addBatchList);
+        syncAddPhoto(addBatchList,photoBatch.getTypeId());
     }
+
 
     @Override
     public void addPhoto(PhotoNew photoNew) throws ImageProcessingException, IOException {
@@ -151,8 +156,30 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
         photo.setShotTime(processedPhoto.getShotTime());
         photo.setDevice(processedPhoto.getDevice());
         photo.setAltitude(processedPhoto.getAltitude());
-        photoMapper.insert(photo);
+        ArrayList<Photo> addBatchList = new ArrayList<>();
+        addBatchList.add(photo);
+        syncAddPhoto(addBatchList,photo.getTypeId());
     }
+
+    /**
+     * 同步更改数据库
+     * @param addBatchList 照片
+     * @param typeId 添加的类型ID
+     */
+    private void syncAddPhoto(ArrayList<Photo> addBatchList, Integer typeId) {
+        lock.lock();
+        try {
+            photoMapper.insert(addBatchList);
+            PhotoType photoType = photoTypeMapper.selectById(typeId);
+            photoType.setPhotoCount(photoType.getPhotoCount() + addBatchList.size());
+            UpdateWrapper<PhotoType> photoTypeUpdateWrapper = new UpdateWrapper<>();
+            photoTypeUpdateWrapper.set("photo_count", photoType.getPhotoCount()).eq("id", typeId);
+            photoTypeMapper.update(photoTypeUpdateWrapper);
+        }finally {
+            lock.unlock();
+        }
+    }
+
 
     /**
      * 处理这张照片原图保存temp 推给mq转缩略webp

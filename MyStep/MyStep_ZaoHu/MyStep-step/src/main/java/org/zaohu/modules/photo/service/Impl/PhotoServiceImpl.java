@@ -27,8 +27,8 @@ public class PhotoServiceImpl extends ServiceImpl<PhotoMapper, Photo> implements
     public List<Photo> getPhoto(Integer typeId) {
         QueryWrapper<Photo> photoQueryWrapper = new QueryWrapper<>();
         photoQueryWrapper.lambda().eq(Photo::getTypeId, typeId);
-        List<Photo> photos = photoMapper.selectList(photoQueryWrapper);
-        return photos;
+        photoQueryWrapper.lambda().orderByDesc(Photo::getIsFavorite, Photo::getShotTime);
+        return photoMapper.selectList(photoQueryWrapper);
     }
 
     @Override
