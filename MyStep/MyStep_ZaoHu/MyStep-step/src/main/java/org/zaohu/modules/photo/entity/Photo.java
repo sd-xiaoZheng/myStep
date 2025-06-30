@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -77,4 +78,7 @@ public class Photo {
     @ApiModelProperty("海拔")
     @TableField("altitude")
     private Double altitude;
+
+    @TableField(exist = false)
+    private MultipartFile tempPhoto;
 }

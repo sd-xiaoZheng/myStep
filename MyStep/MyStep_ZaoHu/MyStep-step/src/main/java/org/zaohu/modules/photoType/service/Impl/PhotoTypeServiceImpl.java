@@ -192,7 +192,7 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
      * @throws IOException
      * @throws ImageProcessingException
      */
-    private Photo processAndBuildPhoto(MultipartFile file, Integer typeId, String year, String month)
+    public Photo processAndBuildPhoto(MultipartFile file, Integer typeId, String year, String month)
             throws IOException, ImageProcessingException {
 
         String path = FileUtils.uploadPhotoImage(file, Constant.PHOTO_TYPE_TEMP_PATH);

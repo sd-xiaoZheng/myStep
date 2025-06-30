@@ -1,5 +1,6 @@
 package org.zaohu.modules.photo.controller;
 
+import com.drew.imaging.ImageProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.zaohu.common.ResultCommon.Result;
@@ -10,6 +11,7 @@ import org.zaohu.modules.photo.service.PhotoService;
 import org.zaohu.modules.photoType.entity.PhotoType;
 import org.zaohu.modules.photoType.service.PhotoTypeService;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.zaohu.utils.PageUtils.startPageNoCount;
@@ -55,7 +57,7 @@ public class PhotoController extends BaseController {
      * @return
      */
     @PostMapping("/updatePhoto")
-    public Result updatePhoto(Photo photo) {
+    public Result updatePhoto(Photo photo) throws ImageProcessingException, IOException {
         photoService.updatePhoto(photo);
         return Result.success();
     }
