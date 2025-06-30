@@ -19,4 +19,8 @@ public interface PhotoService extends IService<Photo> {
     List<Photo> getPhoto(Integer typeId);
 
     Long selectCount(Integer typeId);
+
+    void like(Integer photoId);
+
+    void updatePhoto(Photo photo);
 }

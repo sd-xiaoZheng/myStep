@@ -1,6 +1,7 @@
 package org.zaohu.modules.photo.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.zaohu.modules.photo.entity.Photo;
 import org.zaohu.modules.photo.mapper.PhotoMapper;
@@ -36,5 +37,17 @@ public class PhotoServiceImpl extends ServiceImpl<PhotoMapper, Photo> implements
         QueryWrapper<Photo> photoQueryWrapper = new QueryWrapper<>();
         photoQueryWrapper.lambda().eq(Photo::getTypeId, typeId);
         return photoMapper.selectCount(photoQueryWrapper);
+    }
+
+    @Override
+    public void like(Integer photoId) {
+        UpdateWrapper<Photo> photoUpdateWrapper = new UpdateWrapper<>();
+        photoUpdateWrapper.set("is_favorite", true).eq("id", photoId);
+        photoMapper.update(photoUpdateWrapper);
+    }
+
+    @Override
+    public void updatePhoto(Photo photo) {
+
     }
 }

@@ -2,6 +2,7 @@ package org.zaohu.modules.photo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.zaohu.common.ResultCommon.Result;
 import org.zaohu.common.page.TableDataInfo;
 import org.zaohu.constant.controller.BaseController;
 import org.zaohu.modules.photo.entity.Photo;
@@ -35,5 +36,27 @@ public class PhotoController extends BaseController {
         TableDataInfo dataTable = getDataTableNoTotal(photoList);
         dataTable.setTotal(total);
         return dataTable;
+    }
+
+    /**
+     * 收藏照片接口
+     * @param photoId 相册id
+     * @return
+     */
+    @PostMapping("/like")
+    public Result like(Integer photoId) {
+        photoService.like(photoId);
+        return Result.success();
+    }
+
+    /**
+     * 收藏照片接口
+     * @param photo 相册修改内容
+     * @return
+     */
+    @PostMapping("/updatePhoto")
+    public Result updatePhoto(Photo photo) {
+        photoService.updatePhoto(photo);
+        return Result.success();
     }
 }
