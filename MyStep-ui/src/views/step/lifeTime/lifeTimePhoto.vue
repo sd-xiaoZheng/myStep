@@ -2,11 +2,17 @@
   <div class="waterfall-album">
     <div class="masonry">
       <div v-for="(photo, idx) in photoList" :key="photo.id || idx" class="masonry-item">
-        <div class="img-wrapper" 
-             @mouseenter="showTooltip(idx)" 
+        <div class="img-wrapper"
+             @mouseenter="showTooltip(idx)"
              @mouseleave="hideTooltip(idx)">
-          <img :src="'/api' + photo.filePath" :alt="photo.name || '照片'" />
-          <div v-if="photo.showTooltip" 
+          <img :src="'/api' + photo.filePath" :alt="photo.name || '照片'"/>
+          <!-- 小心心按钮 -->
+          <span class="like-btn" :class="{ liked: photo.liked }" @click.stop="handleLike(idx)"
+                :disabled="photo.likeLoading">
+            <i v-if="photo.liked" class="el-icon-star-on"></i>
+            <i v-else class="el-icon-star-off"></i>
+          </span>
+          <div v-if="photo.showTooltip"
                class="memory-tooltip"
                :data-photo-index="idx"
                @click="skipTyping(idx)">
@@ -37,7 +43,7 @@
 </template>
 
 <script>
-import { getPhoto } from "@/apis/api/lifeTimePhoto";
+import {getPhoto, likePhoto, UnLikePhoto} from "@/apis/api/lifeTimePhoto";
 
 export default {
   name: 'lifeTimePhoto',
@@ -85,7 +91,7 @@ export default {
       getPhoto(params).then(res => {
         if (res.code === 200) {
           console.log('lifeTimePhoto页面收到的id:', res);
-          // 为每个照片添加tooltip相关属性
+          // 为每个照片添加tooltip相关属性和like相关属性
           const photosWithTooltip = res.rows.map(photo => ({
             ...photo,
             showTooltip: false,
@@ -96,7 +102,9 @@ export default {
             isTyping: false,
             fullText: this.buildFullText(photo),
             scrollOffset: 0,
-            shouldScroll: false
+            shouldScroll: false,
+            liked: photo.isFavorite === true, // 用isFavorite字段初始化
+            likeLoading: false
           }));
           this.photoList = [...this.photoList, ...photosWithTooltip];
           this.total = res.total;
@@ -108,6 +116,28 @@ export default {
       }).finally(() => {
         this.loading = false;
       });
+    },
+    async handleLike(idx) {
+      const photo = this.photoList[idx];
+      if (photo.likeLoading) return;
+      this.$set(this.photoList[idx], 'likeLoading', true);
+      try {
+        let res;
+        if (!photo.liked) {
+          res = await likePhoto(photo.id);
+        } else {
+          res = await UnLikePhoto(photo.id);
+        }
+        if (res.code === 200) {
+          this.$set(this.photoList[idx], 'liked', !photo.liked);
+        } else {
+          this.$message.error(res.message || (photo.liked ? '取消收藏失败' : '收藏失败'));
+        }
+      } catch (e) {
+        this.$message.error(photo.liked ? '取消收藏异常' : '收藏异常');
+      } finally {
+        this.$set(this.photoList[idx], 'likeLoading', false);
+      }
     },
     handleScroll() {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -123,7 +153,7 @@ export default {
       if (this.tooltipTimers[index]) {
         clearTimeout(this.tooltipTimers[index]);
       }
-      
+
       // 设置1秒后显示tooltip并开始打字效果
       this.tooltipTimers[index] = setTimeout(() => {
         this.$set(this.photoList[index], 'showTooltip', true);
@@ -142,19 +172,19 @@ export default {
         clearTimeout(this.tooltipTimers[index]);
         this.tooltipTimers[index] = null;
       }
-      
+
       // 清除打字定时器
       if (this.typingTimers[index]) {
         clearInterval(this.typingTimers[index]);
         this.typingTimers[index] = null;
       }
-      
+
       // 清除滚动定时器
       if (this.scrollTimers[index]) {
         clearInterval(this.scrollTimers[index]);
         this.scrollTimers[index] = null;
       }
-      
+
       // 立即隐藏tooltip
       this.$set(this.photoList[index], 'showTooltip', false);
       this.$set(this.photoList[index], 'isTyping', false);
@@ -168,16 +198,16 @@ export default {
     startTyping(index) {
       const photo = this.photoList[index];
       const fields = [
-        { key: 'phrase', label: '留言', value: photo.phrase },
-        { key: 'device', label: '拍摄设备', value: photo.device },
-        { key: 'shotTime', label: '拍摄时间', value: photo.shotTime },
-        { key: 'memory', label: '记忆', value: photo.memory }
+        {key: 'phrase', label: '留言', value: photo.phrase},
+        {key: 'device', label: '拍摄设备', value: photo.device},
+        {key: 'shotTime', label: '拍摄时间', value: photo.shotTime},
+        {key: 'memory', label: '记忆', value: photo.memory}
       ];
-      
+
       let currentFieldIndex = 0;
       let currentCharIndex = 0;
       let currentField = fields[currentFieldIndex];
-      
+
       this.typingTimers[index] = setInterval(() => {
         // 如果当前字段为空，跳到下一个字段
         if (!currentField.value) {
@@ -190,7 +220,7 @@ export default {
             clearInterval(this.typingTimers[index]);
             this.typingTimers[index] = null;
             this.$set(this.photoList[index], 'isTyping', false);
-            
+
             // 检查是否需要滚动
             this.$nextTick(() => {
               this.checkScrollNeeded(index);
@@ -198,7 +228,7 @@ export default {
             return;
           }
         }
-        
+
         // 如果当前字段还有字符要打
         if (currentCharIndex < currentField.value.length) {
           const displayedText = currentField.value.substring(0, currentCharIndex + 1);
@@ -215,7 +245,7 @@ export default {
             clearInterval(this.typingTimers[index]);
             this.typingTimers[index] = null;
             this.$set(this.photoList[index], 'isTyping', false);
-            
+
             // 检查是否需要滚动
             this.$nextTick(() => {
               this.checkScrollNeeded(index);
@@ -223,7 +253,7 @@ export default {
             return;
           }
         }
-        
+
         // 在打字过程中实时检查是否需要滚动
         this.$nextTick(() => {
           this.checkScrollNeeded(index);
@@ -232,20 +262,20 @@ export default {
     },
     skipTyping(index) {
       const photo = this.photoList[index];
-      
+
       // 清除打字定时器
       if (this.typingTimers[index]) {
         clearInterval(this.typingTimers[index]);
         this.typingTimers[index] = null;
       }
-      
+
       // 直接显示所有字段的完整内容
       this.$set(this.photoList[index], 'displayedPhrase', photo.phrase || '');
       this.$set(this.photoList[index], 'displayedDevice', photo.device || '');
       this.$set(this.photoList[index], 'displayedShotTime', photo.shotTime || '');
       this.$set(this.photoList[index], 'displayedMemory', photo.memory || '');
       this.$set(this.photoList[index], 'isTyping', false);
-      
+
       // 检查是否需要滚动
       this.$nextTick(() => {
         this.checkScrollNeeded(index);
@@ -254,13 +284,13 @@ export default {
     checkScrollNeeded(index) {
       const photo = this.photoList[index];
       const tooltipElement = document.querySelector(`[data-photo-index="${index}"] .memory-tooltip`);
-      
+
       if (tooltipElement && !photo.shouldScroll) {
         const textElement = tooltipElement.querySelector('.text-content');
         if (textElement) {
           const textHeight = textElement.scrollHeight;
           const containerHeight = tooltipElement.clientHeight;
-          
+
           if (textHeight > containerHeight) {
             // 需要滚动
             this.$set(this.photoList[index], 'shouldScroll', true);
@@ -272,15 +302,15 @@ export default {
     startScrolling(index, textHeight) {
       const photo = this.photoList[index];
       let scrollOffset = 0;
-      
+
       this.scrollTimers[index] = setInterval(() => {
         scrollOffset -= 1; // 向上滚动1px
-        
+
         // 当第一段文字完全滚出顶部时，重置位置
         if (Math.abs(scrollOffset) >= textHeight) {
           scrollOffset = 0;
         }
-        
+
         this.$set(this.photoList[index], 'scrollOffset', scrollOffset);
       }, 30); // 每30毫秒滚动一次，稍微快一点
     },
@@ -303,35 +333,48 @@ export default {
   padding: 2rem 0 3rem 0;
   background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
 }
+
 .masonry {
   column-count: 4;
   column-gap: 1.5rem;
   max-width: 1400px;
   margin: 0 auto;
 }
+
 @media (max-width: 1200px) {
-  .masonry { column-count: 3; }
+  .masonry {
+    column-count: 3;
+  }
 }
+
 @media (max-width: 900px) {
-  .masonry { column-count: 2; }
+  .masonry {
+    column-count: 2;
+  }
 }
+
 @media (max-width: 600px) {
-  .masonry { column-count: 1; }
+  .masonry {
+    column-count: 1;
+  }
 }
+
 .masonry-item {
   break-inside: avoid;
   margin-bottom: 1.5rem;
   border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.04);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1.5px 4px rgba(0, 0, 0, 0.04);
   background: #fff;
   overflow: hidden;
   transition: box-shadow 0.3s, transform 0.3s;
   cursor: pointer;
 }
+
 .masonry-item:hover {
-  box-shadow: 0 8px 32px rgba(80,120,200,0.18), 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 32px rgba(80, 120, 200, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08);
   transform: translateY(-4px) scale(1.02);
 }
+
 .img-wrapper {
   width: 100%;
   background: #f3f6fa;
@@ -340,6 +383,7 @@ export default {
   justify-content: center;
   position: relative;
 }
+
 .img-wrapper img {
   width: 100%;
   height: auto;
@@ -348,6 +392,7 @@ export default {
   border-radius: 16px;
   transition: transform 0.3s;
 }
+
 .masonry-item:hover img {
   transform: scale(1.04);
 }
@@ -411,8 +456,12 @@ export default {
 }
 
 @keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
 }
 
 @keyframes fadeIn {
@@ -429,5 +478,39 @@ export default {
   color: #888;
   font-size: 1.1rem;
   margin: 2rem 0 1rem 0;
+}
+
+.like-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 22px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  padding: 4px 6px;
+  cursor: pointer;
+  z-index: 20;
+  transition: color 0.2s, background 0.2s;
+  user-select: none;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.like-btn.liked {
+  color: #ff4d6d;
+  background: #fff0f3;
+}
+
+.like-btn:active {
+  background: #ffe0e6;
+}
+
+.like-btn[disabled] {
+  pointer-events: none;
+  opacity: 0.6;
 }
 </style>

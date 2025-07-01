@@ -46,9 +46,19 @@ public class PhotoController extends BaseController {
      * @param photoId 相册id
      * @return
      */
-    @PostMapping("/like")
-    public Result like(Integer photoId) {
-        photoService.like(photoId);
+    @PostMapping("/likePhoto")
+    public Result likePhoto(@RequestBody Integer photoId) {
+        photoService.likePhoto(photoId);
+        return Result.success();
+    }
+    /**
+     * 收藏照片接口
+     * @param photoId 相册id
+     * @return
+     */
+    @PostMapping("/UnLikePhoto")
+    public Result UnLikePhoto(@RequestBody Integer photoId) {
+        photoService.UnLikePhoto(photoId);
         return Result.success();
     }
 

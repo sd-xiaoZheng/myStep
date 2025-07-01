@@ -22,7 +22,9 @@ public interface PhotoService extends IService<Photo> {
 
     Long selectCount(Integer typeId);
 
-    void like(Integer photoId);
+    void likePhoto(Integer photoId);
 
     void updatePhoto(Photo photo) throws ImageProcessingException, IOException;
+
+    void UnLikePhoto(Integer photoId);
 }

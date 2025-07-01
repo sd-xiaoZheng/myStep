@@ -21,3 +21,21 @@ export function updatePhoto(data) {
         }
     })
 }
+
+// 收藏照片
+export function likePhoto(data) {
+    return request({
+        data,
+        url: '/photo/likePhoto',
+        method: 'post'
+    })
+}
+
+// 取消收藏照片
+export function UnLikePhoto(data) {
+    return request({
+        data,
+        url: '/photo/UnLikePhoto',
+        method: 'post'
+    })
+}

@@ -49,9 +49,15 @@ public class PhotoServiceImpl extends ServiceImpl<PhotoMapper, Photo> implements
     }
 
     @Override
-    public void like(Integer photoId) {
+    public void likePhoto(Integer photoId) {
         UpdateWrapper<Photo> photoUpdateWrapper = new UpdateWrapper<>();
         photoUpdateWrapper.set("is_favorite", true).eq("id", photoId);
+        photoMapper.update(photoUpdateWrapper);
+    }
+    @Override
+    public void UnLikePhoto(Integer photoId) {
+        UpdateWrapper<Photo> photoUpdateWrapper = new UpdateWrapper<>();
+        photoUpdateWrapper.set("is_favorite", false).eq("id", photoId);
         photoMapper.update(photoUpdateWrapper);
     }
 
