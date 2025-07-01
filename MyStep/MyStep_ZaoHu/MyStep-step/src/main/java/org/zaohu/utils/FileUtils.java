@@ -50,7 +50,7 @@ public class FileUtils {
      * @param path 年后面的路径 以/开头结尾 如： /Step/temp/
      * @return
      */
-    public static String uploadPhotoImage(MultipartFile fileName,String path) {
+    public static String uploadPhotoImage(MultipartFile file,String path) {
         try {
             LocalDate currentDate = LocalDate.now();//时间戳
             //获取年月日
@@ -59,14 +59,14 @@ public class FileUtils {
             Path directoryPath = Paths.get(Constant.FILE_PATH, year, path);
             Files.createDirectories(directoryPath);
 
-            String originalFilename = fileName.getOriginalFilename();
+            String originalFilename = file.getOriginalFilename();
             String filenameBase = IdUtil.fastSimpleUUID();//获取一个uuid
             String extension = originalFilename.substring(originalFilename.lastIndexOf('.'));//去掉后缀
             String timestamp = String.valueOf(System.currentTimeMillis());//时间戳Str
             String newFilename = filenameBase + "_" + timestamp + extension;
             // Save file上传
             Path filePath = directoryPath.resolve(newFilename);
-            fileName.transferTo(filePath.toFile());//把这个文件创建出来
+            file.transferTo(filePath.toFile());//把这个文件创建出来
             //这里返回的是用户前端访问展示的
             return Constant.RESOURCE_PREFIX.replace("/step", "") + year + path + newFilename;
         } catch (IOException e) {

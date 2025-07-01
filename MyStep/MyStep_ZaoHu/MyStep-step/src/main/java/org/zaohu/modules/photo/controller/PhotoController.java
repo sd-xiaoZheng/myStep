@@ -1,6 +1,7 @@
 package org.zaohu.modules.photo.controller;
 
 import com.drew.imaging.ImageProcessingException;
+import org.checkerframework.checker.mustcall.qual.MustCallAlias;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.zaohu.common.ResultCommon.Result;
@@ -52,12 +53,12 @@ public class PhotoController extends BaseController {
     }
 
     /**
-     * 收藏照片接口
+     * 修改照片接口
      * @param photo 相册修改内容
-     * @return
+     * @return Result
      */
     @PostMapping("/updatePhoto")
-    public Result updatePhoto(Photo photo) throws ImageProcessingException, IOException {
+    public Result updatePhoto(@ModelAttribute Photo photo) throws ImageProcessingException, IOException {
         photoService.updatePhoto(photo);
         return Result.success();
     }

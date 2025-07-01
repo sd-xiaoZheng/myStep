@@ -9,3 +9,15 @@ export function getPhoto(params) {
     })
 }
 
+
+// 更新照片
+export function updatePhoto(data) {
+    return request({
+        data,
+        url: '/photo/updatePhoto',
+        method: 'post',
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+}
