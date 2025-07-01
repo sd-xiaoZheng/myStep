@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
@@ -63,13 +64,14 @@ public class PhotoServiceImpl extends ServiceImpl<PhotoMapper, Photo> implements
 
     @Override
     public void updatePhoto(Photo photo) throws ImageProcessingException, IOException {
-        MultipartFile file = photo.getTempPhoto();
-        LocalDate currentDate = LocalDate.now();
-        String year = String.valueOf(currentDate.getYear());
-        String month = String.format("%02d", currentDate.getMonthValue());
-        Photo processedPhoto = photoTypeService.processAndBuildPhoto(file, photo.getTypeId(), year, month);
+        if (Objects.nonNull(photo.getTempPhoto())){
+            LocalDate currentDate = LocalDate.now();
+            String year = String.valueOf(currentDate.getYear());
+            String month = String.format("%02d", currentDate.getMonthValue());
+            Photo processedPhoto = photoTypeService.processAndBuildPhoto(photo.getTempPhoto(), photo.getTypeId(), year, month);
+            photo.setFilePath(processedPhoto.getFilePath());
+        }
         photo.setUploadTime(LocalDateTime.now());
-        photo.setFilePath(processedPhoto.getFilePath());
         photoMapper.updateById(photo);
     }
 }

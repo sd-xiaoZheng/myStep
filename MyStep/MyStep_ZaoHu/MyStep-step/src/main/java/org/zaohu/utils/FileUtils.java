@@ -46,7 +46,7 @@ public class FileUtils {
 
     /**
      *
-     * @param fileName 文件
+     * @param file 文件
      * @param path 年后面的路径 以/开头结尾 如： /Step/temp/
      * @return
      */
