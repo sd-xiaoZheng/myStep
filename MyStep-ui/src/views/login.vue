@@ -27,6 +27,36 @@
             <el-button class="register-btn" @click="switchToRegister">注册</el-button>
           </el-form-item>
         </el-form>
+        <div v-if="isLogin" class="forgot-password-link" @click="switchToForgot">忘记密码？</div>
+        <!-- 注册表单 -->
+        <el-form
+            v-else-if="isForgot"
+            :model="forgotForm"
+            ref="forgotForm"
+            label-width="21%"
+            class="registerForm"
+        >
+          <el-form-item label="手机号" prop="phone" style="width: 380px">
+            <el-input v-model="forgotForm.phone" placeholder="请输入手机号"></el-input>
+          </el-form-item>
+          <el-form-item label="邮箱" prop="email" style="width: 380px">
+            <el-input v-model="forgotForm.email" placeholder="请输入邮箱"></el-input>
+          </el-form-item>
+          <el-form-item label="验证码" prop="code" style="width: 380px">
+            <el-input v-model="forgotForm.code" placeholder="请输入验证码" style="width: 55%; float: left;"></el-input>
+            <el-button type="primary" @click="sendForgotCode" style="float: right; margin-left: 10px;">发送验证码</el-button>
+          </el-form-item>
+          <el-form-item label="新密码" prop="password" style="width: 380px">
+            <el-input type="password" v-model="forgotForm.password" placeholder="请输入新密码"></el-input>
+          </el-form-item>
+          <el-form-item label="确认密码" prop="confirmPassword" style="width: 380px">
+            <el-input type="password" v-model="forgotForm.confirmPassword" placeholder="请再次输入新密码"></el-input>
+          </el-form-item>
+          <el-form-item class="btn-ground">
+            <el-button type="primary" @click="resetForgotPassword">重置密码</el-button>
+            <el-button @click="switchToLogin">返回登录</el-button>
+          </el-form-item>
+        </el-form>
         <!-- 注册表单 -->
         <el-form
             v-else
@@ -84,6 +114,14 @@ export default {
       lastTime: 0,
 
       isLogin: true,
+      isForgot: false,
+      forgotForm: {
+        phone: '',
+        email: '',
+        code: '',
+        password: '',
+        confirmPassword: ''
+      },
       registerForm: {
         username: '',
         phone: '',
@@ -406,9 +444,17 @@ export default {
 
     switchToRegister() {
       this.isLogin = false;
+      this.isForgot = false;
     },
     switchToLogin() {
       this.isLogin = true;
+      this.isForgot = false;
+      this.forgotForm = { phone: '', email: '', code: '', password: '', confirmPassword: '' };
+    },
+    switchToForgot() {
+      this.isLogin = false;
+      this.isForgot = true;
+      this.forgotForm = { phone: '', email: '', code: '', password: '', confirmPassword: '' };
     },
     submitRegisterForm(form) {
       register(form).then((res)=>{
@@ -457,6 +503,22 @@ export default {
           localStorage.removeItem('countdown');
         }
       }, 1000);
+    },
+    sendForgotCode() {
+      // 这里可以做校验
+      console.log('发送验证码到邮箱：', this.forgotForm.phone, this.forgotForm.email);
+    },
+    resetForgotPassword() {
+      if (this.forgotForm.password !== this.forgotForm.confirmPassword) {
+        this.$message.error('两次输入的密码不一致');
+        return;
+      }
+      console.log('手机号：', this.forgotForm.phone);
+      console.log('邮箱：', this.forgotForm.email);
+      console.log('验证码：', this.forgotForm.code);
+      console.log('新密码：', this.forgotForm.password);
+      this.$message.success('密码重置成功！');
+      this.switchToLogin();
     }
   },
 }
@@ -628,11 +690,27 @@ export default {
 .loginForm, .registerForm {
   opacity: 0;
   animation: fadeIn 0.5s ease forwards;
+  margin-left: -40px;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+.forgot-password-link {
+  color: #b0b0b0;
+  font-size: 10px;
+  text-align: right;
+  margin-bottom: -35px;
+  margin-right: -37px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.forgot-password-link:hover {
+  color: #888;
+  text-decoration: underline;
 }
 
 </style>

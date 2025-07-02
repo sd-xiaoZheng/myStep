@@ -73,7 +73,7 @@ public class LoginController {
         }
 
         //查看输入密码 加密后生成的密文
-        String encode = passwordEncoder.encode(password);
+//        String encode = passwordEncoder.encode(password);
         //封装用户名密码
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(phone, password);
 
@@ -156,6 +156,24 @@ public class LoginController {
         return Result.success("注册成功，现在可以登陆啦~");
     }
 
+
+    /**
+     * 忘记密码
+     *
+     * @param user
+     * @return
+     */
+    @PostMapping("/forgotPwd")
+    public Result forgotPwd(@RequestBody User user) {
+        return Result.success();
+    }
+
+    /**
+     * 发送邮箱
+     *
+     * @param user
+     * @return
+     */
     @PostMapping("/sendCodeEmail")
     public Result sendCodeEmail(@RequestBody User user) {
         rocketMQTemplateProducerUtils.syncSendMessage(Constant.ROCKET_EMAIL_LOGIN_CODE_TOPICTAG, JSONUtil.toJsonStr(user));
