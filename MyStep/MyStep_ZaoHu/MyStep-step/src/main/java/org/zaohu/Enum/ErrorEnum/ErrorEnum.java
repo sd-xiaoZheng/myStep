@@ -7,7 +7,8 @@ import lombok.Getter;
 @Getter
 public enum ErrorEnum implements IErrorEnum {
     SYSTEM_ERROR(-1, "系统出小差了，请稍后再试哦~"),
-    NULL_POINTER(0, "空指针了你个笨蛋！");
+    NULL_POINTER(0, "空指针了你个笨蛋！"),
+    FORGET_ERROR(500, "没有上传手机号密码");
     private final Integer code;
     private final String message;
 

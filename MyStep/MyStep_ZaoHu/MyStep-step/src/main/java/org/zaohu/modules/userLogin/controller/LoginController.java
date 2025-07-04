@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.zaohu.constant.Constant;
+import org.zaohu.modules.userLogin.service.UserService;
 import org.zaohu.utils.JwtUtils;
 import org.zaohu.utils.RedisUtils;
 import org.zaohu.jobs.rocketMq.producer.RocketMQTemplateProducerUtils;
@@ -48,6 +49,8 @@ public class LoginController {
     private UserMapper userMapper;
     @Autowired
     private RocketMQTemplateProducerUtils rocketMQTemplateProducerUtils;
+    @Autowired
+    private UserService userService;
 
 
     /**
@@ -165,6 +168,7 @@ public class LoginController {
      */
     @PostMapping("/forgetPwd")
     public Result forgetPwd(@RequestBody User user) {
+        userService.forgetPwd(user);
         return Result.success();
     }
 

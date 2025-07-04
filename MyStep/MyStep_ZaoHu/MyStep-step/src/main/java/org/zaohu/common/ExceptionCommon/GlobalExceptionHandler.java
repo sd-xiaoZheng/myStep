@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.zaohu.Enum.ErrorEnum.ErrorEnum;
 import org.zaohu.common.ResultCommon.Result;
 
-@RestControllerAdvice
 @Slf4j
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     /**

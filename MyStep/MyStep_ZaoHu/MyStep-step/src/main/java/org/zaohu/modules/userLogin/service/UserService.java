@@ -13,4 +13,5 @@ import org.zaohu.modules.userLogin.entity.User;
  */
 public interface UserService extends IService<User> {
 
+    void forgetPwd(User user);
 }
