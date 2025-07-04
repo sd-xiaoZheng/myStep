@@ -33,10 +33,13 @@ public class ForgetCodeConsumer implements RocketMQListener<String> {
     public void onMessage(String str) {
         User user = JSONUtil.toBean(str, User.class);
         Random random = new Random();
-        int codeNum= random.nextInt(9000)+1000;
-        int i = emailUtil.sendEmail(user.getEmail(), "Step验证码", "欢迎注册Step\n您的验证码为：" + codeNum);
-        if (i==0){
-            redisUtils.setEx(user.getEmail(),Integer.toString(codeNum),60, TimeUnit.SECONDS);
+        int codeNum = random.nextInt(9000) + 1000;
+        int i = emailUtil.sendEmail(user.getEmail(), "Step验证码", "【安全验证通知】您正在进行忘记密码重置操作，本次验证码为："
+                + codeNum
+                + "。该验证码 1 分钟内有效，请勿向他人泄露。如非本人操作，请及时检查账号安全。"
+        );
+        if (i == 0) {
+            redisUtils.setEx(user.getEmail(), Integer.toString(codeNum), 60, TimeUnit.SECONDS);
             log.info("电子邮件已经发送==>{}", JSON.toJSONString(str));
         }
     }

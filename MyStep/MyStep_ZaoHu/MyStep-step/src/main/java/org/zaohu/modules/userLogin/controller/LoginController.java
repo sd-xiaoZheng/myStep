@@ -163,8 +163,18 @@ public class LoginController {
      * @param user
      * @return
      */
-    @PostMapping("/forgotPwd")
-    public Result forgotPwd(@RequestBody User user) {
+    @PostMapping("/forgetPwd")
+    public Result forgetPwd(@RequestBody User user) {
+        return Result.success();
+    }
+
+    /**
+     * 发送忘记密码验证码
+     * @param user
+     * @return
+     */
+    @PostMapping("/sendForgetPwdEmail")
+    public Result sendForgetPwdEmail(@RequestBody User user) {
         rocketMQTemplateProducerUtils.syncSendMessage(Constant.ROCKET_EMAIL_TOPIC, JSONUtil.toJsonStr(user));
         return Result.success();
     }
