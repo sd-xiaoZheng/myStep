@@ -2,7 +2,9 @@ package org.zaohu.modules.userLogin.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zaohu.Enum.ErrorEnum.ErrorEnum;
 import org.zaohu.common.myException.BusinessException;
@@ -25,7 +27,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private UserMapper userMapper;
-
+    @Resource
+    private PasswordEncoder passwordEncoder;
     @Override
     public void forgetPwd(User user) {
         UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
@@ -37,7 +40,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new BusinessException(ErrorEnum.FORGET_ERROR);
         }
         // 设置要更新的字段（新密码）
-        updateWrapper.set("password", user.getPassword());        // 执行更新操作
+        updateWrapper.set("password", passwordEncoder.encode(user.getPassword()));        // 执行更新操作
         userMapper.update(null, updateWrapper);
     }
 }
