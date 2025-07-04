@@ -165,6 +165,7 @@ public class LoginController {
      */
     @PostMapping("/forgotPwd")
     public Result forgotPwd(@RequestBody User user) {
+        rocketMQTemplateProducerUtils.syncSendMessage(Constant.ROCKET_EMAIL_TOPIC, JSONUtil.toJsonStr(user));
         return Result.success();
     }
 
@@ -176,7 +177,7 @@ public class LoginController {
      */
     @PostMapping("/sendCodeEmail")
     public Result sendCodeEmail(@RequestBody User user) {
-        rocketMQTemplateProducerUtils.syncSendMessage(Constant.ROCKET_EMAIL_LOGIN_CODE_TOPICTAG, JSONUtil.toJsonStr(user));
+        rocketMQTemplateProducerUtils.syncSendMessage(Constant.ROCKET_EMAIL_TOPIC, JSONUtil.toJsonStr(user));
         return Result.success("发送成功,请稍后查看~");
     }
 }

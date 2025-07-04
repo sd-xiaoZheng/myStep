@@ -22,8 +22,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 @Slf4j
-@RocketMQMessageListener(topic = Constant.ROCKET_EMAIL_TOPIC, selectorExpression = Constant.ROCKET_TAG_REGISTERED_CODE, consumerGroup = "loginCode")
-public class LoginCodeConsumer implements RocketMQListener<String> {
+@RocketMQMessageListener(topic = Constant.ROCKET_EMAIL_TOPIC, selectorExpression = Constant.ROCKET_TAG_FORGET_CODE, consumerGroup = "forget")
+public class ForgetCodeConsumer implements RocketMQListener<String> {
     @Resource
     private EmailUtil emailUtil;
     @Resource
