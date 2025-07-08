@@ -37,8 +37,6 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/step")
 public class LoginController {
-
-
     @Resource
     private AuthenticationManager authenticationManager;
     @Resource
