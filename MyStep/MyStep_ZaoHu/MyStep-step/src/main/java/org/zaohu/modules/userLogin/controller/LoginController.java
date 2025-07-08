@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.zaohu.constant.Constant;
+import org.zaohu.constant.RedisKey;
 import org.zaohu.modules.userLogin.service.UserService;
 import org.zaohu.utils.JwtUtils;
 import org.zaohu.utils.RedisUtils;
@@ -60,7 +61,6 @@ public class LoginController {
     @PostMapping("/login")
     public Result login(@RequestBody User user,
                         HttpServletRequest request) {
-        ArrayList<Object> objects = new ArrayList<>();
         String phone = user.getPhone();
         String password = user.getPassword();
         //判断曾经有没有登陆过
@@ -125,7 +125,7 @@ public class LoginController {
     @PostMapping("/register")
     public Result register(@RequestBody User user) {
         String code = user.getCode();
-        Boolean b = redisUtils.hasKey(user.getEmail());
+        Boolean b = redisUtils.hasKey(RedisKey.REGISTER_CODE+user.getEmail());
         if (!b) {
             return Result.failed("验证码已过期");
         } else {
@@ -177,6 +177,18 @@ public class LoginController {
      */
     @PostMapping("/sendForgetPwdEmail")
     public Result sendForgetPwdEmail(@RequestBody User user) {
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.lambda()
+                .eq(User::getEmail, user.getEmail());
+        User emailUser = userMapper.selectOne(userQueryWrapper);
+        if (Objects.isNull(emailUser)) {
+            return Result.failed("无此邮箱记录");
+        }
+//        else {
+//            if(){
+//
+//            }
+//        }//TODO 更具传来的手机号判断传来的邮箱是否是记录里的邮箱 CODE_OVERDUE
         rocketMQTemplateProducerUtils.syncSendMessage(Constant.ROCKET_EMAIL_TOPIC, JSONUtil.toJsonStr(user));
         return Result.success();
     }

@@ -34,6 +34,17 @@ export function sendCodeEmail(data) {
 }
 
 /**
+ * 请求忘记密码验证码
+ */
+export function sendForgetPwdEmail(data) {
+    return request({
+        url: '/sendForgetPwdEmail',
+        method: 'post',
+        data
+    })
+}
+
+/**
  * 登出
  */
 export function logout() {

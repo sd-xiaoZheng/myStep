@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import {login,register,sendCodeEmail} from '@/apis/api/login'
+import {login,register,sendCodeEmail,sendForgetPwdEmail} from '@/apis/api/login'
 
 export default {
   name: "Login",
@@ -513,11 +513,17 @@ export default {
         this.$message.error('两次输入的密码不一致');
         return;
       }
-      console.log('手机号：', this.forgotForm.phone);
-      console.log('邮箱：', this.forgotForm.email);
-      console.log('验证码：', this.forgotForm.code);
-      console.log('新密码：', this.forgotForm.password);
-      this.$message.success('密码重置成功！');
+      let param={
+        phone:this.forgotForm.phone,
+        email:this.forgotForm.email,
+        code:this.forgotForm.code,
+        password:this.forgotForm.password,
+      }
+      sendForgetPwdEmail(param).then(res=>{
+        if (res.code === 200) {
+          this.$message.success('密码重置成功！');
+        }
+      })
       this.switchToLogin();
     }
   },

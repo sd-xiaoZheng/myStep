@@ -8,6 +8,7 @@ import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.stereotype.Service;
 import org.zaohu.constant.Constant;
+import org.zaohu.constant.RedisKey;
 import org.zaohu.modules.userLogin.entity.User;
 import org.zaohu.utils.EmailUtil;
 import org.zaohu.utils.RedisUtils;
@@ -39,7 +40,7 @@ public class ForgetCodeConsumer implements RocketMQListener<String> {
                 + "。该验证码 1 分钟内有效，请勿向他人泄露。如非本人操作，请及时检查账号安全。"
         );
         if (i == 0) {
-            redisUtils.setEx(user.getEmail(), Integer.toString(codeNum), 60, TimeUnit.SECONDS);
+            redisUtils.setEx(RedisKey.FORGET_CODE+user.getEmail(), Integer.toString(codeNum), 60, TimeUnit.SECONDS);
             log.info("电子邮件已经发送==>{}", JSON.toJSONString(str));
         }
     }

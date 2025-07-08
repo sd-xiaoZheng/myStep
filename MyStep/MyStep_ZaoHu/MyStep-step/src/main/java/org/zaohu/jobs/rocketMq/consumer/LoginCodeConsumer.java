@@ -8,6 +8,7 @@ import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.stereotype.Service;
 import org.zaohu.constant.Constant;
+import org.zaohu.constant.RedisKey;
 import org.zaohu.modules.userLogin.entity.User;
 import org.zaohu.utils.EmailUtil;
 import org.zaohu.utils.RedisUtils;
@@ -36,7 +37,7 @@ public class LoginCodeConsumer implements RocketMQListener<String> {
         int codeNum= random.nextInt(9000)+1000;
         int i = emailUtil.sendEmail(user.getEmail(), "Step验证码", "欢迎注册Step\n您的验证码为：" + codeNum);
         if (i==0){
-            redisUtils.setEx(user.getEmail(),Integer.toString(codeNum),60, TimeUnit.SECONDS);
+            redisUtils.setEx(RedisKey.REGISTER_CODE+user.getEmail(),Integer.toString(codeNum),60, TimeUnit.SECONDS);
             log.info("电子邮件已经发送==>{}", JSON.toJSONString(str));
         }
     }
