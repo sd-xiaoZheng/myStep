@@ -38,11 +38,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public void forgetPwd(User user) {
         String code = user.getCode();
-        Boolean b = redisUtils.hasKey(RedisKey.REGISTER_CODE + user.getEmail());
+        Boolean b = redisUtils.hasKey(RedisKey.FORGET_CODE + user.getEmail());
         if (!b) {
             throw new BusinessException(ErrorEnum.CODE_OVERDUE);
         }
-        String redisCode = redisUtils.get(user.getEmail());
+        String redisCode = redisUtils.get(RedisKey.FORGET_CODE + user.getEmail());
         if (!redisCode.equals(code)) {
             Result.failed("验证码错误");
         }

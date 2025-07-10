@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.zaohu.Enum.ErrorEnum.ErrorEnum;
 import org.zaohu.constant.Constant;
 import org.zaohu.constant.RedisKey;
 import org.zaohu.modules.userLogin.service.UserService;
@@ -125,11 +126,11 @@ public class LoginController {
     @PostMapping("/register")
     public Result register(@RequestBody User user) {
         String code = user.getCode();
-        Boolean b = redisUtils.hasKey(RedisKey.REGISTER_CODE+user.getEmail());
+        Boolean b = redisUtils.hasKey(RedisKey.REGISTER_CODE + user.getEmail());
         if (!b) {
             return Result.failed("验证码已过期");
         } else {
-            String redisCode = redisUtils.get(user.getEmail());
+            String redisCode = redisUtils.get(RedisKey.REGISTER_CODE + user.getEmail());
             if (!redisCode.equals(code)) {
                 Result.failed("验证码错误");
             } else {
@@ -172,24 +173,24 @@ public class LoginController {
 
     /**
      * 发送忘记密码验证码
+     *
      * @param user
      * @return
      */
     @PostMapping("/sendForgetPwdEmail")
     public Result sendForgetPwdEmail(@RequestBody User user) {
+        if (Objects.isNull(user.getEmail()) || Objects.isNull(user.getPhone())) {
+            return Result.failed(ErrorEnum.PARAM_LESS);
+        }
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
         userQueryWrapper.lambda()
-                .eq(User::getEmail, user.getEmail());
+                .eq(User::getEmail, user.getEmail())
+                .eq(User::getPhone, user.getPhone());
         User emailUser = userMapper.selectOne(userQueryWrapper);
         if (Objects.isNull(emailUser)) {
-            return Result.failed("无此邮箱记录");
+            return Result.failed("手机号与该邮箱未绑定");
         }
-//        else {
-//            if(){
-//
-//            }
-//        }//TODO 更具传来的手机号判断传来的邮箱是否是记录里的邮箱 CODE_OVERDUE
-        rocketMQTemplateProducerUtils.syncSendMessage(Constant.ROCKET_EMAIL_TOPIC, JSONUtil.toJsonStr(user));
+        rocketMQTemplateProducerUtils.syncSendMessage(Constant.ROCKET_EMAIL_TOPIC + ":" + Constant.ROCKET_TAG_FORGET_CODE, JSONUtil.toJsonStr(user));
         return Result.success();
     }
 

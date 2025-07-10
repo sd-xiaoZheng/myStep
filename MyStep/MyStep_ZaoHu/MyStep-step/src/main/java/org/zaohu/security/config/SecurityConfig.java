@@ -52,7 +52,9 @@ public class SecurityConfig {
                                                 "/MyStep/ws/**",
                                                 "/step/sendCodeEmail",
                                                 "/step/register",
-                                                "/step/Zaohu/**")
+                                                "/step/Zaohu/**",
+                                                "/step/forgetPwd",
+                                                "/step/sendForgetPwdEmail")
 //                                .hasAuthority("user")//有权限
                                         .permitAll()//不需要认证
                                         .anyRequest()//拿到所有的请求 /test1  /test2

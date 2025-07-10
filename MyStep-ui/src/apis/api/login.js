@@ -45,6 +45,17 @@ export function sendForgetPwdEmail(data) {
 }
 
 /**
+ * 忘记密码重置密码
+ */
+export function forgetPwd(data) {
+    return request({
+        url: '/forgetPwd',
+        method: 'post',
+        data
+    })
+}
+
+/**
  * 登出
  */
 export function logout() {

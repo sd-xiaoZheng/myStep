@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import {login,register,sendCodeEmail,sendForgetPwdEmail} from '@/apis/api/login'
+import {login,register,sendCodeEmail,sendForgetPwdEmail,forgetPwd} from '@/apis/api/login'
 
 export default {
   name: "Login",
@@ -505,8 +505,17 @@ export default {
       }, 1000);
     },
     sendForgotCode() {
-      // 这里可以做校验
-      console.log('发送验证码到邮箱：', this.forgotForm.phone, this.forgotForm.email);
+      let param={
+        phone:this.forgotForm.phone,
+        email:this.forgotForm.email
+      }
+      sendForgetPwdEmail(param).then(res=>{
+        if (res.code === 200) {
+          this.$message.success('验证码发送成功~');
+        }else if (res.code === 500){
+          this.$message.error(res.message);
+        }
+      })
     },
     resetForgotPassword() {
       if (this.forgotForm.password !== this.forgotForm.confirmPassword) {
@@ -519,7 +528,7 @@ export default {
         code:this.forgotForm.code,
         password:this.forgotForm.password,
       }
-      sendForgetPwdEmail(param).then(res=>{
+      forgetPwd(param).then(res=>{
         if (res.code === 200) {
           this.$message.success('密码重置成功！');
         }
