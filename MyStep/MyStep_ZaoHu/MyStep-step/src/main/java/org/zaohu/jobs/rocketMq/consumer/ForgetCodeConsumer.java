@@ -40,7 +40,7 @@ public class ForgetCodeConsumer implements RocketMQListener<String> {
                 + "。该验证码 1 分钟内有效，请勿向他人泄露。如非本人操作，请及时检查账号安全。"
         );
         if (i == 0) {
-            redisUtils.setEx(RedisKey.FORGET_CODE+user.getEmail(), Integer.toString(codeNum), 60, TimeUnit.SECONDS);
+            redisUtils.setEx(RedisKey.FORGET_CODE + user.getEmail(), Integer.toString(codeNum), 60, TimeUnit.SECONDS);
             log.info("电子邮件已经发送==>{}", JSON.toJSONString(str));
         }
     }

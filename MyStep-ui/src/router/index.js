@@ -15,7 +15,7 @@ import snake from '@/views/fun/snake.vue';
 import home from '@/views/fun/home.vue';
 
 // 成长记录相关
-import messageBoard from '@/views/step/messageBoard.vue';
+import messageBoard from '@/views/step/board/messageBoard.vue';
 import lifeTimeType from '@/views/step/lifeTime/lifeTimeType.vue';
 import lifeTimeManage from '@/views/step/lifeTime/lifeTimeManage.vue';
 import lifeTimePhoto from '@/views/step/lifeTime/lifeTimePhoto.vue';

@@ -78,7 +78,7 @@ export default {
     this.fetchMessages()
 
     // 导入背景图片
-    const imageContext = require.context('../../assets/image', false, /\.(jpg|jpeg|png|gif)$/)
+    const imageContext = require.context('../../../assets/image', false, /\.(jpg|jpeg|png|gif)$/)
     const backgroundImages = imageContext.keys().map(key => imageContext(key))
     
     // 随机选择一张背景图片
@@ -88,7 +88,7 @@ export default {
     }
 
     // 导入头像图片
-    const avatarContext = require.context('../../assets/icon', false, /\.png$/)
+    const avatarContext = require.context('../../../assets/icon', false, /\.png$/)
     this.avatarList = avatarContext.keys()
       .filter(key => key !== './leave_wall.png' && key !== './tool_box.png')
       .map(key => require(`@/assets/icon${key.slice(1)}`))
@@ -354,7 +354,7 @@ export default {
 
 .message-wall {
   position: relative;
-  height: 650px;
+  height: 70vh;
   background-size: cover;
   background-position: center;
   border-radius: 8px;
