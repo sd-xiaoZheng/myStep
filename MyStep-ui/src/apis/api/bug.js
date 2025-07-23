@@ -19,3 +19,12 @@ export function KillMysql() {
         method: 'post'
     })
 }
+
+//清除数据库
+export function getQuestionText(params) {
+    return request({
+        url: '/WebBug/getQuestionText',
+        method: 'get',
+        params
+    })
+}

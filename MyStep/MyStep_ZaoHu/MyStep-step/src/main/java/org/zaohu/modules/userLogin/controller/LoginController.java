@@ -196,7 +196,6 @@ public class LoginController {
 
     /**
      * 发送邮箱
-     *
      * @param user
      * @return
      */

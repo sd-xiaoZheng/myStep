@@ -8,7 +8,6 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 public class BaiduQuestion {
-
 //  @TableId(type = IdType.AUTO)
   private Long id;
   private String questionText;
