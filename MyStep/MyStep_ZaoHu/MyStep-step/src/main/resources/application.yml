@@ -37,6 +37,13 @@ spring:
             enable: true
           socketFactory:
             port: 465
+langchain4j:
+  open-ai:
+    chat-model:
+      base-url: http://localhost:11434
+      model-name: qwen:8b
+      log-requests: true
+      log-responses: true
 
 #https://juejin.cn/post/6850418115382738958 rocket详细使用
 rocketmq:
