@@ -2,7 +2,7 @@ services:
   # Nacos 注册中心
   nacos:
     image: nacos/nacos-server:v2.3.2
-    container_name: nacos
+    container_name: nacos-Step
     restart: always
     ports:
       - "8848:8848"
@@ -22,7 +22,7 @@ services:
   # Redis 内存服务
   redis:
     image: redis:3.2-alpine
-    container_name: redis
+    container_name: redis-Step
     restart: always
     ports:
       - "6379:6379"
@@ -35,7 +35,7 @@ services:
   # Sentinel 限流服务
   sentinel:
     image: bladex/sentinel-dashboard:1.8.6
-    container_name: sentinel
+    container_name: sentinel-Step
     restart: always
     ports:
       - "8718:8080"
@@ -47,7 +47,7 @@ services:
   # RocketMQ 服务
   rocketmq-namesrv:
     image: apache/rocketmq:5.3.1
-    container_name: rocketmq-namesrv
+    container_name: rocketmq-namesrv-Step
     restart: always
     ports:
       - "9876:9876"
@@ -60,7 +60,7 @@ services:
 
   rocketmq-broker:
     image: apache/rocketmq:5.3.1
-    container_name: rocketmq-broker
+    container_name: rocketmq-broker-Step
     restart: always
     ports:
       - "10909:10909"
@@ -77,7 +77,7 @@ services:
 
   rocketmq-dashboard:
     image: apacherocketmq/rocketmq-dashboard:2.0.0
-    container_name: rocketmq-dashboard
+    container_name: rocketmq-dashboard-Step
     restart: always
     ports:
       - "8792:8080"
@@ -92,7 +92,7 @@ services:
   # Elasticsearch
   elasticsearch:
     image: elasticsearch:8.17.4
-    container_name: elasticsearch
+    container_name: elasticsearch-Step
     restart: always
     ports:
       - "9200:9200"
@@ -114,7 +114,7 @@ services:
   # Seata 全局事务管理
   seata:
     image: seataio/seata-server:2.0.0
-    container_name: seata
+    container_name: seata-Step
     restart: always
     ports:
       - "8091:8091"
