@@ -1,0 +1,16 @@
+# elasticsearch/config/elasticsearch.yml
+cluster.name: laokou-elasticsearch
+node.name: node-elasticsearch
+network.host: 0.0.0.0  # 监听所有网络接口
+http.port: 9200
+discovery.type: single-node  # 单节点模式
+
+# 禁用安全模块
+xpack.security.enabled: false
+xpack.security.transport.ssl.enabled: false
+xpack.security.http.ssl.enabled: false
+
+# CORS 配置（可选）
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+http.cors.allow-headers: Authorization

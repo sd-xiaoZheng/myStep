@@ -1,0 +1,1265 @@
+2025-07-30 19:59:02 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:03 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 19:59:03 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 19:59:03 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 19:59:03 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 19:59:03 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 19:59:03 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 19:59:03 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 19:59:03 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 19:59:03 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 19:59:03 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 19:59:03 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 19:59:03 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 19:59:03 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 19:59:03 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 19:59:03 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 19:59:03 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 19:59:03 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:04 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:05 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:06 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:07 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 19:59:07 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 19:59:07 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 19:59:07 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 19:59:07 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:07 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 1
+2025-07-30 19:59:07 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:07 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:07 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:07 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 1
+2025-07-30 19:59:07 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 1
+2025-07-30 19:59:07 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 1
+2025-07-30 19:59:07 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 19:59:07 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:07 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 1
+2025-07-30 19:59:07 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 19:59:07 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:07 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 1
+2025-07-30 19:59:07 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 19:59:07 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:07 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 1
+2025-07-30 19:59:07 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 19:59:07 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:07 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 1
+2025-07-30 19:59:07 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:08 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:09 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 19:59:09 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 19:59:09 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 19:59:09 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 19:59:09 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 19:59:09 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 19:59:09 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 19:59:09 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 19:59:09 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 19:59:09 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 19:59:09 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 19:59:09 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 19:59:09 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 19:59:09 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 19:59:09 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 19:59:09 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 19:59:09 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:10 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:12 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:13 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:13 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 19:59:13 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 19:59:13 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:13 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 2
+2025-07-30 19:59:13 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:13 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 2
+2025-07-30 19:59:13 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 19:59:13 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:13 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 19:59:13 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 2
+2025-07-30 19:59:13 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:13 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 2
+2025-07-30 19:59:13 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 19:59:13 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:13 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 2
+2025-07-30 19:59:13 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 19:59:13 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:13 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 2
+2025-07-30 19:59:13 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 19:59:13 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:13 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 2
+2025-07-30 19:59:13 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 19:59:13 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:13 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 2
+2025-07-30 19:59:14 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:15 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:16 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:16 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 19:59:16 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 19:59:16 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 19:59:16 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 19:59:16 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 19:59:16 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 19:59:16 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 19:59:16 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 19:59:16 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 19:59:16 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 19:59:16 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 19:59:16 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 19:59:16 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 19:59:16 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 19:59:16 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 19:59:16 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 19:59:17 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:18 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:19 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:20 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:20 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 19:59:20 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 19:59:20 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 19:59:20 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:20 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:20 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 19:59:20 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:20 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 19:59:20 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 19:59:20 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 19:59:20 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:20 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 19:59:20 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 19:59:20 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:20 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 19:59:20 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 19:59:20 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 19:59:20 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:20 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 19:59:20 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:20 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 19:59:20 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 19:59:20 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:20 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 19:59:21 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:22 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:23 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:24 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:24 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 19:59:24 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 19:59:24 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 19:59:24 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 19:59:24 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 19:59:24 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 19:59:24 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 19:59:24 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 19:59:24 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 19:59:24 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 19:59:24 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 19:59:24 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 19:59:24 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 19:59:24 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 19:59:24 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 19:59:24 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 19:59:25 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:26 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:27 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:28 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:29 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 19:59:29 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 19:59:29 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:29 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 19:59:29 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:29 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 19:59:29 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 19:59:29 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:29 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 19:59:29 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 19:59:29 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 19:59:29 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:29 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 19:59:29 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:29 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 19:59:29 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 19:59:29 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 19:59:29 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:29 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 19:59:29 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:29 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 19:59:29 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 19:59:29 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:29 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 19:59:29 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:30 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:31 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:32 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:33 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 19:59:33 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 19:59:33 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 19:59:33 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 19:59:33 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 19:59:33 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 19:59:33 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 19:59:33 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 19:59:33 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 19:59:33 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 19:59:33 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 19:59:33 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 19:59:33 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 19:59:33 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 19:59:33 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 19:59:33 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 19:59:33 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:34 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:35 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:36 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:37 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 19:59:37 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 19:59:37 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:37 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:37 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 19:59:37 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 19:59:37 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 19:59:37 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:37 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 19:59:37 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:37 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 19:59:37 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 19:59:37 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:37 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 19:59:37 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 19:59:37 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 19:59:37 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 19:59:37 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:37 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 19:59:37 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:37 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 19:59:37 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 19:59:37 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:37 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 19:59:37 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:38 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:39 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:40 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:41 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 19:59:41 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 19:59:41 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 19:59:41 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 19:59:41 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 19:59:41 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 19:59:41 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 19:59:41 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 19:59:41 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 19:59:41 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 19:59:41 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 19:59:41 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 19:59:41 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 19:59:41 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 19:59:41 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 19:59:41 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 19:59:41 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:42 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:43 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:44 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:45 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 19:59:45 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 19:59:45 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:45 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 19:59:45 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 19:59:45 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 19:59:45 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:45 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 19:59:45 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 19:59:45 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:45 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:45 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 19:59:45 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 19:59:45 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:45 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 19:59:45 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 19:59:45 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:45 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 19:59:45 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 19:59:45 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:45 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 19:59:45 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 19:59:45 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:45 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 19:59:45 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:46 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:47 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:48 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:49 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 19:59:49 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 19:59:49 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 19:59:49 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 19:59:49 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 19:59:49 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 19:59:49 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 19:59:49 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 19:59:49 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 19:59:49 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 19:59:49 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 19:59:49 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 19:59:49 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 19:59:49 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 19:59:49 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 19:59:49 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 19:59:49 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:50 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:51 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:52 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:53 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 19:59:53 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 19:59:53 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:53 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 19:59:53 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 19:59:53 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:53 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 19:59:53 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:53 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 19:59:53 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:53 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 19:59:53 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 19:59:53 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 19:59:53 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:53 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 19:59:53 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 19:59:53 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 19:59:53 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:53 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 19:59:53 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:53 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 19:59:53 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 19:59:53 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 19:59:53 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 19:59:53 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:54 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:55 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:56 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:57 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 19:59:57 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 19:59:57 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 19:59:57 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 19:59:57 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 19:59:57 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 19:59:57 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 19:59:57 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 19:59:57 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 19:59:57 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 19:59:57 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 19:59:57 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 19:59:57 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 19:59:57 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 19:59:57 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 19:59:57 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 19:59:57 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 19:59:58 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:00 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:01 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:01 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:00:01 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:00:01 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:00:01 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:00:01 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:01 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:00:01 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:01 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:00:01 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:00:01 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:01 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:00:01 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:01 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:00:01 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:01 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:00:01 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:00:01 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:00:01 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:01 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:00:01 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:01 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:00:01 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:00:01 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:01 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:00:02 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:02 INFO QueueLockManager - QueueLockSize=0
+2025-07-30 20:00:03 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:04 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:05 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:05 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:00:05 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:00:05 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:00:05 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:00:05 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:00:05 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:00:05 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:00:05 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:00:05 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:00:05 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:00:05 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:00:05 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:00:05 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:00:05 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:00:05 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:00:05 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:00:06 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:07 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:08 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:09 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:09 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:00:09 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:00:09 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:00:09 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:09 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:00:09 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:09 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:00:09 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:00:09 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:09 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:00:09 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:00:09 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:09 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:09 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:00:09 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:00:09 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:00:09 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:09 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:00:09 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:00:09 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:09 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:00:09 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:00:09 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:09 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:00:10 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:11 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:12 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:13 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:13 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:00:13 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:00:13 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:00:13 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:00:13 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:00:13 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:00:13 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:00:13 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:00:13 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:00:13 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:00:13 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:00:13 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:00:13 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:00:13 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:00:13 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:00:13 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:00:14 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:15 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:16 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:17 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:17 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:00:17 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:00:17 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:17 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:00:17 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:00:17 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:00:17 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:17 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:00:17 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:00:17 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:17 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:00:17 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:17 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:17 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:00:17 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:00:17 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:00:17 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:00:17 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:17 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:17 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:00:17 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:00:17 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:00:17 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:17 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:00:18 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:19 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:20 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:21 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:21 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:00:21 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:00:21 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:00:21 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:00:21 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:00:21 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:00:21 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:00:21 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:00:21 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:00:21 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:00:21 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:00:21 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:00:21 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:00:21 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:00:21 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:00:21 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:00:22 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:23 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:24 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:25 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:25 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:00:25 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:00:25 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:00:25 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:00:25 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:25 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:00:25 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:25 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:00:25 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:00:25 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:25 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:25 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:00:25 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:00:25 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:25 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:00:25 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:00:25 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:00:25 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:25 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:25 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:00:25 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:00:25 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:00:25 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:25 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:00:26 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:27 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:28 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:29 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:29 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:00:29 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:00:29 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:00:29 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:00:29 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:00:29 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:00:29 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:00:29 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:00:29 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:00:29 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:00:29 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:00:29 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:00:29 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:00:29 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:00:29 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:00:29 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:00:30 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:31 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:32 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:33 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:33 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:00:33 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:00:33 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:00:33 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:00:33 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:33 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:00:33 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:00:33 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:33 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:00:33 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:33 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:33 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:00:33 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:33 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:00:33 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:00:33 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:00:33 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:33 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:00:33 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:00:33 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:33 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:00:33 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:00:33 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:33 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:00:34 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:35 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:36 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:37 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:37 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:00:37 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:00:37 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:00:37 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:00:37 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:00:37 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:00:37 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:00:37 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:00:37 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:00:37 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:00:37 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:00:37 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:00:37 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:00:37 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:00:37 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:00:37 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:00:38 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:39 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:40 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:41 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:41 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:00:41 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:00:41 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:00:41 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:00:41 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:00:41 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:41 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:41 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:00:41 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:00:41 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:41 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:00:41 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:41 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:00:41 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:41 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:00:42 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:00:42 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:00:42 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:42 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:00:42 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:42 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:00:42 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:00:42 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:42 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:00:42 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:43 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:44 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:45 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:45 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:00:45 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:00:45 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:00:45 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:00:45 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:00:45 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:00:45 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:00:45 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:00:45 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:00:45 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:00:46 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:00:46 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:00:46 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:00:46 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:00:46 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:00:46 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:00:46 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:47 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:48 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:50 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:50 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:00:50 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:00:50 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:00:50 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:50 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:00:50 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:50 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:00:50 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:00:50 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:00:50 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:50 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:50 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:00:50 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:50 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:00:50 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:00:50 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:00:50 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:00:50 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:50 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:00:50 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:50 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:00:50 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:00:50 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:50 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:00:51 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:52 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:53 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:54 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:54 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:00:54 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:00:54 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:00:54 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:00:54 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:00:54 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:00:54 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:00:54 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:00:54 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:00:54 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:00:54 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:00:54 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:00:54 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:00:54 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:00:54 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:00:54 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:00:55 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:56 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:57 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:58 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:00:58 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:00:58 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:00:58 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:00:58 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:58 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:00:58 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:58 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:00:58 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:00:58 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:00:58 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:58 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:00:58 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:58 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:00:58 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:58 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:00:58 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:00:58 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:00:58 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:58 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:00:58 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:58 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:00:58 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:00:58 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:00:58 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:00:59 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:00 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:01 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:02 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:01:02 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:01:02 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:01:02 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:01:02 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:01:02 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:01:02 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:01:02 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:01:02 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:01:02 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:01:02 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:01:02 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:01:02 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:01:02 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:01:02 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:01:02 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:01:02 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:02 INFO QueueLockManager - QueueLockSize=0
+2025-07-30 20:01:03 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:04 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:05 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:06 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:01:06 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:01:06 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:01:06 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:01:06 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:06 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:01:06 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:06 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:01:06 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:01:06 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:06 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:01:06 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:06 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:01:06 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:06 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:01:06 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:01:06 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:06 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:01:06 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:01:06 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:06 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:01:06 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:06 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:01:06 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:06 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:01:07 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:08 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:09 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:10 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:01:10 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:01:10 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:01:10 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:01:10 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:01:10 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:01:10 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:01:10 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:01:10 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:01:10 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:01:10 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:01:10 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:01:10 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:01:10 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:01:10 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:01:10 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:01:10 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:11 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:12 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:13 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:14 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:01:14 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:01:14 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:01:14 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:14 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:01:14 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:01:14 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:14 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:01:14 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:14 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:01:14 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:14 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:01:14 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:14 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:01:14 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:01:14 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:01:14 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:01:14 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:14 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:01:14 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:14 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:01:14 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:01:14 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:14 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:01:14 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:15 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:16 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:17 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:18 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:01:18 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:01:18 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:01:18 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:01:18 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:01:18 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:01:18 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:01:18 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:01:18 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:01:18 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:01:18 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:01:18 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:01:18 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:01:18 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:01:18 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:01:18 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:01:18 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:19 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:20 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:21 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:22 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:01:22 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:01:22 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:22 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:01:22 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:01:22 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:01:22 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:22 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:01:22 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:01:22 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:22 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:01:22 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:22 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:01:22 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:22 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:01:22 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:01:22 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:01:22 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:22 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:01:22 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:22 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:01:22 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:01:22 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:22 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:01:22 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:23 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:24 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:25 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:26 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:01:26 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:01:26 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:01:26 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:01:26 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:01:26 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:01:26 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:01:26 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:01:26 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:01:26 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:01:26 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:01:26 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:01:26 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:01:26 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:01:26 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:01:26 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:01:26 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:27 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:28 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:29 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:30 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:01:30 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:01:30 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:01:30 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:01:30 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:30 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:01:30 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:30 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:01:30 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:01:30 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:30 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:01:30 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:30 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:01:30 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:30 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:01:30 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:01:30 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:01:30 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:30 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:01:30 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:30 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:01:30 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:01:30 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:30 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:01:30 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:31 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:32 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:33 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:34 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:01:34 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:01:34 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:01:34 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:01:34 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:01:34 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:01:34 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:01:34 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:01:34 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:01:34 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:01:34 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:01:34 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:01:34 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:01:34 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:01:34 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:01:34 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:01:34 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:35 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:36 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:37 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:38 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:01:38 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:01:38 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:01:38 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:01:38 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:38 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:38 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:01:38 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:01:38 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:01:38 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:38 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:01:38 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:38 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:01:38 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:38 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:01:38 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:01:38 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:38 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:01:38 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:01:38 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:38 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:01:38 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:01:38 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:38 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:01:38 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:39 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:41 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:42 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:42 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:01:42 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:01:42 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:01:42 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:01:42 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:01:42 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:01:42 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:01:42 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:01:42 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:01:42 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:01:42 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:01:42 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:01:42 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:01:42 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:01:42 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:01:42 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:01:43 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:44 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:45 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:46 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:46 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:01:46 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:01:46 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:46 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:01:46 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:46 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:01:46 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:01:46 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:46 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:01:46 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:01:46 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:46 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:01:46 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:01:46 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:46 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:01:46 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:01:46 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:01:46 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:46 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:01:46 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:46 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:01:46 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:01:46 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:46 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:01:47 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:48 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:49 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:50 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:50 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:01:50 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:01:50 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:01:50 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:01:50 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:01:50 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:01:50 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:01:50 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:01:50 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:01:50 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:01:50 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:01:50 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:01:50 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:01:50 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:01:50 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:01:50 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:01:51 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:52 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:53 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:54 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:54 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:01:54 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:01:54 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:01:54 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:54 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:01:54 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:54 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:01:54 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:01:54 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:01:54 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:54 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:01:54 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:54 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:01:54 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:54 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:01:54 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:01:54 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:54 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:01:54 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:01:54 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:54 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:01:54 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:01:54 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:01:54 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:01:55 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:56 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:57 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:58 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:01:58 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:01:58 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:01:58 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:01:58 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:01:58 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:01:58 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:01:58 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:01:58 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:01:58 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:01:58 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:01:58 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:01:58 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:01:58 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:01:58 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:01:58 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:01:58 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:01:59 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:00 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:01 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:02 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:02 INFO QueueLockManager - QueueLockSize=0
+2025-07-30 20:02:03 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:02:03 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:03 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:02:03 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:02:03 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:02:03 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:03 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:02:03 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:03 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:02:03 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:02:03 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:03 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:02:03 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:02:03 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:03 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:02:03 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:02:03 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:03 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:02:03 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:02:03 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:03 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:02:03 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:02:03 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:03 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:02:03 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:04 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:05 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:06 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:07 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:02:07 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:02:07 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:02:07 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:02:07 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:02:07 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:02:07 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:02:07 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:02:07 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:02:07 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:02:07 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:02:07 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:02:07 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:02:07 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:02:07 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:02:07 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:02:07 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:08 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:09 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:10 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:11 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:02:11 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:11 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:02:11 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:02:11 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:02:11 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:11 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:02:11 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:02:11 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:11 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:02:11 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:11 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:02:11 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:02:11 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:11 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:02:11 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:02:11 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:11 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:02:11 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:02:11 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:11 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:02:11 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:02:11 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:11 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:02:11 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:12 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:13 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:14 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:15 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:02:15 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:02:15 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:02:15 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:02:15 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:02:15 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:02:15 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:02:15 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:02:15 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:02:15 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:02:15 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:02:15 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:02:15 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:02:15 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:02:15 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:02:15 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:02:15 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:16 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:17 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:18 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:19 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:02:19 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:02:19 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:19 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:02:19 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:02:19 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:19 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:02:19 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:19 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:02:19 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:19 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:02:19 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:02:19 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:19 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:02:19 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:02:19 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:02:19 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:19 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:02:19 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:02:19 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:19 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:02:19 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:02:19 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:19 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:02:19 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:20 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:21 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:22 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:23 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:02:23 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:02:23 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:02:23 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:02:23 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:02:23 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:02:23 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:02:23 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:02:23 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:02:23 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:02:23 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:02:23 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:02:23 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:02:23 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:02:23 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:02:23 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:02:23 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:24 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:25 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:26 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:27 INFO PopReviveService_1 - reviveQueueId=1, ck listSize=0
+2025-07-30 20:02:27 INFO PopReviveService_5 - reviveQueueId=5, ck listSize=0
+2025-07-30 20:02:27 INFO PopReviveService_1 - reviveQueueId=1, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:27 INFO PopReviveService_1 - reviveQueueId=1, has no new msg, take a rest 3
+2025-07-30 20:02:27 INFO PopReviveService_4 - reviveQueueId=4, ck listSize=0
+2025-07-30 20:02:27 INFO PopReviveService_2 - reviveQueueId=2, ck listSize=0
+2025-07-30 20:02:27 INFO PopReviveService_4 - reviveQueueId=4, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:27 INFO PopReviveService_4 - reviveQueueId=4, has no new msg, take a rest 3
+2025-07-30 20:02:27 INFO PopReviveService_2 - reviveQueueId=2, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:27 INFO PopReviveService_5 - reviveQueueId=5, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:27 INFO PopReviveService_2 - reviveQueueId=2, has no new msg, take a rest 3
+2025-07-30 20:02:27 INFO PopReviveService_5 - reviveQueueId=5, has no new msg, take a rest 3
+2025-07-30 20:02:27 INFO PopReviveService_0 - reviveQueueId=0, ck listSize=0
+2025-07-30 20:02:27 INFO PopReviveService_0 - reviveQueueId=0, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:27 INFO PopReviveService_0 - reviveQueueId=0, has no new msg, take a rest 3
+2025-07-30 20:02:27 INFO PopReviveService_3 - reviveQueueId=3, ck listSize=0
+2025-07-30 20:02:27 INFO PopReviveService_7 - reviveQueueId=7, ck listSize=0
+2025-07-30 20:02:27 INFO PopReviveService_3 - reviveQueueId=3, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:27 INFO PopReviveService_7 - reviveQueueId=7, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:27 INFO PopReviveService_3 - reviveQueueId=3, has no new msg, take a rest 3
+2025-07-30 20:02:27 INFO PopReviveService_7 - reviveQueueId=7, has no new msg, take a rest 3
+2025-07-30 20:02:27 INFO PopReviveService_6 - reviveQueueId=6, ck listSize=0
+2025-07-30 20:02:27 INFO PopReviveService_6 - reviveQueueId=6, revive finish,old offset is -1, new offset is -1, ckDelay=0  
+2025-07-30 20:02:27 INFO PopReviveService_6 - reviveQueueId=6, has no new msg, take a rest 3
+2025-07-30 20:02:27 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:28 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:29 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:31 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0
+2025-07-30 20:02:31 INFO PopReviveService_1 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=1
+2025-07-30 20:02:31 INFO PopReviveService_2 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=2
+2025-07-30 20:02:31 INFO PopReviveService_4 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=4
+2025-07-30 20:02:31 INFO PopReviveService_4 - reviveQueueId=4, old offset is -1 
+2025-07-30 20:02:31 INFO PopReviveService_5 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=5
+2025-07-30 20:02:31 INFO PopReviveService_0 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=0
+2025-07-30 20:02:31 INFO PopReviveService_1 - reviveQueueId=1, old offset is -1 
+2025-07-30 20:02:31 INFO PopReviveService_2 - reviveQueueId=2, old offset is -1 
+2025-07-30 20:02:31 INFO PopReviveService_5 - reviveQueueId=5, old offset is -1 
+2025-07-30 20:02:31 INFO PopReviveService_0 - reviveQueueId=0, old offset is -1 
+2025-07-30 20:02:31 INFO PopReviveService_7 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=7
+2025-07-30 20:02:31 INFO PopReviveService_7 - reviveQueueId=7, old offset is -1 
+2025-07-30 20:02:31 INFO PopReviveService_3 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=3
+2025-07-30 20:02:31 INFO PopReviveService_3 - reviveQueueId=3, old offset is -1 
+2025-07-30 20:02:31 INFO PopReviveService_6 - start revive topic=rmq_sys_REVIVE_LOG_DefaultCluster, reviveQueueId=6
+2025-07-30 20:02:31 INFO PopReviveService_6 - reviveQueueId=6, old offset is -1 
+2025-07-30 20:02:32 INFO PopBufferMergeService - [PopBuffer]scan, PopBufferEclipse=0, PopBufferToStoreAck=0, PopBufferToStoreCk=0, PopBufferSize=0, PopBufferOffsetSize=0

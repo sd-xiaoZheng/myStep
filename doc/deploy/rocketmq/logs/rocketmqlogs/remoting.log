@@ -1,0 +1,938 @@
+2025-07-30 19:59:01 INFO main - Server is running in TLS permissive mode
+2025-07-30 19:59:01 INFO main - Tls config file doesn't exist, skip it
+2025-07-30 19:59:01 INFO main - Log the final used tls related configuration
+2025-07-30 19:59:01 INFO main - tls.test.mode.enable = true
+2025-07-30 19:59:01 INFO main - tls.server.need.client.auth = none
+2025-07-30 19:59:01 INFO main - tls.server.keyPath = null
+2025-07-30 19:59:01 INFO main - tls.server.keyPassword = null
+2025-07-30 19:59:01 INFO main - tls.server.certPath = null
+2025-07-30 19:59:01 INFO main - tls.server.authClient = false
+2025-07-30 19:59:01 INFO main - tls.server.trustCertPath = null
+2025-07-30 19:59:01 INFO main - tls.client.keyPath = null
+2025-07-30 19:59:01 INFO main - tls.client.keyPassword = null
+2025-07-30 19:59:01 INFO main - tls.client.certPath = null
+2025-07-30 19:59:01 INFO main - tls.client.authServer = false
+2025-07-30 19:59:01 INFO main - tls.client.trustCertPath = null
+2025-07-30 19:59:01 INFO main - Using OpenSSL provider
+2025-07-30 19:59:01 INFO main - SSLContext created for server
+2025-07-30 19:59:01 INFO main - Server is running in TLS permissive mode
+2025-07-30 19:59:01 INFO main - Tls config file doesn't exist, skip it
+2025-07-30 19:59:01 INFO main - Log the final used tls related configuration
+2025-07-30 19:59:01 INFO main - tls.test.mode.enable = true
+2025-07-30 19:59:01 INFO main - tls.server.need.client.auth = none
+2025-07-30 19:59:01 INFO main - tls.server.keyPath = null
+2025-07-30 19:59:01 INFO main - tls.server.keyPassword = null
+2025-07-30 19:59:01 INFO main - tls.server.certPath = null
+2025-07-30 19:59:01 INFO main - tls.server.authClient = false
+2025-07-30 19:59:01 INFO main - tls.server.trustCertPath = null
+2025-07-30 19:59:01 INFO main - tls.client.keyPath = null
+2025-07-30 19:59:01 INFO main - tls.client.keyPassword = null
+2025-07-30 19:59:01 INFO main - tls.client.certPath = null
+2025-07-30 19:59:01 INFO main - tls.client.authServer = false
+2025-07-30 19:59:01 INFO main - tls.client.trustCertPath = null
+2025-07-30 19:59:01 INFO main - Using OpenSSL provider
+2025-07-30 19:59:02 INFO main - SSLContext created for server
+2025-07-30 19:59:02 INFO main - name server address updated. NEW : [namesrv:9876] , OLD: null
+2025-07-30 19:59:02 INFO NettyEventExecutor - NettyEventExecutor service started
+2025-07-30 19:59:02 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:02 INFO main - RemotingServer started, listening 0.0.0.0:10911
+2025-07-30 19:59:02 INFO NettyEventExecutor - NettyEventExecutor service started
+2025-07-30 19:59:02 INFO main - RemotingServer started, listening 0.0.0.0:10909
+2025-07-30 19:59:02 INFO NettyEventExecutor - NettyEventExecutor service started
+2025-07-30 19:59:02 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:02 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=7f27c426]
+2025-07-30 19:59:02 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=7f27c426] was removed from channel table
+2025-07-30 19:59:02 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=7f27c426]
+2025-07-30 19:59:02 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=7f27c426] has been removed from the channel table before
+2025-07-30 19:59:02 INFO brokerOutApi_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:02 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:02 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=2eef3aef]
+2025-07-30 19:59:02 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=2eef3aef] was removed from channel table
+2025-07-30 19:59:02 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=2eef3aef]
+2025-07-30 19:59:02 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=2eef3aef] has been removed from the channel table before
+2025-07-30 19:59:02 INFO brokerOutApi_thread_1 - closeChannel: begin close the channel[addr=namesrv:9876, id=2eef3aef] Found: false
+2025-07-30 19:59:02 INFO brokerOutApi_thread_1 - closeChannel: the channel[addr=namesrv:9876, id=2eef3aef] has been removed from the channel table before
+2025-07-30 19:59:05 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:05 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:05 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=7d39e052]
+2025-07-30 19:59:05 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=7d39e052] was removed from channel table
+2025-07-30 19:59:05 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=7d39e052]
+2025-07-30 19:59:05 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=7d39e052] has been removed from the channel table before
+2025-07-30 19:59:08 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:08 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:08 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=d91f9f59]
+2025-07-30 19:59:08 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=d91f9f59] was removed from channel table
+2025-07-30 19:59:08 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=d91f9f59]
+2025-07-30 19:59:08 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=d91f9f59] has been removed from the channel table before
+2025-07-30 19:59:11 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:11 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:11 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=c5811a57]
+2025-07-30 19:59:11 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=c5811a57] was removed from channel table
+2025-07-30 19:59:11 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=c5811a57]
+2025-07-30 19:59:11 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=c5811a57] has been removed from the channel table before
+2025-07-30 19:59:12 INFO brokerOutApi_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:12 INFO brokerOutApi_thread_2 - closeChannel: begin close the channel[addr=namesrv:9876, id=951252bf] Found: true
+2025-07-30 19:59:12 INFO brokerOutApi_thread_2 - closeChannel: the channel[addr=namesrv:9876, id=951252bf] has been closed before, and has been created again, nothing to do.
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=951252bf]
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=951252bf] was removed from channel table
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=951252bf]
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=951252bf] has been removed from the channel table before
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=951252bf]
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=951252bf] has been removed from the channel table before
+2025-07-30 19:59:12 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: null , NEW: namesrv:9876. namesrvIndex = 843
+2025-07-30 19:59:12 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:12 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=3428b30e] Found: false
+2025-07-30 19:59:12 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=3428b30e] has been removed from the channel table before
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3428b30e]
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=3428b30e] was removed from channel table
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3428b30e]
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=3428b30e] has been removed from the channel table before
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3428b30e]
+2025-07-30 19:59:12 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=3428b30e] has been removed from the channel table before
+2025-07-30 19:59:14 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:14 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:14 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=1190b335]
+2025-07-30 19:59:14 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=1190b335] was removed from channel table
+2025-07-30 19:59:14 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=1190b335]
+2025-07-30 19:59:14 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=1190b335] has been removed from the channel table before
+2025-07-30 19:59:17 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 844
+2025-07-30 19:59:17 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:17 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:17 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=51f2a727] Found: false
+2025-07-30 19:59:17 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=51f2a727] has been removed from the channel table before
+2025-07-30 19:59:17 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=51f2a727]
+2025-07-30 19:59:17 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=51f2a727] was removed from channel table
+2025-07-30 19:59:17 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=51f2a727]
+2025-07-30 19:59:17 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=51f2a727] has been removed from the channel table before
+2025-07-30 19:59:17 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=51f2a727]
+2025-07-30 19:59:17 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=51f2a727] has been removed from the channel table before
+2025-07-30 19:59:18 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:18 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:18 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=4b84bb02]
+2025-07-30 19:59:18 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=4b84bb02] was removed from channel table
+2025-07-30 19:59:18 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=4b84bb02]
+2025-07-30 19:59:18 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=4b84bb02] has been removed from the channel table before
+2025-07-30 19:59:21 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:21 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:21 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f5808ad5]
+2025-07-30 19:59:21 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=f5808ad5] was removed from channel table
+2025-07-30 19:59:21 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f5808ad5]
+2025-07-30 19:59:21 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=f5808ad5] has been removed from the channel table before
+2025-07-30 19:59:22 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 845
+2025-07-30 19:59:22 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:22 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:22 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=b366002f]
+2025-07-30 19:59:22 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=b366002f] Found: false
+2025-07-30 19:59:22 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=b366002f] has been removed from the channel table before
+2025-07-30 19:59:22 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=b366002f] was removed from channel table
+2025-07-30 19:59:22 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=b366002f]
+2025-07-30 19:59:22 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=b366002f] has been removed from the channel table before
+2025-07-30 19:59:24 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:24 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:24 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=fcedb102]
+2025-07-30 19:59:24 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=fcedb102] was removed from channel table
+2025-07-30 19:59:24 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=fcedb102]
+2025-07-30 19:59:24 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=fcedb102] has been removed from the channel table before
+2025-07-30 19:59:27 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:27 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:27 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=62d5a8e4]
+2025-07-30 19:59:27 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=62d5a8e4] was removed from channel table
+2025-07-30 19:59:27 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=62d5a8e4]
+2025-07-30 19:59:27 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=62d5a8e4] has been removed from the channel table before
+2025-07-30 19:59:27 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 846
+2025-07-30 19:59:27 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:27 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:27 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=9da6f0e8]
+2025-07-30 19:59:27 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=9da6f0e8] Found: false
+2025-07-30 19:59:27 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=9da6f0e8] has been removed from the channel table before
+2025-07-30 19:59:27 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=9da6f0e8] was removed from channel table
+2025-07-30 19:59:27 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=9da6f0e8]
+2025-07-30 19:59:27 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=9da6f0e8] has been removed from the channel table before
+2025-07-30 19:59:27 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=9da6f0e8]
+2025-07-30 19:59:27 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=9da6f0e8] has been removed from the channel table before
+2025-07-30 19:59:30 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:30 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:30 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f380a94c]
+2025-07-30 19:59:30 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=f380a94c] was removed from channel table
+2025-07-30 19:59:30 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f380a94c]
+2025-07-30 19:59:30 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=f380a94c] has been removed from the channel table before
+2025-07-30 19:59:32 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 847
+2025-07-30 19:59:32 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:32 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:32 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=266e57ab] Found: false
+2025-07-30 19:59:32 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=266e57ab] has been removed from the channel table before
+2025-07-30 19:59:32 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=266e57ab]
+2025-07-30 19:59:32 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=266e57ab] was removed from channel table
+2025-07-30 19:59:32 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=266e57ab]
+2025-07-30 19:59:32 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=266e57ab] has been removed from the channel table before
+2025-07-30 19:59:32 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=266e57ab]
+2025-07-30 19:59:32 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=266e57ab] has been removed from the channel table before
+2025-07-30 19:59:33 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:33 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:33 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=e4f37bcf]
+2025-07-30 19:59:33 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=e4f37bcf] was removed from channel table
+2025-07-30 19:59:33 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=e4f37bcf]
+2025-07-30 19:59:33 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=e4f37bcf] has been removed from the channel table before
+2025-07-30 19:59:36 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:36 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:36 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3bcae4a7]
+2025-07-30 19:59:36 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=3bcae4a7] was removed from channel table
+2025-07-30 19:59:36 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3bcae4a7]
+2025-07-30 19:59:36 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=3bcae4a7] has been removed from the channel table before
+2025-07-30 19:59:37 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 848
+2025-07-30 19:59:37 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:37 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:37 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=b6685ca3] Found: false
+2025-07-30 19:59:37 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=b6685ca3]
+2025-07-30 19:59:37 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=b6685ca3] has been removed from the channel table before
+2025-07-30 19:59:37 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=b6685ca3] was removed from channel table
+2025-07-30 19:59:37 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=b6685ca3]
+2025-07-30 19:59:37 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=b6685ca3] has been removed from the channel table before
+2025-07-30 19:59:39 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:39 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:39 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ffe75160]
+2025-07-30 19:59:39 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=ffe75160] was removed from channel table
+2025-07-30 19:59:39 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ffe75160]
+2025-07-30 19:59:39 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=ffe75160] has been removed from the channel table before
+2025-07-30 19:59:42 INFO brokerOutApi_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:42 INFO brokerOutApi_thread_3 - closeChannel: begin close the channel[addr=namesrv:9876, id=15ca38e2] Found: true
+2025-07-30 19:59:42 INFO brokerOutApi_thread_3 - closeChannel: the channel[addr=namesrv:9876, id=15ca38e2] has been closed before, and has been created again, nothing to do.
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=15ca38e2]
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=15ca38e2] was removed from channel table
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=15ca38e2]
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=15ca38e2] has been removed from the channel table before
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=15ca38e2]
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=15ca38e2] has been removed from the channel table before
+2025-07-30 19:59:42 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 849
+2025-07-30 19:59:42 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:42 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=266fb118] Found: false
+2025-07-30 19:59:42 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=266fb118] has been removed from the channel table before
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=266fb118]
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=266fb118] was removed from channel table
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=266fb118]
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=266fb118] has been removed from the channel table before
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=266fb118]
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=266fb118] has been removed from the channel table before
+2025-07-30 19:59:42 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=d5b50c20]
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=d5b50c20] was removed from channel table
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=d5b50c20]
+2025-07-30 19:59:42 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=d5b50c20] has been removed from the channel table before
+2025-07-30 19:59:45 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:45 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:45 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=53c491bc]
+2025-07-30 19:59:45 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=53c491bc] was removed from channel table
+2025-07-30 19:59:45 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=53c491bc]
+2025-07-30 19:59:45 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=53c491bc] has been removed from the channel table before
+2025-07-30 19:59:47 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 850
+2025-07-30 19:59:47 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:47 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:47 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=d2d9d57d] Found: false
+2025-07-30 19:59:47 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=d2d9d57d] has been removed from the channel table before
+2025-07-30 19:59:47 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=d2d9d57d]
+2025-07-30 19:59:47 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=d2d9d57d] was removed from channel table
+2025-07-30 19:59:47 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=d2d9d57d]
+2025-07-30 19:59:47 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=d2d9d57d] has been removed from the channel table before
+2025-07-30 19:59:49 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:49 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:49 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=330c8cfb]
+2025-07-30 19:59:49 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=330c8cfb] was removed from channel table
+2025-07-30 19:59:49 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=330c8cfb]
+2025-07-30 19:59:49 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=330c8cfb] has been removed from the channel table before
+2025-07-30 19:59:52 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:52 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:52 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=391b81ff]
+2025-07-30 19:59:52 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=391b81ff] was removed from channel table
+2025-07-30 19:59:52 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=391b81ff]
+2025-07-30 19:59:52 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=391b81ff] has been removed from the channel table before
+2025-07-30 19:59:52 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 851
+2025-07-30 19:59:52 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:52 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:52 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ea74c718]
+2025-07-30 19:59:52 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=ea74c718] Found: false
+2025-07-30 19:59:52 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=ea74c718] has been removed from the channel table before
+2025-07-30 19:59:52 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=ea74c718] was removed from channel table
+2025-07-30 19:59:52 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ea74c718]
+2025-07-30 19:59:52 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=ea74c718] has been removed from the channel table before
+2025-07-30 19:59:52 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ea74c718]
+2025-07-30 19:59:52 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=ea74c718] has been removed from the channel table before
+2025-07-30 19:59:55 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:55 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:55 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=7b943d63]
+2025-07-30 19:59:55 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=7b943d63] was removed from channel table
+2025-07-30 19:59:55 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=7b943d63]
+2025-07-30 19:59:55 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=7b943d63] has been removed from the channel table before
+2025-07-30 19:59:57 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 852
+2025-07-30 19:59:57 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:57 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:57 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=7f8bdc62]
+2025-07-30 19:59:57 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=7f8bdc62] Found: false
+2025-07-30 19:59:57 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=7f8bdc62] has been removed from the channel table before
+2025-07-30 19:59:57 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=7f8bdc62] was removed from channel table
+2025-07-30 19:59:57 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=7f8bdc62]
+2025-07-30 19:59:57 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=7f8bdc62] has been removed from the channel table before
+2025-07-30 19:59:57 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=7f8bdc62]
+2025-07-30 19:59:57 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=7f8bdc62] has been removed from the channel table before
+2025-07-30 19:59:58 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 19:59:58 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 19:59:58 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=8968cd63]
+2025-07-30 19:59:58 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=8968cd63] was removed from channel table
+2025-07-30 19:59:58 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=8968cd63]
+2025-07-30 19:59:58 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=8968cd63] has been removed from the channel table before
+2025-07-30 20:00:01 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:01 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:01 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=5c3cd135]
+2025-07-30 20:00:01 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=5c3cd135] was removed from channel table
+2025-07-30 20:00:01 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=5c3cd135]
+2025-07-30 20:00:01 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=5c3cd135] has been removed from the channel table before
+2025-07-30 20:00:02 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 853
+2025-07-30 20:00:02 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:02 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:02 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=129f31c5] Found: false
+2025-07-30 20:00:02 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=129f31c5] has been removed from the channel table before
+2025-07-30 20:00:02 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=129f31c5]
+2025-07-30 20:00:02 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=129f31c5] was removed from channel table
+2025-07-30 20:00:02 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=129f31c5]
+2025-07-30 20:00:02 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=129f31c5] has been removed from the channel table before
+2025-07-30 20:00:02 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=129f31c5]
+2025-07-30 20:00:02 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=129f31c5] has been removed from the channel table before
+2025-07-30 20:00:04 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:04 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:04 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=310ed365]
+2025-07-30 20:00:04 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=310ed365] was removed from channel table
+2025-07-30 20:00:04 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=310ed365]
+2025-07-30 20:00:04 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=310ed365] has been removed from the channel table before
+2025-07-30 20:00:07 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:07 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:07 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=0a600447]
+2025-07-30 20:00:07 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=0a600447] was removed from channel table
+2025-07-30 20:00:07 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=0a600447]
+2025-07-30 20:00:07 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=0a600447] has been removed from the channel table before
+2025-07-30 20:00:07 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 854
+2025-07-30 20:00:07 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:07 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:07 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=166e417d]
+2025-07-30 20:00:07 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=166e417d] Found: false
+2025-07-30 20:00:07 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=166e417d] has been removed from the channel table before
+2025-07-30 20:00:07 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=166e417d] was removed from channel table
+2025-07-30 20:00:07 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=166e417d]
+2025-07-30 20:00:07 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=166e417d] has been removed from the channel table before
+2025-07-30 20:00:10 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:10 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:10 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=c37284e8]
+2025-07-30 20:00:10 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=c37284e8] was removed from channel table
+2025-07-30 20:00:10 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=c37284e8]
+2025-07-30 20:00:10 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=c37284e8] has been removed from the channel table before
+2025-07-30 20:00:12 INFO brokerOutApi_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:12 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:12 INFO brokerOutApi_thread_4 - closeChannel: begin close the channel[addr=namesrv:9876, id=c1348fb3] Found: true
+2025-07-30 20:00:12 INFO brokerOutApi_thread_4 - closeChannel: the channel[addr=namesrv:9876, id=c1348fb3] has been closed before, and has been created again, nothing to do.
+2025-07-30 20:00:12 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=c1348fb3]
+2025-07-30 20:00:12 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=c1348fb3] was removed from channel table
+2025-07-30 20:00:12 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=c1348fb3]
+2025-07-30 20:00:12 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=c1348fb3] has been removed from the channel table before
+2025-07-30 20:00:12 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=c1348fb3]
+2025-07-30 20:00:12 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=c1348fb3] has been removed from the channel table before
+2025-07-30 20:00:12 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 855
+2025-07-30 20:00:12 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:12 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:12 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=4b0ea469]
+2025-07-30 20:00:12 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=4b0ea469] Found: false
+2025-07-30 20:00:12 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=4b0ea469] has been removed from the channel table before
+2025-07-30 20:00:12 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=4b0ea469] was removed from channel table
+2025-07-30 20:00:12 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=4b0ea469]
+2025-07-30 20:00:12 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=4b0ea469] has been removed from the channel table before
+2025-07-30 20:00:13 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:13 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:13 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=aa0c77bf]
+2025-07-30 20:00:13 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=aa0c77bf] was removed from channel table
+2025-07-30 20:00:13 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=aa0c77bf]
+2025-07-30 20:00:13 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=aa0c77bf] has been removed from the channel table before
+2025-07-30 20:00:16 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:16 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:16 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=e6654dbd]
+2025-07-30 20:00:16 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=e6654dbd] was removed from channel table
+2025-07-30 20:00:16 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=e6654dbd]
+2025-07-30 20:00:16 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=e6654dbd] has been removed from the channel table before
+2025-07-30 20:00:17 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 856
+2025-07-30 20:00:17 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:17 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:17 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=86b4e82f]
+2025-07-30 20:00:17 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=86b4e82f] Found: false
+2025-07-30 20:00:17 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=86b4e82f] has been removed from the channel table before
+2025-07-30 20:00:17 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=86b4e82f] was removed from channel table
+2025-07-30 20:00:17 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=86b4e82f]
+2025-07-30 20:00:17 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=86b4e82f] has been removed from the channel table before
+2025-07-30 20:00:17 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=86b4e82f]
+2025-07-30 20:00:17 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=86b4e82f] has been removed from the channel table before
+2025-07-30 20:00:20 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:20 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:20 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ecf5c33f]
+2025-07-30 20:00:20 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=ecf5c33f] was removed from channel table
+2025-07-30 20:00:20 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ecf5c33f]
+2025-07-30 20:00:20 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=ecf5c33f] has been removed from the channel table before
+2025-07-30 20:00:22 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 857
+2025-07-30 20:00:22 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:22 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:22 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=0dab5681]
+2025-07-30 20:00:22 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=0dab5681] Found: false
+2025-07-30 20:00:22 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=0dab5681] has been removed from the channel table before
+2025-07-30 20:00:22 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=0dab5681] was removed from channel table
+2025-07-30 20:00:22 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=0dab5681]
+2025-07-30 20:00:22 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=0dab5681] has been removed from the channel table before
+2025-07-30 20:00:23 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:23 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:23 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=249b250d]
+2025-07-30 20:00:23 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=249b250d] was removed from channel table
+2025-07-30 20:00:23 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=249b250d]
+2025-07-30 20:00:23 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=249b250d] has been removed from the channel table before
+2025-07-30 20:00:26 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:26 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:26 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=584fc29c]
+2025-07-30 20:00:26 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=584fc29c] was removed from channel table
+2025-07-30 20:00:26 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=584fc29c]
+2025-07-30 20:00:26 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=584fc29c] has been removed from the channel table before
+2025-07-30 20:00:27 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 858
+2025-07-30 20:00:27 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:27 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:27 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=8ea8f58a] Found: false
+2025-07-30 20:00:27 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=8ea8f58a]
+2025-07-30 20:00:27 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=8ea8f58a] has been removed from the channel table before
+2025-07-30 20:00:27 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=8ea8f58a] was removed from channel table
+2025-07-30 20:00:27 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=8ea8f58a]
+2025-07-30 20:00:27 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=8ea8f58a] has been removed from the channel table before
+2025-07-30 20:00:29 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:29 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:29 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=a4c574e1]
+2025-07-30 20:00:29 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=a4c574e1] was removed from channel table
+2025-07-30 20:00:29 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=a4c574e1]
+2025-07-30 20:00:29 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=a4c574e1] has been removed from the channel table before
+2025-07-30 20:00:32 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:32 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:32 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f846df74]
+2025-07-30 20:00:32 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=f846df74] was removed from channel table
+2025-07-30 20:00:32 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f846df74]
+2025-07-30 20:00:32 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=f846df74] has been removed from the channel table before
+2025-07-30 20:00:32 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 859
+2025-07-30 20:00:32 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:32 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:32 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=2d656680]
+2025-07-30 20:00:32 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=2d656680] Found: false
+2025-07-30 20:00:32 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=2d656680] has been removed from the channel table before
+2025-07-30 20:00:32 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=2d656680] was removed from channel table
+2025-07-30 20:00:32 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=2d656680]
+2025-07-30 20:00:32 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=2d656680] has been removed from the channel table before
+2025-07-30 20:00:35 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:35 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:35 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=e4457b62]
+2025-07-30 20:00:35 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=e4457b62] was removed from channel table
+2025-07-30 20:00:35 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=e4457b62]
+2025-07-30 20:00:35 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=e4457b62] has been removed from the channel table before
+2025-07-30 20:00:37 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 860
+2025-07-30 20:00:37 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:37 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:37 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=b46cdf6c]
+2025-07-30 20:00:37 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=b46cdf6c] Found: false
+2025-07-30 20:00:37 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=b46cdf6c] has been removed from the channel table before
+2025-07-30 20:00:37 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=b46cdf6c] was removed from channel table
+2025-07-30 20:00:37 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=b46cdf6c]
+2025-07-30 20:00:37 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=b46cdf6c] has been removed from the channel table before
+2025-07-30 20:00:37 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=b46cdf6c]
+2025-07-30 20:00:37 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=b46cdf6c] has been removed from the channel table before
+2025-07-30 20:00:38 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:38 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:38 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=0509428f]
+2025-07-30 20:00:38 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=0509428f] was removed from channel table
+2025-07-30 20:00:38 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=0509428f]
+2025-07-30 20:00:38 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=0509428f] has been removed from the channel table before
+2025-07-30 20:00:41 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:41 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:41 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=9ee734b8]
+2025-07-30 20:00:41 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=9ee734b8] was removed from channel table
+2025-07-30 20:00:41 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=9ee734b8]
+2025-07-30 20:00:41 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=9ee734b8] has been removed from the channel table before
+2025-07-30 20:00:42 INFO brokerOutApi_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:42 INFO brokerOutApi_thread_1 - closeChannel: begin close the channel[addr=namesrv:9876, id=931cc4ef] Found: true
+2025-07-30 20:00:42 INFO brokerOutApi_thread_1 - closeChannel: the channel[addr=namesrv:9876, id=931cc4ef] has been closed before, and has been created again, nothing to do.
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=931cc4ef]
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=931cc4ef] was removed from channel table
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=931cc4ef]
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=931cc4ef] has been removed from the channel table before
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=931cc4ef]
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=931cc4ef] has been removed from the channel table before
+2025-07-30 20:00:42 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 861
+2025-07-30 20:00:42 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:42 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=2b2941a4] Found: false
+2025-07-30 20:00:42 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=2b2941a4] has been removed from the channel table before
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=2b2941a4]
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=2b2941a4] was removed from channel table
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=2b2941a4]
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=2b2941a4] has been removed from the channel table before
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=2b2941a4]
+2025-07-30 20:00:42 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=2b2941a4] has been removed from the channel table before
+2025-07-30 20:00:44 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:44 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:44 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=af9187bd]
+2025-07-30 20:00:44 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=af9187bd] was removed from channel table
+2025-07-30 20:00:44 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=af9187bd]
+2025-07-30 20:00:44 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=af9187bd] has been removed from the channel table before
+2025-07-30 20:00:47 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 862
+2025-07-30 20:00:47 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:47 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:47 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=415528bf] Found: false
+2025-07-30 20:00:47 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=415528bf]
+2025-07-30 20:00:47 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=415528bf] has been removed from the channel table before
+2025-07-30 20:00:47 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=415528bf] was removed from channel table
+2025-07-30 20:00:47 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=415528bf]
+2025-07-30 20:00:47 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=415528bf] has been removed from the channel table before
+2025-07-30 20:00:47 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=415528bf]
+2025-07-30 20:00:47 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=415528bf] has been removed from the channel table before
+2025-07-30 20:00:47 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:47 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:47 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=1e37ad12]
+2025-07-30 20:00:47 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=1e37ad12] was removed from channel table
+2025-07-30 20:00:47 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=1e37ad12]
+2025-07-30 20:00:47 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=1e37ad12] has been removed from the channel table before
+2025-07-30 20:00:51 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:51 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:51 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=6005b6fc]
+2025-07-30 20:00:51 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=6005b6fc] was removed from channel table
+2025-07-30 20:00:51 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=6005b6fc]
+2025-07-30 20:00:51 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=6005b6fc] has been removed from the channel table before
+2025-07-30 20:00:52 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 863
+2025-07-30 20:00:52 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:52 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:52 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=91dbb913]
+2025-07-30 20:00:52 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=91dbb913] Found: false
+2025-07-30 20:00:52 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=91dbb913] has been removed from the channel table before
+2025-07-30 20:00:52 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=91dbb913] was removed from channel table
+2025-07-30 20:00:52 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=91dbb913]
+2025-07-30 20:00:52 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=91dbb913] has been removed from the channel table before
+2025-07-30 20:00:54 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:54 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:54 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=b13f4e4e]
+2025-07-30 20:00:54 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=b13f4e4e] was removed from channel table
+2025-07-30 20:00:54 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=b13f4e4e]
+2025-07-30 20:00:54 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=b13f4e4e] has been removed from the channel table before
+2025-07-30 20:00:57 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:57 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:57 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=9e7ca8af]
+2025-07-30 20:00:57 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=9e7ca8af] was removed from channel table
+2025-07-30 20:00:57 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=9e7ca8af]
+2025-07-30 20:00:57 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=9e7ca8af] has been removed from the channel table before
+2025-07-30 20:00:57 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 864
+2025-07-30 20:00:57 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:00:57 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:00:57 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=da269594]
+2025-07-30 20:00:57 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=da269594] Found: false
+2025-07-30 20:00:57 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=da269594] has been removed from the channel table before
+2025-07-30 20:00:57 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=da269594] was removed from channel table
+2025-07-30 20:00:57 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=da269594]
+2025-07-30 20:00:57 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=da269594] has been removed from the channel table before
+2025-07-30 20:01:00 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:00 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:00 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=e5946ad8]
+2025-07-30 20:01:00 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=e5946ad8] was removed from channel table
+2025-07-30 20:01:00 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=e5946ad8]
+2025-07-30 20:01:00 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=e5946ad8] has been removed from the channel table before
+2025-07-30 20:01:02 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 865
+2025-07-30 20:01:02 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:02 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:02 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=d1839547] Found: false
+2025-07-30 20:01:02 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=d1839547] has been removed from the channel table before
+2025-07-30 20:01:02 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=d1839547]
+2025-07-30 20:01:02 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=d1839547] was removed from channel table
+2025-07-30 20:01:02 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=d1839547]
+2025-07-30 20:01:02 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=d1839547] has been removed from the channel table before
+2025-07-30 20:01:02 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=d1839547]
+2025-07-30 20:01:02 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=d1839547] has been removed from the channel table before
+2025-07-30 20:01:03 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:03 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:03 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=62050900]
+2025-07-30 20:01:03 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=62050900] was removed from channel table
+2025-07-30 20:01:03 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=62050900]
+2025-07-30 20:01:03 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=62050900] has been removed from the channel table before
+2025-07-30 20:01:06 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:06 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:06 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=a8d47ea3]
+2025-07-30 20:01:06 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=a8d47ea3] was removed from channel table
+2025-07-30 20:01:06 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=a8d47ea3]
+2025-07-30 20:01:06 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=a8d47ea3] has been removed from the channel table before
+2025-07-30 20:01:07 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 866
+2025-07-30 20:01:07 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:07 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:07 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3a1c6027]
+2025-07-30 20:01:07 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=3a1c6027] Found: false
+2025-07-30 20:01:07 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=3a1c6027] has been removed from the channel table before
+2025-07-30 20:01:07 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=3a1c6027] was removed from channel table
+2025-07-30 20:01:07 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3a1c6027]
+2025-07-30 20:01:07 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=3a1c6027] has been removed from the channel table before
+2025-07-30 20:01:07 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3a1c6027]
+2025-07-30 20:01:07 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=3a1c6027] has been removed from the channel table before
+2025-07-30 20:01:09 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:09 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:09 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=9797e805]
+2025-07-30 20:01:09 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=9797e805] was removed from channel table
+2025-07-30 20:01:09 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=9797e805]
+2025-07-30 20:01:09 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=9797e805] has been removed from the channel table before
+2025-07-30 20:01:12 INFO brokerOutApi_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=eaa11ff0]
+2025-07-30 20:01:12 INFO brokerOutApi_thread_2 - closeChannel: begin close the channel[addr=namesrv:9876, id=eaa11ff0] Found: true
+2025-07-30 20:01:12 INFO brokerOutApi_thread_2 - closeChannel: the channel[addr=namesrv:9876, id=eaa11ff0] has been closed before, and has been created again, nothing to do.
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=eaa11ff0] was removed from channel table
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=eaa11ff0]
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=eaa11ff0] has been removed from the channel table before
+2025-07-30 20:01:12 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 867
+2025-07-30 20:01:12 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=bdc5479b]
+2025-07-30 20:01:12 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=bdc5479b] Found: false
+2025-07-30 20:01:12 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=bdc5479b] has been removed from the channel table before
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=bdc5479b] was removed from channel table
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=bdc5479b]
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=bdc5479b] has been removed from the channel table before
+2025-07-30 20:01:12 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=880f5926]
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=880f5926] was removed from channel table
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=880f5926]
+2025-07-30 20:01:12 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=880f5926] has been removed from the channel table before
+2025-07-30 20:01:15 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:15 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:15 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=87f0061e]
+2025-07-30 20:01:15 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=87f0061e] was removed from channel table
+2025-07-30 20:01:15 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=87f0061e]
+2025-07-30 20:01:15 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=87f0061e] has been removed from the channel table before
+2025-07-30 20:01:17 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 868
+2025-07-30 20:01:17 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:17 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:17 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=5a2dbad2]
+2025-07-30 20:01:17 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=5a2dbad2] Found: false
+2025-07-30 20:01:17 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=5a2dbad2] has been removed from the channel table before
+2025-07-30 20:01:17 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=5a2dbad2] was removed from channel table
+2025-07-30 20:01:17 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=5a2dbad2]
+2025-07-30 20:01:17 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=5a2dbad2] has been removed from the channel table before
+2025-07-30 20:01:17 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=5a2dbad2]
+2025-07-30 20:01:17 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=5a2dbad2] has been removed from the channel table before
+2025-07-30 20:01:18 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:18 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:18 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=8c89da02]
+2025-07-30 20:01:18 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=8c89da02] was removed from channel table
+2025-07-30 20:01:18 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=8c89da02]
+2025-07-30 20:01:18 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=8c89da02] has been removed from the channel table before
+2025-07-30 20:01:22 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:22 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:22 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=6a80bfc8]
+2025-07-30 20:01:22 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=6a80bfc8] was removed from channel table
+2025-07-30 20:01:22 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=6a80bfc8]
+2025-07-30 20:01:22 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=6a80bfc8] has been removed from the channel table before
+2025-07-30 20:01:22 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 869
+2025-07-30 20:01:22 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:22 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:22 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f1e5786c]
+2025-07-30 20:01:22 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=f1e5786c] Found: false
+2025-07-30 20:01:22 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=f1e5786c] has been removed from the channel table before
+2025-07-30 20:01:22 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=f1e5786c] was removed from channel table
+2025-07-30 20:01:22 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f1e5786c]
+2025-07-30 20:01:22 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=f1e5786c] has been removed from the channel table before
+2025-07-30 20:01:22 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f1e5786c]
+2025-07-30 20:01:22 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=f1e5786c] has been removed from the channel table before
+2025-07-30 20:01:25 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:25 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:25 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=8ce5a575]
+2025-07-30 20:01:25 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=8ce5a575] was removed from channel table
+2025-07-30 20:01:25 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=8ce5a575]
+2025-07-30 20:01:25 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=8ce5a575] has been removed from the channel table before
+2025-07-30 20:01:27 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 870
+2025-07-30 20:01:27 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:27 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:27 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3789f20f]
+2025-07-30 20:01:27 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=3789f20f] Found: false
+2025-07-30 20:01:27 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=3789f20f] has been removed from the channel table before
+2025-07-30 20:01:27 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=3789f20f] was removed from channel table
+2025-07-30 20:01:27 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3789f20f]
+2025-07-30 20:01:27 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=3789f20f] has been removed from the channel table before
+2025-07-30 20:01:27 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3789f20f]
+2025-07-30 20:01:27 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=3789f20f] has been removed from the channel table before
+2025-07-30 20:01:28 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:28 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:28 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=1a7c4b68]
+2025-07-30 20:01:28 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=1a7c4b68] was removed from channel table
+2025-07-30 20:01:28 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=1a7c4b68]
+2025-07-30 20:01:28 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=1a7c4b68] has been removed from the channel table before
+2025-07-30 20:01:31 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:31 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:31 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=d3fd43a5]
+2025-07-30 20:01:31 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=d3fd43a5] was removed from channel table
+2025-07-30 20:01:31 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=d3fd43a5]
+2025-07-30 20:01:31 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=d3fd43a5] has been removed from the channel table before
+2025-07-30 20:01:32 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 871
+2025-07-30 20:01:32 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:32 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:32 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=e20d24e8] Found: false
+2025-07-30 20:01:32 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=e20d24e8] has been removed from the channel table before
+2025-07-30 20:01:32 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=e20d24e8]
+2025-07-30 20:01:32 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=e20d24e8] was removed from channel table
+2025-07-30 20:01:32 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=e20d24e8]
+2025-07-30 20:01:32 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=e20d24e8] has been removed from the channel table before
+2025-07-30 20:01:32 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=e20d24e8]
+2025-07-30 20:01:32 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=e20d24e8] has been removed from the channel table before
+2025-07-30 20:01:34 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:34 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:34 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=268ef4ae]
+2025-07-30 20:01:34 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=268ef4ae] was removed from channel table
+2025-07-30 20:01:34 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=268ef4ae]
+2025-07-30 20:01:34 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=268ef4ae] has been removed from the channel table before
+2025-07-30 20:01:37 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:37 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:37 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=8121c384]
+2025-07-30 20:01:37 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=8121c384] was removed from channel table
+2025-07-30 20:01:37 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=8121c384]
+2025-07-30 20:01:37 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=8121c384] has been removed from the channel table before
+2025-07-30 20:01:37 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 872
+2025-07-30 20:01:37 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:37 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:37 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=369753d8]
+2025-07-30 20:01:37 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=369753d8] Found: false
+2025-07-30 20:01:37 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=369753d8] has been removed from the channel table before
+2025-07-30 20:01:37 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=369753d8] was removed from channel table
+2025-07-30 20:01:37 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=369753d8]
+2025-07-30 20:01:37 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=369753d8] has been removed from the channel table before
+2025-07-30 20:01:37 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=369753d8]
+2025-07-30 20:01:37 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=369753d8] has been removed from the channel table before
+2025-07-30 20:01:40 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:40 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:40 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=14b05f83]
+2025-07-30 20:01:40 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=14b05f83] was removed from channel table
+2025-07-30 20:01:40 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=14b05f83]
+2025-07-30 20:01:40 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=14b05f83] has been removed from the channel table before
+2025-07-30 20:01:42 INFO brokerOutApi_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:42 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:42 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f0cff1dc]
+2025-07-30 20:01:42 INFO brokerOutApi_thread_3 - closeChannel: begin close the channel[addr=namesrv:9876, id=f0cff1dc] Found: true
+2025-07-30 20:01:42 INFO brokerOutApi_thread_3 - closeChannel: the channel[addr=namesrv:9876, id=f0cff1dc] has been closed before, and has been created again, nothing to do.
+2025-07-30 20:01:42 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=f0cff1dc] was removed from channel table
+2025-07-30 20:01:42 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f0cff1dc]
+2025-07-30 20:01:42 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=f0cff1dc] has been removed from the channel table before
+2025-07-30 20:01:42 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 873
+2025-07-30 20:01:42 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:42 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:42 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=15e41a69] Found: false
+2025-07-30 20:01:42 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=15e41a69] has been removed from the channel table before
+2025-07-30 20:01:42 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=15e41a69]
+2025-07-30 20:01:42 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=15e41a69] was removed from channel table
+2025-07-30 20:01:42 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=15e41a69]
+2025-07-30 20:01:42 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=15e41a69] has been removed from the channel table before
+2025-07-30 20:01:42 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=15e41a69]
+2025-07-30 20:01:42 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=15e41a69] has been removed from the channel table before
+2025-07-30 20:01:43 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:43 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:43 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=252eb1b1]
+2025-07-30 20:01:43 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=252eb1b1] was removed from channel table
+2025-07-30 20:01:43 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=252eb1b1]
+2025-07-30 20:01:43 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=252eb1b1] has been removed from the channel table before
+2025-07-30 20:01:46 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:46 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:46 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=14e0c3b6]
+2025-07-30 20:01:46 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=14e0c3b6] was removed from channel table
+2025-07-30 20:01:46 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=14e0c3b6]
+2025-07-30 20:01:46 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=14e0c3b6] has been removed from the channel table before
+2025-07-30 20:01:47 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 874
+2025-07-30 20:01:47 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:47 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:47 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=979cedbb] Found: false
+2025-07-30 20:01:47 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=979cedbb]
+2025-07-30 20:01:47 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=979cedbb] has been removed from the channel table before
+2025-07-30 20:01:47 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=979cedbb] was removed from channel table
+2025-07-30 20:01:47 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=979cedbb]
+2025-07-30 20:01:47 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=979cedbb] has been removed from the channel table before
+2025-07-30 20:01:47 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=979cedbb]
+2025-07-30 20:01:47 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=979cedbb] has been removed from the channel table before
+2025-07-30 20:01:49 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:49 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:49 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f5ca8d62]
+2025-07-30 20:01:49 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=f5ca8d62] was removed from channel table
+2025-07-30 20:01:49 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=f5ca8d62]
+2025-07-30 20:01:49 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=f5ca8d62] has been removed from the channel table before
+2025-07-30 20:01:52 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 875
+2025-07-30 20:01:52 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:52 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:52 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ee715c90]
+2025-07-30 20:01:52 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=ee715c90] Found: false
+2025-07-30 20:01:52 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=ee715c90] has been removed from the channel table before
+2025-07-30 20:01:52 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=ee715c90] was removed from channel table
+2025-07-30 20:01:52 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ee715c90]
+2025-07-30 20:01:52 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=ee715c90] has been removed from the channel table before
+2025-07-30 20:01:52 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ee715c90]
+2025-07-30 20:01:52 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=ee715c90] has been removed from the channel table before
+2025-07-30 20:01:53 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:53 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:53 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=4c244540]
+2025-07-30 20:01:53 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=4c244540] was removed from channel table
+2025-07-30 20:01:53 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=4c244540]
+2025-07-30 20:01:53 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=4c244540] has been removed from the channel table before
+2025-07-30 20:01:56 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:56 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:56 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=36437f8e]
+2025-07-30 20:01:56 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=36437f8e] was removed from channel table
+2025-07-30 20:01:56 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=36437f8e]
+2025-07-30 20:01:56 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=36437f8e] has been removed from the channel table before
+2025-07-30 20:01:57 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 876
+2025-07-30 20:01:57 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:57 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:57 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=1f433d36]
+2025-07-30 20:01:57 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=1f433d36] Found: false
+2025-07-30 20:01:57 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=1f433d36] has been removed from the channel table before
+2025-07-30 20:01:57 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=1f433d36] was removed from channel table
+2025-07-30 20:01:57 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=1f433d36]
+2025-07-30 20:01:57 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=1f433d36] has been removed from the channel table before
+2025-07-30 20:01:59 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:01:59 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:01:59 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=023e8ca2]
+2025-07-30 20:01:59 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=023e8ca2] was removed from channel table
+2025-07-30 20:01:59 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=023e8ca2]
+2025-07-30 20:01:59 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=023e8ca2] has been removed from the channel table before
+2025-07-30 20:02:02 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:02 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:02 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=61a474fd]
+2025-07-30 20:02:02 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=61a474fd] was removed from channel table
+2025-07-30 20:02:02 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=61a474fd]
+2025-07-30 20:02:02 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=61a474fd] has been removed from the channel table before
+2025-07-30 20:02:02 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 877
+2025-07-30 20:02:02 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:02 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:02 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=37a8b341]
+2025-07-30 20:02:02 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=37a8b341] Found: false
+2025-07-30 20:02:02 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=37a8b341] has been removed from the channel table before
+2025-07-30 20:02:02 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=37a8b341] was removed from channel table
+2025-07-30 20:02:02 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=37a8b341]
+2025-07-30 20:02:02 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=37a8b341] has been removed from the channel table before
+2025-07-30 20:02:02 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=37a8b341]
+2025-07-30 20:02:02 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=37a8b341] has been removed from the channel table before
+2025-07-30 20:02:05 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:05 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:05 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3f61ae68]
+2025-07-30 20:02:05 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=3f61ae68] was removed from channel table
+2025-07-30 20:02:05 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3f61ae68]
+2025-07-30 20:02:05 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=3f61ae68] has been removed from the channel table before
+2025-07-30 20:02:07 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 878
+2025-07-30 20:02:07 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:07 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:07 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=3528f4c8] Found: false
+2025-07-30 20:02:07 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=3528f4c8] has been removed from the channel table before
+2025-07-30 20:02:07 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3528f4c8]
+2025-07-30 20:02:07 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=3528f4c8] was removed from channel table
+2025-07-30 20:02:07 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3528f4c8]
+2025-07-30 20:02:07 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=3528f4c8] has been removed from the channel table before
+2025-07-30 20:02:07 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3528f4c8]
+2025-07-30 20:02:07 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=3528f4c8] has been removed from the channel table before
+2025-07-30 20:02:08 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:08 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:08 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=af1831ef]
+2025-07-30 20:02:08 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=af1831ef] was removed from channel table
+2025-07-30 20:02:08 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=af1831ef]
+2025-07-30 20:02:08 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=af1831ef] has been removed from the channel table before
+2025-07-30 20:02:11 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:11 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:11 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=6f0a00f9]
+2025-07-30 20:02:11 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=6f0a00f9] was removed from channel table
+2025-07-30 20:02:11 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=6f0a00f9]
+2025-07-30 20:02:11 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=6f0a00f9] has been removed from the channel table before
+2025-07-30 20:02:12 INFO brokerOutApi_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=64f31480]
+2025-07-30 20:02:12 INFO brokerOutApi_thread_4 - closeChannel: begin close the channel[addr=namesrv:9876, id=64f31480] Found: true
+2025-07-30 20:02:12 INFO brokerOutApi_thread_4 - closeChannel: the channel[addr=namesrv:9876, id=64f31480] has been closed before, and has been created again, nothing to do.
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=64f31480] was removed from channel table
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=64f31480]
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=64f31480] has been removed from the channel table before
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=64f31480]
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=64f31480] has been removed from the channel table before
+2025-07-30 20:02:12 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 879
+2025-07-30 20:02:12 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:12 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=958beb57] Found: false
+2025-07-30 20:02:12 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=958beb57] has been removed from the channel table before
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=958beb57]
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=958beb57] was removed from channel table
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=958beb57]
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=958beb57] has been removed from the channel table before
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=958beb57]
+2025-07-30 20:02:12 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=958beb57] has been removed from the channel table before
+2025-07-30 20:02:14 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:14 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:14 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=0e4b9245]
+2025-07-30 20:02:14 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=0e4b9245] was removed from channel table
+2025-07-30 20:02:14 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=0e4b9245]
+2025-07-30 20:02:14 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=0e4b9245] has been removed from the channel table before
+2025-07-30 20:02:17 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 880
+2025-07-30 20:02:17 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:17 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:17 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ff0fecef]
+2025-07-30 20:02:17 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=ff0fecef] Found: false
+2025-07-30 20:02:17 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=ff0fecef] has been removed from the channel table before
+2025-07-30 20:02:17 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=ff0fecef] was removed from channel table
+2025-07-30 20:02:17 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ff0fecef]
+2025-07-30 20:02:17 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=ff0fecef] has been removed from the channel table before
+2025-07-30 20:02:17 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=ff0fecef]
+2025-07-30 20:02:17 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=ff0fecef] has been removed from the channel table before
+2025-07-30 20:02:17 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:17 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:17 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=77d70a0e]
+2025-07-30 20:02:17 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=77d70a0e] was removed from channel table
+2025-07-30 20:02:17 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=77d70a0e]
+2025-07-30 20:02:17 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=77d70a0e] has been removed from the channel table before
+2025-07-30 20:02:20 INFO NettyClientScan_thread_1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:20 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:20 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=92dba35a]
+2025-07-30 20:02:20 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=92dba35a] was removed from channel table
+2025-07-30 20:02:20 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=92dba35a]
+2025-07-30 20:02:20 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=92dba35a] has been removed from the channel table before
+2025-07-30 20:02:22 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 881
+2025-07-30 20:02:22 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:22 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:22 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=a04881f5]
+2025-07-30 20:02:22 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=a04881f5] Found: false
+2025-07-30 20:02:22 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=a04881f5] has been removed from the channel table before
+2025-07-30 20:02:22 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=a04881f5] was removed from channel table
+2025-07-30 20:02:22 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=a04881f5]
+2025-07-30 20:02:22 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=a04881f5] has been removed from the channel table before
+2025-07-30 20:02:22 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=a04881f5]
+2025-07-30 20:02:22 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=a04881f5] has been removed from the channel table before
+2025-07-30 20:02:24 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:24 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:24 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=980b89a4]
+2025-07-30 20:02:24 INFO NettyClientWorkerThread_1 - closeChannel: the channel[addr=namesrv:9876, id=980b89a4] was removed from channel table
+2025-07-30 20:02:24 INFO NettyClientWorkerThread_1 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=980b89a4]
+2025-07-30 20:02:24 INFO NettyClientWorkerThread_1 - eventCloseChannel: the channel[addr=, id=980b89a4] has been removed from the channel table before
+2025-07-30 20:02:27 INFO NettyClientScan_thread_3 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:27 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:27 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3c95d840]
+2025-07-30 20:02:27 INFO NettyClientWorkerThread_2 - closeChannel: the channel[addr=namesrv:9876, id=3c95d840] was removed from channel table
+2025-07-30 20:02:27 INFO NettyClientWorkerThread_2 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=3c95d840]
+2025-07-30 20:02:27 INFO NettyClientWorkerThread_2 - eventCloseChannel: the channel[addr=, id=3c95d840] has been removed from the channel table before
+2025-07-30 20:02:27 INFO BrokerControllerScheduledThread1 - new name server is chosen. OLD: namesrv:9876 , NEW: namesrv:9876. namesrvIndex = 882
+2025-07-30 20:02:27 INFO BrokerControllerScheduledThread1 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:27 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:27 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=9847bd7d]
+2025-07-30 20:02:27 INFO BrokerControllerScheduledThread1 - closeChannel: begin close the channel[addr=, id=9847bd7d] Found: false
+2025-07-30 20:02:27 INFO BrokerControllerScheduledThread1 - closeChannel: the channel[addr=, id=9847bd7d] has been removed from the channel table before
+2025-07-30 20:02:27 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=namesrv:9876, id=9847bd7d] was removed from channel table
+2025-07-30 20:02:27 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=9847bd7d]
+2025-07-30 20:02:27 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=9847bd7d] has been removed from the channel table before
+2025-07-30 20:02:27 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=9847bd7d]
+2025-07-30 20:02:27 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=, id=9847bd7d] has been removed from the channel table before
+2025-07-30 20:02:30 INFO NettyClientScan_thread_4 - createChannel: begin to connect remote host[namesrv:9876] asynchronously
+2025-07-30 20:02:30 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 127.0.0.1:9876
+2025-07-30 20:02:30 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=4ad3a58d]
+2025-07-30 20:02:30 INFO NettyClientWorkerThread_4 - closeChannel: the channel[addr=namesrv:9876, id=4ad3a58d] was removed from channel table
+2025-07-30 20:02:30 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CLOSE channel[addr=, id=4ad3a58d]
+2025-07-30 20:02:30 INFO NettyClientWorkerThread_4 - eventCloseChannel: the channel[addr=, id=4ad3a58d] has been removed from the channel table before
