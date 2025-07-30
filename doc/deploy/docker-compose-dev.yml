@@ -21,6 +21,25 @@ services:
 #    networks:
 #      - iot_network
 
+  #postgresql 数据库
+  postgresql:
+    image: timescale/timescaledb:latest-pg17
+    container_name: postgresql-Step
+    # 保持容器在没有守护程序的情况下运行
+    tty: true
+    restart: always
+    privileged: true
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgresql17/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=zaohu279982
+      - TZ=Asia/Shanghai
+    networks:
+      - iot_network
+
   # Redis 内存服务
   redis:
     image: redis:3.2-alpine
