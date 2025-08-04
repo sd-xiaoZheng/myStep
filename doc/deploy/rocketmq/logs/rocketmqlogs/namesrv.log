@@ -6658,3 +6658,30 @@
 2025-08-04 17:52:30 INFO NSScanScheduledThread - start scanNotActiveBroker
 2025-08-04 17:52:35 INFO NSScanScheduledThread - start scanNotActiveBroker
 2025-08-04 17:52:40 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:52:45 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:52:50 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:52:55 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:53:00 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:53:05 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:53:10 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:53:15 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:53:20 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:53:25 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:53:30 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:53:35 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:53:40 WARN NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: IDLE exception channel[addr=172.19.0.4:9876, id=e5c6fb76]
+2025-08-04 17:53:40 INFO NettyClientWorkerThread_3 - closeChannel: the channel[addr=172.19.0.4:9876, id=e5c6fb76] was removed from channel table
+2025-08-04 17:53:40 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: CLOSE channel[addr=172.19.0.4:9876, id=e5c6fb76]
+2025-08-04 17:53:40 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=172.19.0.4:9876, id=e5c6fb76] has been removed from the channel table before
+2025-08-04 17:53:40 INFO NettyClientSelector_1 - closeChannel: close the connection to remote address[172.19.0.4:9876] result: true
+2025-08-04 17:53:40 INFO NettyClientWorkerThread_3 - NETTY CLIENT PIPELINE: channelInactive, the channel[addr=172.19.0.4:9876, id=e5c6fb76]
+2025-08-04 17:53:40 INFO NettyClientWorkerThread_3 - eventCloseChannel: the channel[addr=172.19.0.4:9876, id=e5c6fb76] has been removed from the channel table before
+2025-08-04 17:53:40 INFO NettyServerCodecThread_4 - NETTY SERVER PIPELINE: channelInactive, the channel[172.19.0.4:33292]
+2025-08-04 17:53:40 INFO NettyServerCodecThread_4 - NETTY SERVER PIPELINE: channelUnregistered, the channel[172.19.0.4:33292]
+2025-08-04 17:53:40 INFO NSScanScheduledThread - start scanNotActiveBroker
+2025-08-04 17:53:41 INFO NettyClientScan_thread_2 - createChannel: begin to connect remote host[172.19.0.4:9876] asynchronously
+2025-08-04 17:53:41 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: CONNECT  UNKNOWN => 172.19.0.4:9876
+2025-08-04 17:53:41 INFO NettyClientWorkerThread_4 - NETTY CLIENT PIPELINE: ACTIVE, 172.19.0.4:9876, channelId=11895de9
+2025-08-04 17:53:41 INFO NettyServerCodecThread_5 - NETTY SERVER PIPELINE: channelRegistered 172.19.0.4:44338
+2025-08-04 17:53:41 INFO NettyServerCodecThread_5 - NETTY SERVER PIPELINE: channelActive, the channel[172.19.0.4:44338]
+2025-08-04 17:53:45 INFO NSScanScheduledThread - start scanNotActiveBroker
