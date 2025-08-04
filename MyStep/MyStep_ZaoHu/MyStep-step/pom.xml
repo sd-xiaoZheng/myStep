@@ -274,6 +274,11 @@
             <artifactId>langchain4j-spring-boot-starter</artifactId>
             <version>1.0.1-beta6</version>
         </dependency>
+        <!--流式相应-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
 
 
     </dependencies>

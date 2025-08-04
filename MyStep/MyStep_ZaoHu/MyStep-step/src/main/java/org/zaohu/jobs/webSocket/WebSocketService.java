@@ -2,6 +2,7 @@ package org.zaohu.jobs.webSocket;
 
 
 import com.alibaba.fastjson2.JSONObject;
+import dev.langchain4j.service.TokenStream;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.zaohu.ai.service.ConsultantService;
+import org.zaohu.common.ApplicationHelper;
 
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -19,8 +21,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class WebSocketService {
 
-    @Autowired
-    private ConsultantService consultantService;
+
+    private final ConsultantService consultantService = (ConsultantService) ApplicationHelper.getBean("consultantService");
 
     private static Logger log = LoggerFactory.getLogger(WebSocketService.class);
     private static final AtomicInteger OnlineCount = new AtomicInteger(0);
@@ -69,8 +71,7 @@ public class WebSocketService {
         String type = jsonObject.get("type").toString();
         switch (type) {
             case "1":
-                String res = chat2Ai(jsonObject);
-                session.getBasicRemote().sendText(res);
+                handleStreamingChat(jsonObject, session);
                 break;
             default:
                 break;
@@ -78,9 +79,31 @@ public class WebSocketService {
         session.getBasicRemote().sendText("请匹配正确的typeId哦~");
     }
 
-    private String chat2Ai(JSONObject jsonObject) {
+    private void handleStreamingChat(JSONObject jsonObject, Session session) {
         String content = jsonObject.get("content").toString();
-        return consultantService.chat(content);
+
+        consultantService.chat(content)
+                .onPartialResponse(token -> {
+                    try {
+                        session.getBasicRemote().sendText(token);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .onCompleteResponse(chatResponse -> {
+                    try {
+                        session.getBasicRemote().sendText("[DONE]");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .onError(Throwable::printStackTrace)
+                .start(); // 🚀 这很关键：启动流
+    }
+    private TokenStream chat2Ai(JSONObject jsonObject) {
+        String content = jsonObject.get("content").toString();
+        TokenStream chat = consultantService.chat(content);
+        return chat;
     }
 
 
