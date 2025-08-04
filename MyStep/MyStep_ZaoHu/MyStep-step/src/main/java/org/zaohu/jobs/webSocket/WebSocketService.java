@@ -1,12 +1,15 @@
 package org.zaohu.jobs.webSocket;
 
 
+import com.alibaba.fastjson2.JSONObject;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.zaohu.ai.service.ConsultantService;
 
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -16,6 +19,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class WebSocketService {
 
+    @Autowired
+    private ConsultantService consultantService;
+
     private static Logger log = LoggerFactory.getLogger(WebSocketService.class);
     private static final AtomicInteger OnlineCount = new AtomicInteger(0);
     // concurrent包的线程安全Set，用来存放每个客户端对应的Session对象。
@@ -23,57 +29,76 @@ public class WebSocketService {
 
     /**
      * 建立连接
+     *
      * @param session
      * @param user
      */
     @OnOpen
-    public void onOpen(Session session, @PathParam("id") String user){
+    public void onOpen(Session session, @PathParam("id") String user) {
         SessionSet.add(session);
         int cnt = OnlineCount.incrementAndGet(); // 在线数加1
         log.info("有连接加入，当前连接数为：{}", cnt);
 
         System.out.println("有链接进来了哦!");
-        System.out.println("session:"+session);
-        System.out.println("user:"+user);
+        System.out.println("session:" + session);
+        System.out.println("user:" + user);
     }
 
     /**
      * 连接关闭
      */
     @OnClose
-    public void onClose(Session session){
+    public void onClose(Session session) {
         SessionSet.remove(session);
         int cnt = OnlineCount.decrementAndGet();
         log.info("有连接关闭，当前连接数为：{}", cnt);
 
         System.out.println("连接断开了");
-        System.out.println("session:"+session);
+        System.out.println("session:" + session);
     }
 
     /**
      * 接收到消息
+     *
      * @param text 发送来的消息
      */
     @OnMessage
-    public void onMessage(String text,Session session) throws IOException {
-        System.out.println("收到消息:"+text);
-        session.getBasicRemote().sendText("哦，自己滚");
+    public void onMessage(String text, Session session) throws IOException {
+        System.out.println("收到消息:" + text);
+        JSONObject jsonObject = JSONObject.parseObject(text, JSONObject.class);
+        String type = jsonObject.get("type").toString();
+        switch (type) {
+            case "1":
+                String res = chat2Ai(jsonObject);
+                session.getBasicRemote().sendText(res);
+                break;
+            default:
+                break;
+        }
+        session.getBasicRemote().sendText("请匹配正确的typeId哦~");
+    }
+
+    private String chat2Ai(JSONObject jsonObject) {
+        String content = jsonObject.get("content").toString();
+        return consultantService.chat(content);
     }
 
 
     /**
      * 出现错误
+     *
      * @param session
      * @param error
      */
     @OnError
     public void onError(Session session, Throwable error) {
-        log.error("发生错误：{}，Session ID： {}",error.getMessage(),session.getId());
+        log.error("发生错误：{}，Session ID： {}", error.getMessage(), session.getId());
         error.printStackTrace();
     }
 
     /**
      * 发送消息，实践表明，每次浏览器刷新，session会发生变化。
+     *
      * @param session
      * @param message
      */
@@ -88,12 +113,13 @@ public class WebSocketService {
 
     /**
      * 群发消息
+     *
      * @param message
      * @throws IOException
      */
     public static void BroadCastInfo(String message) throws IOException {
         for (Session session : SessionSet) {
-            if(session.isOpen()){
+            if (session.isOpen()) {
                 SendMessage(session, message);
             }
         }
@@ -101,23 +127,23 @@ public class WebSocketService {
 
     /**
      * 指定Session发送消息
+     *
      * @param sessionId
      * @param message
      * @throws IOException
      */
-    public static void SendMessage(String message,String sessionId) throws IOException {
+    public static void SendMessage(String message, String sessionId) throws IOException {
         Session session = null;
         for (Session s : SessionSet) {
-            if(s.getId().equals(sessionId)){
+            if (s.getId().equals(sessionId)) {
                 session = s;
                 break;
             }
         }
-        if(session!=null){
+        if (session != null) {
             SendMessage(session, message);
-        }
-        else{
-            log.warn("没有找到你指定ID的会话：{}",sessionId);
+        } else {
+            log.warn("没有找到你指定ID的会话：{}", sessionId);
         }
     }
 

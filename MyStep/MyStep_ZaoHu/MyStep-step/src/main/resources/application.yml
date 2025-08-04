@@ -42,7 +42,13 @@ langchain4j:
     chat-model:
       base-url: http://localhost:11434
       model-name: qwen:8b
+      #会在日志中打印你发送到 LLM 的完整请求内容（包括提示词、参数等）。
+      #示例（简化）：
+      #Request: {"model":"qwen:8b","messages":[{"role":"user","content":"你好"}]}
       log-requests: true
+      #会在日志中打印 LLM 返回的完整响应内容（包括生成的文本、token 用量等）。
+      #示例（简化）：
+      #Response: { "choices": [ { "message": { "content": "你好！有什么可以帮你的？" } } ] }
       log-responses: true
 
 #https://juejin.cn/post/6850418115382738958 rocket详细使用

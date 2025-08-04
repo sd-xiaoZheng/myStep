@@ -265,7 +265,7 @@
         <!--ollama AI模型-->
         <dependency>
             <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-open-ai-spring-boot-starter</artifactId>
+            <artifactId>langchain4j-ollama-spring-boot-starter</artifactId>
             <version>1.0.1-beta6</version>
         </dependency>
         <!--AiService相关依赖-->
@@ -274,6 +274,8 @@
             <artifactId>langchain4j-spring-boot-starter</artifactId>
             <version>1.0.1-beta6</version>
         </dependency>
+
+
     </dependencies>
 
 
