@@ -27,7 +27,7 @@ services:
     container_name: postgresql-Step
     # 保持容器在没有守护程序的情况下运行
     tty: true
-    restart: always
+#    restart: always
     privileged: true
     ports:
       - "5432:5432"
@@ -46,7 +46,7 @@ services:
     container_name: redis-Step
     # 保持容器在没有守护程序的情况下运行
     tty: true
-    restart: always
+#    restart: always
     ports:
       - "6379:6379"
     volumes:
@@ -64,7 +64,7 @@ services:
     container_name: sentinel-Step
     # 保持容器在没有守护程序的情况下运行
     tty: true
-    restart: always
+#    restart: always
     ports:
       - "8718:8080"
     environment:
@@ -78,7 +78,7 @@ services:
     container_name: rocketmq-namesrv-Step
     # 保持容器在没有守护程序的情况下运行
     tty: true
-    restart: always
+#    restart: always
     ports:
       - "9876:9876"
     command: sh mqnamesrv
@@ -92,7 +92,7 @@ services:
     image: apache/rocketmq:5.3.1
     container_name: rocketmq-broker-Step
     tty: true
-    restart: always
+#    restart: always
     ports:
       - "10909:10909"  # SSL 端口（可选）
       - "10911:10911"  # 主端口
@@ -114,7 +114,7 @@ services:
   rocketmq-dashboard:
     image: apacherocketmq/rocketmq-dashboard:2.0.0
     container_name: rocketmq-dashboard-Step
-    restart: always
+#    restart: always
     ports:
       - "8792:8080"
     environment:
@@ -130,7 +130,7 @@ services:
     image: elasticsearch:8.17.4
     container_name: elasticsearch-Step
     tty: true
-    restart: always
+#    restart: always
     ports:
       - "9200:9200"  # 仅保留 HTTP 端口（禁用 HTTPS）
       - "9300:9300"  # 节点间通信端口
@@ -155,7 +155,7 @@ services:
     image: seataio/seata-server:2.0.0
     container_name: seata-Step
     tty: true
-    restart: always
+#    restart: always
     ports:
       - "8091:8091"  # Seata 服务端口
     environment:

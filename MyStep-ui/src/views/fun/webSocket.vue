@@ -8,10 +8,6 @@
       <el-row>
         <el-button type="success" plain @click="openWebSocket">手动连接</el-button>
         <el-button type="danger" plain @click="clossWebSocket">手动关闭</el-button>
-<!--        <el-button type="primary" plain @click="senMessage">发送消息</el-button>-->
-        <!--      <el-button type="info" plain>信息按钮</el-button>-->
-        <!--      <el-button type="warning" plain>警告按钮</el-button>-->
-        <!--      <el-button type="danger" plain>危险按钮</el-button>-->
       </el-row>
     </div>
     <div class="chat-container">
@@ -192,13 +188,18 @@ export default {
 
     async sendMessage() {
       try {
+        let str = this.inputMessage.trim();
+        let param={
+          type:1,
+          content:str
+        }
         // 添加用户消息
         this.messages.push({
           role: 'user',
-          content: this.inputMessage.trim()
+          content: str
         })
-        const userMessage = this.inputMessage
-        this.ws.send(userMessage)
+        // const userMessage = this.inputMessage
+        this.ws.send(JSON.stringify(param))
 
         this.inputMessage = ''
         this.isLoading = true

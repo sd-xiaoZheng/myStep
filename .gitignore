@@ -24,6 +24,14 @@ TestResults.xml
 ### IDE和编辑器配置 ###
 .idea/
 
+
+#log file
+*.log
+logs
+temp
+.idea
+*.iml
+
 ### Node.js ###
 node_modules/
 package-lock.json
@@ -32,3 +40,18 @@ package-lock.json
 .flattened-pom.xml
 # 排除Maven构建生成的target目录
 target/
+
+# BlueJ files
+*.ctxt
+/**/target
+target
+*.data
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.rar
+info.log.*.gz
