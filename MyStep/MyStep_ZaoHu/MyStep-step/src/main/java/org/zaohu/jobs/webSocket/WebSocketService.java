@@ -8,7 +8,6 @@ import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.zaohu.ai.service.ConsultantService;
 import org.zaohu.common.ApplicationHelper;
@@ -72,7 +71,7 @@ public class WebSocketService {
         switch (type) {
             case "1":
                 handleStreamingChat(jsonObject, session);
-                break;
+                return;
             default:
                 break;
         }
@@ -81,7 +80,7 @@ public class WebSocketService {
 
     private void handleStreamingChat(JSONObject jsonObject, Session session) {
         String content = jsonObject.get("content").toString();
-
+        System.out.println(content);
         consultantService.chat(content)
                 .onPartialResponse(token -> {
                     try {

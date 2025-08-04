@@ -71,6 +71,12 @@ export default {
       ],
       inputMessage: '',
       isLoading: false,
+      // 流式消息处理相关
+      currentStreamMessage: null,
+      isStreaming: false,
+      // 思考过程相关
+      currentThinking: null,
+      isThinking: false,
     };
   },
   computed: {
@@ -119,10 +125,73 @@ export default {
     //收到消息回调
     webSocketMessage(message) {
       console.log("来自客户端的消息："+message.data)
-      this.messages.push({
-        role: 'bot',
-        content: message.data
-      })
+      
+      // 检查是否是流式消息的结束标志
+      if (message.data === '[DONE]') {
+        console.log("流式消息接收完成")
+        this.isStreaming = false
+        this.currentStreamMessage = null
+        this.isThinking = false
+        this.currentThinking = null
+        return
+      }
+      
+      // 检查是否是思考过程的开始
+      if (message.data.startsWith('<think>')) {
+        this.isThinking = true
+        this.currentThinking = {
+          role: 'thinking',
+          content: message.data.replace('<think>', '')
+        }
+        this.messages.push(this.currentThinking)
+        this.$nextTick(() => {
+          this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight
+        })
+        return
+      }
+      
+      // 检查是否是思考过程的结束
+      if (message.data.includes('</think>')) {
+        this.isThinking = false
+        if (this.currentThinking) {
+          this.currentThinking.content += message.data.replace('</think>', '')
+        }
+        this.currentThinking = null
+        this.$nextTick(() => {
+          this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight
+        })
+        return
+      }
+      
+      // 处理思考过程中的内容
+      if (this.isThinking && this.currentThinking) {
+        this.currentThinking.content += message.data
+        this.$nextTick(() => {
+          this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight
+        })
+        return
+      }
+      
+      // 处理正常的流式消息
+      if (this.isStreaming && this.currentStreamMessage) {
+        // 继续拼接消息
+        this.currentStreamMessage.content += message.data
+        // 更新最后一条消息的显示
+        this.$nextTick(() => {
+          this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight
+        })
+      } else {
+        // 开始新的流式消息
+        this.isStreaming = true
+        this.currentStreamMessage = {
+          role: 'bot',
+          content: message.data
+        }
+        this.messages.push(this.currentStreamMessage)
+        this.$nextTick(() => {
+          this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight
+        })
+      }
     },
     //websocket报错回调
     webSocketError() {
@@ -130,7 +199,7 @@ export default {
     },
     //连接成功回调
     webSocketOpen() {
-      let temp={role: 'bot', content: 'websocket连接成功,海皮吧？'}
+      let temp={role: 'bot', content: '频道链接连接成功,我们一起聊天吧~'}
       this.messages.push(temp)
     },
     //重连
@@ -177,7 +246,8 @@ export default {
     messageClass(role) {
       return {
         'user-message': role === 'user',
-        'bot-message': role === 'bot'
+        'bot-message': role === 'bot',
+        'thinking-message': role === 'thinking'
       }
     },
 
@@ -203,6 +273,12 @@ export default {
 
         this.inputMessage = ''
         this.isLoading = true
+        
+        // 重置流式消息状态，准备接收新的流式响应
+        this.isStreaming = false
+        this.currentStreamMessage = null
+        this.isThinking = false
+        this.currentThinking = null
       } catch (error) {
         this.showError(error.message)
       } finally {
@@ -271,9 +347,30 @@ export default {
 }
 
 .bot-message {
-  background: #e5e7eb;
-  color: #111827;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #f3f4f6;
   margin-right: auto;
+  font-size: 14px;
+}
+
+.thinking-message {
+  background: #e5e7eb;
+  color: #6b7280;
+  margin-right: auto;
+  border-left: 4px solid #9ca3af;
+  font-style: italic;
+  opacity: 0.9;
+  position: relative;
+  font-size: 12px;
+}
+
+.thinking-message::before {
+  content: '🤔';
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
 }
 
 .input-group {
