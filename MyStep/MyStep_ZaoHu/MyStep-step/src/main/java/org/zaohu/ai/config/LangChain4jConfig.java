@@ -19,9 +19,9 @@ public class LangChain4jConfig {
         return OllamaStreamingChatModel.builder()
                 .baseUrl("http://localhost:11434") // Ollama 默认地址
                 .modelName("qwen3")               // 你本地跑的模型名
-                .temperature(0.7)
-                .topK(40) // 选择高概率词汇
-                .topP(0.9) // 控制采样范围
+                .temperature(0.4)//越低越确定 越准
+                .topP(0.9) // 控制采样范围 例如 0.9 表示只从概率前90%内的词中采样
+                .topK(40) // 选择高概率词汇 控制从概率最高的前 K 个词中采样，比如设置为 50 表示只从前 50 个可能词中选一个
                 .logRequests(true)
                 .logResponses(true)
                 .customHeaders(customheaders)//加上这个才能用中文发送问题 不然乱码
