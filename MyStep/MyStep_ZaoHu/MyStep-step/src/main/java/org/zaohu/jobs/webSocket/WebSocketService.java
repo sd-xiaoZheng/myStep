@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.zaohu.ai.service.ConsultantService;
 import org.zaohu.common.ApplicationHelper;
+import org.zaohu.constant.WebSocketOnMessageStatus;
 
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -69,7 +70,7 @@ public class WebSocketService {
         JSONObject jsonObject = JSONObject.parseObject(text, JSONObject.class);
         String type = jsonObject.get("type").toString();
         switch (type) {
-            case "1":
+            case WebSocketOnMessageStatus.AI_CHAT:
                 handleStreamingChat(jsonObject, session);
                 return;
             default:
@@ -97,7 +98,7 @@ public class WebSocketService {
                     }
                 })
                 .onError(Throwable::printStackTrace)
-                .start(); // 🚀 这很关键：启动流
+                .start();
     }
     private TokenStream chat2Ai(JSONObject jsonObject) {
         String content = jsonObject.get("content").toString();
