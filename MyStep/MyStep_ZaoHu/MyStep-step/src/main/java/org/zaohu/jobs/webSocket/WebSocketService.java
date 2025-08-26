@@ -73,15 +73,38 @@ public class WebSocketService {
             case WebSocketOnMessageStatus.AI_CHAT:
                 handleStreamingChat(jsonObject, session);
                 return;
+            case WebSocketOnMessageStatus.AI_CHAT_MEMORY:
+                handleStreamingChatWithMemory(jsonObject, session);
+                return;
             default:
                 break;
         }
         session.getBasicRemote().sendText("请匹配正确的typeId哦~");
     }
 
+    private void handleStreamingChatWithMemory(JSONObject jsonObject, Session session) {
+        String content = jsonObject.get("content").toString();
+        consultantService.chatWithMemory(content)
+                .onPartialResponse(token -> {
+                    try {
+                        session.getBasicRemote().sendText(token);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .onCompleteResponse(chatResponse -> {
+                    try {
+                        session.getBasicRemote().sendText("[DONE]");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .onError(Throwable::printStackTrace)
+                .start();
+    }
+
     private void handleStreamingChat(JSONObject jsonObject, Session session) {
         String content = jsonObject.get("content").toString();
-        System.out.println(content);
         consultantService.chat(content)
                 .onPartialResponse(token -> {
                     try {
