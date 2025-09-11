@@ -40,8 +40,6 @@ public class WebSocketService {
         SessionSet.add(session);
         int cnt = OnlineCount.incrementAndGet(); // 在线数加1
         log.info("有连接加入，当前连接数为：{}", cnt);
-
-        System.out.println("有链接进来了哦!");
         System.out.println("session:" + session);
         System.out.println("user:" + user);
     }
@@ -54,8 +52,6 @@ public class WebSocketService {
         SessionSet.remove(session);
         int cnt = OnlineCount.decrementAndGet();
         log.info("有连接关闭，当前连接数为：{}", cnt);
-
-        System.out.println("连接断开了");
         System.out.println("session:" + session);
     }
 

@@ -8,6 +8,7 @@ import dev.langchain4j.service.TokenStream;
 //        chatModel = "ollamaStreamingChatModel"//指定模型,
 //)
 //@AiService
+//TODO 图片 语音输入？
 public interface ConsultantService {
     //用于聊天的方法
 //    @SystemMessage("你是一名脾气暴躁的陪聊，你很不喜欢你的工作，每当客户来聊天时，你都不耐烦")
