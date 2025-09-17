@@ -19,7 +19,8 @@
             class="message"
             :class="messageClass(message.role)"
         >
-          {{ message.content }}
+          <div v-if="message.role === 'user'">{{ message.content }}</div>
+          <div v-else v-html="renderMarkdown(message.content)"></div>
         </div>
 
         <!-- 加载状态 -->
@@ -251,6 +252,50 @@ export default {
       }
     },
 
+    // 将文本渲染为支持基础 Markdown 的 HTML（含三引号代码块与行内代码）
+    renderMarkdown(text) {
+      if (!text) return ''
+
+      const placeholders = []
+      // 提取三引号代码块为占位，避免后续转义破坏
+      let withPlaceholders = String(text).replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+        const index = placeholders.push({ lang: lang || '', code: code || '' }) - 1
+        return `\u0000CODEBLOCK_${index}\u0000`
+      })
+
+      // 对剩余内容进行 HTML 转义
+      let html = this.escapeHtml(withPlaceholders)
+
+      // 行内代码 `code`
+      html = html.replace(/`([^`]+)`/g, (m, g1) => `<code class=\"inline-code\">${this.escapeHtml(g1)}</code>`)
+
+      // 加粗 **text**
+      html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+
+      // 简单换行
+      html = html.replace(/\n/g, '<br/>')
+
+      // 还原三引号代码块
+      html = html.replace(/\u0000CODEBLOCK_(\d+)\u0000/g, (m, idxStr) => {
+        const idx = Number(idxStr)
+        const block = placeholders[idx] || { lang: '', code: '' }
+        const codeEscaped = this.escapeHtml(block.code)
+        return `<div class=\"code-block-wrapper\"><pre class=\"code-block\"><code class=\"language-${block.lang}\">${codeEscaped}</code></pre></div>`
+      })
+
+      return html
+    },
+
+    // 简单 HTML 转义
+    escapeHtml(str) {
+      return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/\"/g, '&quot;')
+          .replace(/'/g, '&#39;')
+    },
+
     autoResize(e) {
       e.target.style.height = 'auto'
       e.target.style.height = e.target.scrollHeight + 'px'
@@ -351,6 +396,41 @@ export default {
   color: #f3f4f6;
   margin-right: auto;
   font-size: 14px;
+}
+
+/* 代码块：在紫蓝色气泡上叠加一层浅黑覆盖层，再放深色代码背景 */
+.bot-message .code-block-wrapper {
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 12px 0;
+}
+
+.bot-message .code-block {
+  background: #0b1020;
+  color: #e5e7eb;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: auto;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.bot-message .code-block code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.bot-message code.inline-code {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.25);
 }
 
 .thinking-message {
