@@ -39,3 +39,12 @@ export function UnLikePhoto(data) {
         method: 'post'
     })
 }
+
+// 删除照片（按需携带 id 与 typeId）
+export function deletePhoto(data) {
+    return request({
+        data,
+        url: '/photo/deletePhoto',
+        method: 'post'
+    })
+}

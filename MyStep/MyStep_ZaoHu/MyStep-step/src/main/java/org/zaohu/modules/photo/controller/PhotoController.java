@@ -72,4 +72,15 @@ public class PhotoController extends BaseController {
         photoService.updatePhoto(photo);
         return Result.success();
     }
+
+    /**
+     * 删除照片接口
+     * @param photo 删除的照片包括归属的typeId
+     * @return Result
+     */
+    @PostMapping("/deletePhoto")
+    public Result deletePhoto(@RequestBody Photo photo){
+        photoService.deletePhoto(photo);
+        return Result.success();
+    }
 }

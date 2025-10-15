@@ -1,6 +1,7 @@
 package org.zaohu.modules.photo.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.drew.imaging.ImageProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,21 @@ public class PhotoServiceImpl extends ServiceImpl<PhotoMapper, Photo> implements
         UpdateWrapper<Photo> photoUpdateWrapper = new UpdateWrapper<>();
         photoUpdateWrapper.set("is_favorite", false).eq("id", photoId);
         photoMapper.update(photoUpdateWrapper);
+    }
+
+    @Override
+    public void deletePhoto(Photo photo) {
+        //TODO 删除时要删除文件，包括删除照片类型 后面再写 目前先删除 然后扣减数量
+        Integer id = photo.getId();
+        int i = photoMapper.deleteById(id);
+        if(i>0){
+            //扣减类型照片数量
+            Integer typeId = photo.getTypeId();
+            LambdaUpdateWrapper<PhotoType> photoTypeLuw = new LambdaUpdateWrapper<>();
+            photoTypeLuw.eq(PhotoType::getId, typeId);
+            photoTypeLuw.setSql("photo_count = photo_count - 1");
+            photoTypeService.update(photoTypeLuw);
+        }
     }
 
     @Override

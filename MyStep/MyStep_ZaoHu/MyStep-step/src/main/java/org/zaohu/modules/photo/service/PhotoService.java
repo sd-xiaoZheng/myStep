@@ -27,4 +27,6 @@ public interface PhotoService extends IService<Photo> {
     void updatePhoto(Photo photo) throws ImageProcessingException, IOException;
 
     void UnLikePhoto(Integer photoId);
+
+    void deletePhoto(Photo photo);
 }

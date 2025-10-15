@@ -215,13 +215,13 @@
             {{ formatUploadTime(scope.row.uploadTime) }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="90vh" fixed="right">
-                      <template slot-scope="scope">
-              <el-button type="primary" icon="el-icon-edit" circle size="mini" title="编辑"
-                        @click="editPhoto(scope.row)" :disabled="submitEditPhotoLoading"></el-button>
-              <el-button type="danger" icon="el-icon-delete" circle size="mini" title="删除该类型包括子照片"
-                        @click="moveToRecycleBin(scope.row)" :disabled="deleteLoading"></el-button>
-            </template>
+        <el-table-column label="操作" width="160" fixed="right">
+          <template slot-scope="scope">
+            <el-button type="primary" icon="el-icon-edit" circle size="mini" title="编辑"
+                       @click="editPhoto(scope.row)" :disabled="submitEditPhotoLoading"></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle size="mini" title="删除该照片"
+                       @click="handleDeletePhoto(scope.row)" :disabled="deleteLoading"></el-button>
+          </template>
         </el-table-column>
       </el-table>
 
@@ -359,7 +359,7 @@ import {
   addPhotoBatch,
   addPhoto
 } from '@/apis/api/lifeTimeManage'
-import {getPhoto, updatePhoto} from "@/apis/api/lifeTimePhoto";
+import {getPhoto, updatePhoto, deletePhoto} from "@/apis/api/lifeTimePhoto";
 
 export default {
   data() {
@@ -451,6 +451,35 @@ export default {
     }
   },
   methods: {
+    async handleDeletePhoto(row) {
+      try {
+        await this.$confirm('确认删除这张照片吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+
+        this.deleteLoading = true
+        const data = {
+          id: row.id,
+          typeId: this.currentTypeId
+        }
+        const res = await deletePhoto(data)
+        if (res.code === 200) {
+          this.$message.success('删除成功')
+          // 重新加载当前类型的照片列表
+          this.loadPhotoList()
+        } else {
+          this.$message.warning(res.msg || '删除失败')
+        }
+      } catch (error) {
+        if (error !== 'cancel') {
+          this.$message.info('已取消操作')
+        }
+      } finally {
+        this.deleteLoading = false
+      }
+    },
     handleChange(file, fileList) {
       console.log(file, "file")
       console.log(fileList, "fileList")
