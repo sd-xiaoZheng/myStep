@@ -111,6 +111,7 @@ public class PhotoTypeServiceImpl extends ServiceImpl<PhotoTypeMapper, PhotoType
 
     @Override
     public int deleteById(Integer id) {
+        //TODO 这里需要减去一下数量吧？等会看看
         return photoTypeMapper.deleteById(id);
     }
 

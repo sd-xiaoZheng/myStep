@@ -29,6 +29,6 @@ public class ImageThumbConsumer implements RocketMQListener<String> {
                 0.5f,
                 0.2f
         );
-        System.out.println("我消费了消息" + imagePathJson);
+        log.info("我消费了消息{}", imagePathJson);
     }
 }

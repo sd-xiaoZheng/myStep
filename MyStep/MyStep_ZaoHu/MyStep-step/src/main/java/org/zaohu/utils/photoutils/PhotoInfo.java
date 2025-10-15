@@ -7,6 +7,7 @@ import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
 import com.drew.metadata.exif.GpsDirectory;
+import lombok.extern.slf4j.Slf4j;
 import org.zaohu.modules.photo.entity.Photo;
 
 import java.io.File;
@@ -16,6 +17,7 @@ import java.io.IOException;
  * @author myStep
  * @since 2025/6/21
  **/
+@Slf4j
 public class PhotoInfo {
     public static void getPhotoInfo(File imageFile, Photo photo) throws ImageProcessingException, IOException {
         Metadata metadata = ImageMetadataReader.readMetadata(imageFile);
@@ -44,11 +46,7 @@ public class PhotoInfo {
             GeoLocation geoLocation = gpsDir.getGeoLocation();
             if (geoLocation != null) {
                 photo.setLocation(geoLocation.getLatitude() + "," + geoLocation.getLongitude());
-            } else {
-                System.out.println("没有 GPS 位置信息。");
             }
-        } else {
-            System.out.println("未找到 GPS 信息。");
         }
     }
 }

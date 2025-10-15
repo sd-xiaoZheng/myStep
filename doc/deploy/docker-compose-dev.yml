@@ -42,7 +42,7 @@ services:
 
   # Redis 内存服务
   redis:
-    image: redis:3.2-alpine
+    image: redis:7.2-alpine
     container_name: redis-Step
     # 保持容器在没有守护程序的情况下运行
     tty: true
@@ -104,8 +104,10 @@ services:
       - ./rocketmq/store:/home/rocketmq/store
     environment:
       - JAVA_OPT_EXT=-Xms512m -Xmx512m -Xmn256m  # 限制 JVM 内存
-    extra_hosts:
-      - "namesrv:${NAMESRV_IP:-127.0.0.1}"  # 解决内部域名解析
+      - BROKER_IP1=192.168.1.2
+      - NAMESRV_ADDR=rocketmq-namesrv-Step:9876
+#    extra_hosts:
+#      - "namesrv:${NAMESRV_IP:-127.0.0.1}"  # 解决内部域名解析
     depends_on:
       - rocketmq-namesrv
     networks:
@@ -114,11 +116,10 @@ services:
   rocketmq-dashboard:
     image: apacherocketmq/rocketmq-dashboard:2.0.0
     container_name: rocketmq-dashboard-Step
-#    restart: always
     ports:
       - "8792:8080"
     environment:
-      - ROCKETMQ_NAMESRV_ADDR=rocketmq-namesrv-Step:9876  # 使用完整服务名
+      - JAVA_OPTS=-Drocketmq.namesrv.addr=rocketmq-namesrv-Step:9876 -Dserver.port=8080
     depends_on:
       - rocketmq-namesrv
       - rocketmq-broker

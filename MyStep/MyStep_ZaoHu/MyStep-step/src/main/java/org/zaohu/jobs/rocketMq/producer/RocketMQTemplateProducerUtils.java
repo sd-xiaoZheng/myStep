@@ -84,7 +84,7 @@ public  class RocketMQTemplateProducerUtils {
 
             @Override
             public void onException(Throwable e) {
-                log.info("异步消息发送异常，exception = {}", e.getMessage());
+                log.info("异步消息发送异常，exception = {}", e);
             }
         });
     }
