@@ -38,12 +38,10 @@
             <relativePath>../../pom.xml</relativePath>
         </parent>-->
     <modules>
-        <module>MyStep_ZaoHu/MyStep-account</module>
         <module>MyStep_ZaoHu/MyStep-common</module>
-        <module>MyStep_ZaoHu/MyStep-order</module>
-        <module>MyStep_ZaoHu/MyStep-storage</module>
         <module>MyStep_ZaoHu/MyStep-gateway</module>
         <module>MyStep_ZaoHu/MyStep-step</module>
+        <module>MyStep_ZaoHu/MyStep-auth</module>
     </modules>
 
     <!--dependencyManagement 依赖管理 如果dependencies没有被这个包围 那么子模块会无条件的继承这些依赖，

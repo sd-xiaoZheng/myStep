@@ -1,0 +1,44 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: MyStep-auth
+  servlet:
+    multipart:
+      enabled: true
+      # 单个文件大小
+      max-file-size: 50MB
+      # 设置总上传的文件大小
+      max-request-size: 50MB
+
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yml
+      - optional:nacos:db-common.yml
+      - nacos:nacos-discovery.yml
+      - optional:nacos:seata-client.yml
+
+logging:
+  level:
+    org.zaohu.modules: debug # 指定这个包为debug日志级别 默认是info 为了让feign生效所以使用debug级别
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss #只修改控制台时间格式
+#    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%t] %logger{36} : %msg%n"
+#%d{yyyy-MM-dd HH:mm:ss} → 时间格式
+#%-5level → 日志级别（INFO/DEBUG/WARN/ERROR）
+#[%t] → 线程名（如 [main]）
+#%logger{36} → 日志来源类名（最多显示 36 字符）
+#%msg%n → 日志消息 + 换行
+
+
+
+#日志局部配置 feign
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+
+
+
+
+

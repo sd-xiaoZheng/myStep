@@ -305,7 +305,7 @@ export default {
       try {
         let str = this.inputMessage.trim();
         let param={
-          type:1,
+          type:2,
           content:str
         }
         // 添加用户消息

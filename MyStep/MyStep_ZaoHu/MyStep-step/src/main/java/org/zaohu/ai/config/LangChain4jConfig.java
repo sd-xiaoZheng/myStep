@@ -4,10 +4,15 @@ import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.data.message.CustomMessage;
 import dev.langchain4j.data.message.SystemMessage;
 import dev.langchain4j.data.message.UserMessage;
+import dev.langchain4j.memory.ChatMemory;
+import dev.langchain4j.memory.chat.MessageWindowChatMemory;
+import dev.langchain4j.model.chat.ChatModel;
+import dev.langchain4j.model.chat.StreamingChatModel;
 import dev.langchain4j.model.chat.request.ChatRequest;
 import dev.langchain4j.model.chat.response.ChatResponse;
 import dev.langchain4j.model.ollama.OllamaStreamingChatModel;
 import dev.langchain4j.service.AiServices;
+import dev.langchain4j.service.TokenStream;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.zaohu.ai.service.ConsultantService;
@@ -33,28 +38,16 @@ public class LangChain4jConfig {
                 .logResponses(true)
                 .customHeaders(customheaders)//加上这个才能用中文发送问题 不然乱码
                 .build();
-
-        String retrievedContext = "条约制定的一个重要部分是，签署条约意味着承认对方是主权国家，并且所考虑的协议在国际法下是可执行的。因此，各国在将协议称为条约时可能非常谨慎。例如，在美国，州之间的协议是契约，而州与联邦政府之间或政府机构之间的协议是谅解备忘录。";
-
-
-        List<ChatMessage> messages = List.of(
-                SystemMessage.from("context_relevance"),
-                UserMessage.from("条约制定的历史是什么？"),
-                CustomMessage.from(Map.of(
-                        "role", "context",
-                        "content", retrievedContext
-                ))
-        );
-//        ChatRequest build = ChatRequest.builder().messages(messages).build();
-
-//        ChatResponse chatResponse = qwen3.chat(build);
         return qwen3;
     }
 
     @Bean
     public ConsultantService consultantService(OllamaStreamingChatModel ollamaStreamingChatModel) {
+        ChatMemory chatMemory = MessageWindowChatMemory.withMaxMessages(60);
+
         return AiServices.builder(ConsultantService.class)
                 .streamingChatModel(ollamaStreamingChatModel)
+                .chatMemory(chatMemory)
                 .build();
     }
 }
