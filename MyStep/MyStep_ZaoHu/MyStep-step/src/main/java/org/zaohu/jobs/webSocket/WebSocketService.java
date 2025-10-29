@@ -65,7 +65,7 @@ public class WebSocketService {
         System.out.println("收到消息:" + text);
         JSONObject jsonObject = JSONObject.parseObject(text, JSONObject.class);
         String type = jsonObject.get("type").toString();
-        switch (type) {
+        switch (type) {//type=1的情况不要了 因为谁会用不记住上下文的情况呢？
             case WebSocketOnMessageStatus.AI_CHAT:
                 handleStreamingChat(jsonObject, session);
                 return;
@@ -75,7 +75,7 @@ public class WebSocketService {
             default:
                 break;
         }
-        session.getBasicRemote().sendText("请匹配正确的typeId哦~");
+        session.getBasicRemote().sendText("请匹配正确的type哦~");
     }
 
     private void handleStreamingChatWithMemory(JSONObject jsonObject, Session session) {

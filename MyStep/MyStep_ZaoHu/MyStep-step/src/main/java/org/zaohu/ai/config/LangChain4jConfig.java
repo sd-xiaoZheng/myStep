@@ -43,7 +43,7 @@ public class LangChain4jConfig {
 
     @Bean
     public ConsultantService consultantService(OllamaStreamingChatModel ollamaStreamingChatModel) {
-        ChatMemory chatMemory = MessageWindowChatMemory.withMaxMessages(60);
+        ChatMemory chatMemory = MessageWindowChatMemory.withMaxMessages(60);//配置记录多少条上下文
 
         return AiServices.builder(ConsultantService.class)
                 .streamingChatModel(ollamaStreamingChatModel)
