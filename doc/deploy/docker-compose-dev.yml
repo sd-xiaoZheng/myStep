@@ -32,7 +32,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgresql17/data:/var/lib/postgresql/data
+      - ./postgresql17/data:/var/lib/postgresql17/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=zaohu279982
