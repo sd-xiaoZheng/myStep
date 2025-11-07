@@ -171,6 +171,28 @@ services:
     networks:
       - iot_network
 
+  emqx:
+    image: emqx/emqx:5.4.1
+    container_name: emqx-Step
+    # 保持容器在没有守护程序的情况下运行
+    tty: true
+#    restart: always
+    privileged: true
+    ports:
+      - "1883:1883"
+      - "8083:8083"
+      - "8883:8883"
+      - "18083:18083"
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      # 挂载数据存储
+      - ./emqx/data:/opt/emqx/data
+      # 挂载日志文件
+      - ./emqx/log:/opt/emqx/log
+    networks:
+      - iot_network
+
 networks:
   iot_network:
     driver: bridge
