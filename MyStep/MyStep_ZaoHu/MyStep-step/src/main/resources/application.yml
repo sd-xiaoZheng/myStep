@@ -53,7 +53,7 @@ spring:
 
 #https://juejin.cn/post/6850418115382738958 rocket详细使用
 rocketmq:
-  name-server: 192.168.1.4:9876
+  name-server: 127.0.0.1:9876
   producer:
     group: step
     send-message-timeout: 3000
