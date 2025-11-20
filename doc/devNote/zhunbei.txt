@@ -1,0 +1,64 @@
+待做：
+系统日志
+分系统 起码把相册模块分出来
+头像回显 要回显图片的网络地址
+玩家取名子或者别的确定后要夸赞，比如：您取得名字真美...我收录了 等等 每次尽量做到不一样，做一个返回消息的随机的功能
+笔记模块
+
+日志日记模块  //随笔 //我的流水账 //日记
+
+背包模块
+
+Xx生成二维码模块
+
+视频模块
+
+IOT物联网模块
+
+Sa-token
+
+手机端
+
+人生小愿望墙
+
+语音识别
+
+完成的时候要Jenkins自动化部署
+Jar包瘦身
+Maven整理整理依赖
+
+Nacos中的db-common的mysql内容：
+spring:
+datasource:
+driver-class-name: com.mysql.cj.jdbc.Driver
+username: root
+password: zaohu279982
+main:
+allow-bean-definition-overriding: true
+
+mybatis:
+configuration:
+map-underscore-to-camel-case: true
+
+
+
+
+
+
+
+/www/server/java/jdk1.8.0_371/bin/java -Djava.rmi.server.hostname=localhost -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=39798 -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Xmx2048M -Xms2048M -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/www/wwwlogs/java/springboot -jar /www/wwwroot/back/ruoyi-admin.jar --server.port=8080
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
