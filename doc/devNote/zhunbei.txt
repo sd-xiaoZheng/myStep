@@ -16,7 +16,7 @@ Xx生成二维码模块
 
 视频模块
 
-IOT物联网模块
+IOT物联网模块 对接mqtt
 
 Sa-token
 
@@ -29,6 +29,24 @@ Sa-token
 完成的时候要Jenkins自动化部署
 Jar包瘦身
 Maven整理整理依赖
+
+大数据 hadoop flink 。。。
+
+分服务 dubbo
+
+分片传输文件
+
+oss
+
+Elasticsearch
+
+定时任务调度
+
+测试用例
+
+语音转文字
+
+
 
 Nacos中的db-common的mysql内容：
 spring:
