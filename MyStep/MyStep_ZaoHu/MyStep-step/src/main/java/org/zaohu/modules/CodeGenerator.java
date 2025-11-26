@@ -33,7 +33,9 @@ public class CodeGenerator {
 
         FastAutoGenerator.create(url, username, password)
                 // 全局配置
-                .globalConfig((scanner, builder) -> builder.author(scanner.apply("=====================全局配置=======================\n请输入作者名称？"))
+                .globalConfig((scanner, builder) -> builder
+                        .author("铁汉柔情")
+//                        .author(scanner.apply("=====================全局配置=======================\n请输入作者名称？"))
                         .outputDir(System.getProperty("user.dir") + "/MyStep/MyStep_ZaoHu/MyStep-step/src/main/java")
                         .commentDate("yyyy-MM-dd HH:mm:ss")
                         .dateType(DateType.TIME_PACK)
@@ -42,7 +44,7 @@ public class CodeGenerator {
                         .disableOpenDir()
                 )
                 // 包配置
-                //比如我想生成到modules中的xx文件夹中：就这么写：org.zaohu.modules
+                //比如我想生成到modules中的xx文件夹中：包名就这么写：org.zaohu.modules
                 .packageConfig((scanner, builder) -> builder.parent(scanner.apply("=====================包配置=======================\n请输入包名？"))
                 //xx写在这里
                         .moduleName(scanner.apply("请输入父包模块名？"))
