@@ -23,6 +23,17 @@
         </router-link>
         <el-dropdown class="item nav-item" :show-timeout=0 :hide-timeout=180 @command="handleCommand">
             <span class="el-dropdown-link">
+              <img src="@/assets/icon/diary.png" class="nav-icon" alt="工具图标"/> 日记<i
+                class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+          <el-dropdown-menu>
+            <el-dropdown-item class="item" command="diaryHome">首页</el-dropdown-item>
+            <el-dropdown-item class="item" command="diaryCreate">编辑</el-dropdown-item>
+            <el-dropdown-item class="item" command="diaryList">列表</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <el-dropdown class="item nav-item" :show-timeout=0 :hide-timeout=180 @command="handleCommand">
+            <span class="el-dropdown-link">
               <img src="@/assets/icon/tool_box.png" class="nav-icon" alt="工具图标"/> 工具箱<i
                 class="el-icon-arrow-down el-icon--right"></i>
             </span>
@@ -66,7 +77,7 @@
         </div>
       </el-header>
       <el-main class="backGround" style="margin:-0.5vh;">
-        <div style="height: 10vh;width: 5vh"></div>
+        <div style="height: 8vh;width: 5vh"></div>
         <router-view/>
       </el-main>
     </el-container>
@@ -118,6 +129,17 @@ export default {
           break;
         case "photo":
           path = '/lifeTimeManage';
+          break;
+        case "diaryHome":
+          path = '/diaryHome';
+          break;
+        case "diaryEdit":
+          path = '/diaryEdit';
+        case "diaryCreate":
+          path = '/diaryCreate';
+          break;
+        case "diaryList":
+          path = '/diaryList';
           break;
         default:
           alert("没有该选项~");

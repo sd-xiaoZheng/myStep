@@ -19,6 +19,9 @@ import messageBoard from '@/views/step/board/messageBoard.vue';
 import lifeTimeType from '@/views/step/lifeTime/lifeTimeType.vue';
 import lifeTimeManage from '@/views/step/lifeTime/lifeTimeManage.vue';
 import lifeTimePhoto from '@/views/step/lifeTime/lifeTimePhoto.vue';
+import diaryHome from '@/views/step/diary/diaryHome.vue';
+import diaryCreate from '@/views/step/diary/diaryCreate.vue';
+import diaryList from '@/views/step/diary/diaryList.vue';
 
 Vue.use(Router);
 
@@ -127,6 +130,30 @@ const router = new Router({
                     component: lifeTimePhoto,
                     meta: {
                         title: "生命瞬间"
+                    }
+                },
+                {
+                    path: '/diaryHome',
+                    name: '/diaryHome',
+                    component: diaryHome,
+                    meta: {
+                        title: "日记首页"
+                    }
+                },
+                {
+                    path: '/diaryCreate',
+                    name: '/diaryCreate',
+                    component: diaryCreate,
+                    meta: {
+                        title: "日记编辑"
+                    }
+                },
+                {
+                    path: '/diaryList',
+                    name: '/diaryList',
+                    component: diaryList,
+                    meta: {
+                        title: "日记编辑"
                     }
                 }
             ]

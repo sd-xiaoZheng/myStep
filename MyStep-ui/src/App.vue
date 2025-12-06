@@ -17,6 +17,6 @@ export default {
 <style>
 /* 这样就不会出现左右的滚动条了 */
 body {
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 </style>
