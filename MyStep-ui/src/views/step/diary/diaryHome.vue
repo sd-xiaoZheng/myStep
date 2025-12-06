@@ -19,7 +19,7 @@
           <h2>快速新建</h2>
         </div>
         <div class="card-buttons">
-          <button class="btn btn-blue" @click="goToCreateDiary">+ 新建日记</button>
+          <button class="btn btn-blue" @click="goToDiaryCreate">+ 新建日记</button>
           <button class="btn btn-grey"><span></span>心情日记</button>
         </div>
       </div>
@@ -155,8 +155,8 @@ export default {
       const day = now.getDate()
       this.currentDate= `${year} 年 ${month} 月 ${day} 日`
     },
-    goToCreateDiary() {
-      this.$router.push('/createDiary');
+    goToDiaryCreate() {
+      this.$router.push('/diaryCreate');
     }
   }
 }

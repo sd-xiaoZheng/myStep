@@ -1,6 +1,9 @@
 <template>
   <div class="create-diary-page">
-    <div class="create-diary-container">
+    <div
+      class="create-diary-container"
+      :style="{ border: `1px solid ${selectedColor}`, boxShadow: `0 8px 32px ${selectedColor}40` }"
+    >
       <!-- 面包屑导航 -->
       <div class="breadcrumb">
         <span class="breadcrumb-link">首页</span>
@@ -9,13 +12,36 @@
       </div>
 
       <!-- 页面标题 -->
-      <h1 class="page-title">新建日记</h1>
+      <h1 class="page-title">> 新建日记 <</h1>
 
       <!-- 信息栏 -->
       <div class="info-section">
-        <div class="info-item">
-          <label>日期:</label>
-          <input type="date" v-model="diary.date" class="date-input">
+        <div class="info-row">
+          <div class="info-item">
+            <label>记忆中的日期:</label>
+            <input type="date" v-model="diary.date" class="date-input">
+          </div>
+
+          <div class="spacer"></div>
+
+          <div class="info-item color-picker-item">
+            <label>记忆颜色:</label>
+            <div class="color-picker-wrapper">
+              <div
+                class="color-preview"
+                :style="{ backgroundColor: selectedColor }"
+                @click="openColorPicker"
+              ></div>
+              <span class="color-value">{{ selectedColor }}</span>
+              <input
+                ref="colorInput"
+                type="color"
+                v-model="selectedColor"
+                class="color-input-hidden"
+                @input="onColorChange"
+              >
+            </div>
+          </div>
         </div>
 
         <div class="info-item">
@@ -73,6 +99,51 @@
           >
         </div>
 
+        <!-- 添加图片模块 -->
+        <div class="image-upload-section">
+          <div class="image-upload-header">
+            <label class="image-label">添加配图：</label>
+            <div class="image-upload-controls">
+              <input
+                type="file"
+                ref="fileInput"
+                accept="image/jpeg,image/png,image/jpg"
+                multiple
+                style="display: none"
+                @change="handleImageUpload"
+              >
+              <button
+                class="image-upload-btn"
+                @click="$refs.fileInput.click()"
+              >
+                选择图片
+              </button>
+              <span class="image-tip">最多上传 3 张</span>
+            </div>
+          </div>
+
+          <!-- 图片预览区域 -->
+          <div v-if="diary.images && diary.images.length > 0" class="image-preview-container">
+            <div
+              v-for="(image, index) in diary.images"
+              :key="index"
+              class="image-preview-item"
+            >
+              <img
+                :src="image.url"
+                :alt="image.name"
+                class="preview-image"
+              >
+              <button
+                class="remove-image-btn"
+                @click="removeImage(index)"
+              >
+                ×
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div class="content-input-wrapper">
           <textarea
             v-model="diary.content"
@@ -107,9 +178,11 @@ export default {
         mood: 'happy',
         module: 'daily',
         title: '',
-        content: ''
+        content: '',
+        images: []
       },
       wordCount: 0,
+      selectedColor: '#3498db', // 默认蓝色
       weatherOptions: [
         { label: '晴天', value: '1' },
         { label: '多云', value: '2' },
@@ -176,6 +249,16 @@ export default {
     selectModule(module) {
       this.diary.module = module;
     },
+    selectColor(color) {
+      this.selectedColor = color;
+    },
+    openColorPicker() {
+      // 直接触发隐藏的颜色输入框点击事件
+      this.$refs.colorInput.click();
+    },
+    onColorChange(event) {
+      this.selectedColor = event.target.value;
+    },
     updateWordCount() {
       this.wordCount = this.diary.content.length;
     },
@@ -187,6 +270,43 @@ export default {
       console.log('保存日记:', this.diary);
       alert('日记已保存！');
       this.$router.go(-1);
+    },
+    handleImageUpload(event) {
+      const files = event.target.files;
+      if (files.length === 0) return;
+
+      // 限制最多上传3张图片
+      if (this.diary.images.length + files.length > 3) {
+        alert('最多只能上传3张图片');
+        return;
+      }
+
+      // 处理每个选择的文件
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        // 检查文件类型
+        if (!file.type.startsWith('image/')) {
+          alert('请选择图片文件');
+          continue;
+        }
+
+        // 创建预览URL
+        const url = URL.createObjectURL(file);
+
+        // 添加到图片数组
+        this.diary.images.push({
+          name: file.name,
+          url: url,
+          file: file
+        });
+      }
+
+      // 清空input值，确保下次选择相同文件也能触发change事件
+      event.target.value = '';
+    },
+    removeImage(index) {
+      // 移除图片
+      this.diary.images.splice(index, 1);
     }
   }
 }
@@ -204,17 +324,19 @@ export default {
   /* 渐变过渡自然，保留轻微流动感但更柔和 */
   background-size: 200% 200%;
   border-radius: 24px;
+  position: relative;
 }
 
 .create-diary-container {
   width: 100%;
-  max-width: 700px;
+  max-width: 1200px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 15px;
   padding: 2rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
 /* 更缓慢的渐变流动动画 */
@@ -264,8 +386,20 @@ export default {
   margin-bottom: 2rem;
 }
 
-.info-item {
+.info-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
   margin-bottom: 1.5rem;
+  align-items: flex-end;
+}
+
+.info-item {
+  flex: 0 0 auto;
+}
+
+.spacer {
+  flex: 1;
 }
 
 .info-item label {
@@ -282,6 +416,42 @@ export default {
   background: rgba(255, 255, 255, 0.7);
   width: 100%;
   max-width: 200px;
+}
+
+/* 颜色选择器 */
+.color-picker-item {
+  margin-left: auto;
+}
+
+.color-picker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.color-preview {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.color-value {
+  width: 60px;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+/* 隐藏的颜色输入框 */
+.color-input-hidden {
+  padding-top: 30px;
+  position: absolute;
+  visibility: hidden;
+  width: 0;
+  height: 0;
 }
 
 /* 天气和心情选项 */
@@ -381,6 +551,86 @@ export default {
   background: rgba(255, 255, 255, 0.7);
 }
 
+/* 图片上传模块 */
+.image-upload-section {
+  margin-bottom: 1rem;
+}
+
+.image-upload-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.image-label {
+  font-weight: bold;
+  color: #2c3e50;
+  margin-right: 1rem;
+}
+
+.image-upload-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.image-upload-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background: #9b59b6; /* 浅紫色 */
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.image-upload-btn:hover {
+  background: #8e44ad;
+}
+
+.image-tip {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+}
+
+.image-preview-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.image-preview-item {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* 输入区域底部 */
 .input-footer {
   display: flex;
@@ -442,6 +692,11 @@ export default {
     padding: 1rem;
   }
 
+  .info-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   .weather-options, .mood-options, .module-tags {
     gap: 0.5rem;
   }
@@ -453,6 +708,11 @@ export default {
 
   .action-buttons {
     gap: 1rem;
+  }
+
+  .image-preview-item {
+    width: 60px;
+    height: 60px;
   }
 }
 </style>
