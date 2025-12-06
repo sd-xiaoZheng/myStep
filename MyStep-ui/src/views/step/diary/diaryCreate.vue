@@ -45,12 +45,12 @@
         </div>
 
         <div class="info-item">
-          <label>天气:</label>
-          <div class="weather-options">
+          <label>天气标签:</label>
+          <div class="tab-options">
             <button
               v-for="(weather, index) in weatherOptions"
               :key="index"
-              :class="['weather-btn', { active: diary.weather === weather.value }]"
+              :class="['tab-btn', { active: diary.weather === weather.value }]"
               @click="selectWeather(weather.value)"
             >
               {{ weather.label }}
@@ -59,31 +59,48 @@
         </div>
 
         <div class="info-item">
-          <label>心情:</label>
-          <div class="mood-options">
+          <label>心情标签:</label>
+          <div class="tab-options">
             <button
               v-for="(mood, index) in moodOptions"
               :key="index"
-              :class="['mood-btn', { active: diary.mood === mood.value }]"
+              :class="['tab-btn', { active: diary.mood === mood.value }]"
               @click="selectMood(mood.value)"
             >
               {{ mood.label }}
             </button>
           </div>
         </div>
+
+        <!-- 文章类型 -->
+        <div class="info-item">
+          <label>文章类型:</label>
+          <div class="tab-options">
+            <button
+              v-for="(articleType, index) in articleTypeOptions"
+              :key="index"
+              :class="['tab-btn', { active: diary.articleType === articleType.value }]"
+              @click="selectArticleType(articleType.value)"
+            >
+              {{ articleType.label }}
+            </button>
+          </div>
+        </div>
       </div>
 
-      <!-- 所属模块 -->
-      <div class="module-section">
-        <label>所属模块:</label>
-        <div class="module-tags">
+      <!-- 标签（多选） -->
+      <div class="tag-section">
+        <div class="tag-section-header">
+          <label>标签:</label>
+        </div>
+        <div class="tag-options">
           <button
-            v-for="(module, index) in moduleOptions"
+            v-for="(tag, index) in tagOptions"
             :key="index"
-            :class="['module-tag', { active: diary.module === module.value }]"
-            @click="selectModule(module.value)"
+            :class="['tag-btn', { active: diary.tags.includes(tag.value) }]"
+            @click="toggleTag(tag.value)"
           >
-            {{ module.label }}
+            {{ tag.label }}
           </button>
         </div>
       </div>
@@ -176,7 +193,8 @@ export default {
         date: '2025-11-04',
         weather: '1',
         mood: 'happy',
-        module: 'daily',
+        articleType: 'diary', // 新增文章类型字段
+        tags: [], // 将单个tag改为tags数组以支持多选
         title: '',
         content: '',
         images: []
@@ -217,7 +235,15 @@ export default {
         { label: '愧疚', value: 'guilty' },
         { label: '自豪', value: 'proud' }
       ],
-      moduleOptions: [
+      // 文章类型选项
+      articleTypeOptions: [
+        { label: '日记', value: 'diary' },
+        { label: '随笔', value: 'essay' },
+        { label: '游记', value: 'travel' },
+        { label: '读书笔记', value: 'reading' },
+        { label: '工作日志', value: 'worklog' }
+      ],
+      tagOptions: [
         { label: '日常生活', value: 'daily' },
         { label: '学习笔记', value: 'study' },
         { label: '旅行见闻', value: 'travel' },
@@ -246,8 +272,25 @@ export default {
     selectMood(mood) {
       this.diary.mood = mood;
     },
-    selectModule(module) {
-      this.diary.module = module;
+    // 新增文章类型选择方法
+    selectArticleType(articleType) {
+      this.diary.articleType = articleType;
+    },
+    // 将标签选择改为切换方式以支持多选，实现队列式选择（最多3个）
+    toggleTag(tag) {
+      const index = this.diary.tags.indexOf(tag);
+      if (index === -1) {
+        // 如果标签不存在
+        if (this.diary.tags.length >= 3) {
+          // 如果已达到3个标签，移除第一个并添加新标签到末尾
+          this.diary.tags.shift(); // 移除第一个元素
+        }
+        // 添加新标签到末尾
+        this.diary.tags.push(tag);
+      } else {
+        // 如果标签已存在，则移除
+        this.diary.tags.splice(index, 1);
+      }
     },
     selectColor(color) {
       this.selectedColor = color;
@@ -440,65 +483,69 @@ export default {
 }
 
 .color-value {
-  width: 60px;
   font-size: 0.9rem;
   color: #7f8c8d;
 }
 
 /* 隐藏的颜色输入框 */
 .color-input-hidden {
-  padding-top: 30px;
   position: absolute;
   visibility: hidden;
   width: 0;
   height: 0;
 }
 
-/* 天气和心情选项 */
-.weather-options, .mood-options {
+/* 标签选项 */
+.tab-options {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
-.weather-btn, .mood-btn {
+.tab-btn {
   padding: 0.5rem 1rem;
   border: 1px solid #ddd;
-  border-radius: 20px;
+  border-radius: 5px;
   background: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.weather-btn:hover, .mood-btn:hover {
+.tab-btn:hover {
   background: rgba(236, 240, 241, 0.9);
 }
 
-.weather-btn.active, .mood-btn.active {
+.tab-btn.active {
   background: #3498db;
   color: white;
   border-color: #3498db;
 }
 
-/* 所属模块 */
-.module-section {
+/* 标签区域（原模块区域） */
+.tag-section {
   margin-bottom: 2rem;
 }
 
-.module-section label {
-  display: block;
+.tag-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.tag-section-header label {
   font-weight: bold;
   color: #2c3e50;
 }
 
-.module-tags {
+
+.tag-options {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
 }
 
-.module-tag {
+.tag-btn {
   padding: 0.5rem 1rem;
   border: 1px solid #ddd;
   border-radius: 20px;
@@ -507,11 +554,11 @@ export default {
   transition: all 0.3s ease;
 }
 
-.module-tag:hover {
+.tag-btn:hover {
   background: rgba(236, 240, 241, 0.9);
 }
 
-.module-tag.active {
+.tag-btn.active {
   background: #8e44ad;
   color: white;
   border-color: #8e44ad;
@@ -697,11 +744,11 @@ export default {
     gap: 1rem;
   }
 
-  .weather-options, .mood-options, .module-tags {
+  .tab-options, .tag-options {
     gap: 0.5rem;
   }
 
-  .weather-btn, .mood-btn, .module-tag {
+  .tab-btn, .tag-btn {
     padding: 0.4rem 0.8rem;
     font-size: 0.9rem;
   }
