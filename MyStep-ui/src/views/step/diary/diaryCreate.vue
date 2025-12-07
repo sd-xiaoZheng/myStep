@@ -18,7 +18,7 @@
       <div class="info-section">
         <div class="info-row">
           <div class="info-item">
-            <label>记忆中的日期:</label>
+            <label>记忆日期:</label>
             <input type="date" v-model="diary.date" class="date-input">
           </div>
 
@@ -45,7 +45,7 @@
         </div>
 
         <div class="info-item">
-          <label>天气标签:</label>
+          <label>天气</label>
           <div class="tab-options">
             <button
               v-for="(weather, index) in weatherOptions"
@@ -59,7 +59,7 @@
         </div>
 
         <div class="info-item">
-          <label>心情标签:</label>
+          <label>心情</label>
           <div class="tab-options">
             <button
               v-for="(mood, index) in moodOptions"
@@ -74,7 +74,7 @@
 
         <!-- 文章类型 -->
         <div class="info-item">
-          <label>文章类型:</label>
+          <label>类型:</label>
           <div class="tab-options">
             <button
               v-for="(articleType, index) in articleTypeOptions"
