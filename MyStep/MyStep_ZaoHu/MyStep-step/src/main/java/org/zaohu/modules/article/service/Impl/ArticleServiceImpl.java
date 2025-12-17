@@ -21,7 +21,13 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     public List<Article> getDairy(Article article) {
-        AssemblyConditions();条件
+//        AssemblyConditions();
         return List.of();
+    }
+
+    @Override
+    public Long selectCount(Article article) {
+
+        return 0L;
     }
 }
