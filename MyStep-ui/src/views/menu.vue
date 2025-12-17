@@ -56,7 +56,9 @@
             </span>
           <el-dropdown-menu>
             <!--item中添加 disabled 元素 禁止点击,添加 divided 元素 置底-->
-            <el-dropdown-item class="item" command="photo">相册页面</el-dropdown-item>
+            <el-dropdown-item class="item" command="photo">相册</el-dropdown-item>
+            <el-dropdown-item class="item" command="diaryManage">日记</el-dropdown-item>
+            <el-dropdown-item class="item" command="typeManage">类型管理</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
 
@@ -140,6 +142,12 @@ export default {
           break;
         case "diaryList":
           path = '/diaryList';
+          break;
+        case "diaryManage":
+          path = '/diaryManage';
+          break;
+        case "typeManage":
+          path = '/typeManage';
           break;
         default:
           alert("没有该选项~");

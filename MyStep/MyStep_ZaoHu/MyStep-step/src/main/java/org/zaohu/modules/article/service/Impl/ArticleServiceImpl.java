@@ -6,6 +6,8 @@ import org.zaohu.modules.article.service.ArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 文章表 服务实现类
@@ -17,4 +19,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
 
+    @Override
+    public List<Article> getDairy(Article article) {
+        AssemblyConditions();条件
+        return List.of();
+    }
 }

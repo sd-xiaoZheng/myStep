@@ -22,6 +22,8 @@ import lifeTimePhoto from '@/views/step/lifeTime/lifeTimePhoto.vue';
 import diaryHome from '@/views/step/diary/diaryHome.vue';
 import diaryCreate from '@/views/step/diary/diaryCreate.vue';
 import diaryList from '@/views/step/diary/diaryList.vue';
+import diaryManage from '@/views/step/diary/manage/diaryListManage.vue';
+import typeManage from '@/views/manage/typeManage.vue';
 
 Vue.use(Router);
 
@@ -154,6 +156,22 @@ const router = new Router({
                     component: diaryList,
                     meta: {
                         title: "日记编辑"
+                    }
+                },
+                {
+                    path: '/diaryManage',
+                    name: '/diaryManage',
+                    component: diaryManage,
+                    meta: {
+                        title: "日记管理"
+                    }
+                },
+                {
+                    path: '/typeManage',
+                    name: '/typeManage',
+                    component: typeManage,
+                    meta: {
+                        title: "类型管理"
                     }
                 }
             ]
