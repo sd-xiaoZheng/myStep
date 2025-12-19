@@ -67,6 +67,8 @@ services:
       - iot_network
 
   rocketmq-broker:
+    #加上这里才有权限写入文件
+    user: root
     image: apache/rocketmq:5.3.1
     container_name: rocketmq-broker-Step
     tty: true

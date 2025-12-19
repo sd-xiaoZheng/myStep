@@ -1,5 +1,7 @@
 package org.zaohu.modules.article.service.Impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import org.zaohu.common.conditionalAssembler.ConditionalAssembler;
 import org.zaohu.modules.article.entity.Article;
 import org.zaohu.modules.article.mapper.ArticleMapper;
 import org.zaohu.modules.article.service.ArticleService;
@@ -21,7 +23,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     public List<Article> getDairy(Article article) {
-//        AssemblyConditions();
+        LambdaQueryWrapper<Article> articleLambdaQueryWrapper = ConditionalAssembler.AssemblyConditions(article);
         return List.of();
     }
 

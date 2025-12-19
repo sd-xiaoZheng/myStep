@@ -1,5 +1,5 @@
 # elasticsearch/config/elasticsearch.yml
-cluster.name: laokou-elasticsearch
+cluster.name: elasticsearch-Step
 node.name: node-elasticsearch
 network.host: 0.0.0.0  # 监听所有网络接口
 http.port: 9200
