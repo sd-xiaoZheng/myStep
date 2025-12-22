@@ -65,6 +65,7 @@ logging:
     org.zaohu.modules: debug # 指定这个包为debug日志级别 默认是info 为了让feign生效所以使用debug级别
   pattern:
     dateformat: yyyy-MM-dd HH:mm:ss #只修改控制台时间格式
+    console: "%d{HH:mm:ss} %-5level [%t] %logger{36} : %msg%n"
 #    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%t] %logger{36} : %msg%n"
 #%d{yyyy-MM-dd HH:mm:ss} → 时间格式
 #%-5level → 日志级别（INFO/DEBUG/WARN/ERROR）
