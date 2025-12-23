@@ -17,7 +17,6 @@ spring:
       - optional:nacos:${spring.application.name}.yml
       - optional:nacos:db-common.yml
       - nacos:nacos-discovery.yml
-      - optional:nacos:seata-client.yml
 
 logging:
   level:

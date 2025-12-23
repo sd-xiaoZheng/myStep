@@ -21,7 +21,7 @@ import java.util.List;
  * @since 2025-11-26 16:59:59
  */
 @RestController
-@RequestMapping("/article")
+@RequestMapping("/step/article")
 public class ArticleController extends BaseController {
     @Autowired
     private ArticleService articleService;

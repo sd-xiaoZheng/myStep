@@ -12,6 +12,12 @@
           <el-button @click="() => getDiaryList(true)" :loading="searchLoading">搜索</el-button>
         </template>
       </el-input>
+      <el-input v-model="searchContent" placeholder="请输入日记内容" style="width: 200px; margin-left: 20px;"
+                @keyup.enter="() => getDiaryList(true)">
+        <template #append>
+          <el-button @click="() => getDiaryList(true)" :loading="searchLoading">搜索</el-button>
+        </template>
+      </el-input>
       <el-radio-group v-model="viewMode" class="filter-group">
         <el-radio-button label="all">全部</el-radio-button>
       </el-radio-group>
@@ -22,9 +28,14 @@
         v-loading="loading"
         :data="diaryList"
         style="width: 100%">
-      <el-table-column prop="id" label="文章ID" width="80"></el-table-column>
+<!--      <el-table-column prop="id" label="文章ID" width="80"></el-table-column>-->
       <el-table-column prop="typeId" label="类型ID" width="80"></el-table-column>
       <el-table-column prop="title" label="标题" min-width="150"></el-table-column>
+      <el-table-column prop="content" label="内容" min-width="200">
+        <template slot-scope="scope">
+          <div class="content-cell">{{ scope.row.content }}</div>
+        </template>
+      </el-table-column>
       <el-table-column prop="authorName" label="作者名称" width="120"></el-table-column>
       <el-table-column prop="authorId" label="作者ID" width="100"></el-table-column>
       <el-table-column prop="writeTime" label="写作时间" width="180"></el-table-column>
@@ -61,7 +72,7 @@
           @current-change="handleCurrentChange"
       />
     </div>
-    
+
     <!-- 添加/编辑日记对话框 -->
     <el-dialog :visible.sync="dialogVisible" :title="dialogMode === 'add' ? '添加日记' : '编辑日记'" :modal="false">
       <el-form :model="diaryForm" :rules="rules" ref="diaryForm" label-width="100px">
@@ -136,9 +147,17 @@
   display: flex;
   justify-content: center;
 }
+
+.content-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 </style>
 
 <script>
+import { getDiaryList } from '@/apis/api/diary'
+
 export default {
   data() {
     return {
@@ -149,9 +168,10 @@ export default {
       viewMode: 'all',
       diaryList: [],
       currentPage: 1,
-      pageSize: 20,
+      pageSize: 10,
       total: 0,
       searchTitle: '',
+      searchContent: '',
       dialogVisible: false,
       dialogMode: 'add',
       diaryForm: {
@@ -196,69 +216,49 @@ export default {
       } else {
         this.loading = true
       }
-      
-      // 这里应该调用实际的API接口
-      // 暂时模拟数据
-      setTimeout(() => {
-        // 模拟返回的数据
-        this.diaryList = [
-          {
-            id: '1',
-            typeId: 1,
-            title: '我的第一篇日记',
-            content: '今天天气很好...',
-            writeTime: '2025-12-01 10:00:00',
-            memoryTime: '2025-12-01 08:00:00',
-            weatherId: 1,
-            moodId: 3,
-            authorName: '张三',
-            authorId: 'user001',
-            authorAvatar: '',
-            color: '#409EFF',
-            imageUrls: '',
-            isStar: true,
-            address: '北京市朝阳区'
-          },
-          {
-            id: '2',
-            typeId: 2,
-            title: '学习Vue的心得',
-            content: 'Vue是一个很好的前端框架...',
-            writeTime: '2025-12-05 14:30:00',
-            memoryTime: '2025-12-05 10:00:00',
-            weatherId: 2,
-            moodId: 5,
-            authorName: '李四',
-            authorId: 'user002',
-            authorAvatar: '',
-            color: '#67C23A',
-            imageUrls: '',
-            isStar: false,
-            address: '上海市浦东新区'
-          }
-        ]
-        this.total = 2
-        
+
+      try {
+        const params = {
+          pageNum: this.currentPage,
+          pageSize: this.pageSize,
+          title: this.searchTitle || undefined,
+          content: this.searchContent || undefined
+        }
+
+        const res = await getDiaryList(params)
+
+        this.diaryList = res.rows || []
+        this.total = res.total || 0
+
         if (isSearch) {
           this.searchLoading = false
         } else {
           this.loading = false
         }
-      }, 500)
+      } catch (error) {
+        console.error('获取日记列表失败:', error)
+        this.$message.error('获取日记列表失败')
+
+        if (isSearch) {
+          this.searchLoading = false
+        } else {
+          this.loading = false
+        }
+      }
     },
-    
+
     // 处理分页大小改变
     handleSizeChange(val) {
       this.pageSize = val
       this.getDiaryList()
     },
-    
+
     // 处理当前页改变
     handleCurrentChange(val) {
       this.currentPage = val
       this.getDiaryList()
     },
-    
+
     // 打开添加对话框
     openAddDialog() {
       this.dialogMode = 'add'
@@ -281,14 +281,14 @@ export default {
       }
       this.dialogVisible = true
     },
-    
+
     // 编辑日记
     editDiary(row) {
       this.dialogMode = 'edit'
       this.diaryForm = { ...row }
       this.dialogVisible = true
     },
-    
+
     // 提交日记（添加或编辑）
     async submitDiary() {
       try {
@@ -298,7 +298,7 @@ export default {
             resolve()
           })
         })
-        
+
         this.submitLoading = true
         // 这里应该调用实际的API接口
         // 暂时模拟提交过程
@@ -313,7 +313,7 @@ export default {
         this.$message.error('操作失败，请稍后重试')
       }
     },
-    
+
     // 删除日记
     async deleteDiary(row) {
       try {
@@ -322,7 +322,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         })
-        
+
         this.deleteLoading = true
         // 这里应该调用实际的API接口
         // 暂时模拟删除过程
@@ -339,7 +339,7 @@ export default {
       }
     }
   },
-  
+
   mounted() {
     this.getDiaryList()
   }

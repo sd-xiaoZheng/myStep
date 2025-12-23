@@ -17,7 +17,6 @@ spring:
       - optional:nacos:${spring.application.name}.yml
       - optional:nacos:db-common.yml
       - nacos:nacos-discovery.yml
-      - optional:nacos:seata-client.yml
   mail:
     host: smtp.qq.com #配置 SMTP 服务器地址
     port: 465   #SMTP 服务器的端口
@@ -65,14 +64,14 @@ logging:
     org.zaohu.modules: debug # 指定这个包为debug日志级别 默认是info 为了让feign生效所以使用debug级别
   pattern:
     dateformat: yyyy-MM-dd HH:mm:ss #只修改控制台时间格式
-    console: "%d{HH:mm:ss} %-5level [%t] %logger{36} : %msg%n"
+    console: "%clr(%d{HH:mm:ss}){faint} %clr(%-5level){ERROR:red, WARN:yellow, INFO:green, DEBUG:blue, TRACE:magenta} %clr([%t]){faint} %clr(%logger{36}){cyan} : %clr(%msg%n){faint}"
 #    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%t] %logger{36} : %msg%n"
 #%d{yyyy-MM-dd HH:mm:ss} → 时间格式
 #%-5level → 日志级别（INFO/DEBUG/WARN/ERROR）
 #[%t] → 线程名（如 [main]）
 #%logger{36} → 日志来源类名（最多显示 36 字符）
 #%msg%n → 日志消息 + 换行
-
+#支持的颜色：black、red、green、yellow、blue、magenta、cyan、white、faint（浅灰）等
 
 
 #日志局部配置 feign

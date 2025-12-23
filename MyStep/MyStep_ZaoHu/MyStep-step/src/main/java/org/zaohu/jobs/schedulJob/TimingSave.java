@@ -1,6 +1,7 @@
 package org.zaohu.jobs.schedulJob;
 
 
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -10,7 +11,7 @@ import org.zaohu.constant.Constant;
 import org.zaohu.modules.visitNum.entity.VisitNum;
 import org.zaohu.modules.visitNum.mapper.VisitNumMapper;
 
-import javax.annotation.Resource;
+//import javax.annotation.Resource;
 import java.util.Objects;
 
 @Configuration

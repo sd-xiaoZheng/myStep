@@ -1,0 +1,79 @@
+#server:
+#  port: 7091
+#
+#spring:
+#  application:
+#    name: seata-server
+#
+#logging:
+#  config: classpath:logback-spring.xml
+#  file:
+#    path: ${log.home:${user.home}/logs/seata}
+#  extend:
+#    logstash-appender:
+#      destination: 127.0.0.1:4560
+#    kafka-appender:
+#      bootstrap-servers: 127.0.0.1:9092
+#      topic: logback_to_logstash
+#
+#console:
+#  user:
+#    username: seata
+#    password: seata
+#
+#seata:
+#  server:
+#    preferred-networks:
+#      - 192.168.*
+#      - 10.*
+#  service:
+#    vgroup-mapping:
+#      default_tx_group: default
+#
+#  # 注册中心配置（指向宿主机Nacos）
+#  registry:
+#    type: nacos
+#    nacos:
+#      application: seata-server
+#      server-addr: host.docker.internal:8848
+#      group: SEATA_GROUP
+#      namespace: seata
+#      cluster: default
+#      username: nacos
+#      password: nacos
+#      port: 9091
+#
+#  # 配置中心配置（与注册中心一致）
+#  config:
+#    type: nacos
+#    nacos:
+#      server-addr: host.docker.internal:8848
+#      group: SEATA_GROUP
+#      namespace: seata
+#      username: nacos
+#      password: nacos
+#
+#  # 恢复存储配置
+#  store:
+#    mode: file
+#    file:
+#      session-store:
+#        dir: /seata-server/logs/sessionStore
+#    lock:
+#      mode: file
+#    session:
+#      mode: file
+#
+#  # 安全配置（从默认配置复制）
+#  security:
+#    secretKey: SeataSecretKey0c382ef121d778043159209298fd40bf3850a017
+#    tokenValidityInMilliseconds: 1800000
+#    ignore:
+#      urls: /,/**/*.css,/**/*.js,/**/*.html,/**/*.map,/**/*.svg,/**/*.png,/**/*.jpeg,/**/*.ico,/api/v1/auth/login,/metadata/v1/**
+#
+#  # 关闭无用功能
+#  apm:
+#    skywalking:
+#      enabled: false
+#  jmx:
+#    enabled: false
