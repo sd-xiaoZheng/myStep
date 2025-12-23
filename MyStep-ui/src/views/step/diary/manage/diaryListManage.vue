@@ -29,7 +29,7 @@
         :data="diaryList"
         style="width: 100%">
 <!--      <el-table-column prop="id" label="文章ID" width="80"></el-table-column>-->
-      <el-table-column prop="typeId" label="类型ID" width="80"></el-table-column>
+      <el-table-column prop="typeName" label="类型" width="80"></el-table-column>
       <el-table-column prop="title" label="标题" min-width="150"></el-table-column>
       <el-table-column prop="content" label="内容" min-width="200">
         <template slot-scope="scope">
@@ -40,8 +40,8 @@
       <el-table-column prop="authorId" label="作者ID" width="100"></el-table-column>
       <el-table-column prop="writeTime" label="写作时间" width="180"></el-table-column>
       <el-table-column prop="memoryTime" label="记忆时间" width="180"></el-table-column>
-      <el-table-column prop="weatherId" label="天气ID" width="80"></el-table-column>
-      <el-table-column prop="moodId" label="心情ID" width="80"></el-table-column>
+      <el-table-column prop="weatherName" label="天气" width="80"></el-table-column>
+      <el-table-column prop="moodName" label="心情" width="80"></el-table-column>
       <el-table-column prop="color" label="展示颜色" width="100"></el-table-column>
       <el-table-column prop="isStar" label="是否星标" width="100">
         <template slot-scope="scope">

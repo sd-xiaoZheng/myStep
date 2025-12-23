@@ -84,4 +84,15 @@ public class Article {
     @ApiModelProperty("发生地址")
     @TableField("address")
     private String address;
+
+    @TableField(exist = false)
+    private String typeName;
+
+    @TableField(exist = false)
+    private String weatherName;
+
+    @TableField(exist = false)
+    private String moodName;
+
+
 }
