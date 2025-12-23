@@ -20,7 +20,7 @@
 -- Sequence structure for access_record_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."access_record_id_seq";
-CREATE SEQUENCE "public"."access_record_id_seq" 
+CREATE SEQUENCE "public"."access_record_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
@@ -31,7 +31,7 @@ CACHE 1;
 -- Sequence structure for account_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."account_id_seq";
-CREATE SEQUENCE "public"."account_id_seq" 
+CREATE SEQUENCE "public"."account_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
@@ -42,7 +42,7 @@ CACHE 1;
 -- Sequence structure for comment_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."comment_id_seq";
-CREATE SEQUENCE "public"."comment_id_seq" 
+CREATE SEQUENCE "public"."comment_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -53,7 +53,7 @@ CACHE 1;
 -- Sequence structure for fun_question_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."fun_question_id_seq";
-CREATE SEQUENCE "public"."fun_question_id_seq" 
+CREATE SEQUENCE "public"."fun_question_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -64,7 +64,7 @@ CACHE 1;
 -- Sequence structure for mood_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."mood_id_seq";
-CREATE SEQUENCE "public"."mood_id_seq" 
+CREATE SEQUENCE "public"."mood_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -75,7 +75,7 @@ CACHE 1;
 -- Sequence structure for msg_wall_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."msg_wall_id_seq";
-CREATE SEQUENCE "public"."msg_wall_id_seq" 
+CREATE SEQUENCE "public"."msg_wall_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -86,7 +86,7 @@ CACHE 1;
 -- Sequence structure for order_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."order_id_seq";
-CREATE SEQUENCE "public"."order_id_seq" 
+CREATE SEQUENCE "public"."order_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
@@ -97,7 +97,7 @@ CACHE 1;
 -- Sequence structure for permission_permission_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."permission_permission_id_seq";
-CREATE SEQUENCE "public"."permission_permission_id_seq" 
+CREATE SEQUENCE "public"."permission_permission_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
@@ -108,7 +108,7 @@ CACHE 1;
 -- Sequence structure for photo_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."photo_id_seq";
-CREATE SEQUENCE "public"."photo_id_seq" 
+CREATE SEQUENCE "public"."photo_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -119,7 +119,7 @@ CACHE 1;
 -- Sequence structure for photo_type_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."photo_type_id_seq";
-CREATE SEQUENCE "public"."photo_type_id_seq" 
+CREATE SEQUENCE "public"."photo_type_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -130,7 +130,7 @@ CACHE 1;
 -- Sequence structure for role_role_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."role_role_id_seq";
-CREATE SEQUENCE "public"."role_role_id_seq" 
+CREATE SEQUENCE "public"."role_role_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
@@ -141,7 +141,7 @@ CACHE 1;
 -- Sequence structure for storage_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."storage_id_seq";
-CREATE SEQUENCE "public"."storage_id_seq" 
+CREATE SEQUENCE "public"."storage_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
@@ -152,7 +152,7 @@ CACHE 1;
 -- Sequence structure for tag_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."tag_id_seq";
-CREATE SEQUENCE "public"."tag_id_seq" 
+CREATE SEQUENCE "public"."tag_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -163,7 +163,7 @@ CACHE 1;
 -- Sequence structure for todo_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."todo_id_seq";
-CREATE SEQUENCE "public"."todo_id_seq" 
+CREATE SEQUENCE "public"."todo_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -174,7 +174,7 @@ CACHE 1;
 -- Sequence structure for type_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."type_id_seq";
-CREATE SEQUENCE "public"."type_id_seq" 
+CREATE SEQUENCE "public"."type_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -185,7 +185,7 @@ CACHE 1;
 -- Sequence structure for undo_log_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."undo_log_id_seq";
-CREATE SEQUENCE "public"."undo_log_id_seq" 
+CREATE SEQUENCE "public"."undo_log_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
@@ -196,7 +196,7 @@ CACHE 1;
 -- Sequence structure for user_user_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."user_user_id_seq";
-CREATE SEQUENCE "public"."user_user_id_seq" 
+CREATE SEQUENCE "public"."user_user_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
@@ -207,7 +207,7 @@ CACHE 1;
 -- Sequence structure for visit_num_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."visit_num_id_seq";
-CREATE SEQUENCE "public"."visit_num_id_seq" 
+CREATE SEQUENCE "public"."visit_num_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
@@ -218,7 +218,7 @@ CACHE 1;
 -- Sequence structure for weather_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."weather_id_seq";
-CREATE SEQUENCE "public"."weather_id_seq" 
+CREATE SEQUENCE "public"."weather_id_seq"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -655,8 +655,8 @@ CREATE TABLE "public"."article" (
   "type_id" int4 NOT NULL,
   "title" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
   "content" text COLLATE "pg_catalog"."default" NOT NULL,
-  "write_time" timestamptz(6) DEFAULT now(),
-  "memory_time" timestamptz(6),
+  "write_time" timestamp(6) DEFAULT now(),
+  "memory_time" timestamp(6),
   "weather_id" int4,
   "mood_id" int4,
   "author_name" varchar(100) COLLATE "pg_catalog"."default",
