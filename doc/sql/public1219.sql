@@ -945,7 +945,7 @@ CREATE TABLE "public"."comment" (
   "id" int4 NOT NULL DEFAULT nextval('comment_id_seq'::regclass),
   "ref_id" int4 NOT NULL,
   "content" text COLLATE "pg_catalog"."default" NOT NULL,
-  "create_time" timestamptz(6) DEFAULT now(),
+  "create_time" timestamp(6) DEFAULT now(),
   "user_name" varchar(100) COLLATE "pg_catalog"."default",
   "user_avatar" varchar(255) COLLATE "pg_catalog"."default",
   "parent_id" int4 DEFAULT 0
@@ -1397,7 +1397,7 @@ CREATE TABLE "public"."todo" (
   "sort_no" int4 DEFAULT 0,
   "type_id" int4 NOT NULL,
   "extra_info" varchar(255) COLLATE "pg_catalog"."default",
-  "create_time" timestamptz(6) NOT NULL DEFAULT now()
+  "create_time" timestamp(6) NOT NULL DEFAULT now()
 )
 ;
 COMMENT ON COLUMN "public"."todo"."id" IS '主键ID';
