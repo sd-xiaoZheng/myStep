@@ -59,6 +59,8 @@
             <el-dropdown-item class="item" command="photo">相册</el-dropdown-item>
             <el-dropdown-item class="item" command="diaryManage">日记</el-dropdown-item>
             <el-dropdown-item class="item" command="typeManage">类型管理</el-dropdown-item>
+            <el-dropdown-item class="item" command="moodManage">心情管理</el-dropdown-item>
+            <el-dropdown-item class="item" command="weatherManage">天气管理</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
 
@@ -148,6 +150,12 @@ export default {
           break;
         case "typeManage":
           path = '/typeManage';
+          break;
+        case "moodManage":
+          path = '/moodManage';
+          break;
+        case "weatherManage":
+          path = '/weatherManage';
           break;
         default:
           alert("没有该选项~");

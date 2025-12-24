@@ -2,12 +2,12 @@ package org.zaohu.modules.type.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.zaohu.common.ResultCommon.Result;
 import org.zaohu.modules.type.entity.Type;
+import org.zaohu.modules.type.entity.vo.TypeVO;
 import org.zaohu.modules.type.service.TypeService;
+import org.zaohu.utils.FileUtils;
 import org.zaohu.utils.text.StringUtils;
 
 /**
@@ -28,9 +28,22 @@ public class TypeController {
     public Result typeList(Type type) {
         LambdaQueryWrapper<Type> typeLqw = new LambdaQueryWrapper<>();
         String name = type.getName();
-        if(StringUtils.isNotEmpty(name)){
-            typeLqw.like(Type::getName,name);
+        if (StringUtils.isNotEmpty(name)) {
+            typeLqw.like(Type::getName, name);
         }
+        typeLqw.orderByAsc(true, Type::getSortNo);
         return Result.success(typeService.list(typeLqw));
+    }
+
+    @PostMapping("/update")
+    public Result update(@ModelAttribute TypeVO typeVO) {
+        typeService.addOrUpdateSynthesis(typeVO);
+        return Result.success();
+    }
+
+    @PostMapping("/add")
+    public Result add(@ModelAttribute TypeVO typeVO) {
+        typeService.addOrUpdateSynthesis(typeVO);
+        return Result.success();
     }
 }

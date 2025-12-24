@@ -1,78 +1,78 @@
 <template>
-  <div class="type-manage">
+  <div class="mood-manage">
     <!-- 顶部操作栏 -->
     <div class="operation-bar">
-      <el-input
-        v-model="searchName"
-        placeholder="请输入类型名称"
+      <el-input 
+        v-model="searchName" 
+        placeholder="请输入心情名称" 
         style="width: 200px; margin-right: 20px;"
-        @keyup.enter.native="searchTypes"
+        @keyup.enter.native="searchMoods"
       >
         <template #append>
-          <el-button @click="searchTypes" :loading="searchLoading">
+          <el-button @click="searchMoods" :loading="searchLoading">
             <i class="el-icon-search"></i>
           </el-button>
         </template>
       </el-input>
       <el-button type="success" @click="openAddDialog" style="background-color: #40c463; border-color: #40c463; color: white;">
-        Add Type
+        Add Mood
       </el-button>
     </div>
 
-    <!-- 类型卡片网格 -->
-    <div class="type-grid">
-      <div
-        v-for="type in typeList"
-        :key="type.id"
-        class="type-card"
-        @mouseenter="hoveredCard = type.id"
+    <!-- 心情卡片网格 -->
+    <div class="mood-grid">
+      <div 
+        v-for="mood in moodList" 
+        :key="mood.id" 
+        class="mood-card"
+        @mouseenter="hoveredCard = mood.id"
         @mouseleave="hoveredCard = null"
       >
         <!-- 展示顺序 -->
-        <div class="order-number">{{ type.sortNo }}</div>
-
+        <div class="order-number">{{ mood.sortNo }}</div>
+        
         <!-- 图标 -->
         <div class="icon-container">
-          <img :src="'/api'+type.icon" :alt="type.name" class="type-icon" v-if="type.icon" />
-          <div v-else class="type-icon-placeholder">?</div>
+          <img :src="'/api'+mood.icon" :alt="mood.name" class="mood-icon" v-if="mood.icon" />
+          <div v-else class="mood-icon-placeholder">?</div>
         </div>
-
-        <!-- 类型名称 -->
-        <div class="type-name">{{ type.name }}</div>
-
+        
+        <!-- 心情名称 -->
+        <div class="mood-name">{{ mood.name }}</div>
+        
         <!-- 操作按钮 - 悬浮显示 -->
-        <div class="card-actions" v-show="hoveredCard === type.id">
-          <el-button
-            type="primary"
-            icon="el-icon-edit"
-            size="mini"
-            circle
-            @click="editType(type)"
+        <div class="card-actions" v-show="hoveredCard === mood.id">
+          <el-button 
+            type="primary" 
+            icon="el-icon-edit" 
+            size="mini" 
+            circle 
+            @click="editMood(mood)"
             class="action-btn edit-btn"
           ></el-button>
-          <el-button
-            type="danger"
-            icon="el-icon-delete"
-            size="mini"
-            circle
-            @click="deleteType(type)"
+          <el-button 
+            type="danger" 
+            icon="el-icon-delete" 
+            size="mini" 
+            circle 
+            @click="deleteMood(mood)"
             class="action-btn delete-btn"
           ></el-button>
         </div>
       </div>
     </div>
 
-    <!-- 添加/编辑类型对话框 -->
-    <el-dialog
-      :title="dialogMode === 'add' ? '添加类型' : '编辑类型'"
+    <!-- 添加/编辑心情对话框 -->
+    <el-dialog 
+      :title="dialogMode === 'add' ? '添加心情' : '编辑心情'" 
       :visible.sync="dialogVisible"
       width="40%"
       :close-on-click-modal="false"
       :modal-append-to-body="false",
     >
-      <el-form :model="typeForm" :rules="rules" ref="typeForm" label-width="100px">
-        <el-form-item label="类型名称" prop="name">
-          <el-input v-model="typeForm.name" placeholder="请输入类型名称"></el-input>
+      <el-form :model="moodForm" :rules="rules" ref="moodForm" label-width="100px">
+        <el-form-item label="心情名称" prop="name">
+          <el-input v-model="moodForm.name" placeholder="请输入心情名称"></el-input>
         </el-form-item>
         <el-form-item label="图标" prop="icon">
           <el-upload
@@ -84,39 +84,39 @@
             :before-upload="beforeIconUpload"
             accept="image/*"
           >
-            <img v-if="previewIconUrl" :src="previewIconUrl" class="icon-preview">
-            <el-button v-else type="primary" icon="el-icon-plus" class="icon-upload-btn"></el-button>
+            <img v-if="previewIconUrl" :src="'/api'+previewIconUrl" class="icon-preview">
+            <el-button v-else type="primary" icon="el-icon-plus" class="icon-upload-btn">选择图标</el-button>
           </el-upload>
-<!--          <div class="icon-upload-tip" v-if="!previewIconUrl">支持 JPG/PNG/GIF/WebP 格式，建议尺寸 80x80</div>-->
+          <div class="icon-upload-tip" v-if="!previewIconUrl">支持 JPG/PNG/GIF/WebP 格式，建议尺寸 80x80</div>
         </el-form-item>
         <el-form-item label="排序号" prop="sortNo">
-          <el-input-number v-model="typeForm.sortNo" :min="0" :max="999" placeholder="请输入排序号"></el-input-number>
+          <el-input-number v-model="moodForm.sortNo" :min="0" :max="999" placeholder="请输入排序号"></el-input-number>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="submitType" :loading="submitLoading">确定</el-button>
+        <el-button type="primary" @click="submitMood" :loading="submitLoading">确定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { getTypeList, addType, updateType, deleteType } from '@/apis/api/type'
+import { getMoodList, addMood, updateMood, deleteMood } from '@/apis/api/mood'
 
 export default {
-  name: 'TypeManage',
+  name: 'MoodManage',
   data() {
     return {
       loading: false,
       searchLoading: false,
       submitLoading: false,
-      typeList: [],
+      moodList: [],
       searchName: '',
       dialogVisible: false,
       dialogMode: 'add',
       hoveredCard: null, // 当前鼠标悬停的卡片ID
-      typeForm: {
+      moodForm: {
         id: null,
         name: '',
         icon: '',
@@ -124,7 +124,7 @@ export default {
       },
       rules: {
         name: [
-          { required: true, message: '请输入类型名称', trigger: 'blur' }
+          { required: true, message: '请输入心情名称', trigger: 'blur' }
         ],
         sortNo: [
           { required: true, message: '请输入排序号', trigger: 'blur' },
@@ -136,8 +136,8 @@ export default {
     }
   },
   methods: {
-    // 获取类型列表
-    async getTypeList(isSearch = false) {
+    // 获取心情列表
+    async getMoodList(isSearch = false) {
       if (isSearch) {
         this.searchLoading = true
       } else {
@@ -149,18 +149,18 @@ export default {
           name: this.searchName || undefined
         }
 
-        const res = await getTypeList(params)
-
+        const res = await getMoodList(params)
+        
         if (res.code === 200) {
           // 将接口返回的数据结构映射到组件期望的结构
-          this.typeList = res.data.map(item => ({
+          this.moodList = res.data.map(item => ({
             id: item.id,
             name: item.name,
             icon: item.icon,
             sortNo: item.sortNo
           }))
         } else {
-          this.$message.error(res.message || '获取类型列表失败')
+          this.$message.error(res.message || '获取心情列表失败')
         }
 
         if (isSearch) {
@@ -169,8 +169,8 @@ export default {
           this.loading = false
         }
       } catch (error) {
-        console.error('获取类型列表失败:', error)
-        this.$message.error('获取类型列表失败')
+        console.error('获取心情列表失败:', error)
+        this.$message.error('获取心情列表失败')
 
         if (isSearch) {
           this.searchLoading = false
@@ -180,15 +180,15 @@ export default {
       }
     },
 
-    // 搜索类型
-    searchTypes() {
-      this.getTypeList(true)
+    // 搜索心情
+    searchMoods() {
+      this.getMoodList(true)
     },
 
     // 打开添加对话框
     openAddDialog() {
       this.dialogMode = 'add'
-      this.typeForm = {
+      this.moodForm = {
         id: null,
         name: '',
         icon: '',
@@ -199,11 +199,11 @@ export default {
       this.dialogVisible = true
     },
 
-    // 编辑类型
-    editType(row) {
+    // 编辑心情
+    editMood(row) {
       this.dialogMode = 'edit'
       // 复制数据到表单
-      this.typeForm = {
+      this.moodForm = { 
         id: row.id,
         name: row.name,
         icon: row.icon,
@@ -211,7 +211,7 @@ export default {
       }
       this.currentFile = null // 重置文件
       // 设置预览图标为当前图标的完整路径
-      this.previewIconUrl = '/api'+row.icon
+      this.previewIconUrl = row.icon
       this.dialogVisible = true
     },
 
@@ -246,41 +246,41 @@ export default {
       this.currentFile = file.raw
     },
 
-    // 提交类型（添加或编辑）
-    async submitType() {
+    // 提交心情（添加或编辑）
+    async submitMood() {
       try {
-        await this.$refs.typeForm.validate()
+        await this.$refs.moodForm.validate()
         this.submitLoading = true
 
         // 准备表单数据
         const formData = new FormData()
-        formData.append('name', this.typeForm.name)
-        formData.append('sortNo', this.typeForm.sortNo.toString())
-
+        formData.append('name', this.moodForm.name)
+        formData.append('sortNo', this.moodForm.sortNo.toString())
+        
         // 如果是编辑模式，添加ID
         if (this.dialogMode === 'edit') {
-          formData.append('id', this.typeForm.id.toString())
+          formData.append('id', this.moodForm.id.toString())
         }
-
+        
         // 如果有新上传的文件，则添加到formData
         if (this.currentFile) {
           formData.append('iconFile', this.currentFile)
         } else {
           // 如果没有新文件但有原始图标路径，也要设置图标路径
-          if (this.typeForm.icon) {
-            formData.append('icon', this.typeForm.icon)
+          if (this.moodForm.icon) {
+            formData.append('icon', this.moodForm.icon)
           }
         }
 
         if (this.dialogMode === 'add') {
-          await addType(formData)
+          await addMood(formData)
         } else {
-          await updateType(formData)
+          await updateMood(formData)
         }
 
         this.submitLoading = false
         this.dialogVisible = false
-        this.getTypeList()
+        this.getMoodList()
         this.$message.success(this.dialogMode === 'add' ? '添加成功' : '编辑成功')
       } catch (error) {
         this.submitLoading = false
@@ -293,18 +293,18 @@ export default {
       }
     },
 
-    // 删除类型
-    async deleteType(row) {
+    // 删除心情
+    async deleteMood(row) {
       try {
-        await this.$confirm(`确认删除类型 "${row.name}" 吗？`, '提示', {
+        await this.$confirm(`确认删除心情 "${row.name}" 吗？`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         })
 
-        await deleteType(row.id)
-
-        this.getTypeList()
+        await deleteMood(row.id)
+        
+        this.getMoodList()
         this.$message.success('删除成功')
       } catch (error) {
         if (error !== 'cancel') {
@@ -315,13 +315,13 @@ export default {
   },
 
   mounted() {
-    this.getTypeList()
+    this.getMoodList()
   }
 }
 </script>
 
 <style scoped>
-.type-manage {
+.mood-manage {
   padding: 20px;
 }
 
@@ -332,13 +332,13 @@ export default {
   align-items: center;
 }
 
-.type-grid {
+.mood-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr); /* 每行显示6个 */
   gap: 20px;
 }
 
-.type-card {
+.mood-card {
   position: relative;
   border: 1px solid #e4e7ed;
   border-radius: 8px;
@@ -351,7 +351,7 @@ export default {
   height: 180px; /* 固定高度以保持一致性 */
 }
 
-.type-card:hover {
+.mood-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
 }
@@ -379,14 +379,14 @@ export default {
   height: 80px;
 }
 
-.type-icon {
+.mood-icon {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.type-icon-placeholder {
+.mood-icon-placeholder {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -398,7 +398,7 @@ export default {
   color: #909399;
 }
 
-.type-name {
+.mood-name {
   font-size: 14px;
   font-weight: 500;
   margin-top: 10px;

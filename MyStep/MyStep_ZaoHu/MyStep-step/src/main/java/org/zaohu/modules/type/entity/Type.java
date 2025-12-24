@@ -24,7 +24,7 @@ import lombok.Setter;
 public class Type {
 
     @ApiModelProperty("主键ID")
-      @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty("类型名称")

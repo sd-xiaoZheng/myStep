@@ -24,6 +24,9 @@ import diaryCreate from '@/views/step/diary/diaryCreate.vue';
 import diaryList from '@/views/step/diary/diaryList.vue';
 import diaryManage from '@/views/step/diary/manage/diaryListManage.vue';
 import typeManage from '@/views/manage/typeManage.vue';
+import weatherManage from '@/views/manage/weatherManage.vue';
+import moodManage from '@/views/manage/moodManage.vue';
+
 
 Vue.use(Router);
 
@@ -172,6 +175,22 @@ const router = new Router({
                     component: typeManage,
                     meta: {
                         title: "类型管理"
+                    }
+                },
+                {
+                    path: '/moodManage',
+                    name: '/moodManage',
+                    component: moodManage,
+                    meta: {
+                        title: "心情管理"
+                    }
+                },
+                {
+                    path: '/weatherManage',
+                    name: '/weatherManage',
+                    component: weatherManage,
+                    meta: {
+                        title: "天气管理"
                     }
                 }
             ]

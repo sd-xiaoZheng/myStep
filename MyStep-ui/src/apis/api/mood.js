@@ -1,52 +1,52 @@
 import request from '@/apis/request'
 
 /**
- * 获取类型列表
+ * 获取心情列表
  * @param params 查询参数
  * @returns {*}
  */
-export function getTypeList(params) {
+export function getMoodList(params) {
     return request({
-        url: '/type/list',
+        url: '/mood/list',
         method: 'get',
         params
     })
 }
 
 /**
- * 添加类型
- * @param data 类型数据
+ * 添加心情
+ * @param data 心情数据
  * @returns {*}
  */
-export function addType(data) {
+export function addMood(data) {
     return request({
-        url: '/type/add',
+        url: '/mood/add',
         method: 'post',
         data: data
     })
 }
 
 /**
- * 更新类型
- * @param data 类型数据
+ * 更新心情
+ * @param data 心情数据
  * @returns {*}
  */
-export function updateType(data) {
+export function updateMood(data) {
     return request({
-        url: '/type/update',
+        url: '/mood/update',
         method: 'post',
         data: data
     })
 }
 
 /**
- * 删除类型
- * @param id 类型ID
+ * 删除心情
+ * @param id 心情ID
  * @returns {*}
  */
-export function deleteType(id) {
+export function deleteMood(id) {
     return request({
-        url: `/type/delete/${id}`,
+        url: `/mood/delete/${id}`,
         method: 'delete'
     })
 }

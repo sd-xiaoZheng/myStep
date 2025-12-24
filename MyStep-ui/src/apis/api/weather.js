@@ -1,52 +1,52 @@
 import request from '@/apis/request'
 
 /**
- * 获取类型列表
+ * 获取天气列表
  * @param params 查询参数
  * @returns {*}
  */
-export function getTypeList(params) {
+export function getWeatherList(params) {
     return request({
-        url: '/type/list',
+        url: '/weather/list',
         method: 'get',
         params
     })
 }
 
 /**
- * 添加类型
- * @param data 类型数据
+ * 添加天气
+ * @param data 天气数据
  * @returns {*}
  */
-export function addType(data) {
+export function addWeather(data) {
     return request({
-        url: '/type/add',
+        url: '/weather/add',
         method: 'post',
         data: data
     })
 }
 
 /**
- * 更新类型
- * @param data 类型数据
+ * 更新天气
+ * @param data 天气数据
  * @returns {*}
  */
-export function updateType(data) {
+export function updateWeather(data) {
     return request({
-        url: '/type/update',
+        url: '/weather/update',
         method: 'post',
         data: data
     })
 }
 
 /**
- * 删除类型
- * @param id 类型ID
+ * 删除天气
+ * @param id 天气ID
  * @returns {*}
  */
-export function deleteType(id) {
+export function deleteWeather(id) {
     return request({
-        url: `/type/delete/${id}`,
+        url: `/weather/delete/${id}`,
         method: 'delete'
     })
 }
