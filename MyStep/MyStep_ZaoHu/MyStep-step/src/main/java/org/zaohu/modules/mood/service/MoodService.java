@@ -2,6 +2,7 @@ package org.zaohu.modules.mood.service;
 
 import org.zaohu.modules.mood.entity.Mood;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.zaohu.modules.mood.entity.vo.MoodVO;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface MoodService extends IService<Mood> {
 
+    void addOrUpdateSynthesis(MoodVO moodVO);
 }

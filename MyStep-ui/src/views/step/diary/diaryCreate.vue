@@ -48,10 +48,10 @@
           <label>天气</label>
           <div class="tab-options">
             <button
-              v-for="(weather, index) in weatherOptions"
+              v-for="(weather, index) in weatherList"
               :key="index"
-              :class="['tab-btn', { active: diary.weather === weather.value }]"
-              @click="selectWeather(weather.value)"
+              :class="['tab-btn', { active: diary.weather === weather.id }]"
+              @click="selectWeather(weather.id)"
             >
               {{ weather.label }}
             </button>
@@ -62,12 +62,12 @@
           <label>心情</label>
           <div class="tab-options">
             <button
-              v-for="(mood, index) in moodOptions"
+              v-for="(mood, index) in moodList"
               :key="index"
-              :class="['tab-btn', { active: diary.mood === mood.value }]"
-              @click="selectMood(mood.value)"
+              :class="['tab-btn', { active: diary.mood === mood.id }]"
+              @click="selectMood(mood.id)"
             >
-              {{ mood.label }}
+              {{ mood.name }}
             </button>
           </div>
         </div>
@@ -77,12 +77,12 @@
           <label>类型:</label>
           <div class="tab-options">
             <button
-              v-for="(articleType, index) in articleTypeOptions"
+              v-for="(articleType, index) in typeList"
               :key="index"
-              :class="['tab-btn', { active: diary.articleType === articleType.value }]"
-              @click="selectArticleType(articleType.value)"
+              :class="['tab-btn', { active: diary.articleType === articleType.id }]"
+              @click="selectArticleType(articleType.id)"
             >
-              {{ articleType.label }}
+              {{ articleType.name }}
             </button>
           </div>
         </div>
@@ -185,15 +185,19 @@
 </template>
 
 <script>
+import { getTypeList } from '@/apis/api/type'
+import { getMoodList } from '@/apis/api/mood'
+import { getWeatherList } from '@/apis/api/weather'
+
 export default {
   name: 'CreateDiary',
   data() {
     return {
       diary: {
         date: '2025-11-04',
-        weather: '1',
-        mood: 'happy',
-        articleType: 'diary', // 新增文章类型字段
+        weather: null, // 修改为使用ID
+        mood: null, // 修改为使用ID
+        articleType: null, // 修改为使用ID
         tags: [], // 将单个tag改为tags数组以支持多选
         title: '',
         content: '',
@@ -201,48 +205,9 @@ export default {
       },
       wordCount: 0,
       selectedColor: '#3498db', // 默认蓝色
-      weatherOptions: [
-        { label: '晴天', value: '1' },
-        { label: '多云', value: '2' },
-        { label: '雨天', value: '3' },
-        { label: '雪天', value: '4' },
-        { label: '阴天', value: '5' },
-        { label: '雨夹雪', value: '6' },
-        { label: '雾天', value: '7' },
-        { label: '霾天', value: '8' },
-        { label: '沙尘天气', value: '9' },
-        { label: '雷阵雨', value: '10' },
-        { label: '冰雹', value: '11' },
-        { label: '霜冻', value: '12' },
-        { label: '大风', value: '13' },
-        { label: '台风', value: '14' }
-      ],
-      moodOptions: [
-        { label: '开心', value: 'happy' },
-        { label: '平静', value: 'calm' },
-        { label: '难过', value: 'sad' },
-        { label: '兴奋', value: 'excited' },
-        { label: '愤怒', value: 'angry' },
-        { label: '焦虑', value: 'anxious' },
-        { label: '疲惫', value: 'tired' },
-        { label: '烦躁', value: 'irritable' },
-        { label: '惊喜', value: 'surprised' },
-        { label: '失望', value: 'disappointed' },
-        { label: '满足', value: 'satisfied' },
-        { label: '孤独', value: 'lonely' },
-        { label: '紧张', value: 'nervous' },
-        { label: '放松', value: 'relaxed' },
-        { label: '愧疚', value: 'guilty' },
-        { label: '自豪', value: 'proud' }
-      ],
-      // 文章类型选项
-      articleTypeOptions: [
-        { label: '日记', value: 'diary' },
-        { label: '随笔', value: 'essay' },
-        { label: '游记', value: 'travel' },
-        { label: '读书笔记', value: 'reading' },
-        { label: '工作日志', value: 'worklog' }
-      ],
+      typeList: [], // 从接口获取的类型列表
+      moodList: [], // 从接口获取的心情列表
+      weatherList: [], // 从接口获取的天气列表
       tagOptions: [
         { label: '日常生活', value: 'daily' },
         { label: '学习笔记', value: 'study' },
@@ -265,16 +230,61 @@ export default {
       ]
     }
   },
+  async mounted() {
+    // 在组件挂载后获取数据
+    await this.loadTypes();
+    await this.loadMoods();
+    await this.loadWeathers();
+  },
   methods: {
-    selectWeather(weather) {
-      this.diary.weather = weather;
+    async loadTypes() {
+      try {
+        const res = await getTypeList({});
+        if (res.code === 200) {
+          this.typeList = res.data;
+          if (this.typeList.length > 0) {
+            this.diary.articleType = this.typeList[0].id; // 默认选择第一个
+          }
+        }
+      } catch (error) {
+        console.error('获取类型列表失败:', error);
+      }
     },
-    selectMood(mood) {
-      this.diary.mood = mood;
+    async loadMoods() {
+      try {
+        const res = await getMoodList({});
+        if (res.code === 200) {
+          this.moodList = res.data;
+          if (this.moodList.length > 0) {
+            this.diary.mood = this.moodList[0].id; // 默认选择第一个
+          }
+        }
+      } catch (error) {
+        console.error('获取心情列表失败:', error);
+      }
+    },
+    async loadWeathers() {
+      try {
+        const res = await getWeatherList({});
+        if (res.code === 200) {
+          this.weatherList = res.data;
+          if (this.weatherList.length > 0) {
+            this.diary.weather = this.weatherList[0].id; // 默认选择第一个
+          }
+        }
+      } catch (error) {
+        console.error('获取天气列表失败:', error);
+      }
+    },
+    selectWeather(weatherId) {
+      this.diary.weather = weatherId;
+    },
+    selectMood(moodId) {
+      this.diary.mood = moodId;
     },
     // 新增文章类型选择方法
-    selectArticleType(articleType) {
-      this.diary.articleType = articleType;
+    selectArticleType(articleTypeId) {
+      this.diary.articleType = articleTypeId;
     },
     // 将标签选择改为切换方式以支持多选，实现队列式选择（最多3个）
     toggleTag(tag) {

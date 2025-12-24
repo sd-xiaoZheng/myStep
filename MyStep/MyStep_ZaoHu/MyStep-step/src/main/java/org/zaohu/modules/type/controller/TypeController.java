@@ -46,4 +46,10 @@ public class TypeController {
         typeService.addOrUpdateSynthesis(typeVO);
         return Result.success();
     }
+
+    @DeleteMapping("/delete/{id}")
+    public Result delete(@PathVariable Integer id) {
+        typeService.removeById(id);
+        return Result.success();
+    }
 }

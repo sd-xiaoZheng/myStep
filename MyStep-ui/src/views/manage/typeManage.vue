@@ -33,7 +33,7 @@
 
         <!-- 图标 -->
         <div class="icon-container">
-          <img :src="'/api'+type.icon" :alt="type.name" class="type-icon" v-if="type.icon" />
+          <img :src="'/api'+type.icon" :alt="type.name" class="type-icon" v-if="type.icon" loading="lazy"/>
           <div v-else class="type-icon-placeholder">?</div>
         </div>
 
@@ -374,7 +374,7 @@ export default {
 }
 
 .icon-container {
-  margin: 15px auto 10px;
+  margin: 25px auto 10px;
   width: 80px;
   height: 80px;
 }
@@ -401,7 +401,7 @@ export default {
 .type-name {
   font-size: 14px;
   font-weight: 500;
-  margin-top: 10px;
+  margin-top: 40px;
   word-break: break-all;
   text-overflow: ellipsis;
   display: -webkit-box;

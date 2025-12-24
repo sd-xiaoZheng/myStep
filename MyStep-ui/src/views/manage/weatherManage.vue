@@ -2,9 +2,9 @@
   <div class="weather-manage">
     <!-- 顶部操作栏 -->
     <div class="operation-bar">
-      <el-input 
-        v-model="searchName" 
-        placeholder="请输入天气名称" 
+      <el-input
+        v-model="searchLabel"
+        placeholder="请输入天气名称"
         style="width: 200px; margin-right: 20px;"
         @keyup.enter.native="searchWeathers"
       >
@@ -21,40 +21,37 @@
 
     <!-- 天气卡片网格 -->
     <div class="weather-grid">
-      <div 
-        v-for="weather in weatherList" 
-        :key="weather.id" 
+      <div
+        v-for="weather in weatherList"
+        :key="weather.id"
         class="weather-card"
         @mouseenter="hoveredCard = weather.id"
         @mouseleave="hoveredCard = null"
       >
-        <!-- 展示顺序 -->
-        <div class="order-number">{{ weather.sortNo }}</div>
-        
         <!-- 图标 -->
         <div class="icon-container">
-          <img :src="'/api'+weather.icon" :alt="weather.name" class="weather-icon" v-if="weather.icon" />
+          <img :src="'/api'+weather.icon" :alt="weather.label" class="weather-icon" v-if="weather.icon" loading="lazy"/>
           <div v-else class="weather-icon-placeholder">?</div>
         </div>
-        
+
         <!-- 天气名称 -->
-        <div class="weather-name">{{ weather.name }}</div>
-        
+        <div class="weather-name">{{ weather.label }}</div>
+
         <!-- 操作按钮 - 悬浮显示 -->
         <div class="card-actions" v-show="hoveredCard === weather.id">
-          <el-button 
-            type="primary" 
-            icon="el-icon-edit" 
-            size="mini" 
-            circle 
+          <el-button
+            type="primary"
+            icon="el-icon-edit"
+            size="mini"
+            circle
             @click="editWeather(weather)"
             class="action-btn edit-btn"
           ></el-button>
-          <el-button 
-            type="danger" 
-            icon="el-icon-delete" 
-            size="mini" 
-            circle 
+          <el-button
+            type="danger"
+            icon="el-icon-delete"
+            size="mini"
+            circle
             @click="deleteWeather(weather)"
             class="action-btn delete-btn"
           ></el-button>
@@ -63,16 +60,16 @@
     </div>
 
     <!-- 添加/编辑天气对话框 -->
-    <el-dialog 
-      :title="dialogMode === 'add' ? '添加天气' : '编辑天气'" 
+    <el-dialog
+      :title="dialogMode === 'add' ? '添加天气' : '编辑天气'"
       :visible.sync="dialogVisible"
       width="40%"
       :close-on-click-modal="false"
       :modal-append-to-body="false",
     >
       <el-form :model="weatherForm" :rules="rules" ref="weatherForm" label-width="100px">
-        <el-form-item label="天气名称" prop="name">
-          <el-input v-model="weatherForm.name" placeholder="请输入天气名称"></el-input>
+        <el-form-item label="天气名称" prop="label">
+          <el-input v-model="weatherForm.label" placeholder="请输入天气名称"></el-input>
         </el-form-item>
         <el-form-item label="图标" prop="icon">
           <el-upload
@@ -85,12 +82,8 @@
             accept="image/*"
           >
             <img v-if="previewIconUrl" :src="'/api'+previewIconUrl" class="icon-preview">
-            <el-button v-else type="primary" icon="el-icon-plus" class="icon-upload-btn">选择图标</el-button>
+            <el-button v-else type="primary" icon="el-icon-plus" class="icon-upload-btn"></el-button>
           </el-upload>
-          <div class="icon-upload-tip" v-if="!previewIconUrl">支持 JPG/PNG/GIF/WebP 格式，建议尺寸 80x80</div>
-        </el-form-item>
-        <el-form-item label="排序号" prop="sortNo">
-          <el-input-number v-model="weatherForm.sortNo" :min="0" :max="999" placeholder="请输入排序号"></el-input-number>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -112,23 +105,18 @@ export default {
       searchLoading: false,
       submitLoading: false,
       weatherList: [],
-      searchName: '',
+      searchLabel: '',
       dialogVisible: false,
       dialogMode: 'add',
       hoveredCard: null, // 当前鼠标悬停的卡片ID
       weatherForm: {
         id: null,
-        name: '',
-        icon: '',
-        sortNo: 0
+        label: '',
+        icon: ''
       },
       rules: {
-        name: [
+        label: [
           { required: true, message: '请输入天气名称', trigger: 'blur' }
-        ],
-        sortNo: [
-          { required: true, message: '请输入排序号', trigger: 'blur' },
-          { type: 'number', message: '排序号必须为数字', trigger: 'blur' }
         ]
       },
       currentFile: null, // 存储当前选择的文件
@@ -146,18 +134,17 @@ export default {
 
       try {
         const params = {
-          name: this.searchName || undefined
+          label: this.searchLabel || undefined
         }
 
         const res = await getWeatherList(params)
-        
+
         if (res.code === 200) {
           // 将接口返回的数据结构映射到组件期望的结构
           this.weatherList = res.data.map(item => ({
             id: item.id,
-            name: item.name,
-            icon: item.icon,
-            sortNo: item.sortNo
+            label: item.label,
+            icon: item.icon
           }))
         } else {
           this.$message.error(res.message || '获取天气列表失败')
@@ -190,9 +177,8 @@ export default {
       this.dialogMode = 'add'
       this.weatherForm = {
         id: null,
-        name: '',
-        icon: '',
-        sortNo: 0
+        label: '',
+        icon: ''
       }
       this.currentFile = null // 重置文件
       this.previewIconUrl = '' // 重置预览
@@ -203,11 +189,10 @@ export default {
     editWeather(row) {
       this.dialogMode = 'edit'
       // 复制数据到表单
-      this.weatherForm = { 
+      this.weatherForm = {
         id: row.id,
-        name: row.name,
-        icon: row.icon,
-        sortNo: row.sortNo
+        label: row.label,
+        icon: row.icon
       }
       this.currentFile = null // 重置文件
       // 设置预览图标为当前图标的完整路径
@@ -254,14 +239,13 @@ export default {
 
         // 准备表单数据
         const formData = new FormData()
-        formData.append('name', this.weatherForm.name)
-        formData.append('sortNo', this.weatherForm.sortNo.toString())
-        
+        formData.append('label', this.weatherForm.label)
+
         // 如果是编辑模式，添加ID
         if (this.dialogMode === 'edit') {
           formData.append('id', this.weatherForm.id.toString())
         }
-        
+
         // 如果有新上传的文件，则添加到formData
         if (this.currentFile) {
           formData.append('iconFile', this.currentFile)
@@ -296,14 +280,14 @@ export default {
     // 删除天气
     async deleteWeather(row) {
       try {
-        await this.$confirm(`确认删除天气 "${row.name}" 吗？`, '提示', {
+        await this.$confirm(`确认删除天气 "${row.label}" 吗？`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         })
 
         await deleteWeather(row.id)
-        
+
         this.getWeatherList()
         this.$message.success('删除成功')
       } catch (error) {
@@ -356,25 +340,8 @@ export default {
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
 }
 
-.order-number {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background-color: #409EFF;
-  color: white;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
-  z-index: 2;
-}
-
 .icon-container {
-  margin: 15px auto 10px;
+  margin: 30px auto 10px; /* 增加顶部边距以适应没有排序号的布局 */
   width: 80px;
   height: 80px;
 }
@@ -401,7 +368,7 @@ export default {
 .weather-name {
   font-size: 14px;
   font-weight: 500;
-  margin-top: 10px;
+  margin-top: 40px;
   word-break: break-all;
   text-overflow: ellipsis;
   display: -webkit-box;

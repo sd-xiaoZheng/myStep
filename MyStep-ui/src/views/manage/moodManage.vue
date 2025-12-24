@@ -2,11 +2,11 @@
   <div class="mood-manage">
     <!-- 顶部操作栏 -->
     <div class="operation-bar">
-      <el-input 
-        v-model="searchName" 
-        placeholder="请输入心情名称" 
-        style="width: 200px; margin-right: 20px;"
-        @keyup.enter.native="searchMoods"
+      <el-input
+          v-model="searchName"
+          placeholder="请输入心情名称"
+          style="width: 200px; margin-right: 20px;"
+          @keyup.enter.native="searchMoods"
       >
         <template #append>
           <el-button @click="searchMoods" :loading="searchLoading">
@@ -21,54 +21,51 @@
 
     <!-- 心情卡片网格 -->
     <div class="mood-grid">
-      <div 
-        v-for="mood in moodList" 
-        :key="mood.id" 
-        class="mood-card"
-        @mouseenter="hoveredCard = mood.id"
-        @mouseleave="hoveredCard = null"
+      <div
+          v-for="mood in moodList"
+          :key="mood.id"
+          class="mood-card"
+          @mouseenter="hoveredCard = mood.id"
+          @mouseleave="hoveredCard = null"
       >
-        <!-- 展示顺序 -->
-        <div class="order-number">{{ mood.sortNo }}</div>
-        
         <!-- 图标 -->
         <div class="icon-container">
-          <img :src="'/api'+mood.icon" :alt="mood.name" class="mood-icon" v-if="mood.icon" />
+          <img :src="'/api'+mood.icon" :alt="mood.name" class="mood-icon" v-if="mood.icon" loading="lazy"/>
           <div v-else class="mood-icon-placeholder">?</div>
         </div>
-        
+
         <!-- 心情名称 -->
         <div class="mood-name">{{ mood.name }}</div>
-        
+
         <!-- 操作按钮 - 悬浮显示 -->
         <div class="card-actions" v-show="hoveredCard === mood.id">
-          <el-button 
-            type="primary" 
-            icon="el-icon-edit" 
-            size="mini" 
-            circle 
-            @click="editMood(mood)"
-            class="action-btn edit-btn"
+          <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="mini"
+              circle
+              @click="editMood(mood)"
+              class="action-btn edit-btn"
           ></el-button>
-          <el-button 
-            type="danger" 
-            icon="el-icon-delete" 
-            size="mini" 
-            circle 
-            @click="deleteMood(mood)"
-            class="action-btn delete-btn"
+          <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+              circle
+              @click="deleteMood(mood)"
+              class="action-btn delete-btn"
           ></el-button>
         </div>
       </div>
     </div>
 
     <!-- 添加/编辑心情对话框 -->
-    <el-dialog 
-      :title="dialogMode === 'add' ? '添加心情' : '编辑心情'" 
-      :visible.sync="dialogVisible"
-      width="40%"
-      :close-on-click-modal="false"
-      :modal-append-to-body="false",
+    <el-dialog
+        :title="dialogMode === 'add' ? '添加心情' : '编辑心情'"
+        :visible.sync="dialogVisible"
+        width="40%"
+        :close-on-click-modal="false"
+        :modal-append-to-body="false",
     >
       <el-form :model="moodForm" :rules="rules" ref="moodForm" label-width="100px">
         <el-form-item label="心情名称" prop="name">
@@ -76,21 +73,18 @@
         </el-form-item>
         <el-form-item label="图标" prop="icon">
           <el-upload
-            class="icon-uploader"
-            action="#"
-            :show-file-list="false"
-            :on-change="handleIconChange"
-            :auto-upload="false"
-            :before-upload="beforeIconUpload"
-            accept="image/*"
+              class="icon-uploader"
+              action="#"
+              :show-file-list="false"
+              :on-change="handleIconChange"
+              :auto-upload="false"
+              :before-upload="beforeIconUpload"
+              accept="image/*"
           >
             <img v-if="previewIconUrl" :src="'/api'+previewIconUrl" class="icon-preview">
             <el-button v-else type="primary" icon="el-icon-plus" class="icon-upload-btn">选择图标</el-button>
           </el-upload>
           <div class="icon-upload-tip" v-if="!previewIconUrl">支持 JPG/PNG/GIF/WebP 格式，建议尺寸 80x80</div>
-        </el-form-item>
-        <el-form-item label="排序号" prop="sortNo">
-          <el-input-number v-model="moodForm.sortNo" :min="0" :max="999" placeholder="请输入排序号"></el-input-number>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -119,16 +113,11 @@ export default {
       moodForm: {
         id: null,
         name: '',
-        icon: '',
-        sortNo: 0
+        icon: ''
       },
       rules: {
         name: [
           { required: true, message: '请输入心情名称', trigger: 'blur' }
-        ],
-        sortNo: [
-          { required: true, message: '请输入排序号', trigger: 'blur' },
-          { type: 'number', message: '排序号必须为数字', trigger: 'blur' }
         ]
       },
       currentFile: null, // 存储当前选择的文件
@@ -150,14 +139,13 @@ export default {
         }
 
         const res = await getMoodList(params)
-        
+
         if (res.code === 200) {
           // 将接口返回的数据结构映射到组件期望的结构
           this.moodList = res.data.map(item => ({
             id: item.id,
             name: item.name,
-            icon: item.icon,
-            sortNo: item.sortNo
+            icon: item.icon
           }))
         } else {
           this.$message.error(res.message || '获取心情列表失败')
@@ -191,8 +179,7 @@ export default {
       this.moodForm = {
         id: null,
         name: '',
-        icon: '',
-        sortNo: 0
+        icon: ''
       }
       this.currentFile = null // 重置文件
       this.previewIconUrl = '' // 重置预览
@@ -203,11 +190,10 @@ export default {
     editMood(row) {
       this.dialogMode = 'edit'
       // 复制数据到表单
-      this.moodForm = { 
+      this.moodForm = {
         id: row.id,
         name: row.name,
-        icon: row.icon,
-        sortNo: row.sortNo
+        icon: row.icon
       }
       this.currentFile = null // 重置文件
       // 设置预览图标为当前图标的完整路径
@@ -255,13 +241,12 @@ export default {
         // 准备表单数据
         const formData = new FormData()
         formData.append('name', this.moodForm.name)
-        formData.append('sortNo', this.moodForm.sortNo.toString())
-        
+
         // 如果是编辑模式，添加ID
         if (this.dialogMode === 'edit') {
           formData.append('id', this.moodForm.id.toString())
         }
-        
+
         // 如果有新上传的文件，则添加到formData
         if (this.currentFile) {
           formData.append('iconFile', this.currentFile)
@@ -303,7 +288,7 @@ export default {
         })
 
         await deleteMood(row.id)
-        
+
         this.getMoodList()
         this.$message.success('删除成功')
       } catch (error) {
@@ -356,25 +341,8 @@ export default {
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
 }
 
-.order-number {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background-color: #409EFF;
-  color: white;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
-  z-index: 2;
-}
-
 .icon-container {
-  margin: 15px auto 10px;
+  margin: 30px auto 10px; /* 增加顶部边距以适应没有排序号的布局 */
   width: 80px;
   height: 80px;
 }
@@ -401,7 +369,7 @@ export default {
 .mood-name {
   font-size: 14px;
   font-weight: 500;
-  margin-top: 10px;
+  margin-top: 40px;
   word-break: break-all;
   text-overflow: ellipsis;
   display: -webkit-box;
