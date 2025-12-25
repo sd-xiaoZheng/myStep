@@ -24,7 +24,7 @@ public class ConditionalAssembler {
         if (Objects.nonNull(article.getWeatherId())) { articleLambdaQueryWrapper.eq(Article::getWeatherId, article.getWeatherId()); }
         if (Objects.nonNull(article.getMoodId())) { articleLambdaQueryWrapper.eq(Article::getMoodId, article.getMoodId()); }
         if (StringUtils.isNotEmpty(article.getAuthorName())) { articleLambdaQueryWrapper.eq(Article::getAuthorName, article.getAuthorName()); }
-        if (StringUtils.isNotEmpty(article.getAuthorId())) { articleLambdaQueryWrapper.eq(Article::getAuthorId, article.getAuthorId()); }
+        if (Objects.nonNull(article.getAuthorId())) { articleLambdaQueryWrapper.eq(Article::getAuthorId, article.getAuthorId()); }
         if (StringUtils.isNotEmpty(article.getAuthorAvatar())) { articleLambdaQueryWrapper.eq(Article::getAuthorAvatar, article.getAuthorAvatar()); }
         if (StringUtils.isNotEmpty(article.getColor())) { articleLambdaQueryWrapper.eq(Article::getColor, article.getColor()); }
         if (StringUtils.isNotEmpty(article.getImageUrls())) { articleLambdaQueryWrapper.like(Article::getImageUrls, article.getImageUrls()); }

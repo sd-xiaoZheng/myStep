@@ -1,5 +1,7 @@
 package org.zaohu.modules.article.service.Impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.zaohu.common.conditionalAssembler.ConditionalAssembler;
@@ -13,13 +15,12 @@ import org.zaohu.modules.mood.entity.Mood;
 import org.zaohu.modules.mood.mapper.MoodMapper;
 import org.zaohu.modules.type.entity.Type;
 import org.zaohu.modules.type.mapper.TypeMapper;
+import org.zaohu.modules.userLogin.entity.User;
 import org.zaohu.modules.weather.entity.Weather;
 import org.zaohu.modules.weather.mapper.WeatherMapper;
+import org.zaohu.utils.security.SecurityUtils;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -38,6 +39,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     private final MoodMapper moodMapper;
     private final TypeMapper typeMapper;
     private final WeatherMapper weatherMapper;
+    private final SecurityUtils securityUtils;
 
     @Override
     public List<Article> getDairy(Article article) {
@@ -90,5 +92,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     public void addArticle(ArticleVO articleVO) {
         Integer[] tags = articleVO.getTags();
+        Article article = new Article();
+        BeanUtil.copyProperties(articleVO,article);
+        article.setWriteTime(new Date());
+        User user = securityUtils.getUser();
+        String username = user.getUsername();
+        article.setAuthorName(username);
+        article.setAuthorId(user.getUserId());
     }
 }

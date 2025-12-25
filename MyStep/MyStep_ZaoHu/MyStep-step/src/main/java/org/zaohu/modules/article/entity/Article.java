@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -43,11 +44,11 @@ public class Article {
 
     @ApiModelProperty("写作时间")
     @TableField("write_time")
-    private LocalDateTime writeTime;
+    private Date writeTime;
 
     @ApiModelProperty("记忆中的时间")
     @TableField("memory_time")
-    private LocalDateTime memoryTime;
+    private Date memoryTime;
 
     @ApiModelProperty("天气ID")
     @TableField("weather_id")
@@ -63,7 +64,7 @@ public class Article {
 
     @ApiModelProperty("写作者ID")
     @TableField("author_id")
-    private String authorId;
+    private Long authorId;
 
     @ApiModelProperty("写作者头像")
     @TableField("author_avatar")
