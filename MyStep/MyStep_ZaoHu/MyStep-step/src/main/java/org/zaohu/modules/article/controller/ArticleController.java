@@ -1,12 +1,12 @@
 package org.zaohu.modules.article.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.zaohu.common.ResultCommon.Result;
 import org.zaohu.common.page.TableDataInfo;
 import org.zaohu.constant.controller.BaseController;
 import org.zaohu.modules.article.entity.Article;
+import org.zaohu.modules.article.entity.vo.ArticleVO;
 import org.zaohu.modules.article.service.ArticleService;
 
 import java.util.List;
@@ -34,5 +34,11 @@ public class ArticleController extends BaseController {
         TableDataInfo dataTable = getDataTableNoTotal(photoList);
         dataTable.setTotal(total);
         return dataTable;
+    }
+
+    @PostMapping("/addArticle")
+    public Result addArticle(@ModelAttribute ArticleVO articleVO) {
+        articleService.addArticle(articleVO);
+        return Result.success();
     }
 }

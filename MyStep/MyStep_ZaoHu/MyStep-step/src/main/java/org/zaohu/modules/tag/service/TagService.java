@@ -1,5 +1,6 @@
 package org.zaohu.modules.tag.service;
 
+import org.zaohu.modules.mood.entity.vo.MoodVO;
 import org.zaohu.modules.tag.entity.Tag;
 import com.baomidou.mybatisplus.extension.service.IService;
 

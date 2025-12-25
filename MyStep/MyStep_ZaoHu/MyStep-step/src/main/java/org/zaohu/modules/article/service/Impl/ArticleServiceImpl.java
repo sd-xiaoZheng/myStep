@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.zaohu.common.conditionalAssembler.ConditionalAssembler;
 import org.zaohu.modules.article.entity.Article;
+import org.zaohu.modules.article.entity.vo.ArticleVO;
 import org.zaohu.modules.article.mapper.ArticleMapper;
 import org.zaohu.modules.article.service.ArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -84,5 +85,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     public Long selectCount(Article article) {
         return articleMapper.selectCount(null);
+    }
+
+    @Override
+    public void addArticle(ArticleVO articleVO) {
+        Integer[] tags = articleVO.getTags();
     }
 }

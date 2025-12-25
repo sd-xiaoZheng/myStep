@@ -95,8 +95,8 @@
         </div>
         <div class="tag-options">
           <button
-            v-for="(tag, index) in tagOptions"
-            :key="index"
+            v-for="(tag, index) in tagList"
+            :key="tag.value"
             :class="['tag-btn', { active: diary.tags.includes(tag.value) }]"
             @click="toggleTag(tag.value)"
           >
@@ -188,6 +188,8 @@
 import { getTypeList } from '@/apis/api/type'
 import { getMoodList } from '@/apis/api/mood'
 import { getWeatherList } from '@/apis/api/weather'
+import { getTagList } from '@/apis/api/tag'
+import { addArticle } from '@/apis/api/article'
 
 export default {
   name: 'CreateDiary',
@@ -208,26 +210,7 @@ export default {
       typeList: [], // 从接口获取的类型列表
       moodList: [], // 从接口获取的心情列表
       weatherList: [], // 从接口获取的天气列表
-      tagOptions: [
-        { label: '日常生活', value: 'daily' },
-        { label: '学习笔记', value: 'study' },
-        { label: '旅行见闻', value: 'travel' },
-        { label: '工作记录', value: 'work' },
-        { label: '兴趣爱好', value: 'hobby' },
-        { label: '美食探索', value: 'food' },
-        { label: '影视评论', value: 'movie' },
-        { label: '音乐分享', value: 'music' },
-        { label: '书籍读后感', value: 'book' },
-        { label: '职场心得', value: 'career' },
-        { label: '社交聚会', value: 'social' },
-        { label: '健身运动', value: 'fitness' },
-        { label: '思考感悟', value: 'thought' },
-        { label: '技能分享', value: 'skill' },
-        { label: '好物推荐', value: 'recommend' },
-        { label: '志愿服务', value: 'volunteer' },
-        { label: '节日纪念', value: 'festival' },
-        { label: '理财规划', value: 'finance' }
-      ]
+      tagList: [], // 从接口获取的标签列表
     }
   },
   async mounted() {
@@ -235,6 +218,7 @@ export default {
     await this.loadTypes();
     await this.loadMoods();
     await this.loadWeathers();
+    await this.loadTags();
   },
   methods: {
     async loadTypes() {
@@ -318,11 +302,49 @@ export default {
     cancel() {
       this.$router.go(-1);
     },
-    saveDiary() {
-      // 这里可以添加保存日记的逻辑
-      console.log('保存日记:', this.diary);
-      alert('日记已保存！');
-      this.$router.go(-1);
+    async saveDiary() {
+      try {
+        // 创建 FormData 对象来发送 multipart/form-data 请求
+        const formData = new FormData();
+        
+        // 添加基本字段
+        formData.append('title', this.diary.title);
+        formData.append('content', this.diary.content);
+        formData.append('memoryTime', this.diary.date + 'T00:00:00'); // 对应后端的 memory_time 字段，转换为 LocalDateTime 格式
+        formData.append('color', this.selectedColor);
+        formData.append('weatherId', this.diary.weather || ''); // 对应后端的 weather_id 字段
+        formData.append('moodId', this.diary.mood || ''); // 对应后端的 mood_id 字段
+        formData.append('typeId', this.diary.articleType || ''); // 对应后端的 type_id 字段
+        
+        // 添加标签数组（作为整数数组）
+        if (this.diary.tags && this.diary.tags.length > 0) {
+          this.diary.tags.forEach(tag => {
+            formData.append('tags', parseInt(tag)); // 确保标签ID是整数类型
+          });
+        }
+        
+        // 添加图片文件
+        if (this.diary.images && this.diary.images.length > 0) {
+          this.diary.images.forEach(image => {
+            if (image.file) { // 确保图片文件存在
+              formData.append('images', image.file);
+            }
+          });
+        }
+        
+        const res = await addArticle(formData);
+        
+        if (res.code === 200) {
+          this.$message.success('日记保存成功！');
+          // 保存成功后返回上一页或跳转到指定页面
+          this.$router.go(-1);
+        } else {
+          this.$message.error(res.message || '日记保存失败');
+        }
+      } catch (error) {
+        console.error('保存日记失败:', error);
+        this.$message.error('保存日记时发生错误: ' + (error.message || '未知错误'));
+      }
     },
     handleImageUpload(event) {
       const files = event.target.files;
@@ -360,6 +382,20 @@ export default {
     removeImage(index) {
       // 移除图片
       this.diary.images.splice(index, 1);
+    },
+    async loadTags() {
+      try {
+        const res = await getTagList({});
+        if (res.code === 200) {
+          // 将接口返回的数据格式转换为组件需要的格式
+          this.tagList = res.data.map(tag => ({
+            label: tag.name, // 根据后端接口字段映射
+            value: tag.id   // 根据后端接口字段映射
+          }));
+        }
+      } catch (error) {
+        console.error('获取标签列表失败:', error);
+      }
     }
   }
 }

@@ -7,7 +7,6 @@ import org.zaohu.common.ResultCommon.Result;
 import org.zaohu.modules.type.entity.Type;
 import org.zaohu.modules.type.entity.vo.TypeVO;
 import org.zaohu.modules.type.service.TypeService;
-import org.zaohu.utils.FileUtils;
 import org.zaohu.utils.text.StringUtils;
 
 /**

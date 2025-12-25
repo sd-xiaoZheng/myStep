@@ -2,6 +2,7 @@ package org.zaohu.modules.article.service;
 
 import org.zaohu.modules.article.entity.Article;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.zaohu.modules.article.entity.vo.ArticleVO;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface ArticleService extends IService<Article> {
     List<Article> getDairy(Article article);
 
     Long selectCount(Article article);
+
+    void addArticle(ArticleVO articleVO);
 }

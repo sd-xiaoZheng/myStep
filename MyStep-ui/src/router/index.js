@@ -26,6 +26,7 @@ import diaryManage from '@/views/step/diary/manage/diaryListManage.vue';
 import typeManage from '@/views/manage/typeManage.vue';
 import weatherManage from '@/views/manage/weatherManage.vue';
 import moodManage from '@/views/manage/moodManage.vue';
+import tagManage from '@/views/manage/tagManage.vue';
 
 
 Vue.use(Router);
@@ -189,6 +190,14 @@ const router = new Router({
                     path: '/weatherManage',
                     name: '/weatherManage',
                     component: weatherManage,
+                    meta: {
+                        title: "天气管理"
+                    }
+                },
+                {
+                    path: '/tagManage',
+                    name: '/tagManage',
+                    component: tagManage,
                     meta: {
                         title: "天气管理"
                     }

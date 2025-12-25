@@ -61,6 +61,7 @@
             <el-dropdown-item class="item" command="typeManage">类型管理</el-dropdown-item>
             <el-dropdown-item class="item" command="moodManage">心情管理</el-dropdown-item>
             <el-dropdown-item class="item" command="weatherManage">天气管理</el-dropdown-item>
+            <el-dropdown-item class="item" command="tagManage">标签</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
 
@@ -156,6 +157,9 @@ export default {
           break;
         case "weatherManage":
           path = '/weatherManage';
+          break;
+        case "tagManage":
+          path = '/tagManage';
           break;
         default:
           alert("没有该选项~");
