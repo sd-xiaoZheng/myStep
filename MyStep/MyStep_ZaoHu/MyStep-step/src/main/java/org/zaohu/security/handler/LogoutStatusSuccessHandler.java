@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.zaohu.constant.RedisKey;
 import org.zaohu.utils.RedisUtils;
 import org.zaohu.common.ResultCommon.Result;
 import org.zaohu.utils.text.StringUtils;
@@ -28,7 +29,7 @@ public class LogoutStatusSuccessHandler implements LogoutSuccessHandler {
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String token = request.getHeader("token");
         if (StringUtils.isNotEmpty(token)) {
-            String key = "login:token:" + token;
+            String key = RedisKey.LOGIN_TOKEN + token;
             redisUtils.delete(key);
         }
         response.setCharacterEncoding("UTF-8");

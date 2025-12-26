@@ -46,7 +46,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     private final MoodMapper moodMapper;
     private final TypeMapper typeMapper;
     private final WeatherMapper weatherMapper;
-    private final SecurityUtils securityUtils;
 
     @Override
     public List<Article> getDairy(Article article) {
@@ -104,7 +103,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         Article article = new Article();
         BeanUtil.copyProperties(articleVO, article);
         article.setWriteTime(LocalDateTime.now());
-        User user = securityUtils.getUser();
+        User user = SecurityUtils.getUser();
         String username = user.getUsername();
         article.setAuthorName(username);
         article.setAuthorId(user.getUserId());
@@ -114,5 +113,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         String city = ipRegion.getCity().equals("0") ? "未知" : ipRegion.getCity();//城市
         article.setAddress(province + city);
         System.out.println(article);
+        //Article( authorAvatar=null, imageUrls=null)
+
     }
 }

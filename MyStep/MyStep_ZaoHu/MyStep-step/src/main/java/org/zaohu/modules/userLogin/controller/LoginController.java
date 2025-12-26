@@ -69,7 +69,7 @@ public class LoginController {
         if (!StringUtils.isEmpty(token_)) { //判断token是否存在
             String claim = JwtUtils.getClaim(token_);//从jwt中拿出当时存的手机号
             if (!StringUtils.isEmpty(claim) && phone.equals(claim)) {//判断是否是同一个用户
-                String key = "login:token:" + token_;
+                String key = RedisKey.LOGIN_TOKEN + token_;
                 redisUtils.delete(key);
             }
         }
@@ -91,7 +91,7 @@ public class LoginController {
             String token = JwtUtils.sign(phone, 1000 * 60 * 60 * 24 * 7L);
             //将生成的token保存到redis中
 //            RedisUtils redisUtils = new RedisUtils();
-            String key = "login:token:" + token;
+            String key = RedisKey.LOGIN_TOKEN + token;
 
             LoginUserDetails principal = (LoginUserDetails) authenticate.getPrincipal();
             String jsonStr = JSONUtil.toJsonStr(principal);
@@ -114,7 +114,7 @@ public class LoginController {
     public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String token = request.getHeader("authorization");
         if (StringUtils.isNotEmpty(token)) {
-            String key = "login:token:" + token.split(" ")[1];
+            String key = RedisKey.LOGIN_TOKEN + token.split(" ")[1];
             redisUtils.delete(key);
         }
         response.setCharacterEncoding("UTF-8");

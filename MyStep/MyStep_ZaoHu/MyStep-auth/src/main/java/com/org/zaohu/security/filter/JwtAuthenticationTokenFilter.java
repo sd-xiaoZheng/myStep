@@ -10,8 +10,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.zaohu.utils.RedisUtils;
+import org.zaohu.constant.RedisKey;
 import org.zaohu.security.entity.LoginUserDetails;
+import org.zaohu.utils.RedisUtils;
 import org.zaohu.utils.text.StringUtils;
 
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         //获取token
         String token = request.getHeader("Authorization");
         if (StringUtils.isNotEmpty(token)) {
-            String key = "login:token:" + token.split(" ")[1];
+            String key = RedisKey.LOGIN_TOKEN + token.split(" ")[1];
             String json = redisUtils.get(key);
             if (StringUtils.isNotEmpty(json)) {
                 LoginUserDetails userDetails = JSONUtil.toBean(json, LoginUserDetails.class);
