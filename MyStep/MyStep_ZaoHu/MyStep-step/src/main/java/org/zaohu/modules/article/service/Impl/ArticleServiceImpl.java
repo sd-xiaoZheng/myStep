@@ -14,20 +14,21 @@ import org.zaohu.modules.article.mapper.ArticleMapper;
 import org.zaohu.modules.article.service.ArticleService;
 import org.zaohu.modules.mood.entity.Mood;
 import org.zaohu.modules.mood.mapper.MoodMapper;
+import org.zaohu.modules.tagRelation.entity.TagRelation;
+import org.zaohu.modules.tagRelation.mapper.TagRelationMapper;
 import org.zaohu.modules.type.entity.Type;
 import org.zaohu.modules.type.mapper.TypeMapper;
 import org.zaohu.modules.userLogin.entity.User;
 import org.zaohu.modules.weather.entity.Weather;
 import org.zaohu.modules.weather.mapper.WeatherMapper;
+import org.zaohu.utils.FileUtils;
 import org.zaohu.utils.GetIPAddrUtil;
 import org.zaohu.utils.RequestUtils;
 import org.zaohu.utils.entity.IpRegion;
 import org.zaohu.utils.security.SecurityUtils;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -46,6 +47,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     private final MoodMapper moodMapper;
     private final TypeMapper typeMapper;
     private final WeatherMapper weatherMapper;
+    private final TagRelationMapper tagRelationMapper;
 
     @Override
     public List<Article> getDairy(Article article) {
@@ -98,8 +100,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     @Transactional
     public void addArticle(ArticleVO articleVO) {
-        Integer[] tags = articleVO.getTags();
-        MultipartFile[] images = articleVO.getImages();
         Article article = new Article();
         BeanUtil.copyProperties(articleVO, article);
         article.setWriteTime(LocalDateTime.now());
@@ -107,13 +107,37 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         String username = user.getUsername();
         article.setAuthorName(username);
         article.setAuthorId(user.getUserId());
+        article.setAuthorAvatar(user.getAvatar());
         String remoteHost = RequestUtils.getRequest().getRemoteHost();
         IpRegion ipRegion = GetIPAddrUtil.getIpRegion(remoteHost);
         String province = ipRegion.getProvince().equals("0") ? "未知" : ipRegion.getProvince();//省份
         String city = ipRegion.getCity().equals("0") ? "未知" : ipRegion.getCity();//城市
         article.setAddress(province + city);
-        System.out.println(article);
-        //Article( authorAvatar=null, imageUrls=null)
-
+        MultipartFile[] images = articleVO.getImages();
+        if (Objects.nonNull(images)) {
+            for (MultipartFile image : images) {
+                String imageUrls = article.getImageUrls();
+                if (Objects.isNull(imageUrls)) {
+                    imageUrls = "";
+                }
+                String s = FileUtils.uploadImage(image);
+                article.setImageUrls(imageUrls + "," + s);
+            }
+        }
+        articleMapper.insertOrUpdate(article);
+        Integer[] tags = articleVO.getTags();
+        if (Objects.nonNull(tags)) {
+            ArrayList<TagRelation> tagRelations = new ArrayList<>();
+            for (Integer tag : tags) {
+                TagRelation tagRelation = new TagRelation();
+                tagRelation.setArticleId(article.getId());
+                tagRelation.setTagId(tag);
+                tagRelations.add(tagRelation);
+            }
+            LambdaQueryWrapper<TagRelation> tagRelationLqw = new LambdaQueryWrapper<>();
+            tagRelationLqw.eq(TagRelation::getArticleId,article.getId());
+            tagRelationMapper.delete(tagRelationLqw);
+            tagRelationMapper.insert(tagRelations);
+        }
     }
 }

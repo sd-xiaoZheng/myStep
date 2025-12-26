@@ -17,6 +17,7 @@ public class User {
   private String password;
   private String username;
   private String email;
+  private String avatar;
 
   @TableField(exist = false)
   private String code;

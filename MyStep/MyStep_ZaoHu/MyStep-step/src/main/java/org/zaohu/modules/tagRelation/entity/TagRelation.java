@@ -21,7 +21,7 @@ import lombok.Setter;
 @ApiModel(value = "TagRelation对象", description = "标签关联表")
 public class TagRelation {
 
-    @ApiModelProperty("其他ID")
+    @ApiModelProperty("文章ID")
     private String articleId;
 
     @ApiModelProperty("标签ID")
