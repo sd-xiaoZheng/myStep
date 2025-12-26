@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,5 +20,5 @@ public class AccessRecord {
   private String path;
   private String ipAddr;
   private String cyberCarrier;
-  private String accessDate;
+  private LocalDateTime accessDate;
 }

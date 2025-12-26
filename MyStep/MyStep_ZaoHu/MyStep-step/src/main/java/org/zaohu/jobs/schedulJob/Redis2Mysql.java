@@ -16,7 +16,11 @@ import org.zaohu.utils.GetIPAddrUtil;
 import org.zaohu.constant.Constant;
 import org.zaohu.modules.accessRecord.entity.AccessRecord;
 import org.zaohu.modules.accessRecord.service.impl.AccessRecordServiceImpl;
+import org.zaohu.utils.entity.IpRegion;
+import org.zaohu.utils.text.StringUtils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -35,6 +39,7 @@ public class Redis2Mysql {
     private RedisTemplate redisTemplate;
     @Autowired
     private AccessRecordServiceImpl accessRecordService;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Scheduled(cron = "0 0/15 * * * ?")//每十5分钟一次
     private void getValueByIdsRealTime() {
@@ -53,16 +58,13 @@ public class Redis2Mysql {
             String accessDate = jsonObject.getString("access_date");
 
             if (!StringUtil.isBlank(host)) {
-                String ipAddr = GetIPAddrUtil.getIpAddr(host);
+                IpRegion ipRegion = GetIPAddrUtil.getIpRegion(host);
+                String province = ipRegion.getProvince().equals("0") ? "未知" : ipRegion.getProvince();//省份
+                String city = ipRegion.getCity().equals("0")  ? "未知" : ipRegion.getCity();//城市
                 accessRecord.setHost(host);
                 String[] s = null;
-                if (Objects.nonNull(ipAddr)) {
-                    s = ipAddr.split("\t");
-                    accessRecord.setCyberCarrier(s[s.length - 1]);
-                    String[] strings = removeLastElement(s);
-                    String replace = Arrays.toString(strings).replace("[", "").replace("]", "");
-                    accessRecord.setIpAddr(replace);
-                }
+                accessRecord.setCyberCarrier(ipRegion.getIsp());
+                accessRecord.setIpAddr(province + city);
             }
             if (!StringUtil.isBlank(port)) {
                 accessRecord.setPort(Long.parseLong(port));
@@ -77,7 +79,7 @@ public class Redis2Mysql {
                 accessRecord.setUrlParam(urlParam);
             }
             if (!StringUtil.isBlank(accessDate)) {
-                accessRecord.setAccessDate(accessDate);
+                accessRecord.setAccessDate(LocalDateTime.parse(accessDate, formatter));
             }
             accessRecords.add(accessRecord);
         }

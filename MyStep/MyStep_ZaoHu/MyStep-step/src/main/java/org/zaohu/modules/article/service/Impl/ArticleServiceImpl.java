@@ -1,16 +1,17 @@
 package org.zaohu.modules.article.service.Impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.zaohu.common.conditionalAssembler.ConditionalAssembler;
 import org.zaohu.modules.article.entity.Article;
 import org.zaohu.modules.article.entity.vo.ArticleVO;
 import org.zaohu.modules.article.mapper.ArticleMapper;
 import org.zaohu.modules.article.service.ArticleService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 import org.zaohu.modules.mood.entity.Mood;
 import org.zaohu.modules.mood.mapper.MoodMapper;
 import org.zaohu.modules.type.entity.Type;
@@ -18,9 +19,15 @@ import org.zaohu.modules.type.mapper.TypeMapper;
 import org.zaohu.modules.userLogin.entity.User;
 import org.zaohu.modules.weather.entity.Weather;
 import org.zaohu.modules.weather.mapper.WeatherMapper;
+import org.zaohu.utils.GetIPAddrUtil;
+import org.zaohu.utils.RequestUtils;
+import org.zaohu.utils.entity.IpRegion;
 import org.zaohu.utils.security.SecurityUtils;
 
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -90,14 +97,22 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
+    @Transactional
     public void addArticle(ArticleVO articleVO) {
         Integer[] tags = articleVO.getTags();
+        MultipartFile[] images = articleVO.getImages();
         Article article = new Article();
-        BeanUtil.copyProperties(articleVO,article);
-        article.setWriteTime(new Date());
+        BeanUtil.copyProperties(articleVO, article);
+        article.setWriteTime(LocalDateTime.now());
         User user = securityUtils.getUser();
         String username = user.getUsername();
         article.setAuthorName(username);
         article.setAuthorId(user.getUserId());
+        String remoteHost = RequestUtils.getRequest().getRemoteHost();
+        IpRegion ipRegion = GetIPAddrUtil.getIpRegion(remoteHost);
+        String province = ipRegion.getProvince().equals("0") ? "未知" : ipRegion.getProvince();//省份
+        String city = ipRegion.getCity().equals("0") ? "未知" : ipRegion.getCity();//城市
+        article.setAddress(province + city);
+        System.out.println(article);
     }
 }

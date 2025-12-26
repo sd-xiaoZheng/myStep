@@ -44,7 +44,7 @@ public class GetIPAddrUtil {
 //                }
 //        return "未知 未知";
 //    }
-    private static String IP_DATA_PATH="D:\\dev\\idea_project\\My-step\\MyStep\\MyStep_ZaoHu\\file\\ip2region.xdb";
+    private static String IP_DATA_PATH="D:\\dev\\idea_project\\myStep\\myStep\\MyStep\\MyStep_ZaoHu\\file\\ip2region.xdb";
     private static  byte[] contentBuff;
 
     static {
@@ -86,6 +86,11 @@ public class GetIPAddrUtil {
         return ipRegion;
     }
 
+    /**
+     * 通过请求查询ip地址 好像已经荒废了
+     * @param ip
+     * @return
+     */
     public static String getIpAddr(String ip) {
         if (ip.equals("localhost")) {
             ip="127.0.0.1";

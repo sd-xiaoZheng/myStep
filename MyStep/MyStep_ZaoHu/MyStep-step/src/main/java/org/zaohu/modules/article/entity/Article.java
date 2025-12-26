@@ -3,14 +3,15 @@ package org.zaohu.modules.article.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.time.LocalDateTime;
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -24,6 +25,7 @@ import lombok.Setter;
 @Setter
 @TableName("article")
 @ApiModel(value = "Article对象", description = "文章表")
+@ToString
 public class Article {
 
     @ApiModelProperty("文章ID")
@@ -44,11 +46,13 @@ public class Article {
 
     @ApiModelProperty("写作时间")
     @TableField("write_time")
-    private Date writeTime;
+    private LocalDateTime writeTime;
 
     @ApiModelProperty("记忆中的时间")
     @TableField("memory_time")
-    private Date memoryTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "GMT+8")
+    private LocalDateTime memoryTime;
 
     @ApiModelProperty("天气ID")
     @TableField("weather_id")

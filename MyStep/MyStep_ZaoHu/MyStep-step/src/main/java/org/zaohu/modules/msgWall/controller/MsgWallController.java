@@ -44,8 +44,8 @@ public class MsgWallController {
         msgWall.setLeaveFrom(nickname);
         msgWall.setLeaveTime(new Date());
         IpRegion ipRegion = GetIPAddrUtil.getIpRegion(clientIp);
-        String province = StringUtils.isEmpty(ipRegion.getProvince()) ? "未知" : ipRegion.getProvince();
-        String city = StringUtils.isEmpty(ipRegion.getCity()) ? "未知" : ipRegion.getCity();
+        String province = ipRegion.getProvince().equals("0")  ? "未知" : ipRegion.getProvince();
+        String city = ipRegion.getCity().equals("0")  ? "未知" : ipRegion.getCity();
         msgWall.setPlace(province + " " + city);
         msgWall.setIp(clientIp);
         String s = FileUtils.uploadImage(avatar);

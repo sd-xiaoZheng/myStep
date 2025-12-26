@@ -3,11 +3,10 @@ package org.zaohu.utils.security;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.zaohu.modules.userLogin.entity.User;
 import org.zaohu.security.entity.LoginUserDetails;
 import org.zaohu.utils.RedisUtils;
+import org.zaohu.utils.RequestUtils;
 
 /**
  * @author myStep
@@ -20,7 +19,7 @@ public class SecurityUtils {
     private final RedisUtils redisUtils;
 
     public User getUser() {
-        HttpServletRequest request = getRequest();
+        HttpServletRequest request = RequestUtils.getRequest();
         if (request == null) {
             return null;
         }
@@ -30,11 +29,5 @@ public class SecurityUtils {
         }
         String token = authorization.substring(7);
         return redisUtils.get(token, LoginUserDetails.class).getUser();
-    }
-
-    private HttpServletRequest getRequest() {
-        ServletRequestAttributes attributes =
-                (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        return attributes == null ? null : attributes.getRequest();
     }
 }
