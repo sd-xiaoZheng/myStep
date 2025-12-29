@@ -14,6 +14,6 @@ import org.zaohu.modules.article.entity.Article;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArticleVO extends Article {
-    private Integer[] tags;
+    private Integer[] tagIds;
     private MultipartFile[] images;
 }

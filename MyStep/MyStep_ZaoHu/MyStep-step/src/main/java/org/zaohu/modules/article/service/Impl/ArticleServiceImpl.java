@@ -14,6 +14,8 @@ import org.zaohu.modules.article.mapper.ArticleMapper;
 import org.zaohu.modules.article.service.ArticleService;
 import org.zaohu.modules.mood.entity.Mood;
 import org.zaohu.modules.mood.mapper.MoodMapper;
+import org.zaohu.modules.tag.entity.Tag;
+import org.zaohu.modules.tag.mapper.TagMapper;
 import org.zaohu.modules.tagRelation.entity.TagRelation;
 import org.zaohu.modules.tagRelation.mapper.TagRelationMapper;
 import org.zaohu.modules.type.entity.Type;
@@ -29,6 +31,7 @@ import org.zaohu.utils.security.SecurityUtils;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -48,6 +51,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     private final TypeMapper typeMapper;
     private final WeatherMapper weatherMapper;
     private final TagRelationMapper tagRelationMapper;
+    private final TagMapper tagMapper;
 
     @Override
     public List<Article> getDairy(Article article) {
@@ -58,10 +62,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         HashSet<Integer> moodIds = new HashSet<>();
         HashSet<Integer> typeIds = new HashSet<>();
         HashSet<Integer> weatherIds = new HashSet<>();
+        HashSet<String> articleIds = new HashSet<>();
         for (Article item : articles) {
             moodIds.add(item.getMoodId());
             typeIds.add(item.getTypeId());
             weatherIds.add(item.getWeatherId());
+            articleIds.add(item.getId());
         }
         List<Mood> moods = moodMapper.selectByIds(moodIds);
         Map<Integer, String> moodMap = moods.stream()
@@ -84,10 +90,32 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                         Weather::getLabel,
                         (oldValue, newValue) -> oldValue
                 ));
+        LambdaQueryWrapper<TagRelation> tagRelationLqw = new LambdaQueryWrapper<>();
+        tagRelationLqw.in(TagRelation::getArticleId, articleIds);
+        List<TagRelation> tagRelations = tagRelationMapper.selectList(tagRelationLqw);
+        Set<Integer> tagIds = tagRelations.stream()
+                .map(TagRelation::getTagId)
+                .collect(Collectors.toSet());
+        LambdaQueryWrapper<Tag> tagLqw = new LambdaQueryWrapper<>();
+        tagLqw.in(Tag::getId, tagIds);
+        tagLqw.orderBy(true, true, Tag::getSortNo);
+        Map<Integer, Tag> tagMap = tagMapper.selectList(tagLqw).stream()
+                .collect(Collectors.toMap(Tag::getId, Function.identity()));
+
+        Map<String, List<Tag>> articleTagsMap = tagRelations.stream()
+                .collect(Collectors.groupingBy(
+                        TagRelation::getArticleId,
+                        Collectors.mapping(
+                                relation -> tagMap.get(relation.getTagId()),
+                                Collectors.toList()
+                        )
+                ));
+
         for (Article item : articles) {
             item.setMoodName(moodMap.get(item.getMoodId()));
             item.setTypeName(typeMap.get(item.getTypeId()));
             item.setWeatherName(weathersMap.get(item.getWeatherId()));
+            item.setTags(articleTagsMap.getOrDefault(item.getId(), new ArrayList<>()));
         }
         return articles;
     }
@@ -118,14 +146,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             for (MultipartFile image : images) {
                 String imageUrls = article.getImageUrls();
                 if (Objects.isNull(imageUrls)) {
-                    imageUrls = "";
+                    article.setImageUrls(FileUtils.uploadImage(image));
+                    continue;
                 }
-                String s = FileUtils.uploadImage(image);
-                article.setImageUrls(imageUrls + "," + s);
+                article.setImageUrls(imageUrls + "," + FileUtils.uploadImage(image));
             }
         }
         articleMapper.insertOrUpdate(article);
-        Integer[] tags = articleVO.getTags();
+        Integer[] tags = articleVO.getTagIds();
         if (Objects.nonNull(tags)) {
             ArrayList<TagRelation> tagRelations = new ArrayList<>();
             for (Integer tag : tags) {
@@ -135,7 +163,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 tagRelations.add(tagRelation);
             }
             LambdaQueryWrapper<TagRelation> tagRelationLqw = new LambdaQueryWrapper<>();
-            tagRelationLqw.eq(TagRelation::getArticleId,article.getId());
+            tagRelationLqw.eq(TagRelation::getArticleId, article.getId());
             tagRelationMapper.delete(tagRelationLqw);
             tagRelationMapper.insert(tagRelations);
         }

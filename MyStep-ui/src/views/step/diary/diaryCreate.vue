@@ -116,51 +116,6 @@
           >
         </div>
 
-        <!-- 添加图片模块 -->
-        <div class="image-upload-section">
-          <div class="image-upload-header">
-            <label class="image-label">添加配图：</label>
-            <div class="image-upload-controls">
-              <input
-                type="file"
-                ref="fileInput"
-                accept="image/jpeg,image/png,image/jpg"
-                multiple
-                style="display: none"
-                @change="handleImageUpload"
-              >
-              <button
-                class="image-upload-btn"
-                @click="$refs.fileInput.click()"
-              >
-                选择图片
-              </button>
-              <span class="image-tip">最多上传 3 张</span>
-            </div>
-          </div>
-
-          <!-- 图片预览区域 -->
-          <div v-if="diary.images && diary.images.length > 0" class="image-preview-container">
-            <div
-              v-for="(image, index) in diary.images"
-              :key="index"
-              class="image-preview-item"
-            >
-              <img
-                :src="image.url"
-                :alt="image.name"
-                class="preview-image"
-              >
-              <button
-                class="remove-image-btn"
-                @click="removeImage(index)"
-              >
-                ×
-              </button>
-            </div>
-          </div>
-        </div>
-
         <div class="content-input-wrapper">
           <textarea
             v-model="diary.content"
@@ -172,6 +127,51 @@
 
         <div class="input-footer">
           <span class="word-count">正文字数：{{ wordCount }} 字</span>
+        </div>
+      </div>
+
+      <!-- 添加图片模块 -->
+      <div class="image-upload-section">
+        <div class="image-upload-header">
+          <label class="image-label">添加配图：</label>
+          <div class="image-upload-controls">
+            <input
+              type="file"
+              ref="fileInput"
+              accept="image/jpeg,image/png,image/jpg"
+              multiple
+              style="display: none"
+              @change="handleImageUpload"
+            >
+            <button
+              class="image-upload-btn"
+              @click="$refs.fileInput.click()"
+            >
+              选择图片
+            </button>
+            <span class="image-tip">最多上传 3 张</span>
+          </div>
+        </div>
+
+        <!-- 图片预览区域 -->
+        <div v-if="diary.images && diary.images.length > 0" class="image-preview-container">
+          <div
+            v-for="(image, index) in diary.images"
+            :key="index"
+            class="image-preview-item"
+          >
+            <img
+              :src="image.url"
+              :alt="image.name"
+              class="preview-image"
+            >
+            <button
+              class="remove-image-btn"
+              @click="removeImage(index)"
+            >
+              ×
+            </button>
+          </div>
         </div>
       </div>
 
@@ -306,7 +306,7 @@ export default {
       try {
         // 创建 FormData 对象来发送 multipart/form-data 请求
         const formData = new FormData();
-        
+
         // 添加基本字段
         formData.append('title', this.diary.title);
         formData.append('content', this.diary.content);
@@ -315,14 +315,14 @@ export default {
         formData.append('weatherId', this.diary.weather || ''); // 对应后端的 weather_id 字段
         formData.append('moodId', this.diary.mood || ''); // 对应后端的 mood_id 字段
         formData.append('typeId', this.diary.articleType || ''); // 对应后端的 type_id 字段
-        
+
         // 添加标签数组（作为整数数组）
         if (this.diary.tags && this.diary.tags.length > 0) {
           this.diary.tags.forEach(tag => {
-            formData.append('tags', parseInt(tag)); // 确保标签ID是整数类型
+            formData.append('tagIds', parseInt(tag)); // 确保标签ID是整数类型
           });
         }
-        
+
         // 添加图片文件
         if (this.diary.images && this.diary.images.length > 0) {
           this.diary.images.forEach(image => {
@@ -331,9 +331,9 @@ export default {
             }
           });
         }
-        
+
         const res = await addArticle(formData);
-        
+
         if (res.code === 200) {
           this.$message.success('日记保存成功！');
           // 保存成功后返回上一页或跳转到指定页面

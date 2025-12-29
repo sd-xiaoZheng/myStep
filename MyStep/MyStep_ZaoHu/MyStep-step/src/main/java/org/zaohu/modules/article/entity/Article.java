@@ -10,8 +10,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.zaohu.modules.tag.entity.Tag;
+import org.zaohu.modules.type.entity.Type;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -99,5 +102,6 @@ public class Article {
     @TableField(exist = false)
     private String moodName;
 
-
+    @TableField(exist = false)
+    private List<Tag> tags;
 }

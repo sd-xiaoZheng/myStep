@@ -37,9 +37,17 @@
         </template>
       </el-table-column>
       <el-table-column prop="authorName" label="作者名称" width="120"></el-table-column>
-      <el-table-column prop="authorId" label="作者ID" width="100"></el-table-column>
-      <el-table-column prop="writeTime" label="写作时间" width="180"></el-table-column>
-      <el-table-column prop="memoryTime" label="记忆时间" width="180"></el-table-column>
+<!--      <el-table-column prop="authorId" label="作者ID" width="100"></el-table-column>-->
+      <el-table-column label="写作时间" width="180">
+        <template slot-scope="scope">
+          {{ formatTime(scope.row.writeTime) }}
+        </template>
+      </el-table-column>
+      <el-table-column label="记忆时间" width="180">
+        <template slot-scope="scope">
+          {{ formatTime(scope.row.memoryTime) }}
+        </template>
+      </el-table-column>
       <el-table-column prop="weatherName" label="天气" width="80"></el-table-column>
       <el-table-column prop="moodName" label="心情" width="80"></el-table-column>
       <el-table-column prop="color" label="展示颜色" width="100"></el-table-column>
@@ -50,6 +58,34 @@
         </template>
       </el-table-column>
       <el-table-column prop="address" label="发生地址" min-width="150"></el-table-column>
+      <el-table-column label="图片" width="200">
+        <template slot-scope="scope">
+          <div class="images-container">
+            <img
+              v-for="(url, index) in getImageUrls(scope.row.imageUrls)"
+              :key="index"
+              :src="'/api'+url"
+              class="image-item"
+              alt="日记图片"
+              loading="lazy"
+            >
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column label="标签" width="200">
+        <template slot-scope="scope">
+          <div class="tags-container">
+            <div
+              v-for="tag in scope.row.tags"
+              :key="tag.id"
+              class="tag-item"
+              :style="{ backgroundColor: tag.color, borderColor: tag.color }"
+            >
+              {{ tag.name }}
+            </div>
+          </div>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" width="200vh" fixed="right">
         <template slot-scope="scope">
           <el-button type="primary" icon="el-icon-edit" circle size="mini" title="编辑"
@@ -153,10 +189,40 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tag-item {
+  padding: 2px 8px;
+  border: 1px solid;
+  border-radius: 4px;
+  font-size: 12px;
+  color: white;
+  background-color: #909399;
+  border-color: #909399;
+}
+
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.image-item {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
 </style>
 
 <script>
-import { getDiaryList } from '@/apis/api/diary'
+import {getDiaryList} from '@/apis/api/diary'
 
 export default {
   data() {
@@ -337,6 +403,37 @@ export default {
         }
         this.deleteLoading = false
       }
+    },
+
+    // 格式化时间
+    formatTime(time) {
+      if (!time) return ''
+
+      // 如果是ISO字符串，转换为Date对象
+      const date = typeof time === 'string' ? new Date(time) : time
+
+      // 检查日期是否有效
+      if (isNaN(date.getTime())) return time
+
+      const year = date.getFullYear()
+      const month = String(date.getMonth() + 1).padStart(2, '0')
+      const day = String(date.getDate()).padStart(2, '0')
+      const hours = String(date.getHours()).padStart(2, '0')
+      const minutes = String(date.getMinutes()).padStart(2, '0')
+      const seconds = String(date.getSeconds()).padStart(2, '0')
+
+      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+    },
+
+    // 处理图片URL
+    getImageUrls(imageUrls) {
+      if (!imageUrls) return []
+
+      // 按逗号分割URL，并过滤掉空值
+      // 为每个URL添加/api前缀
+      return imageUrls.split(',')
+          .filter(url => url.trim() !== '')
+          .map(url => url.trim()) // 过滤掉仅/api的情况
     }
   },
 
