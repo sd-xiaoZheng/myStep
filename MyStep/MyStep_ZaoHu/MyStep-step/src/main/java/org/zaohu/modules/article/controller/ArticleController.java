@@ -41,4 +41,10 @@ public class ArticleController extends BaseController {
         articleService.addArticle(articleVO);
         return Result.success();
     }
+
+    @PostMapping("/updateArticle")
+    public Result updateArticle(@ModelAttribute ArticleVO articleVO) {
+        articleService.addArticle(articleVO);
+        return Result.success();
+    }
 }

@@ -59,8 +59,8 @@ public class Redis2Mysql {
 
             if (!StringUtil.isBlank(host)) {
                 IpRegion ipRegion = GetIPAddrUtil.getIpRegion(host);
-                String province = ipRegion.getProvince().equals("0") ? "未知" : ipRegion.getProvince();//省份
-                String city = ipRegion.getCity().equals("0")  ? "未知" : ipRegion.getCity();//城市
+                String province = Objects.nonNull(ipRegion.getProvince()) && ipRegion.getProvince().equals("0") ? "未知" : ipRegion.getProvince();
+                String city = Objects.nonNull(ipRegion.getCity()) && ipRegion.getCity().equals("0") ? "未知" : ipRegion.getCity();
                 accessRecord.setHost(host);
                 String[] s = null;
                 accessRecord.setCyberCarrier(ipRegion.getIsp());

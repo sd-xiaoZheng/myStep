@@ -112,8 +112,15 @@
     <!-- 添加/编辑日记对话框 -->
     <el-dialog :visible.sync="dialogVisible" :title="dialogMode === 'add' ? '添加日记' : '编辑日记'" :modal="false">
       <el-form :model="diaryForm" :rules="rules" ref="diaryForm" label-width="100px">
-        <el-form-item label="类型ID" prop="typeId">
-          <el-input v-model.number="diaryForm.typeId"></el-input>
+        <el-form-item label="类型" prop="typeId">
+          <el-select v-model="diaryForm.typeId" placeholder="请选择类型" style="width: 100%">
+            <el-option
+              v-for="item in typeOptions"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="标题" prop="title">
           <el-input v-model="diaryForm.title"></el-input>
@@ -130,17 +137,35 @@
             value-format="yyyy-MM-dd HH:mm:ss">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="天气ID" prop="weatherId">
-          <el-input v-model.number="diaryForm.weatherId"></el-input>
+        <el-form-item label="天气" prop="weatherId">
+          <el-select v-model="diaryForm.weatherId" placeholder="请选择天气" style="width: 100%">
+            <el-option
+              v-for="item in weatherOptions"
+              :key="item.id"
+              :label="item.label"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="心情ID" prop="moodId">
-          <el-input v-model.number="diaryForm.moodId"></el-input>
+        <el-form-item label="心情" prop="moodId">
+          <el-select v-model="diaryForm.moodId" placeholder="请选择心情" style="width: 100%">
+            <el-option
+              v-for="item in moodOptions"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="作者名称" prop="authorName">
-          <el-input v-model="diaryForm.authorName"></el-input>
-        </el-form-item>
-        <el-form-item label="作者ID" prop="authorId">
-          <el-input v-model="diaryForm.authorId"></el-input>
+        <el-form-item label="标签">
+          <el-select v-model="selectedTags" multiple placeholder="请选择标签" style="width: 100%">
+            <el-option
+              v-for="item in tagOptions"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="展示颜色" prop="color">
           <el-color-picker v-model="diaryForm.color"></el-color-picker>
@@ -222,7 +247,11 @@
 </style>
 
 <script>
-import {getDiaryList} from '@/apis/api/diary'
+import { getDiaryList } from '@/apis/api/diary'
+import { getTypeList } from '@/apis/api/type'
+import { getMoodList } from '@/apis/api/mood'
+import { getWeatherList } from '@/apis/api/weather'
+import { getTagList } from '@/apis/api/tag'
 
 export default {
   data() {
@@ -249,29 +278,30 @@ export default {
         memoryTime: '',
         weatherId: null,
         moodId: null,
-        authorName: '',
-        authorId: '',
-        authorAvatar: '',
         color: '',
         imageUrls: '',
         isStar: false,
         address: ''
       },
+      // 下拉框选项
+      typeOptions: [],
+      moodOptions: [],
+      weatherOptions: [],
+      tagOptions: [],
+      selectedTags: [], // 用于多选标签
       rules: {
         title: [
           { required: true, message: '请输入标题', trigger: 'blur' }
         ],
         content: [
           { required: true, message: '请输入内容', trigger: 'blur' }
-        ],
-        authorName: [
-          { required: true, message: '请输入作者名称', trigger: 'blur' }
-        ],
-        authorId: [
-          { required: true, message: '请输入作者ID', trigger: 'blur' }
         ]
       }
     }
+  },
+  async mounted() {
+    this.getDiaryList()
+    await this.loadOptions()
   },
   methods: {
     // 获取日记列表
@@ -337,14 +367,12 @@ export default {
         memoryTime: '',
         weatherId: null,
         moodId: null,
-        authorName: '',
-        authorId: '',
-        authorAvatar: '',
         color: '',
         imageUrls: '',
         isStar: false,
         address: ''
       }
+      this.selectedTags = []
       this.dialogVisible = true
     },
 
@@ -352,12 +380,21 @@ export default {
     editDiary(row) {
       this.dialogMode = 'edit'
       this.diaryForm = { ...row }
+      // 处理标签数据
+      if (row.tags && Array.isArray(row.tags)) {
+        this.selectedTags = row.tags.map(tag => tag.id)
+      } else {
+        this.selectedTags = []
+      }
       this.dialogVisible = true
     },
 
     // 提交日记（添加或编辑）
     async submitDiary() {
       try {
+        // 将选中的标签赋值给表单
+        this.diaryForm.tags = this.selectedTags
+
         await new Promise((resolve, reject) => {
           this.$refs.diaryForm.validate((valid) => {
             if (!valid) return reject('表单验证失败')
@@ -430,15 +467,52 @@ export default {
       if (!imageUrls) return []
 
       // 按逗号分割URL，并过滤掉空值
-      // 为每个URL添加/api前缀
-      return imageUrls.split(',')
-          .filter(url => url.trim() !== '')
-          .map(url => url.trim()) // 过滤掉仅/api的情况
-    }
-  },
+      const urls = imageUrls.split(',')
+        .filter(url => url.trim() !== '')
+        .map(url => url.trim())
 
-  mounted() {
-    this.getDiaryList()
+      // 为每个URL添加/api前缀
+      return urls.map(url => {
+        // 如果URL已经是完整路径（以http或/开头），则不添加前缀
+        if (url.startsWith('http') || url.startsWith('/')) {
+          return url
+        }
+        // 否则添加/api前缀
+        return '/api' + url
+      }).filter(url => url !== '/api') // 过滤掉仅/api的情况
+    },
+
+    // 加载下拉框选项
+    async loadOptions() {
+      try {
+        // 加载类型列表
+        const typeRes = await getTypeList({})
+        if (typeRes.code === 200) {
+          this.typeOptions = typeRes.data
+        }
+
+        // 加载心情列表
+        const moodRes = await getMoodList({})
+        if (moodRes.code === 200) {
+          this.moodOptions = moodRes.data
+        }
+
+        // 加载天气列表
+        const weatherRes = await getWeatherList({})
+        if (weatherRes.code === 200) {
+          this.weatherOptions = weatherRes.data
+        }
+
+        // 加载标签列表
+        const tagRes = await getTagList({})
+        if (tagRes.code === 200) {
+          this.tagOptions = tagRes.data
+        }
+      } catch (error) {
+        console.error('加载选项失败:', error)
+        this.$message.error('加载选项失败')
+      }
+    }
   }
-}
+  }
 </script>

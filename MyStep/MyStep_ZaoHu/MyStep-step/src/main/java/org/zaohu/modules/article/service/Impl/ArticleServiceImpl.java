@@ -138,8 +138,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         article.setAuthorAvatar(user.getAvatar());
         String remoteHost = RequestUtils.getRequest().getRemoteHost();
         IpRegion ipRegion = GetIPAddrUtil.getIpRegion(remoteHost);
-        String province = ipRegion.getProvince().equals("0") ? "未知" : ipRegion.getProvince();//省份
-        String city = ipRegion.getCity().equals("0") ? "未知" : ipRegion.getCity();//城市
+        String province = Objects.nonNull(ipRegion.getProvince()) && ipRegion.getProvince().equals("0") ? "未知" : ipRegion.getProvince();
+        String city = Objects.nonNull(ipRegion.getCity()) && ipRegion.getCity().equals("0") ? "未知" : ipRegion.getCity();
         article.setAddress(province + city);
         MultipartFile[] images = articleVO.getImages();
         if (Objects.nonNull(images)) {

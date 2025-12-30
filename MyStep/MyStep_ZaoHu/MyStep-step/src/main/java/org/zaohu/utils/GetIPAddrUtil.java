@@ -61,6 +61,9 @@ public class GetIPAddrUtil {
      * @return
      */
     public static IpRegion getIpRegion(String ip) {
+        if (ip.equals("localhost")){
+            ip="127.0.0.1";
+        }
         Searcher searcher = null;
         IpRegion ipRegion = new IpRegion();
         try {
