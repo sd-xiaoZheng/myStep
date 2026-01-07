@@ -176,6 +176,40 @@
         <el-form-item label="发生地址" prop="address">
           <el-input v-model="diaryForm.address"></el-input>
         </el-form-item>
+        <!-- 图片上传 -->
+        <el-form-item label="图片">
+          <div class="image-upload-container">
+            <el-upload
+              class="image-uploader"
+              action=""
+              :show-file-list="false"
+              :before-upload="beforeImageUpload"
+              :http-request="customUploadRequest"
+              multiple
+            >
+              <div class="image-preview-area">
+                <div
+                  v-for="(image, index) in imagePreviews"
+                  :key="index"
+                  class="image-preview-item"
+                  @click.stop
+                >
+                  <img :src="getImageSrc(image)" class="image-preview" alt="预览图片">
+                  <div class="image-overlay">
+                    <div class="image-actions">
+                      <i class="el-icon-edit" @click="replaceImage(index)"></i>
+                      <i class="el-icon-delete" @click="removeImage(index)"></i>
+                    </div>
+                  </div>
+                </div>
+                <div v-if="imagePreviews.length < 3" class="upload-placeholder">
+                  <i class="el-icon-plus"></i>
+                  <div class="upload-text">点击上传图片</div>
+                </div>
+              </div>
+            </el-upload>
+          </div>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
@@ -244,10 +278,97 @@
   border-radius: 4px;
   border: 1px solid #ddd;
 }
+
+.image-upload-container {
+  width: 100%;
+}
+
+.image-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+
+.image-preview-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-preview-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #d9d9d9;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.image-preview-item:hover .image-overlay {
+  opacity: 1;
+}
+
+.image-actions {
+  color: white;
+}
+
+.image-actions i {
+  cursor: pointer;
+  margin: 0 5px;
+  font-size: 16px;
+}
+
+.upload-placeholder {
+  width: 100px;
+  height: 100px;
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #8c939d;
+}
+
+.upload-placeholder:hover {
+  border-color: #409EFF;
+}
+
+.upload-text {
+  font-size: 12px;
+  margin-top: 5px;
+}
 </style>
 
 <script>
-import { getDiaryList } from '@/apis/api/diary'
+import { getDiaryList, updateDiary } from '@/apis/api/diary'
 import { getTypeList } from '@/apis/api/type'
 import { getMoodList } from '@/apis/api/mood'
 import { getWeatherList } from '@/apis/api/weather'
@@ -289,6 +410,10 @@ export default {
       weatherOptions: [],
       tagOptions: [],
       selectedTags: [], // 用于多选标签
+      // 图片相关
+      imageFiles: [], // 用于存储上传的图片文件
+      imagePreviews: [], // 用于存储图片预览URL
+      imageOriginalUrls: [], // 用于存储原始图片URL（编辑模式下）
       rules: {
         title: [
           { required: true, message: '请输入标题', trigger: 'blur' }
@@ -373,6 +498,10 @@ export default {
         address: ''
       }
       this.selectedTags = []
+      // 重置图片数据
+      this.imageFiles = [];
+      this.imagePreviews = [];
+      this.imageOriginalUrls = [];
       this.dialogVisible = true
     },
 
@@ -386,15 +515,16 @@ export default {
       } else {
         this.selectedTags = []
       }
+
+      // 初始化图片
+      this.initImagesForEdit(row)
+
       this.dialogVisible = true
     },
 
     // 提交日记（添加或编辑）
     async submitDiary() {
       try {
-        // 将选中的标签赋值给表单
-        this.diaryForm.tags = this.selectedTags
-
         await new Promise((resolve, reject) => {
           this.$refs.diaryForm.validate((valid) => {
             if (!valid) return reject('表单验证失败')
@@ -403,17 +533,79 @@ export default {
         })
 
         this.submitLoading = true
-        // 这里应该调用实际的API接口
-        // 暂时模拟提交过程
-        setTimeout(() => {
-          this.submitLoading = false
-          this.dialogVisible = false
-          this.getDiaryList()
-          this.$message.success(this.dialogMode === 'add' ? '添加成功' : '编辑成功')
-        }, 500)
+
+        if (this.dialogMode === 'edit') {
+          // 编辑模式，调用更新接口
+          const formData = new FormData();
+          
+          // 添加普通字段（排除 tags 字段，只传 tagIds）
+          Object.keys(this.diaryForm).forEach(key => {
+            // 跳过 tags 字段，不传递 tags
+            if (key === 'tags') {
+              return;
+            }
+            if (this.diaryForm[key] !== null && this.diaryForm[key] !== undefined) {
+              formData.append(key, this.diaryForm[key]);
+            }
+          });
+          
+          // 添加标签ID数组（使用 tagIds，不使用 tags）
+          if (this.selectedTags && this.selectedTags.length > 0) {
+            this.selectedTags.forEach(tagId => {
+              formData.append('tagIds', tagId);
+            });
+          }
+          
+          // 处理图片更新
+          // 构建 updateFile 数组：只有当有新文件时才添加到数组中
+          let updateFileIndex = 0;
+          if (this.imageFiles && this.imageFiles.length > 0) {
+            for (let i = 0; i < this.imageFiles.length; i++) {
+              const file = this.imageFiles[i];
+              const originalUrl = this.imageOriginalUrls[i];
+              
+              // 只有当有新文件时，才需要添加到 updateFile
+              if (file) {
+                // 如果有原始URL，说明这是替换的图片；如果没有，说明这是新添加的图片
+                // 当 oldUrl 为 null 时，发送空字符串，后端会将其解析为 null
+                const oldUrl = originalUrl || '';
+                formData.append(`updateFile[${updateFileIndex}].oldUrl`, oldUrl);
+                formData.append(`updateFile[${updateFileIndex}].newImages`, file);
+                updateFileIndex++;
+              }
+              // 如果 file 为 null 但 originalUrl 不为 null，说明图片保持原样，不需要发送
+            }
+          }
+
+          // 调用更新API
+          const res = await updateDiary(formData);
+
+          if (res.code === 200) {
+            this.$message.success('编辑成功');
+          } else {
+            throw new Error(res.message || '编辑失败');
+          }
+        } else {
+          // 添加模式，暂时保持原有逻辑
+          // 这里应该调用实际的API接口
+          // 暂时模拟提交过程
+          setTimeout(() => {
+            this.submitLoading = false
+            this.dialogVisible = false
+            this.getDiaryList()
+            this.$message.success(this.dialogMode === 'add' ? '添加成功' : '编辑成功')
+          }, 500)
+          return;
+        }
+
+        this.submitLoading = false
+        this.dialogVisible = false
+        this.getDiaryList()
+        this.$message.success('编辑成功')
       } catch (error) {
         this.submitLoading = false
-        this.$message.error('操作失败，请稍后重试')
+        console.error('提交日记失败:', error)
+        this.$message.error(error.message || '操作失败，请稍后重试')
       }
     },
 
@@ -512,6 +704,114 @@ export default {
         console.error('加载选项失败:', error)
         this.$message.error('加载选项失败')
       }
+    },
+
+    // 处理图片上传前的验证
+    beforeImageUpload(file) {
+      const isImage = file.type.startsWith('image/')
+
+      if (!isImage) {
+        this.$message.error('只能上传图片文件!')
+        return false
+      }
+      return true
+    },
+
+    // 自定义上传请求
+    customUploadRequest(option) {
+      const file = option.file
+
+      // 将文件添加到imageFiles数组
+      this.imageFiles.push(file)
+      // 新上传的图片没有原始URL，设置为null
+      this.imageOriginalUrls.push(null)
+
+      // 创建预览URL
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        this.imagePreviews.push(e.target.result)
+      }
+      reader.readAsDataURL(file)
+    },
+
+    // 替换图片
+    replaceImage(index) {
+      // 创建一个隐藏的文件输入元素
+      const input = document.createElement('input')
+      input.type = 'file'
+      input.accept = 'image/*'
+      input.onchange = (e) => {
+        const file = e.target.files[0]
+        if (!file) return
+
+        if (!this.beforeImageUpload(file)) {
+          return
+        }
+
+        // 保存原始URL（如果存在）
+        const originalUrl = this.imageOriginalUrls[index]
+
+        // 替换文件
+        this.imageFiles.splice(index, 1, file)
+        // 保留原始URL（如果存在）
+        if (originalUrl !== undefined) {
+          this.imageOriginalUrls.splice(index, 1, originalUrl)
+        } else {
+          // 如果是新添加的图片被替换，原始URL仍为null
+          this.imageOriginalUrls.splice(index, 1, null)
+        }
+
+        // 替换预览
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          this.imagePreviews.splice(index, 1, e.target.result)
+        }
+        reader.readAsDataURL(file)
+      }
+      input.click()
+    },
+
+    // 移除图片
+    removeImage(index) {
+      this.imageFiles.splice(index, 1)
+      this.imagePreviews.splice(index, 1)
+      this.imageOriginalUrls.splice(index, 1)
+    },
+
+    // 在编辑时初始化图片
+    initImagesForEdit(row) {
+      // 重置图片相关数据
+      this.imageFiles = []
+      this.imagePreviews = []
+      this.imageOriginalUrls = []
+
+      // 如果有现有图片，初始化预览
+      if (row.imageUrls) {
+        // 解析原始URL（去掉/api前缀）
+        const originalUrls = row.imageUrls.split(',')
+          .filter(url => url.trim() !== '')
+          .map(url => url.trim())
+        
+        // 将现有图片URL作为预览添加（带/api前缀用于显示）
+        const previewUrls = this.getImageUrls(row.imageUrls)
+        this.imagePreviews = [...previewUrls]
+        
+        // 初始化对应位置的数据
+        for (let i = 0; i < previewUrls.length; i++) {
+          this.imageFiles.push(null) // 对于现有图片，初始时没有新文件
+          // 保存原始URL（不带/api前缀）
+          this.imageOriginalUrls.push(originalUrls[i] || null)
+        }
+      }
+    },
+
+    // 根据图片类型获取正确的src
+    getImageSrc(image) {
+      // 如果图片URL以 'data:' 开头，说明是base64编码的预览图片，直接返回
+      if (image.startsWith('data:')) {
+        return image;
+      }
+      return '/api' + image;
     }
   }
   }

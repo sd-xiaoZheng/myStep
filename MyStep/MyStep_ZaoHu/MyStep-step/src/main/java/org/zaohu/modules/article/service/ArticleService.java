@@ -21,4 +21,6 @@ public interface ArticleService extends IService<Article> {
     Long selectCount(Article article);
 
     void addArticle(ArticleVO articleVO);
+
+    void updateArticle(ArticleVO articleVO);
 }

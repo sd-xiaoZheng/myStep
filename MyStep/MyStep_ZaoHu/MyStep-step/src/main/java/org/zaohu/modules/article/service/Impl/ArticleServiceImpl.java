@@ -168,4 +168,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             tagRelationMapper.insert(tagRelations);
         }
     }
+
+    @Override
+    public void updateArticle(ArticleVO articleVO) {
+        System.out.println(articleVO);
+    }
 }

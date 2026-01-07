@@ -4,19 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
-import org.zaohu.modules.article.entity.Article;
-
-import java.util.List;
 
 /**
  * @author myStep
- * @since 2025/12/25
+ * @since 2026/1/4
  **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArticleVO extends Article {
-    private Integer[] tagIds;
-    private MultipartFile[] images;
-    private List<UpdateArticleVO> updateFile;
+public class UpdateArticleVO {
+    private String oldUrl;
+    private MultipartFile newImages;
 }
