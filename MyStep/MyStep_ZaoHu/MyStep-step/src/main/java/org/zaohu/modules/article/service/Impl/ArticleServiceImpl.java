@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.zaohu.common.conditionalAssembler.ConditionalAssembler;
 import org.zaohu.modules.article.entity.Article;
 import org.zaohu.modules.article.entity.vo.ArticleVO;
+import org.zaohu.modules.article.entity.vo.UpdateArticleVO;
 import org.zaohu.modules.article.mapper.ArticleMapper;
 import org.zaohu.modules.article.service.ArticleService;
 import org.zaohu.modules.mood.entity.Mood;
@@ -155,22 +156,46 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         articleMapper.insertOrUpdate(article);
         Integer[] tags = articleVO.getTagIds();
         if (Objects.nonNull(tags)) {
-            ArrayList<TagRelation> tagRelations = new ArrayList<>();
-            for (Integer tag : tags) {
-                TagRelation tagRelation = new TagRelation();
-                tagRelation.setArticleId(article.getId());
-                tagRelation.setTagId(tag);
-                tagRelations.add(tagRelation);
-            }
-            LambdaQueryWrapper<TagRelation> tagRelationLqw = new LambdaQueryWrapper<>();
-            tagRelationLqw.eq(TagRelation::getArticleId, article.getId());
-            tagRelationMapper.delete(tagRelationLqw);
-            tagRelationMapper.insert(tagRelations);
+            updateTags(article.getId(), tags);
         }
     }
 
     @Override
+    @Transactional
     public void updateArticle(ArticleVO articleVO) {
-        System.out.println(articleVO);
+        //把要更改的图片提取出来提出来
+        List<UpdateArticleVO> updateFile = articleVO.getUpdateFile();
+        if (Objects.nonNull(updateFile) && !updateFile.isEmpty()) {
+            //更新图片并且删除文件
+            for (UpdateArticleVO updateArticleVO : updateFile) {
+                String oldUrl = updateArticleVO.getOldUrl();//旧的图片地址
+                if (FileUtils.deleteImage(oldUrl)) {
+                    //已经删除
+                    MultipartFile newImages = updateArticleVO.getNewImages();//新的图片
+                    articleVO.setImageUrls(articleVO.getImageUrls().replace(oldUrl, FileUtils.uploadImage(newImages)));
+                }
+            }
+        }
+        Article article = new Article();
+        BeanUtil.copyProperties(articleVO, article);
+        Integer[] tagIds = articleVO.getTagIds();
+        if (Objects.nonNull(tagIds) && tagIds.length > 0) {
+            updateTags(article.getId(), tagIds);
+        }
+        articleMapper.insertOrUpdate(article);
+    }
+
+    private void updateTags(String articleId, Integer[] tagIds) {
+        ArrayList<TagRelation> tagRelations = new ArrayList<>();
+        for (Integer tag : tagIds) {
+            TagRelation tagRelation = new TagRelation();
+            tagRelation.setArticleId(articleId);
+            tagRelation.setTagId(tag);
+            tagRelations.add(tagRelation);
+        }
+        LambdaQueryWrapper<TagRelation> tagRelationLqw = new LambdaQueryWrapper<>();
+        tagRelationLqw.eq(TagRelation::getArticleId, articleId);
+        tagRelationMapper.delete(tagRelationLqw);
+        tagRelationMapper.insert(tagRelations);
     }
 }
