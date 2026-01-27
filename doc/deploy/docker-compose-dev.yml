@@ -67,6 +67,8 @@ services:
       - iot_network
 
   rocketmq-broker:
+    #加上这里才有权限写入文件
+    user: root
     image: apache/rocketmq:5.3.1
     container_name: rocketmq-broker-Step
     tty: true
@@ -130,24 +132,24 @@ services:
       - iot_network
 
   # Seata 全局事务管理
-  seata:
-    image: seataio/seata-server:2.0.0
-    container_name: seata-Step
-    tty: true
-#    restart: always
-    ports:
-      - "8091:8091"  # Seata 服务端口
-    environment:
-      - SEATA_CONFIG_NAME=file:/root/seata-config/registry  # 配置文件路径
-      - STORE_MODE=file  # 存储模式
-      - SEATA_IP=seata  # 内部通信 IP（使用服务名）
-    volumes:
-      - ./seata/config:/root/seata-config  # 挂载配置目录
-      - ./seata/logs:/seata-server/logs  # 挂载日志目录（可选）
-#    depends_on:
-#      - nacos  # 依赖 Nacos 注册中心
-    networks:
-      - iot_network
+#  seata:
+#    image: seataio/seata-server:2.0.0
+#    container_name: seata-Step
+#    tty: true
+#    ports:
+#      - "8091:8091"  # Web 控制台
+#      - "9091:9091"  # Netty TM/RM 通信端口
+#    extra_hosts:
+#      - "host.docker.internal:host-gateway"
+#    environment:
+#      - SEATA_IP=host.docker.internal
+#      - SEATA_PORT=9091
+#      - LOG_HOME=/seata-server/logs
+#    volumes:
+#      - ./seata/config/application.yml:/seata-server/resources/application.yml  #/seata-server/resources/application.yml 这个路径是seata的默认读取路径
+#      - ./seata/logs:/seata-server/logs
+#    networks:
+#      - iot_network
 
 #  emqx:
 #    image: emqx/emqx:5.4.1

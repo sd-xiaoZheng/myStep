@@ -19,6 +19,15 @@ import messageBoard from '@/views/step/board/messageBoard.vue';
 import lifeTimeType from '@/views/step/lifeTime/lifeTimeType.vue';
 import lifeTimeManage from '@/views/step/lifeTime/lifeTimeManage.vue';
 import lifeTimePhoto from '@/views/step/lifeTime/lifeTimePhoto.vue';
+import diaryHome from '@/views/step/diary/diaryHome.vue';
+import diaryCreate from '@/views/step/diary/diaryCreate.vue';
+import diaryList from '@/views/step/diary/diaryList.vue';
+import diaryManage from '@/views/step/diary/manage/diaryListManage.vue';
+import typeManage from '@/views/manage/typeManage.vue';
+import weatherManage from '@/views/manage/weatherManage.vue';
+import moodManage from '@/views/manage/moodManage.vue';
+import tagManage from '@/views/manage/tagManage.vue';
+
 
 Vue.use(Router);
 
@@ -127,6 +136,70 @@ const router = new Router({
                     component: lifeTimePhoto,
                     meta: {
                         title: "生命瞬间"
+                    }
+                },
+                {
+                    path: '/diaryHome',
+                    name: '/diaryHome',
+                    component: diaryHome,
+                    meta: {
+                        title: "日记首页"
+                    }
+                },
+                {
+                    path: '/diaryCreate',
+                    name: '/diaryCreate',
+                    component: diaryCreate,
+                    meta: {
+                        title: "日记编辑"
+                    }
+                },
+                {
+                    path: '/diaryList',
+                    name: '/diaryList',
+                    component: diaryList,
+                    meta: {
+                        title: "日记编辑"
+                    }
+                },
+                {
+                    path: '/diaryManage',
+                    name: '/diaryManage',
+                    component: diaryManage,
+                    meta: {
+                        title: "日记管理"
+                    }
+                },
+                {
+                    path: '/typeManage',
+                    name: '/typeManage',
+                    component: typeManage,
+                    meta: {
+                        title: "类型管理"
+                    }
+                },
+                {
+                    path: '/moodManage',
+                    name: '/moodManage',
+                    component: moodManage,
+                    meta: {
+                        title: "心情管理"
+                    }
+                },
+                {
+                    path: '/weatherManage',
+                    name: '/weatherManage',
+                    component: weatherManage,
+                    meta: {
+                        title: "天气管理"
+                    }
+                },
+                {
+                    path: '/tagManage',
+                    name: '/tagManage',
+                    component: tagManage,
+                    meta: {
+                        title: "天气管理"
                     }
                 }
             ]

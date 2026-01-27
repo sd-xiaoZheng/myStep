@@ -3,11 +3,11 @@ package org.zaohu.utils.entity;
 public class Point {
 
     /**
-     * x轴坐标
+     * x轴坐标 经度
      */
     double x;
     /**
-     * y轴坐标
+     * y轴坐标 维度
      */
     double y;
 

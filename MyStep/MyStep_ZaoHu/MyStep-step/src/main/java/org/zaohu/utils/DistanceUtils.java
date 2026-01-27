@@ -370,7 +370,7 @@ public class DistanceUtils {
      * @return 距离，单位米
      */
     public static Long measureDistance(Double lng1, Double lat1, Double lng2, Double lat2) {
-        if (Objects.nonNull(lng1) || Objects.nonNull(lat1) || Objects.nonNull(lng2) || Objects.nonNull(lat2)) {
+        if (Objects.isNull(lng1) || Objects.isNull(lat1) || Objects.isNull(lng2) || Objects.isNull(lat2)) {
             return null;
         }
         double EARTH_RADIUS = 6378137;

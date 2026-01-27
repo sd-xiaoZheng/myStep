@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 import org.zaohu.constant.Constant;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 /**
  * @author My-step
  * @since 2025/4/29
+ * return 直接存库里的路径
  **/
 @Slf4j
 public class FileUtils {
@@ -50,7 +52,7 @@ public class FileUtils {
      * @param path 年后面的路径 以/开头结尾 如： /Step/temp/
      * @return
      */
-    public static String uploadPhotoImage(MultipartFile file,String path) {
+    public static String uploadPhotoImage(MultipartFile file, String path) {
         try {
             LocalDate currentDate = LocalDate.now();//时间戳
             //获取年月日
@@ -73,5 +75,13 @@ public class FileUtils {
             log.error(e.getMessage());
         }
         return "";
+    }
+
+    public static boolean deleteImage(String oldUrl) {
+        // D:/step/file/image/
+        // /Zaohu/2025/12/29/68b3637030314cb4b8a768c7b6f9392e_1766994579798.jpg
+        String imagePath = oldUrl.replace("/Zaohu/", Constant.FILE_PATH);
+        File file = new File(imagePath);
+        return file.delete();
     }
 }

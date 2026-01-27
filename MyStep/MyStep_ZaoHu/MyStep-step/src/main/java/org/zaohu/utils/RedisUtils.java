@@ -1,5 +1,6 @@
 package org.zaohu.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.core.Cursor;
@@ -7,6 +8,9 @@ import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.stereotype.Component;
+import org.zaohu.constant.RedisKey;
+import org.zaohu.modules.userLogin.entity.User;
+import org.zaohu.utils.text.StringUtils;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -22,6 +26,8 @@ public class RedisUtils {
     /** redis 操作模板 */
     @Autowired
     private StringRedisTemplate redisTemplate;
+    @Autowired
+    private ObjectMapper objectMapper;
 
 //    public RedisUtils(StringRedisTemplate redisTemplate) {
 //        this.redisTemplate = redisTemplate;
@@ -1462,5 +1468,18 @@ public class RedisUtils {
      */
     public Cursor<TypedTuple<String>> zScan(String key, ScanOptions options) {
         return redisTemplate.opsForZSet().scan(key, options);
+    }
+
+    public  <T> T get(String token, Class<T> clazz) {
+        String json = redisTemplate.opsForValue().get(RedisKey.LOGIN_TOKEN+token);
+        if (StringUtils.isEmpty(json)) {
+            return null;
+        }
+
+        try {
+            return objectMapper.readValue(json, clazz);
+        } catch (Exception e) {
+            throw new RuntimeException("Redis 数据反序列化失败", e);
+        }
     }
 }
