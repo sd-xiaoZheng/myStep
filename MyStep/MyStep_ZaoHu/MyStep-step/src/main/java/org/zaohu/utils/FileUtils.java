@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 import org.zaohu.constant.Constant;
+import org.zaohu.utils.text.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -78,6 +79,9 @@ public class FileUtils {
     }
 
     public static boolean deleteImage(String oldUrl) {
+        if (StringUtils.isEmpty(oldUrl)) {
+            return false;
+        }
         // D:/step/file/image/
         // /Zaohu/2025/12/29/68b3637030314cb4b8a768c7b6f9392e_1766994579798.jpg
         String imagePath = oldUrl.replace("/Zaohu/", Constant.FILE_PATH);

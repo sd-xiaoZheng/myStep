@@ -47,4 +47,10 @@ public class ArticleController extends BaseController {
         articleService.updateArticle(articleVO);
         return Result.success();
     }
+
+    @PostMapping("/deleteArticle")
+    public Result deleteArticle(@RequestBody ArticleVO articleVO) {
+        articleService.deleteArticle(articleVO);
+        return Result.success();
+    }
 }
