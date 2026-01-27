@@ -194,7 +194,7 @@
                   class="image-preview-item"
                   @click.stop
                 >
-                  <img :src="getImageSrc(image)" class="image-preview" alt="预览图片">
+                  <img :src="getImageSrc(image)" class="image-preview" alt="">
                   <div class="image-overlay">
                     <div class="image-actions">
                       <i class="el-icon-edit" @click="replaceImage(index)"></i>
@@ -365,6 +365,17 @@
   font-size: 12px;
   margin-top: 5px;
 }
+
+.image-preview-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8c939d;
+  font-size: 12px;
+  background-color: #f5f7fa;
+}
 </style>
 
 <script>
@@ -414,6 +425,7 @@ export default {
       imageFiles: [], // 用于存储上传的图片文件
       imagePreviews: [], // 用于存储图片预览URL
       imageOriginalUrls: [], // 用于存储原始图片URL（编辑模式下）
+      deleteImages:[],// 记录删除的图片URL
       rules: {
         title: [
           { required: true, message: '请输入标题', trigger: 'blur' }
@@ -537,7 +549,7 @@ export default {
         if (this.dialogMode === 'edit') {
           // 编辑模式，调用更新接口
           const formData = new FormData();
-          
+
           // 添加普通字段（排除 tags 字段，只传 tagIds）
           Object.keys(this.diaryForm).forEach(key => {
             // 跳过 tags 字段，不传递 tags
@@ -548,14 +560,20 @@ export default {
               formData.append(key, this.diaryForm[key]);
             }
           });
-          
+
           // 添加标签ID数组（使用 tagIds，不使用 tags）
           if (this.selectedTags && this.selectedTags.length > 0) {
             this.selectedTags.forEach(tagId => {
               formData.append('tagIds', tagId);
             });
           }
-          
+
+          // 添加删除的图片URL
+          if (this.deleteImages && this.deleteImages.length > 0) {
+            const deleteImagesStr = this.deleteImages.join(',');
+            formData.append('deleteImages', deleteImagesStr);
+          }
+
           // 处理图片更新
           // 构建 updateFile 数组：只有当有新文件时才添加到数组中
           let updateFileIndex = 0;
@@ -563,7 +581,7 @@ export default {
             for (let i = 0; i < this.imageFiles.length; i++) {
               const file = this.imageFiles[i];
               const originalUrl = this.imageOriginalUrls[i];
-              
+
               // 只有当有新文件时，才需要添加到 updateFile
               if (file) {
                 // 如果有原始URL，说明这是替换的图片；如果没有，说明这是新添加的图片
@@ -773,9 +791,20 @@ export default {
 
     // 移除图片
     removeImage(index) {
-      this.imageFiles.splice(index, 1)
-      this.imagePreviews.splice(index, 1)
-      this.imageOriginalUrls.splice(index, 1)
+      // 保存原始URL
+      const originalUrl = this.imageOriginalUrls[index];
+      
+      // 如果原始URL存在且不在删除列表中，则添加到删除列表
+      if (originalUrl) {
+        if (!this.deleteImages.includes(originalUrl)) {
+          this.deleteImages.push(originalUrl);
+        }
+      }
+      
+      // 标记为删除：文件设为null，预览也应清除
+      this.imageFiles.splice(index, 1, null);
+      this.imagePreviews.splice(index, 1, null); // 使用null表示已删除
+      this.imageOriginalUrls.splice(index, 1, null); // 设置为null
     },
 
     // 在编辑时初始化图片
@@ -784,6 +813,7 @@ export default {
       this.imageFiles = []
       this.imagePreviews = []
       this.imageOriginalUrls = []
+      this.deleteImages = [];
 
       // 如果有现有图片，初始化预览
       if (row.imageUrls) {
@@ -791,11 +821,11 @@ export default {
         const originalUrls = row.imageUrls.split(',')
           .filter(url => url.trim() !== '')
           .map(url => url.trim())
-        
+
         // 将现有图片URL作为预览添加（带/api前缀用于显示）
         const previewUrls = this.getImageUrls(row.imageUrls)
         this.imagePreviews = [...previewUrls]
-        
+
         // 初始化对应位置的数据
         for (let i = 0; i < previewUrls.length; i++) {
           this.imageFiles.push(null) // 对于现有图片，初始时没有新文件
@@ -807,6 +837,10 @@ export default {
 
     // 根据图片类型获取正确的src
     getImageSrc(image) {
+      // 如果图片为null，返回空字符串
+      if (!image) {
+        return '';
+      }
       // 如果图片URL以 'data:' 开头，说明是base64编码的预览图片，直接返回
       if (image.startsWith('data:')) {
         return image;

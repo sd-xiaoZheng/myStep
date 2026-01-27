@@ -29,6 +29,7 @@ import org.zaohu.utils.GetIPAddrUtil;
 import org.zaohu.utils.RequestUtils;
 import org.zaohu.utils.entity.IpRegion;
 import org.zaohu.utils.security.SecurityUtils;
+import org.zaohu.utils.text.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -58,6 +59,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public List<Article> getDairy(Article article) {
         //这里要从es中查询 目前先再mysql中查询
         LambdaQueryWrapper<Article> articleLqWrapper = ConditionalAssembler.AssemblyConditions(article);
+        articleLqWrapper.orderBy(true,false,Article::getMemoryTime);
         List<Article> articles = articleMapper.selectList(articleLqWrapper);
         //TODO 这里先把这几个查出来 后面是否可以直接先提前查出来放入redis，更新时候也一起更新redis？
         HashSet<Integer> moodIds = new HashSet<>();
@@ -143,7 +145,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         String city = Objects.nonNull(ipRegion.getCity()) && ipRegion.getCity().equals("0") ? "未知" : ipRegion.getCity();
         article.setAddress(province + city);
         MultipartFile[] images = articleVO.getImages();
-        if (Objects.nonNull(images)) {
+        if (StringUtils.isEmpty(images)) {
             for (MultipartFile image : images) {
                 String imageUrls = article.getImageUrls();
                 if (Objects.isNull(imageUrls)) {
@@ -169,13 +171,35 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             //更新图片并且删除文件
             for (UpdateArticleVO updateArticleVO : updateFile) {
                 String oldUrl = updateArticleVO.getOldUrl();//旧的图片地址
-                if (FileUtils.deleteImage(oldUrl)) {
+                if (StringUtils.isEmpty(oldUrl) && Objects.nonNull(updateArticleVO.getNewImages())) {
+                    //添加了新图片
+                    String imageUrls = articleVO.getImageUrls();
+                    if (StringUtils.isEmpty(imageUrls)) {
+                        articleVO.setImageUrls(FileUtils.uploadImage(updateArticleVO.getNewImages()));
+                        continue;
+                    }
+                    articleVO.setImageUrls(imageUrls + "," + FileUtils.uploadImage(updateArticleVO.getNewImages()));
+                }else if (FileUtils.deleteImage(oldUrl)) {
                     //已经删除
                     MultipartFile newImages = updateArticleVO.getNewImages();//新的图片
                     articleVO.setImageUrls(articleVO.getImageUrls().replace(oldUrl, FileUtils.uploadImage(newImages)));
                 }
             }
         }
+        String deleteImages = articleVO.getDeleteImages();
+        if (StringUtils.isNotEmpty(deleteImages)) {
+            if (deleteImages.contains(",")) {
+                String[] split = deleteImages.split(",");
+                for (String s : split) {
+                    FileUtils.deleteImage(s);
+                }
+            } else {
+                FileUtils.deleteImage(deleteImages);
+            }
+            String imageUrls = articleVO.getImageUrls();
+            articleVO.setImageUrls(StringUtils.strip(imageUrls.replace(deleteImages, ""), ","));
+        }
+
         Article article = new Article();
         BeanUtil.copyProperties(articleVO, article);
         Integer[] tagIds = articleVO.getTagIds();

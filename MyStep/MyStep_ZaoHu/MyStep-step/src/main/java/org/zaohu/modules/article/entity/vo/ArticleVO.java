@@ -19,4 +19,5 @@ public class ArticleVO extends Article {
     private Integer[] tagIds;
     private MultipartFile[] images;
     private List<UpdateArticleVO> updateFile;//需要更新的图片
+    private String deleteImages;
 }
