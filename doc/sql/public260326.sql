@@ -4002,10 +4002,6 @@ CREATE FUNCTION "public"."delete_job"("job_id" int4)
 -- ----------------------------
 -- Procedure structure for detach_chunk
 -- ----------------------------
-DROP PROCEDURE IF EXISTS "public"."detach_chunk"("chunk" regclass);
-CREATE PROCEDURE "public"."detach_chunk"("chunk" regclass)
- AS '$libdir/timescaledb-2.24.0', 'ts_detach_chunk'
-  LANGUAGE c;
 
 -- ----------------------------
 -- Function structure for detach_tablespace

@@ -145,7 +145,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         String city = Objects.nonNull(ipRegion.getCity()) && ipRegion.getCity().equals("0") ? "未知" : ipRegion.getCity();
         article.setAddress(province + city);
         MultipartFile[] images = articleVO.getImages();
-        if (StringUtils.isEmpty(images)) {
+        if (!StringUtils.isEmpty(images)) {
             for (MultipartFile image : images) {
                 String imageUrls = article.getImageUrls();
                 if (Objects.isNull(imageUrls)) {

@@ -12,6 +12,7 @@ import org.lionsoul.ip2region.xdb.Searcher;
 import org.zaohu.utils.entity.IpRegion;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 
 @Slf4j
@@ -44,13 +45,16 @@ public class GetIPAddrUtil {
 //                }
 //        return "未知 未知";
 //    }
-    private static String IP_DATA_PATH="D:\\dev\\idea_project\\myStep\\myStep\\MyStep\\MyStep_ZaoHu\\file\\ip2region.xdb";
-    private static  byte[] contentBuff;
+    private static byte[] contentBuff;
 
     static {
-        try {
-            // 从 dbPath 加载整个 xdb 到内存。
-            contentBuff = Searcher.loadContentFromFile(IP_DATA_PATH);
+        try (InputStream is = GetIPAddrUtil.class
+                .getClassLoader()
+                .getResourceAsStream("file/ip2region.xdb")) {
+            if (is == null) {
+                throw new RuntimeException("ip2region.xdb not found in classpath");
+            }
+            contentBuff = is.readAllBytes();
         } catch (IOException e) {
             e.printStackTrace();
         }
