@@ -59,7 +59,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public List<Article> getDairy(Article article) {
         //这里要从es中查询 目前先再mysql中查询
         LambdaQueryWrapper<Article> articleLqWrapper = ConditionalAssembler.AssemblyConditions(article);
-        articleLqWrapper.orderBy(true,false,Article::getMemoryTime);
+        articleLqWrapper.orderBy(true, false, Article::getMemoryTime);
         List<Article> articles = articleMapper.selectList(articleLqWrapper);
         //TODO 这里先把这几个查出来 后面是否可以直接先提前查出来放入redis，更新时候也一起更新redis？
         HashSet<Integer> moodIds = new HashSet<>();
@@ -179,7 +179,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                         continue;
                     }
                     articleVO.setImageUrls(imageUrls + "," + FileUtils.uploadImage(updateArticleVO.getNewImages()));
-                }else if (FileUtils.deleteImage(oldUrl)) {
+                } else if (FileUtils.deleteImage(oldUrl)) {
                     //已经删除
                     MultipartFile newImages = updateArticleVO.getNewImages();//新的图片
                     articleVO.setImageUrls(articleVO.getImageUrls().replace(oldUrl, FileUtils.uploadImage(newImages)));
@@ -207,6 +207,26 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             updateTags(article.getId(), tagIds);
         }
         articleMapper.insertOrUpdate(article);
+    }
+
+    @Override
+    public void deleteArticle(ArticleVO articleVO) {
+        Article article = articleMapper.selectById(articleVO.getId());
+        if (Objects.nonNull(article)) {
+            if (articleMapper.deleteById(article.getId()) > 0) {
+                String imageUrls = article.getImageUrls();
+                if (StringUtils.isNotEmpty(imageUrls)) {
+                    if (imageUrls.contains(",")) {
+                        String[] split = imageUrls.split(",");
+                        for (String s : split) {
+                            FileUtils.deleteImage(s);
+                        }
+                    }
+                } else {
+                    FileUtils.deleteImage(imageUrls);
+                }
+            }
+        }
     }
 
     private void updateTags(String articleId, Integer[] tagIds) {

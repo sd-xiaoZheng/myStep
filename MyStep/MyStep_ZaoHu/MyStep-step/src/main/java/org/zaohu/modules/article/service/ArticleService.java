@@ -23,4 +23,6 @@ public interface ArticleService extends IService<Article> {
     void addArticle(ArticleVO articleVO);
 
     void updateArticle(ArticleVO articleVO);
+
+    void deleteArticle(ArticleVO articleVO);
 }
