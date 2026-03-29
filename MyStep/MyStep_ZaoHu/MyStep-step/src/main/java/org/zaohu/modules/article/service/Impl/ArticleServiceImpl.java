@@ -155,10 +155,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 article.setImageUrls(imageUrls + "," + FileUtils.uploadImage(image));
             }
         }
-        articleMapper.insertOrUpdate(article);
-        Integer[] tags = articleVO.getTagIds();
-        if (Objects.nonNull(tags)) {
-            updateTags(article.getId(), tags);
+        boolean b = articleMapper.insertOrUpdate(article);
+        if (b) {
+            //添加文章标签对应关系
+            Integer[] tags = articleVO.getTagIds();
+            if (Objects.nonNull(tags)) {
+                updateTags(article.getId(), tags);
+            }
+            //添加到es
         }
     }
 
