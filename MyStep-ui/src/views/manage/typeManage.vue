@@ -68,7 +68,7 @@
       :visible.sync="dialogVisible"
       width="40%"
       :close-on-click-modal="false"
-      :modal-append-to-body="false",
+      :modal-append-to-body="false"
     >
       <el-form :model="typeForm" :rules="rules" ref="typeForm" label-width="100px">
         <el-form-item label="类型名称" prop="name">

@@ -65,7 +65,7 @@
         :visible.sync="dialogVisible"
         width="40%"
         :close-on-click-modal="false"
-        :modal-append-to-body="false",
+        :modal-append-to-body="false"
     >
       <el-form :model="moodForm" :rules="rules" ref="moodForm" label-width="100px">
         <el-form-item label="心情名称" prop="name">
@@ -81,10 +81,10 @@
               :before-upload="beforeIconUpload"
               accept="image/*"
           >
-            <img v-if="previewIconUrl" :src="'/api'+previewIconUrl" class="icon-preview">
-            <el-button v-else type="primary" icon="el-icon-plus" class="icon-upload-btn">选择图标</el-button>
+            <img v-if="previewIconUrl" :src="previewIconUrl" class="icon-preview">
+            <el-button v-else type="primary" icon="el-icon-plus" class="icon-upload-btn"></el-button>
           </el-upload>
-          <div class="icon-upload-tip" v-if="!previewIconUrl">支持 JPG/PNG/GIF/WebP 格式，建议尺寸 80x80</div>
+<!--          <div class="icon-upload-tip" v-if="!previewIconUrl">支持 JPG/PNG/GIF/WebP 格式，建议尺寸 80x80</div>-->
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -197,7 +197,7 @@ export default {
       }
       this.currentFile = null // 重置文件
       // 设置预览图标为当前图标的完整路径
-      this.previewIconUrl = row.icon
+      this.previewIconUrl = '/api'+row.icon
       this.dialogVisible = true
     },
 

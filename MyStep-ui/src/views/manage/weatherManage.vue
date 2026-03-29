@@ -81,7 +81,7 @@
             :before-upload="beforeIconUpload"
             accept="image/*"
           >
-            <img v-if="previewIconUrl" :src="'/api'+previewIconUrl" class="icon-preview">
+            <img v-if="previewIconUrl" :src="previewIconUrl" class="icon-preview">
             <el-button v-else type="primary" icon="el-icon-plus" class="icon-upload-btn"></el-button>
           </el-upload>
         </el-form-item>
@@ -196,7 +196,7 @@ export default {
       }
       this.currentFile = null // 重置文件
       // 设置预览图标为当前图标的完整路径
-      this.previewIconUrl = row.icon
+      this.previewIconUrl = '/api'+row.icon
       this.dialogVisible = true
     },
 
