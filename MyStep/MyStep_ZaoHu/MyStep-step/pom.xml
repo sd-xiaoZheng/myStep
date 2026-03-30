@@ -233,6 +233,12 @@
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>co.elastic.clients</groupId>
+            <artifactId>elasticsearch-java</artifactId>
+            <version>${elasticsearch-client.version}</version>
+        </dependency>
+
         <!-- 压缩webp -->
         <dependency>
             <groupId>org.sejda.imageio</groupId>
