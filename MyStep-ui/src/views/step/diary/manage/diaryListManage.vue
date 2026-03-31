@@ -2,7 +2,7 @@
   <div class="diary-list-manage">
     <!-- 顶部操作栏 -->
     <div class="operation-bar">
-      <el-button type="primary" icon="el-icon-plus" @click="openAddDialog">
+      <el-button type="primary" icon="el-icon-plus" @click="goToDiaryCreate">
         添加日记
       </el-button>
       <!-- 添加搜索框 -->
@@ -490,6 +490,11 @@ export default {
     handleCurrentChange(val) {
       this.currentPage = val
       this.getDiaryList()
+    },
+
+    // 跳转到日记创建页面
+    goToDiaryCreate() {
+      this.$router.push('/diaryCreate');
     },
 
     // 打开添加对话框
