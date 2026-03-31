@@ -1,6 +1,7 @@
 package org.zaohu.modules.article.service.Impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,9 @@ import org.zaohu.utils.entity.IpRegion;
 import org.zaohu.utils.security.SecurityUtils;
 import org.zaohu.utils.text.StringUtils;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -54,6 +57,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     private final WeatherMapper weatherMapper;
     private final TagRelationMapper tagRelationMapper;
     private final TagMapper tagMapper;
+    private final ElasticsearchClient elasticsearchClient;
 
     @Override
     public List<Article> getDairy(Article article) {
@@ -130,7 +134,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     @Transactional
-    public void addArticle(ArticleVO articleVO) {
+    public void addArticle(ArticleVO articleVO) throws IOException {
         Article article = new Article();
         BeanUtil.copyProperties(articleVO, article);
         article.setWriteTime(LocalDateTime.now());
@@ -162,7 +166,38 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             if (Objects.nonNull(tags)) {
                 updateTags(article.getId(), tags);
             }
-            //添加到es
+            // 构建ES文档
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+            Map<String, Object> esDoc = new HashMap<>();
+            esDoc.put("id", article.getId());
+            esDoc.put("typeId", article.getTypeId());
+            esDoc.put("title", article.getTitle());
+            esDoc.put("content", article.getContent());
+            esDoc.put("writeTime", article.getWriteTime() == null ? null : article.getWriteTime().format(formatter));
+            esDoc.put("memoryTime", article.getMemoryTime() == null ? null : article.getMemoryTime().format(formatter));
+            esDoc.put("weatherId", article.getWeatherId());
+            esDoc.put("moodId", article.getMoodId());
+            esDoc.put("authorName", article.getAuthorName());
+            esDoc.put("authorId", article.getAuthorId());
+            esDoc.put("isStar", article.getIsStar());
+            esDoc.put("address", article.getAddress());
+            List<Map<String, Object>> tagList = new ArrayList<>();
+            if (tags != null && tags.length > 0) {
+                List<Tag> tagEntities = tagMapper.selectByIds(Arrays.asList(tags));
+                for (Tag tag : tagEntities) {
+                    Map<String, Object> tagMap = new HashMap<>();
+                    tagMap.put("id", tag.getId());
+                    tagMap.put("name", tag.getName());
+                    tagList.add(tagMap);
+                }
+            }
+            esDoc.put("tags", tagList);
+            // 存入ES
+            elasticsearchClient.index(i -> i
+                    .index("article_index")
+                    .id(article.getId())
+                    .document(esDoc)
+            );
         }
     }
 

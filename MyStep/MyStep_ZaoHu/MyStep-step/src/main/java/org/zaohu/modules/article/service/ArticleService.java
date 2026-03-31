@@ -4,6 +4,7 @@ import org.zaohu.modules.article.entity.Article;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.zaohu.modules.article.entity.vo.ArticleVO;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public interface ArticleService extends IService<Article> {
 
     Long selectCount(Article article);
 
-    void addArticle(ArticleVO articleVO);
+    void addArticle(ArticleVO articleVO) throws IOException;
 
     void updateArticle(ArticleVO articleVO);
 

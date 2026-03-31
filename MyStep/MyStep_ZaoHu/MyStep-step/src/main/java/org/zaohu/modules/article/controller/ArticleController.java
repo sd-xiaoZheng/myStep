@@ -9,6 +9,7 @@ import org.zaohu.modules.article.entity.Article;
 import org.zaohu.modules.article.entity.vo.ArticleVO;
 import org.zaohu.modules.article.service.ArticleService;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -37,7 +38,7 @@ public class ArticleController extends BaseController {
     }
 
     @PostMapping("/addArticle")
-    public Result addArticle(@ModelAttribute ArticleVO articleVO) {
+    public Result addArticle(@ModelAttribute ArticleVO articleVO) throws IOException {
         articleService.addArticle(articleVO);
         return Result.success();
     }

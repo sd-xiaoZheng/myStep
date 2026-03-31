@@ -29,7 +29,6 @@ import java.util.Objects;
  * @author Step
  */
 @Configuration
-@EnableScheduling
 @RequiredArgsConstructor
 /*是否开启定时任务通过application配置文件中的scheduling.enabled配置**/
 //@ConditionalOnProperty(prefix = "scheduling", name = "enabled", havingValue = "true")
