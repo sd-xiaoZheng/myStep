@@ -13,18 +13,18 @@
             <option value="angry">愤怒</option>
           </select>
         </div>
-        
+
         <div class="filter-group">
-          <input 
-            type="date" 
-            v-model="filters.date" 
+          <input
+            type="date"
+            v-model="filters.date"
             class="date-picker"
           />
         </div>
-        
+
         <div class="time-range-buttons">
-          <button 
-            v-for="range in timeRanges" 
+          <button
+            v-for="range in timeRanges"
             :key="range.value"
             :class="['time-range-btn', { active: filters.timeRange === range.value }]"
             @click="setTimeRange(range.value)"
@@ -33,13 +33,13 @@
           </button>
         </div>
       </div>
-      
+
       <div class="toolbar-center">
         <div class="search-box">
-          <input 
-            type="text" 
-            v-model="filters.keyword" 
-            placeholder="搜索关键词..." 
+          <input
+            type="text"
+            v-model="filters.keyword"
+            placeholder="搜索关键词..."
             class="search-input"
             @keyup.enter="searchDiaries"
           />
@@ -49,19 +49,19 @@
             </svg>
           </button>
         </div>
-        
+
         <button class="clear-button" @click="clearFilters">
           清除筛选
         </button>
       </div>
-      
+
       <div class="toolbar-right">
         <button class="btn btn-primary" @click="goToCreateDiary">
           + 新建日记
         </button>
       </div>
     </div>
-    
+
     <!-- 数据统计模块 -->
     <div class="stats-section">
       <div class="stats-card mood-distribution">
@@ -90,18 +90,18 @@
           </div>
         </div>
       </div>
-      
+
       <div class="stats-card activity-chart">
         <h3>本月活跃度</h3>
         <div class="activity-bars">
-          <div 
-            v-for="(day, index) in activityData" 
+          <div
+            v-for="(day, index) in activityData"
             :key="index"
             class="activity-day"
           >
             <div class="bar-container">
-              <div 
-                class="activity-bar" 
+              <div
+                class="activity-bar"
                 :style="{ height: day.height }"
               ></div>
             </div>
@@ -111,17 +111,17 @@
         </div>
       </div>
     </div>
-    
+
     <!-- 日记列表模块 -->
     <div class="diary-list-section">
       <div class="section-header">
         <h2>我的日记</h2>
         <div class="result-count">共找到 {{ filteredDiaries.length }} 篇日记</div>
       </div>
-      
+
       <div class="diary-grid">
-        <div 
-          v-for="diary in filteredDiaries" 
+        <div
+          v-for="diary in filteredDiaries"
           :key="diary.id"
           class="diary-card"
         >
@@ -132,15 +132,22 @@
           <div class="diary-content">
             {{ diary.preview }}
           </div>
-          <div class="diary-tags">
-            <span 
-              v-for="tag in diary.tags" 
-              :key="tag" 
-              class="tag"
-              :class="getTagClass(tag)"
-            >
-              {{ tag }}
-            </span>
+          <div class="diary-meta">
+            <!-- 天气 -->
+            <span v-if="diary.weatherName" class="meta-text weather">{{ diary.weatherName }}</span>
+            <!-- 类型 -->
+            <span v-if="diary.typeName" class="meta-text type">{{ diary.typeName }}</span>
+            <!-- 标签 -->
+            <div v-if="diary.tags && diary.tags.length > 0" class="tags-container">
+              <span
+                v-for="tag in diary.tags"
+                :key="tag.id || tag.name"
+                class="tag"
+                :style="{ backgroundColor: tag.color || '#FFF000', color: '#333' }"
+              >
+                {{ tag.name }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -149,6 +156,8 @@
 </template>
 
 <script>
+import { getDiaryList } from '@/apis/api/diary'
+
 export default {
   name: 'DiaryList',
   data() {
@@ -176,81 +185,32 @@ export default {
         { date: '9', count: 2, height: '80%' },
         { date: '10', count: 1, height: '40%' }
       ],
-      diaries: [
-        {
-          id: 1,
-          title: '美好的一天',
-          date: '2025-11-04',
-          preview: '今天阳光明媚，心情特别好。早上去了公园散步，看到了很多美丽的花朵...',
-          tags: ['生活', '心情'],
-          mood: 'happy'
-        },
-        {
-          id: 2,
-          title: '工作中的挑战',
-          date: '2025-11-03',
-          preview: '今天遇到了一个技术难题，花了一整天的时间才解决。虽然过程很辛苦，但最终...',
-          tags: ['工作', '反思'],
-          mood: 'calm'
-        },
-        {
-          id: 3,
-          title: '与朋友的聚会',
-          date: '2025-11-02',
-          preview: '周末和几个老朋友聚餐，聊了很多过去的趣事。感觉友谊真的是人生中最宝贵的...',
-          tags: ['社交', '回忆'],
-          mood: 'happy'
-        },
-        {
-          id: 4,
-          title: '学习新技能',
-          date: '2025-11-01',
-          preview: '开始学习Vue.js，感觉这个框架真的很强大。虽然有些概念还不太理解，但我相信...',
-          tags: ['学习', '成长'],
-          mood: 'excited'
-        },
-        {
-          id: 5,
-          title: '雨天的思考',
-          date: '2025-10-30',
-          preview: '今天下雨一整天，适合在家里静静地思考。回想最近的生活，有很多值得感恩...',
-          tags: ['思考', '生活'],
-          mood: 'calm'
-        },
-        {
-          id: 6,
-          title: '健身计划',
-          date: '2025-10-28',
-          preview: '制定了一个新的健身计划，希望能在两个月内达到目标体重。今天开始了第一...',
-          tags: ['健身', '计划'],
-          mood: 'excited'
-        }
-      ]
+      diaries: []
     }
   },
   computed: {
     filteredDiaries() {
       let result = this.diaries;
-      
+
       // 根据心情筛选
       if (this.filters.mood) {
         result = result.filter(diary => diary.mood === this.filters.mood);
       }
-      
+
       // 根据日期筛选
       if (this.filters.date) {
         result = result.filter(diary => diary.date === this.filters.date);
       }
-      
+
       // 根据关键词筛选
       if (this.filters.keyword) {
         const keyword = this.filters.keyword.toLowerCase();
-        result = result.filter(diary => 
-          diary.title.toLowerCase().includes(keyword) || 
+        result = result.filter(diary =>
+          diary.title.toLowerCase().includes(keyword) ||
           diary.preview.toLowerCase().includes(keyword)
         );
       }
-      
+
       // 根据时间范围筛选
       if (this.filters.timeRange !== 'all') {
         const now = new Date();
@@ -260,17 +220,41 @@ export default {
             const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
             return diaryDate >= weekAgo && diaryDate <= now;
           } else if (this.filters.timeRange === 'month') {
-            return diaryDate.getMonth() === now.getMonth() && 
+            return diaryDate.getMonth() === now.getMonth() &&
                    diaryDate.getFullYear() === now.getFullYear();
           }
           return true;
         });
       }
-      
+
       return result;
     }
   },
+  async mounted() {
+    await this.loadDiaryList()
+  },
   methods: {
+    async loadDiaryList() {
+      try {
+        const res = await getDiaryList()
+        if (res.code === 200 && res.rows) {
+          this.diaries = res.rows.map(item => ({
+            id: item.id,
+            title: item.title,
+            date: item.memoryTime ? item.memoryTime.split('T')[0] : '',
+            preview: item.content,
+            tags: item.tags,
+            mood: 'calm',
+            color: item.color,
+            typeName: item.typeName,
+            weatherName: item.weatherName,
+            moodName: item.moodName
+          }))
+        }
+      } catch (error) {
+        console.error('获取日记列表失败:', error)
+      }
+    },
     setTimeRange(range) {
       this.filters.timeRange = range;
     },
@@ -286,23 +270,7 @@ export default {
       };
     },
     goToCreateDiary() {
-      this.$router.push('/createDiary');
-    },
-    getTagClass(tag) {
-      const tagClasses = {
-        '生活': 'tag-life',
-        '心情': 'tag-mood',
-        '工作': 'tag-work',
-        '反思': 'tag-reflection',
-        '社交': 'tag-social',
-        '回忆': 'tag-memory',
-        '学习': 'tag-study',
-        '成长': 'tag-growth',
-        '思考': 'tag-thought',
-        '健身': 'tag-fitness',
-        '计划': 'tag-plan'
-      };
-      return tagClasses[tag] || '';
+      this.$router.push('/diaryCreate');
     }
   }
 }
@@ -617,10 +585,38 @@ export default {
   overflow: hidden;
 }
 
-.diary-tags {
+.diary-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.meta-text {
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background: transparent;
+}
+
+.meta-text.weather {
+  color: #e67e22;
+  font-weight: bold;
+}
+
+.meta-text.type {
+  color: #3498db;
+  font-weight: bold;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-left: auto;
 }
 
 .tag {
@@ -628,87 +624,30 @@ export default {
   border-radius: 15px;
   font-size: 0.8rem;
   font-weight: bold;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.tag-life {
-  background: rgba(52, 152, 219, 0.2);
-  color: #3498db;
-  border: 1px solid rgba(52, 152, 219, 0.3);
+.tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.tag-mood {
-  background: rgba(230, 126, 34, 0.2);
-  color: #e67e22;
-  border: 1px solid rgba(230, 126, 34, 0.3);
-}
 
-.tag-work {
-  background: rgba(46, 204, 113, 0.2);
-  color: #2ecc71;
-  border: 1px solid rgba(46, 204, 113, 0.3);
-}
-
-.tag-reflection {
-  background: rgba(155, 89, 182, 0.2);
-  color: #9b59b6;
-  border: 1px solid rgba(155, 89, 182, 0.3);
-}
-
-.tag-social {
-  background: rgba(241, 196, 15, 0.2);
-  color: #f1c40f;
-  border: 1px solid rgba(241, 196, 15, 0.3);
-}
-
-.tag-memory {
-  background: rgba(230, 126, 34, 0.2);
-  color: #e67e22;
-  border: 1px solid rgba(230, 126, 34, 0.3);
-}
-
-.tag-study {
-  background: rgba(52, 152, 219, 0.2);
-  color: #3498db;
-  border: 1px solid rgba(52, 152, 219, 0.3);
-}
-
-.tag-growth {
-  background: rgba(46, 204, 113, 0.2);
-  color: #2ecc71;
-  border: 1px solid rgba(46, 204, 113, 0.3);
-}
-
-.tag-thought {
-  background: rgba(149, 165, 166, 0.2);
-  color: #95a5a6;
-  border: 1px solid rgba(149, 165, 166, 0.3);
-}
-
-.tag-fitness {
-  background: rgba(231, 76, 60, 0.2);
-  color: #e74c3c;
-  border: 1px solid rgba(231, 76, 60, 0.3);
-}
-
-.tag-plan {
-  background: rgba(155, 89, 182, 0.2);
-  color: #9b59b6;
-  border: 1px solid rgba(155, 89, 182, 0.3);
-}
 
 @media (max-width: 1200px) {
   .toolbar {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .toolbar-left,
   .toolbar-center,
   .toolbar-right {
     width: 100%;
     justify-content: center;
   }
-  
+
   .stats-section {
     grid-template-columns: 1fr;
   }
@@ -718,15 +657,15 @@ export default {
   .diary-list-page {
     padding: 1rem;
   }
-  
+
   .toolbar {
     padding: 1rem;
   }
-  
+
   .search-input {
     width: 150px;
   }
-  
+
   .diary-grid {
     grid-template-columns: 1fr;
   }
