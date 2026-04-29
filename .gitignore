@@ -24,7 +24,6 @@ TestResults.xml
 ### IDE和编辑器配置 ###
 .idea/
 
-
 #log file
 *.log
 logs
@@ -57,13 +56,13 @@ target
 info.log.*.gz
 
 
-
 #deploy:
 doc/deploy/**/data/
 doc/deploy/**/logs/
 doc/deploy/**/store/
 
-
+#ai:
+.claude/
 
 
 
