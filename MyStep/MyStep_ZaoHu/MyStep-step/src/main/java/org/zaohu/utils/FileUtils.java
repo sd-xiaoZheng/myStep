@@ -2,6 +2,7 @@ package org.zaohu.utils;
 
 import cn.hutool.core.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tika.Tika;
 import org.springframework.web.multipart.MultipartFile;
 import org.zaohu.constant.Constant;
 import org.zaohu.utils.text.StringUtils;
@@ -12,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.Set;
 
 /**
  * @author My-step
@@ -20,8 +22,15 @@ import java.time.LocalDate;
  **/
 @Slf4j
 public class FileUtils {
+    private static final Set<String> ALLOWED_EXT = Set.of("jpg", "jpeg", "png", "gif");
     public static String uploadImage(MultipartFile fileName) {
         try {
+            Tika tika = new Tika();
+            String mimeType = tika.detect(fileName.getInputStream());
+
+            if (!mimeType.startsWith("image/")) {
+                throw new RuntimeException("文件内容非法");
+            }
             LocalDate currentDate = LocalDate.now();//时间戳
             //获取年月日
             String year = String.valueOf(currentDate.getYear());
@@ -31,8 +40,8 @@ public class FileUtils {
             Path directoryPath = Paths.get(Constant.FILE_PATH, year, month, day);
             Files.createDirectories(directoryPath);
 
-            String originalFilename = fileName.getOriginalFilename();
             String filenameBase = IdUtil.fastSimpleUUID();
+            String originalFilename = fileName.getOriginalFilename();
             String extension = originalFilename.substring(originalFilename.lastIndexOf('.'));
             String timestamp = String.valueOf(System.currentTimeMillis());
             String newFilename = filenameBase + "_" + timestamp + extension;

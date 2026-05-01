@@ -39,8 +39,7 @@ public class CodeGenerator {
                         .outputDir(System.getProperty("user.dir") + "/MyStep/MyStep_ZaoHu/MyStep-step/src/main/java")
                         .commentDate("yyyy-MM-dd HH:mm:ss")
                         .dateType(DateType.TIME_PACK)
-                        .enableSwagger()
-                        .enableSwagger()
+//                        .enableSwagger()
                         .disableOpenDir()
                 )
                 // 包配置
