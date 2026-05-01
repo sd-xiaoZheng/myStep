@@ -209,12 +209,6 @@
             <artifactId>java-jwt</artifactId>
             <version>4.4.0</version>
         </dependency>
-        <!--        Swagger-->
-        <dependency>
-            <groupId>io.toolisticon.springboot</groupId>
-            <artifactId>springboot-swagger-starter</artifactId>
-            <version>0.3.0</version>
-        </dependency>
         <!--email-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

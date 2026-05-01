@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +23,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("msg_wall")
-@ApiModel(value = "MsgWall对象", description = "")
 public class MsgWall {
 
     /**
@@ -39,31 +36,24 @@ public class MsgWall {
     @TableId(value="id",type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("内容")
     @TableField("leave_msg")
     private String leaveMsg;
 
-    @ApiModelProperty("发表人")
     @TableField("leave_from")
     private String leaveFrom;
 
-    @ApiModelProperty("发表时间")
     @TableField("leave_time")
     private Date leaveTime;
 
-    @ApiModelProperty("地点")
     @TableField("place")
     private String place;
 
-    @ApiModelProperty("0否 1匿名")
     @TableField("anonymity")
     private Byte anonymity;
 
-    @ApiModelProperty("IP地址")
     @TableField("ip")
     private String ip;
 
-    @ApiModelProperty("头像地址")
     @TableField("head")
     private String head;
 }

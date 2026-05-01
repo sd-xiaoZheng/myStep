@@ -2,8 +2,6 @@ package org.zaohu.modules.tagRelation.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,13 +16,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("tag_relation")
-@ApiModel(value = "TagRelation对象", description = "标签关联表")
 public class TagRelation {
 
-    @ApiModelProperty("文章ID")
     private String articleId;
 
-    @ApiModelProperty("标签ID")
     @TableId("tag_id")
     private Integer tagId;
 }
