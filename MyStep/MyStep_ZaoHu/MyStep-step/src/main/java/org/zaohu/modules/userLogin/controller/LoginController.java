@@ -11,22 +11,25 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.zaohu.Enum.ErrorEnum.ErrorEnum;
+import org.zaohu.common.ResultCommon.Result;
 import org.zaohu.constant.Constant;
 import org.zaohu.constant.RedisKey;
-import org.zaohu.modules.userLogin.service.UserService;
-import org.zaohu.utils.JwtUtils;
-import org.zaohu.utils.RedisUtils;
+import org.zaohu.interceptor.LoginRateLimitInterceptor;
 import org.zaohu.jobs.rocketMq.producer.RocketMQTemplateProducerUtils;
-import org.zaohu.common.ResultCommon.Result;
 import org.zaohu.modules.userLogin.entity.User;
 import org.zaohu.modules.userLogin.mapper.UserMapper;
+import org.zaohu.modules.userLogin.service.UserService;
 import org.zaohu.security.entity.LoginUserDetails;
+import org.zaohu.utils.JwtUtils;
+import org.zaohu.utils.RedisUtils;
 import org.zaohu.utils.text.StringUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -85,6 +88,7 @@ public class LoginController {
         try {//因为可能权限不够 等出现异常 这里包一下
             Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
             if (Objects.isNull(authenticate)) {
+                Thread.sleep(500);//睡500毫秒防止暴力破解
                 return Result.failed("用户名或密码错误");
             }
             //生成token
@@ -100,6 +104,11 @@ public class LoginController {
             HashMap<String, String> map = new HashMap<>(1);
             map.put("token", token);
 //            rocketMQTemplate.asyncSend();
+            String ip = request.getHeader("X-Forwarded-For");
+            if (Objects.isNull(ip) || ip.isEmpty()) {
+                ip = request.getRemoteAddr();
+            }
+            LoginRateLimitInterceptor.bucketCache.remove(ip);
             return Result.success("登录成功", map);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -196,6 +205,7 @@ public class LoginController {
 
     /**
      * 发送邮箱
+     *
      * @param user
      * @return
      */

@@ -1,15 +1,16 @@
 package org.zaohu.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.CacheControl;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.zaohu.constant.Constant;
+import org.zaohu.interceptor.LoginRateLimitInterceptor;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -17,6 +18,10 @@ public class WebConfig implements WebMvcConfigurer {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(new MappingJackson2HttpMessageConverter());
     }
+
+    @Autowired
+    private LoginRateLimitInterceptor loginRateLimitInterceptor;
+
 
 
     /**
@@ -32,5 +37,16 @@ public class WebConfig implements WebMvcConfigurer {
 //        registry.addResourceHandler("/swagger-ui/**")
 //                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/")
 //                .setCacheControl(CacheControl.maxAge(5, TimeUnit.HOURS).cachePublic());
+    }
+
+
+    /**
+     * 拦截登录防止暴力破解
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginRateLimitInterceptor)
+                .addPathPatterns("/step/login"); // 只拦登录接口
     }
 }

@@ -51,6 +51,10 @@ axios.interceptors.response.use(
                 // 资源未找到
                 console.log('资源未找到');
                 break;
+            case 429:
+                // 请求过于频繁，请稍后再试~
+                console.log('请求过于频繁，请稍后再试~');
+                break;
             default:
                 return response.data;
                 // console.log('请求出错');
@@ -64,6 +68,7 @@ axios.interceptors.response.use(
                 case 401:
                     // 未授权，可能是 token 失效，可以跳转到登录页面或刷新 token
                     console.log('未授权，请重新登录');
+                    router.push('/login');
                     break;
                 case 403:
                     // 权限不足，可显示相应提示信息
@@ -72,6 +77,10 @@ axios.interceptors.response.use(
                 case 404:
                     // 资源未找到
                     console.log('资源未找到');
+                    break;
+                case 429:
+                    // 请求过于频繁，请稍后再试~
+                    console.log('请求过于频繁，请稍后再试~');
                     break;
                 default:
                     console.log('请求出错');

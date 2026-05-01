@@ -54,7 +54,7 @@ public class SecurityConfig {
                                                 "/step/register",
                                                 "/step/Zaohu/**",
                                                 "/step/forgetPwd",
-                                                "/step/article/**",
+//                                                "/step/article/**",
                                                 "/step/sendForgetPwdEmail")
 //                                .hasAuthority("user")//有权限
                                         .permitAll()//不需要认证
