@@ -17,12 +17,14 @@ spring:
       - optional:nacos:${spring.application.name}.yml
       - optional:nacos:db-common.yml
       - nacos:nacos-discovery.yml
+
+# 各位大佬我这里给出了qq邮箱隐私信息，如果您发现请不要乱用，感谢🤭
   mail:
-    host: smtp.qq.com #配置 SMTP 服务器地址
+    host: smtp.qq.com #SMTP 服务器地址
     port: 465   #SMTP 服务器的端口
     username: 3331247124@qq.com
-    password: fqoosoqrseukcjgh #配置密码，注意，不是真正的密码，而是刚刚申请到的授权码
-    default-encoding: UTF-8 #默认的邮件编码
+    password: fqoosoqrseukcjgh #申请的授权码
+    default-encoding: UTF-8 #邮件编码
 
     #官方建议使用 465 端口，而 465 端口是 SSL 协议的，所以不仅要换端口，
     #还需要进行 SSL 协议替换。下面是在 application.properties 进行的邮件发送相关配置，

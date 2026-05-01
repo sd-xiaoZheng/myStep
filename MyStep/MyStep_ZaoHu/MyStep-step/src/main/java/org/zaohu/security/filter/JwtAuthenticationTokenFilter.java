@@ -34,7 +34,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //获取token
         String token = request.getHeader("Authorization");
-        if (StringUtils.isNotEmpty(token)) {
+        if (StringUtils.isNotEmpty(token) && token.startsWith("Bearer ")) {
             String key = RedisKey.LOGIN_TOKEN + token.split(" ")[1];
             String json = redisUtils.get(key);
             if (StringUtils.isNotEmpty(json)) {
