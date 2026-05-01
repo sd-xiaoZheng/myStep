@@ -132,7 +132,7 @@ public class LoginController {
         } else {
             String redisCode = redisUtils.get(RedisKey.REGISTER_CODE + user.getEmail());
             if (!redisCode.equals(code)) {
-                Result.failed("验证码错误");
+                return Result.failed("验证码错误");
             } else {
                 //判断验证码是否一致 从redis中获取
                 QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
