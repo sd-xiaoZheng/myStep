@@ -7,10 +7,12 @@ import org.zaohu.common.page.TableDataInfo;
 import org.zaohu.constant.controller.BaseController;
 import org.zaohu.modules.article.entity.Article;
 import org.zaohu.modules.article.entity.vo.ArticleVO;
+import org.zaohu.modules.article.entity.vo.GetArticleVo;
 import org.zaohu.modules.article.service.ArticleService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -53,5 +55,17 @@ public class ArticleController extends BaseController {
     public Result deleteArticle(@RequestBody ArticleVO articleVO) {
         articleService.deleteArticle(articleVO);
         return Result.success();
+    }
+
+    @GetMapping("getFiltter")
+    public Result getFiltter() {
+        Map<String, Object> filtter = articleService.getFiltter();
+        return Result.success(filtter);
+    }
+
+    @PostMapping("getArticleByFiltter")
+    public Result getArticleByFiltter(@RequestBody GetArticleVo getArticleVo) {
+        List<Article> photoList = articleService.getArticleByFiltter(getArticleVo);
+        return Result.success(photoList);
     }
 }

@@ -3,9 +3,11 @@ package org.zaohu.modules.article.service;
 import org.zaohu.modules.article.entity.Article;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.zaohu.modules.article.entity.vo.ArticleVO;
+import org.zaohu.modules.article.entity.vo.GetArticleVo;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -26,4 +28,8 @@ public interface ArticleService extends IService<Article> {
     void updateArticle(ArticleVO articleVO);
 
     void deleteArticle(ArticleVO articleVO);
+
+    Map<String, Object> getFiltter();
+
+    List<Article> getArticleByFiltter(GetArticleVo getArticleVo);
 }

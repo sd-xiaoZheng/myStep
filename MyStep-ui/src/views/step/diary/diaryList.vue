@@ -3,16 +3,6 @@
     <!-- 顶部操作栏 -->
     <div class="toolbar">
       <div class="toolbar-left">
-        <div class="filter-group">
-          <select v-model="filters.mood" class="filter-select">
-            <option value="">全部心情</option>
-            <option value="happy">开心</option>
-            <option value="calm">平静</option>
-            <option value="sad">难过</option>
-            <option value="excited">兴奋</option>
-            <option value="angry">愤怒</option>
-          </select>
-        </div>
 
         <div class="filter-group">
           <input
@@ -116,7 +106,42 @@
     <div class="diary-list-section">
       <div class="section-header">
         <h2>我的日记</h2>
+        <div class="selected-filters">
+          <span
+            v-for="(item, index) in activeFilterItems"
+            :key="item._key"
+            :class="['selected-filter-bubble', { 'flash-highlight': item._flash }]"
+            :style="getBubbleStyle(item)"
+            @mouseenter="item._hover = true"
+            @mouseleave="item._hover = false"
+            @click="removeFilter(index)"
+          >
+            {{ item.displayName }}
+            <span v-if="item._hover" class="remove-x">&times;</span>
+          </span>
+          <span
+            v-if="activeFilterItems.length > 0"
+            class="selected-filter-clear"
+            @click="clearBubbleFilters"
+          >清除</span>
+        </div>
         <div class="result-count">共找到 {{ filteredDiaries.length }} 篇日记</div>
+      </div>
+
+      <!-- 可选筛选气泡行 -->
+      <div
+        class="filter-bubble-row"
+        ref="bubbleRow"
+        @mouseenter="pauseScroll"
+        @mouseleave="resumeScroll"
+      >
+        <span
+          v-for="item in availableFilterItems"
+          :key="item._category + '_' + item.id"
+          :class="['filter-bubble', { active: isFilterActive(item) }]"
+          :style="getBubbleStyle(item)"
+          @click="toggleFilter(item)"
+        >{{ item.displayName }}</span>
       </div>
 
       <div class="diary-grid">
@@ -133,11 +158,8 @@
             {{ diary.preview }}
           </div>
           <div class="diary-meta">
-            <!-- 天气 -->
             <span v-if="diary.weatherName" class="meta-text weather">{{ diary.weatherName }}</span>
-            <!-- 类型 -->
             <span v-if="diary.typeName" class="meta-text type">{{ diary.typeName }}</span>
-            <!-- 标签 -->
             <div v-if="diary.tags && diary.tags.length > 0" class="tags-container">
               <span
                 v-for="tag in diary.tags"
@@ -157,6 +179,9 @@
 
 <script>
 import { getDiaryList } from '@/apis/api/diary'
+import { getFiltter } from '@/apis/api/article'
+
+let _keyCounter = 0
 
 export default {
   name: 'DiaryList',
@@ -168,10 +193,17 @@ export default {
         timeRange: 'all',
         keyword: ''
       },
+      filterOptions: {
+        weather: [],
+        mood: [],
+        type: [],
+        tag: []
+      },
+      activeFilterItems: [],
       timeRanges: [
-        { label: '近一周', value: 'week' },
-        { label: '本月', value: 'month' },
-        { label: '全部', value: 'all' }
+        { label: '全部', value: 'all' },
+        { label: '今年', value: 'year' },
+        { label: '本月', value: 'month' }
       ],
       activityData: [
         { date: '1', count: 2, height: '80%' },
@@ -192,17 +224,14 @@ export default {
     filteredDiaries() {
       let result = this.diaries;
 
-      // 根据心情筛选
       if (this.filters.mood) {
         result = result.filter(diary => diary.mood === this.filters.mood);
       }
 
-      // 根据日期筛选
       if (this.filters.date) {
         result = result.filter(diary => diary.date === this.filters.date);
       }
 
-      // 根据关键词筛选
       if (this.filters.keyword) {
         const keyword = this.filters.keyword.toLowerCase();
         result = result.filter(diary =>
@@ -211,7 +240,6 @@ export default {
         );
       }
 
-      // 根据时间范围筛选
       if (this.filters.timeRange !== 'all') {
         const now = new Date();
         result = result.filter(diary => {
@@ -227,13 +255,130 @@ export default {
         });
       }
 
+      if (this.activeFilterItems.length > 0) {
+        result = result.filter(diary => {
+          return this.activeFilterItems.some(f => {
+            switch (f._category) {
+              case 'weather': return diary.weatherId === f.id
+              case 'mood': return diary.moodId === f.id
+              case 'type': return diary.typeId === f.id
+              case 'tag': return diary.tags && diary.tags.some(t => (t.id || t.tagId) === f.id)
+              default: return false
+            }
+          })
+        })
+      }
+
       return result;
+    },
+    allFilterItems() {
+      const items = []
+      this.filterOptions.weather.forEach(w => {
+        items.push({ ...w, displayName: w.label, _category: 'weather' })
+      })
+      this.filterOptions.mood.forEach(m => {
+        items.push({ ...m, displayName: m.name, _category: 'mood' })
+      })
+      this.filterOptions.type.forEach(t => {
+        items.push({ ...t, displayName: t.name, _category: 'type' })
+      })
+      this.filterOptions.tag.forEach(t => {
+        items.push({ ...t, displayName: t.name, _category: 'tag' })
+      })
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]]
+      }
+      return items
+    },
+    availableFilterItems() {
+      const activeSet = new Set(this.activeFilterItems.map(i => i._category + '_' + i.id))
+      return this.allFilterItems.filter(item => !activeSet.has(item._category + '_' + item.id))
     }
   },
   async mounted() {
-    await this.loadDiaryList()
+    await Promise.all([this.loadDiaryList(), this.loadFilterOptions()])
+    this.$nextTick(() => {
+      this.startAutoScroll()
+    })
+  },
+  beforeDestroy() {
+    this.stopAutoScroll()
   },
   methods: {
+    async loadFilterOptions() {
+      try {
+        const res = await getFiltter()
+        if (res.code === 200 && res.data) {
+          this.filterOptions = {
+            weather: res.data.weather || [],
+            mood: res.data.mood || [],
+            type: res.data.type || [],
+            tag: res.data.tag || []
+          }
+        }
+      } catch (error) {
+        console.error('获取筛选条件失败:', error)
+      }
+    },
+    isFilterActive(item) {
+      return this.activeFilterItems.some(f => f._category === item._category && f.id === item.id)
+    },
+    getBubbleStyle(item) {
+      if (item.color) {
+        return { background: item.color, color: '#333' }
+      }
+      return {}
+    },
+    toggleFilter(item) {
+      const idx = this.activeFilterItems.findIndex(f => f._category === item._category && f.id === item.id)
+      if (idx >= 0) {
+        this.$set(this.activeFilterItems[idx], '_flash', true)
+        this.$nextTick(() => {
+          setTimeout(() => {
+            this.$set(this.activeFilterItems[idx], '_flash', false)
+          }, 1500)
+        })
+      } else {
+        const newItem = { ...item, _key: item._category + '_' + item.id + '_' + (++_keyCounter), _hover: false, _flash: false }
+        if (this.activeFilterItems.length >= 20) {
+          this.activeFilterItems.shift()
+        }
+        this.activeFilterItems.push(newItem)
+      }
+    },
+    removeFilter(index) {
+      this.activeFilterItems.splice(index, 1)
+    },
+    clearBubbleFilters() {
+      this.activeFilterItems = []
+    },
+    startAutoScroll() {
+      const el = this.$refs.bubbleRow
+      if (!el) return
+      this._scrollSpeed = 1
+      this._scrollPaused = false
+      this._scrollTimer = setInterval(() => {
+        if (this._scrollPaused) return
+        if (el.scrollLeft >= el.scrollWidth - el.clientWidth) {
+          el.scrollLeft = 0
+        } else {
+          el.scrollLeft += this._scrollSpeed
+        }
+      }, 30)
+    },
+    stopAutoScroll() {
+      if (this._scrollTimer) {
+        clearInterval(this._scrollTimer)
+        this._scrollTimer = null
+      }
+    },
+    pauseScroll() {
+      this._scrollPaused = true
+    },
+    resumeScroll() {
+      this._scrollPaused = false
+    },
     async loadDiaryList() {
       try {
         const res = await getDiaryList()
@@ -248,7 +393,10 @@ export default {
             color: item.color,
             typeName: item.typeName,
             weatherName: item.weatherName,
-            moodName: item.moodName
+            moodName: item.moodName,
+            typeId: item.typeId,
+            weatherId: item.weatherId,
+            moodId: item.moodId
           }))
         }
       } catch (error) {
@@ -259,7 +407,6 @@ export default {
       this.filters.timeRange = range;
     },
     searchDiaries() {
-      // 搜索会在computed属性中自动处理
     },
     clearFilters() {
       this.filters = {
@@ -278,19 +425,16 @@ export default {
 
 <style scoped>
 .diary-list-page {
-  /* 低饱和柔和渐变：浅紫灰+柔粉棕+暖米黄，模拟记忆的温润感 */
   background: linear-gradient(135deg, rgba(180, 170, 190, 0.85), rgba(220, 200, 190, 0.85), rgba(245, 235, 220, 0.85));
-  color: #333333; /* 深灰色文字，提高与背景的对比度 */
+  color: #333333;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 2rem;
   min-height: 100vh;
-  /* 渐变过渡自然，保留轻微流动感但更柔和 */
   background-size: 200% 200%;
-  animation: gradientFlow 20s ease infinite; /* 放慢动画速度，更舒缓 */
+  animation: gradientFlow 20s ease infinite;
   border-radius: 24px;
 }
 
-/* 更缓慢的渐变流动动画 */
 @keyframes gradientFlow {
   0% {
     background-position: 0% 50%;
@@ -520,19 +664,128 @@ export default {
 
 .section-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .section-header h2 {
   margin: 0;
   color: #2c3e50;
+  flex-shrink: 0;
+}
+
+.selected-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.selected-filter-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 15px;
+  font-size: 0.78rem;
+  background: #3498db;
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  user-select: none;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.selected-filter-bubble .remove-x {
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1;
+  opacity: 0.8;
+}
+
+.selected-filter-bubble .remove-x:hover {
+  opacity: 1;
+}
+
+.selected-filter-bubble.flash-highlight {
+  animation: flashBubble 0.5s ease-in-out 3;
+}
+
+@keyframes flashBubble {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4); transform: scale(1); }
+  50% { box-shadow: 0 0 12px 6px rgba(52, 152, 219, 0.9); transform: scale(1.1); }
+}
+
+.selected-filter-clear {
+  font-size: 0.75rem;
+  color: #e74c3c;
+  cursor: pointer;
+  flex-shrink: 0;
+  user-select: none;
+  padding: 0.2rem 0.4rem;
+  border-radius: 10px;
+}
+
+.selected-filter-clear:hover {
+  background: rgba(231, 76, 60, 0.1);
 }
 
 .result-count {
   color: #7f8c8d;
   font-size: 0.9rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* 筛选气泡行 */
+.filter-bubble-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0;
+  margin-bottom: 1.2rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.filter-bubble-row::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-bubble {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  user-select: none;
+  color: #555;
+}
+
+.filter-bubble:hover {
+  border-color: rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filter-bubble.active {
+  background: #3498db !important;
+  color: #fff !important;
+  border-color: #3498db;
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
 }
 
 .diary-grid {
@@ -632,8 +885,6 @@ export default {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-
 
 @media (max-width: 1200px) {
   .toolbar {

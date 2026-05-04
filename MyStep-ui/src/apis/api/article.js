@@ -52,3 +52,14 @@ export function getArticleById(id) {
         method: 'get'
     })
 }
+
+/**
+ * 获取筛选条件（天气、标签、心情、类型）
+ * @returns {*}
+ */
+export function getFiltter() {
+    return request({
+        url: '/article/getFiltter',
+        method: 'get'
+    })
+}

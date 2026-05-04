@@ -2,6 +2,12 @@ package org.zaohu.modules.article.service.Impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.FieldValue;
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch.core.search.Hit;
+import co.elastic.clients.json.JsonData;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.zaohu.common.conditionalAssembler.ConditionalAssembler;
+import org.zaohu.common.entity.KeyIntegerValueObj;
 import org.zaohu.modules.article.entity.Article;
 import org.zaohu.modules.article.entity.vo.ArticleVO;
+import org.zaohu.modules.article.entity.vo.GetArticleVo;
 import org.zaohu.modules.article.entity.vo.UpdateArticleVO;
 import org.zaohu.modules.article.mapper.ArticleMapper;
 import org.zaohu.modules.article.service.ArticleService;
@@ -245,7 +253,43 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         if (Objects.nonNull(tagIds) && tagIds.length > 0) {
             updateTags(article.getId(), tagIds);
         }
-        articleMapper.insertOrUpdate(article);
+        boolean b = articleMapper.insertOrUpdate(article);
+        if (b) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+            Map<String, Object> esDoc = new HashMap<>();
+            esDoc.put("id", article.getId());
+            esDoc.put("typeId", article.getTypeId());
+            esDoc.put("title", article.getTitle());
+            esDoc.put("content", article.getContent());
+            esDoc.put("writeTime", article.getWriteTime() == null ? null : article.getWriteTime().format(formatter));
+            esDoc.put("memoryTime", article.getMemoryTime() == null ? null : article.getMemoryTime().format(formatter));
+            esDoc.put("weatherId", article.getWeatherId());
+            esDoc.put("moodId", article.getMoodId());
+            esDoc.put("authorName", article.getAuthorName());
+            esDoc.put("authorId", article.getAuthorId());
+            esDoc.put("isStar", article.getIsStar());
+            esDoc.put("address", article.getAddress());
+            List<Map<String, Object>> tagList = new ArrayList<>();
+            if (tagIds != null && tagIds.length > 0) {
+                List<Tag> tagEntities = tagMapper.selectByIds(Arrays.asList(tagIds));
+                for (Tag tag : tagEntities) {
+                    Map<String, Object> tagMap = new HashMap<>();
+                    tagMap.put("id", tag.getId());
+                    tagMap.put("name", tag.getName());
+                    tagList.add(tagMap);
+                }
+            }
+            esDoc.put("tags", tagList);
+            try {
+                elasticsearchClient.index(i -> i
+                        .index("article_index")
+                        .id(article.getId())
+                        .document(esDoc)
+                );
+            } catch (IOException e) {
+                throw new RuntimeException("更新ES失败", e);
+            }
+        }
     }
 
     @Override
@@ -260,11 +304,211 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                         for (String s : split) {
                             FileUtils.deleteImage(s);
                         }
+                    } else {
+                        FileUtils.deleteImage(imageUrls);
                     }
-                } else {
-                    FileUtils.deleteImage(imageUrls);
+                }
+                try {
+                    elasticsearchClient.delete(d -> d
+                            .index("article_index")
+                            .id(article.getId())
+                    );
+                } catch (IOException e) {
+                    throw new RuntimeException("删除ES记录失败", e);
                 }
             }
+        }
+    }
+
+    @Override
+    public Map<String, Object> getFiltter() {
+        List<Mood> moods = moodMapper.selectList(null);
+        List<Type> types = typeMapper.selectList(null);
+        List<Weather> weathers = weatherMapper.selectList(null);
+        List<Tag> tags = tagMapper.selectList(null);
+        HashMap<String, Object> resMap = new HashMap<>();
+        resMap.put("mood", moods);
+        resMap.put("type", types);
+        resMap.put("weather", weathers);
+        resMap.put("tag", tags);
+        return resMap;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Article> getArticleByFiltter(GetArticleVo getArticleVo) {
+        List<KeyIntegerValueObj> keyValueObj = getArticleVo.getKeyValueObj();
+        List<Integer> moods = new ArrayList<>();
+        List<Integer> type = new ArrayList<>();
+        List<Integer> weather = new ArrayList<>();
+        List<Integer> tag = new ArrayList<>();
+        if (keyValueObj != null) {
+            for (KeyIntegerValueObj valueObj : keyValueObj) {
+                String key = valueObj.getKey();
+                switch (key) {
+                    case "mood":
+                        moods.add(valueObj.getValue());
+                        break;
+                    case "type":
+                        type.add(valueObj.getValue());
+                        break;
+                    case "weather":
+                        weather.add(valueObj.getValue());
+                        break;
+                    case "tag":
+                        tag.add(valueObj.getValue());
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        BoolQuery.Builder boolQuery = new BoolQuery.Builder();
+
+        // 时间范围过滤
+        String startTime = getArticleVo.getStartTime();
+        String endTime = getArticleVo.getEndTime();
+        if (startTime != null && !startTime.isEmpty() && endTime != null && !endTime.isEmpty()) {
+            boolQuery.filter(Query.of(q -> q.range(r -> r
+                    .untyped(u -> u
+                            .field("writeTime")
+                            .gte(JsonData.of(startTime))
+                            .lte(JsonData.of(endTime))
+                    )
+            )));
+        }
+
+        // 天气过滤
+        if (!weather.isEmpty()) {
+            boolQuery.filter(Query.of(q -> q.terms(t -> t
+                    .field("weatherId")
+                    .terms(tv -> tv.value(weather.stream().map(v -> FieldValue.of(v.longValue())).toList()))
+            )));
+        }
+
+        // 心情过滤
+        if (!moods.isEmpty()) {
+            boolQuery.filter(Query.of(q -> q.terms(t -> t
+                    .field("moodId")
+                    .terms(tv -> tv.value(moods.stream().map(v -> FieldValue.of(v.longValue())).toList()))
+            )));
+        }
+
+        // 类型过滤
+        if (!type.isEmpty()) {
+            boolQuery.filter(Query.of(q -> q.terms(t -> t
+                    .field("typeId")
+                    .terms(tv -> tv.value(type.stream().map(v -> FieldValue.of(v.longValue())).toList()))
+            )));
+        }
+
+        // 标签过滤（nested查询）
+        if (!tag.isEmpty()) {
+            boolQuery.filter(Query.of(q -> q.nested(n -> n
+                    .path("tags")
+                    .query(nq -> nq.terms(t -> t
+                            .field("tags.id")
+                            .terms(tv -> tv.value(tag.stream().map(v -> FieldValue.of(v.longValue())).toList()))
+                    ))
+            )));
+        }
+
+        // 标题和内容全文搜索
+        String title = getArticleVo.getTitle();
+        String content = getArticleVo.getContent();
+        List<Query> searchQueries = new ArrayList<>();
+        if (title != null && !title.isEmpty()) {
+            searchQueries.add(Query.of(q -> q.match(m -> m.field("title").query(title))));
+        }
+        if (content != null && !content.isEmpty()) {
+            searchQueries.add(Query.of(q -> q.match(m -> m.field("content").query(content))));
+        }
+        if (!searchQueries.isEmpty()) {
+            boolQuery.must(Query.of(q -> q.bool(b -> b.should(searchQueries))));
+        }
+
+        try {
+            SearchResponse<Map> response = elasticsearchClient.search(s -> s
+                            .index("article_index")
+                            .query(q -> q.bool(boolQuery.build()))
+                            .highlight(h -> h
+                                    .fields("title", hf -> hf.preTags("<em>").postTags("</em>").numberOfFragments(0))
+                                    .fields("content", hf -> hf.preTags("<em>").postTags("</em>").numberOfFragments(1).fragmentSize(100))
+                            )
+                            .size(100),
+                    Map.class
+            );
+
+            List<Article> articles = new ArrayList<>();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
+            for (Hit<Map> hit : response.hits().hits()) {
+                Map<String, Object> source = hit.source();
+                if (source == null) {
+                    continue;
+                }
+
+                Article article = new Article();
+                article.setId((String) source.get("id"));
+                article.setTypeId(toInt(source.get("typeId")));
+                article.setTitle((String) source.get("title"));
+                article.setContent((String) source.get("content"));
+
+                String writeTimeStr = (String) source.get("writeTime");
+                if (writeTimeStr != null) {
+                    article.setWriteTime(LocalDateTime.parse(writeTimeStr, formatter));
+                }
+                String memoryTimeStr = (String) source.get("memoryTime");
+                if (memoryTimeStr != null) {
+                    article.setMemoryTime(LocalDateTime.parse(memoryTimeStr, formatter));
+                }
+
+                article.setWeatherId(toInt(source.get("weatherId")));
+                article.setMoodId(toInt(source.get("moodId")));
+                article.setAuthorName((String) source.get("authorName"));
+                article.setAuthorId(toLong(source.get("authorId")));
+                article.setAuthorAvatar((String) source.get("authorAvatar"));
+                article.setColor((String) source.get("color"));
+                article.setImageUrls((String) source.get("imageUrls"));
+                article.setIsStar((Boolean) source.get("isStar"));
+                article.setAddress((String) source.get("address"));
+                article.setTypeName((String) source.get("typeName"));
+                article.setWeatherName((String) source.get("weatherName"));
+                article.setMoodName((String) source.get("moodName"));
+
+
+                List<Map<String, Object>> tagsList = (List<Map<String, Object>>) source.get("tags");
+                if (tagsList != null) {
+                    List<Tag> tags = new ArrayList<>();
+                    for (Map<String, Object> tagMap : tagsList) {
+                        Tag t = new Tag();
+                        t.setId(toInt(tagMap.get("id")));
+                        t.setName((String) tagMap.get("name"));
+                        tags.add(t);
+                    }
+                    article.setTags(tags);
+                }
+
+                // 高亮处理
+                Map<String, List<String>> highlightMap = hit.highlight();
+                if (highlightMap != null) {
+                    List<String> titleHL = highlightMap.get("title");
+                    if (titleHL != null && !titleHL.isEmpty()) {
+                        article.setTitle(titleHL.get(0));
+                    }
+                    List<String> contentHL = highlightMap.get("content");
+                    if (contentHL != null && !contentHL.isEmpty()) {
+                        article.setContent(contentHL.get(0));
+                    }
+                }
+
+                articles.add(article);
+            }
+
+            return articles;
+        } catch (IOException e) {
+            throw new RuntimeException("ES查询失败", e);
         }
     }
 
@@ -280,5 +524,17 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         tagRelationLqw.eq(TagRelation::getArticleId, articleId);
         tagRelationMapper.delete(tagRelationLqw);
         tagRelationMapper.insert(tagRelations);
+    }
+
+    private static Integer toInt(Object value) {
+        if (value instanceof Integer i) return i;
+        if (value instanceof Number n) return n.intValue();
+        return null;
+    }
+
+    private static Long toLong(Object value) {
+        if (value instanceof Long l) return l;
+        if (value instanceof Number n) return n.longValue();
+        return null;
     }
 }
