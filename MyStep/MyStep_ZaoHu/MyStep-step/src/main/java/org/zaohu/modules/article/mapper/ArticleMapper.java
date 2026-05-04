@@ -1,8 +1,8 @@
 package org.zaohu.modules.article.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.zaohu.modules.article.entity.Article;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -14,5 +14,4 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ArticleMapper extends BaseMapper<Article> {
-
 }

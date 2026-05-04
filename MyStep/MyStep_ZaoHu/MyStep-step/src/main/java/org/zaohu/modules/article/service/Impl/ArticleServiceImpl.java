@@ -181,8 +181,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             esDoc.put("typeId", article.getTypeId());
             esDoc.put("title", article.getTitle());
             esDoc.put("content", article.getContent());
-            esDoc.put("writeTime", article.getWriteTime() == null ? null : article.getWriteTime().format(formatter));
-            esDoc.put("memoryTime", article.getMemoryTime() == null ? null : article.getMemoryTime().format(formatter));
+            esDoc.put("writeTime", Objects.isNull(article.getWriteTime()) ? null : article.getWriteTime().format(formatter));
+            esDoc.put("memoryTime", Objects.isNull(article.getMemoryTime()) ? null : article.getMemoryTime().format(formatter));
             esDoc.put("weatherId", article.getWeatherId());
             esDoc.put("moodId", article.getMoodId());
             esDoc.put("authorName", article.getAuthorName());
@@ -190,7 +190,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             esDoc.put("isStar", article.getIsStar());
             esDoc.put("address", article.getAddress());
             List<Map<String, Object>> tagList = new ArrayList<>();
-            if (tags != null && tags.length > 0) {
+            if (Objects.nonNull(tags) && tags.length > 0) {
                 List<Tag> tagEntities = tagMapper.selectByIds(Arrays.asList(tags));
                 for (Tag tag : tagEntities) {
                     Map<String, Object> tagMap = new HashMap<>();
@@ -261,8 +261,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             esDoc.put("typeId", article.getTypeId());
             esDoc.put("title", article.getTitle());
             esDoc.put("content", article.getContent());
-            esDoc.put("writeTime", article.getWriteTime() == null ? null : article.getWriteTime().format(formatter));
-            esDoc.put("memoryTime", article.getMemoryTime() == null ? null : article.getMemoryTime().format(formatter));
+            esDoc.put("writeTime", Objects.isNull(article.getWriteTime()) ? null : article.getWriteTime().format(formatter));
+            esDoc.put("memoryTime", Objects.isNull(article.getMemoryTime()) ? null : article.getMemoryTime().format(formatter));
             esDoc.put("weatherId", article.getWeatherId());
             esDoc.put("moodId", article.getMoodId());
             esDoc.put("authorName", article.getAuthorName());
@@ -270,7 +270,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             esDoc.put("isStar", article.getIsStar());
             esDoc.put("address", article.getAddress());
             List<Map<String, Object>> tagList = new ArrayList<>();
-            if (tagIds != null && tagIds.length > 0) {
+            if (Objects.nonNull(tagIds) && tagIds.length > 0) {
                 List<Tag> tagEntities = tagMapper.selectByIds(Arrays.asList(tagIds));
                 for (Tag tag : tagEntities) {
                     Map<String, Object> tagMap = new HashMap<>();
@@ -342,7 +342,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<Integer> type = new ArrayList<>();
         List<Integer> weather = new ArrayList<>();
         List<Integer> tag = new ArrayList<>();
-        if (keyValueObj != null) {
+        if (Objects.nonNull(keyValueObj)) {
             for (KeyIntegerValueObj valueObj : keyValueObj) {
                 String key = valueObj.getKey();
                 switch (key) {
@@ -369,7 +369,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         // 时间范围过滤
         String startTime = getArticleVo.getStartTime();
         String endTime = getArticleVo.getEndTime();
-        if (startTime != null && !startTime.isEmpty() && endTime != null && !endTime.isEmpty()) {
+        if (Objects.nonNull(startTime) && !startTime.isEmpty() && Objects.nonNull(endTime) && !endTime.isEmpty()) {
             boolQuery.filter(Query.of(q -> q.range(r -> r
                     .untyped(u -> u
                             .field("writeTime")
@@ -418,10 +418,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         String title = getArticleVo.getTitle();
         String content = getArticleVo.getContent();
         List<Query> searchQueries = new ArrayList<>();
-        if (title != null && !title.isEmpty()) {
+        if (Objects.nonNull(title) && !title.isEmpty()) {
             searchQueries.add(Query.of(q -> q.match(m -> m.field("title").query(title))));
         }
-        if (content != null && !content.isEmpty()) {
+        if (Objects.nonNull(content) && !content.isEmpty()) {
             searchQueries.add(Query.of(q -> q.match(m -> m.field("content").query(content))));
         }
         if (!searchQueries.isEmpty()) {
@@ -434,7 +434,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                             .query(q -> q.bool(boolQuery.build()))
                             .highlight(h -> h
                                     .fields("title", hf -> hf.preTags("<em>").postTags("</em>").numberOfFragments(0))
-                                    .fields("content", hf -> hf.preTags("<em>").postTags("</em>").numberOfFragments(1).fragmentSize(100))
+                                    .fields("content", hf -> hf.preTags("<em>").postTags("</em>").numberOfFragments(1).fragmentSize(30))
                             )
                             .size(100),
                     Map.class
@@ -445,7 +445,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
             for (Hit<Map> hit : response.hits().hits()) {
                 Map<String, Object> source = hit.source();
-                if (source == null) {
+                if (Objects.isNull(source)) {
                     continue;
                 }
 
@@ -456,11 +456,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 article.setContent((String) source.get("content"));
 
                 String writeTimeStr = (String) source.get("writeTime");
-                if (writeTimeStr != null) {
+                if (Objects.nonNull(writeTimeStr)) {
                     article.setWriteTime(LocalDateTime.parse(writeTimeStr, formatter));
                 }
                 String memoryTimeStr = (String) source.get("memoryTime");
-                if (memoryTimeStr != null) {
+                if (Objects.nonNull(memoryTimeStr)) {
                     article.setMemoryTime(LocalDateTime.parse(memoryTimeStr, formatter));
                 }
 
@@ -479,7 +479,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
 
                 List<Map<String, Object>> tagsList = (List<Map<String, Object>>) source.get("tags");
-                if (tagsList != null) {
+                if (Objects.nonNull(tagsList)) {
                     List<Tag> tags = new ArrayList<>();
                     for (Map<String, Object> tagMap : tagsList) {
                         Tag t = new Tag();
@@ -492,13 +492,13 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
                 // 高亮处理
                 Map<String, List<String>> highlightMap = hit.highlight();
-                if (highlightMap != null) {
+                if (Objects.nonNull(highlightMap)) {
                     List<String> titleHL = highlightMap.get("title");
-                    if (titleHL != null && !titleHL.isEmpty()) {
+                    if (Objects.nonNull(titleHL) && !titleHL.isEmpty()) {
                         article.setTitle(titleHL.get(0));
                     }
                     List<String> contentHL = highlightMap.get("content");
-                    if (contentHL != null && !contentHL.isEmpty()) {
+                    if (Objects.nonNull(contentHL) && !contentHL.isEmpty()) {
                         article.setContent(contentHL.get(0));
                     }
                 }
@@ -506,9 +506,84 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 articles.add(article);
             }
 
+            // 从数据库批量补齐ES中缺失的字段（名称、颜色、排序）
+            enrichArticlesFromDb(articles);
+
             return articles;
         } catch (IOException e) {
             throw new RuntimeException("ES查询失败", e);
+        }
+    }
+
+    /**
+     * 从数据库批量补齐ES中缺失的字段：moodName/weatherName/typeName、tag的color和sortNo
+     */
+    private void enrichArticlesFromDb(List<Article> articles) {
+        if (articles.isEmpty()) {
+            return;
+        }
+
+        // 收集所有ID
+        HashSet<Integer> moodIds = new HashSet<>();
+        HashSet<Integer> typeIds = new HashSet<>();
+        HashSet<Integer> weatherIds = new HashSet<>();
+        HashSet<String> articleIds = new HashSet<>();
+        for (Article article : articles) {
+            if (Objects.nonNull(article.getMoodId())) moodIds.add(article.getMoodId());
+            if (Objects.nonNull(article.getTypeId())) typeIds.add(article.getTypeId());
+            if (Objects.nonNull(article.getWeatherId())) weatherIds.add(article.getWeatherId());
+            articleIds.add(article.getId());
+        }
+
+        // 批量查心情名称
+        Map<Integer, String> moodMap = Map.of();
+        if (!moodIds.isEmpty()) {
+            moodMap = moodMapper.selectByIds(moodIds).stream()
+                    .collect(Collectors.toMap(Mood::getId, Mood::getName, (a, b) -> a));
+        }
+
+        // 批量查类型名称
+        Map<Integer, String> typeMap = Map.of();
+        if (!typeIds.isEmpty()) {
+            typeMap = typeMapper.selectByIds(typeIds).stream()
+                    .collect(Collectors.toMap(Type::getId, Type::getName, (a, b) -> a));
+        }
+
+        // 批量查天气名称
+        Map<Integer, String> weatherMap = Map.of();
+        if (!weatherIds.isEmpty()) {
+            weatherMap = weatherMapper.selectByIds(weatherIds).stream()
+                    .collect(Collectors.toMap(Weather::getId, Weather::getLabel, (a, b) -> a));
+        }
+
+        // 批量查标签（含color和sortNo）
+        Map<String, List<Tag>> articleTagsMap = Map.of();
+        if (!articleIds.isEmpty()) {
+            LambdaQueryWrapper<TagRelation> trLqw = new LambdaQueryWrapper<>();
+            trLqw.in(TagRelation::getArticleId, articleIds);
+            List<TagRelation> relations = tagRelationMapper.selectList(trLqw);
+            if (!relations.isEmpty()) {
+                Set<Integer> tagIds = relations.stream()
+                        .map(TagRelation::getTagId)
+                        .collect(Collectors.toSet());
+                LambdaQueryWrapper<Tag> tagLqw = new LambdaQueryWrapper<>();
+                tagLqw.in(Tag::getId, tagIds);
+                tagLqw.orderBy(true, true, Tag::getSortNo);
+                Map<Integer, Tag> tagMap = tagMapper.selectList(tagLqw).stream()
+                        .collect(Collectors.toMap(Tag::getId, Function.identity()));
+                articleTagsMap = relations.stream().collect(Collectors.groupingBy(
+                        TagRelation::getArticleId,
+                        Collectors.mapping(tr -> tagMap.get(tr.getTagId()), Collectors.toList())
+                ));
+            }
+        }
+
+        // 回填各文章
+        for (Article article : articles) {
+            article.setMoodName(moodMap.get(article.getMoodId()));
+            article.setTypeName(typeMap.get(article.getTypeId()));
+            article.setWeatherName(weatherMap.get(article.getWeatherId()));
+            article.setTags(articleTagsMap.getOrDefault(article.getId(), new ArrayList<>()));
         }
     }
 
@@ -524,6 +599,35 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         tagRelationLqw.eq(TagRelation::getArticleId, articleId);
         tagRelationMapper.delete(tagRelationLqw);
         tagRelationMapper.insert(tagRelations);
+    }
+
+    @Override
+    public List<Map<String, Object>> getYearlyActivity(String startTime, String endTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        LocalDateTime start = LocalDateTime.parse(startTime, formatter);
+        LocalDateTime end = LocalDateTime.parse(endTime, formatter);
+
+        LambdaQueryWrapper<Article> wrapper = new LambdaQueryWrapper<>();
+        wrapper.between(Article::getWriteTime, start, end);
+        List<Article> articles = articleMapper.selectList(wrapper);
+
+        Map<Integer, Long> countMap = articles.stream()
+                .collect(Collectors.groupingBy(a -> a.getWriteTime().getMonthValue(), Collectors.counting()));
+
+        List<Map<String, Object>> result = new ArrayList<>();
+        int year = start.getYear();
+        for (int m = 1; m <= 12; m++) {
+            Map<String, Object> item = new HashMap<>();
+            item.put("month", m);
+            item.put("label", m + "月");
+            item.put("count", countMap.getOrDefault(m, 0L));
+            item.put("startDate", year + "-" + String.format("%02d", m) + "-01");
+            int lastDay = m == 2 ? (java.time.Year.isLeap(year) ? 29 : 28)
+                    : (m == 4 || m == 6 || m == 9 || m == 11 ? 30 : 31);
+            item.put("endDate", year + "-" + String.format("%02d", m) + "-" + String.format("%02d", lastDay));
+            result.add(item);
+        }
+        return result;
     }
 
     private static Integer toInt(Object value) {

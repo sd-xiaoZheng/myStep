@@ -5,10 +5,15 @@
       <div class="toolbar-left">
 
         <div class="filter-group">
-          <input
-            type="date"
-            v-model="filters.date"
-            class="date-picker"
+          <el-date-picker
+            v-model="filters.dateRange"
+            type="daterange"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            value-format="yyyy-MM-dd"
+            class="date-range-picker"
+            @change="onDateRangeChange"
           />
         </div>
 
@@ -16,8 +21,8 @@
           <button
             v-for="range in timeRanges"
             :key="range.value"
-            :class="['time-range-btn', { active: filters.timeRange === range.value }]"
-            @click="setTimeRange(range.value)"
+            :class="['time-range-btn', { active: filters.quickTime === range.value }]"
+            @click="setQuickTime(range.value)"
           >
             {{ range.label }}
           </button>
@@ -29,7 +34,14 @@
           <input
             type="text"
             v-model="filters.keyword"
-            placeholder="搜索关键词..."
+            placeholder="搜索标题..."
+            class="search-input"
+            @keyup.enter="searchDiaries"
+          />
+          <input
+            type="text"
+            v-model="filters.contentKeyword"
+            placeholder="搜索内容..."
             class="search-input"
             @keyup.enter="searchDiaries"
           />
@@ -82,21 +94,22 @@
       </div>
 
       <div class="stats-card activity-chart">
-        <h3>本月活跃度</h3>
+        <h3>本年活跃度</h3>
         <div class="activity-bars">
           <div
-            v-for="(day, index) in activityData"
+            v-for="(item, index) in activityData"
             :key="index"
             class="activity-day"
+            @click="onActivityBarClick(item)"
           >
             <div class="bar-container">
               <div
                 class="activity-bar"
-                :style="{ height: day.height }"
+                :style="{ height: item.height }"
               ></div>
             </div>
-            <div class="day-label">{{ day.date }}</div>
-            <div class="count-label">{{ day.count }}</div>
+            <div class="day-label">{{ item.label }}</div>
+            <div class="count-label">{{ item.count }}</div>
           </div>
         </div>
       </div>
@@ -125,7 +138,7 @@
             @click="clearBubbleFilters"
           >清除</span>
         </div>
-        <div class="result-count">共找到 {{ filteredDiaries.length }} 篇日记</div>
+        <div class="result-count">共找到 {{ diaries.length }} 篇日记</div>
       </div>
 
       <!-- 可选筛选气泡行 -->
@@ -146,17 +159,16 @@
 
       <div class="diary-grid">
         <div
-          v-for="diary in filteredDiaries"
+          v-for="(diary, index) in diaries"
           :key="diary.id"
           class="diary-card"
+          :style="{ animationDelay: (index * 0.04) + 's' }"
         >
           <div class="diary-card-header">
-            <h3 class="diary-title">{{ diary.title }}</h3>
+            <h3 class="diary-title" v-html="diary.title"></h3>
             <div class="diary-date">{{ diary.date }}</div>
           </div>
-          <div class="diary-content">
-            {{ diary.preview }}
-          </div>
+          <div class="diary-content" v-html="diary.preview"></div>
           <div class="diary-meta">
             <span v-if="diary.weatherName" class="meta-text weather">{{ diary.weatherName }}</span>
             <span v-if="diary.typeName" class="meta-text type">{{ diary.typeName }}</span>
@@ -178,8 +190,7 @@
 </template>
 
 <script>
-import { getDiaryList } from '@/apis/api/diary'
-import { getFiltter } from '@/apis/api/article'
+import { getFiltter, getArticleByFiltter, getYearlyActivity } from '@/apis/api/article'
 
 let _keyCounter = 0
 
@@ -188,10 +199,10 @@ export default {
   data() {
     return {
       filters: {
-        mood: '',
-        date: '',
-        timeRange: 'all',
-        keyword: ''
+        dateRange: null,
+        quickTime: 'all',
+        keyword: '',
+        contentKeyword: ''
       },
       filterOptions: {
         weather: [],
@@ -203,74 +214,14 @@ export default {
       timeRanges: [
         { label: '全部', value: 'all' },
         { label: '今年', value: 'year' },
-        { label: '本月', value: 'month' }
+        { label: '本月', value: 'month' },
+        { label: '近一周', value: 'week' }
       ],
-      activityData: [
-        { date: '1', count: 2, height: '80%' },
-        { date: '2', count: 0, height: '0%' },
-        { date: '3', count: 1, height: '40%' },
-        { date: '4', count: 3, height: '100%' },
-        { date: '5', count: 1, height: '40%' },
-        { date: '6', count: 2, height: '80%' },
-        { date: '7', count: 0, height: '0%' },
-        { date: '8', count: 1, height: '40%' },
-        { date: '9', count: 2, height: '80%' },
-        { date: '10', count: 1, height: '40%' }
-      ],
+      activityData: [],
       diaries: []
     }
   },
   computed: {
-    filteredDiaries() {
-      let result = this.diaries;
-
-      if (this.filters.mood) {
-        result = result.filter(diary => diary.mood === this.filters.mood);
-      }
-
-      if (this.filters.date) {
-        result = result.filter(diary => diary.date === this.filters.date);
-      }
-
-      if (this.filters.keyword) {
-        const keyword = this.filters.keyword.toLowerCase();
-        result = result.filter(diary =>
-          diary.title.toLowerCase().includes(keyword) ||
-          diary.preview.toLowerCase().includes(keyword)
-        );
-      }
-
-      if (this.filters.timeRange !== 'all') {
-        const now = new Date();
-        result = result.filter(diary => {
-          const diaryDate = new Date(diary.date);
-          if (this.filters.timeRange === 'week') {
-            const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-            return diaryDate >= weekAgo && diaryDate <= now;
-          } else if (this.filters.timeRange === 'month') {
-            return diaryDate.getMonth() === now.getMonth() &&
-                   diaryDate.getFullYear() === now.getFullYear();
-          }
-          return true;
-        });
-      }
-
-      if (this.activeFilterItems.length > 0) {
-        result = result.filter(diary => {
-          return this.activeFilterItems.some(f => {
-            switch (f._category) {
-              case 'weather': return diary.weatherId === f.id
-              case 'mood': return diary.moodId === f.id
-              case 'type': return diary.typeId === f.id
-              case 'tag': return diary.tags && diary.tags.some(t => (t.id || t.tagId) === f.id)
-              default: return false
-            }
-          })
-        })
-      }
-
-      return result;
-    },
     allFilterItems() {
       const items = []
       this.filterOptions.weather.forEach(w => {
@@ -297,7 +248,7 @@ export default {
     }
   },
   async mounted() {
-    await Promise.all([this.loadDiaryList(), this.loadFilterOptions()])
+    await Promise.all([this.loadArticles(), this.loadFilterOptions(), this.loadActivityData()])
     this.$nextTick(() => {
       this.startAutoScroll()
     })
@@ -345,13 +296,16 @@ export default {
           this.activeFilterItems.shift()
         }
         this.activeFilterItems.push(newItem)
+        this.loadArticles()
       }
     },
     removeFilter(index) {
       this.activeFilterItems.splice(index, 1)
+      this.loadArticles()
     },
     clearBubbleFilters() {
       this.activeFilterItems = []
+      this.loadArticles()
     },
     startAutoScroll() {
       const el = this.$refs.bubbleRow
@@ -379,17 +333,17 @@ export default {
     resumeScroll() {
       this._scrollPaused = false
     },
-    async loadDiaryList() {
+    async loadArticles() {
       try {
-        const res = await getDiaryList()
-        if (res.code === 200 && res.rows) {
-          this.diaries = res.rows.map(item => ({
+        const params = this.buildFilterParams()
+        const res = await getArticleByFiltter(params)
+        if (res.code === 200 && res.data) {
+          this.diaries = res.data.map(item => ({
             id: item.id,
             title: item.title,
-            date: item.memoryTime ? item.memoryTime.split('T')[0] : '',
+            date: item.writeTime ? item.writeTime.split('T')[0] : (item.writeTime ? item.writeTime.split('T')[0] : ''),
             preview: item.content,
             tags: item.tags,
-            mood: 'calm',
             color: item.color,
             typeName: item.typeName,
             weatherName: item.weatherName,
@@ -403,18 +357,93 @@ export default {
         console.error('获取日记列表失败:', error)
       }
     },
-    setTimeRange(range) {
-      this.filters.timeRange = range;
+    setQuickTime(range) {
+      this.filters.quickTime = range
+      const now = new Date()
+      const format = (d) => {
+        const y = d.getFullYear()
+        const m = String(d.getMonth() + 1).padStart(2, '0')
+        const day = String(d.getDate()).padStart(2, '0')
+        return y + '-' + m + '-' + day
+      }
+      if (range === 'all') {
+        this.filters.dateRange = null
+      } else if (range === 'year') {
+        this.filters.dateRange = [now.getFullYear() + '-01-01', format(now)]
+      } else if (range === 'month') {
+        const start = new Date(now.getFullYear(), now.getMonth(), 1)
+        this.filters.dateRange = [format(start), format(now)]
+      } else if (range === 'week') {
+        const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
+        this.filters.dateRange = [format(weekAgo), format(now)]
+      }
+      this.loadArticles()
+    },
+    onDateRangeChange() {
+      this.filters.quickTime = ''
+      this.loadArticles()
     },
     searchDiaries() {
+      this.loadArticles()
     },
     clearFilters() {
       this.filters = {
-        mood: '',
-        date: '',
-        timeRange: 'all',
-        keyword: ''
-      };
+        dateRange: null,
+        quickTime: 'all',
+        keyword: '',
+        contentKeyword: ''
+      }
+      this.activeFilterItems = []
+      this.loadArticles()
+    },
+    buildFilterParams() {
+      const params = {
+        startTime: null,
+        endTime: null,
+        title: null,
+        content: null,
+        keyValueObj: []
+      }
+      if (this.filters.keyword) {
+        params.title = this.filters.keyword
+      }
+      if (this.filters.contentKeyword) {
+        params.content = this.filters.contentKeyword
+      }
+      if (this.filters.dateRange && this.filters.dateRange.length === 2) {
+        params.startTime = this.filters.dateRange[0] + 'T00:00:00'
+        params.endTime = this.filters.dateRange[1] + 'T23:59:59'
+      }
+      this.activeFilterItems.forEach(item => {
+        params.keyValueObj.push({
+          key: item._category,
+          value: item.id
+        })
+      })
+      return params
+    },
+    async loadActivityData() {
+      try {
+        const y = new Date().getFullYear()
+        const res = await getYearlyActivity({
+          startTime: y + '-01-01T00:00:00',
+          endTime: y + '-12-31T23:59:59'
+        })
+        if (res.code === 200 && res.data) {
+          const maxCount = Math.max(1, ...res.data.map(d => d.count))
+          this.activityData = res.data.map(d => ({
+            ...d,
+            height: d.count > 0 ? Math.max(4, (d.count / maxCount * 100)).toFixed(0) + '%' : '0%'
+          }))
+        }
+      } catch (error) {
+        console.error('获取本年活跃度失败:', error)
+      }
+    },
+    onActivityBarClick(item) {
+      this.filters.dateRange = [item.startDate, item.endDate]
+      this.filters.quickTime = ''
+      this.loadArticles()
     },
     goToCreateDiary() {
       this.$router.push('/diaryCreate');
@@ -472,13 +501,8 @@ export default {
   align-items: center;
 }
 
-.filter-select,
-.date-picker {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.7);
-  margin-right: 0.5rem;
+.date-range-picker {
+  width: 260px;
 }
 
 .time-range-buttons {
@@ -627,6 +651,16 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.activity-day:hover {
+  transform: translateY(-3px);
+}
+
+.activity-day:hover .activity-bar {
+  filter: brightness(1.2);
 }
 
 .bar-container {
@@ -801,6 +835,16 @@ export default {
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInCard 0.35s ease-out forwards;
+}
+
+@keyframes fadeInCard {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .diary-card:hover {
@@ -820,6 +864,15 @@ export default {
   margin: 0;
   color: #2c3e50;
   font-size: 1.2rem;
+}
+
+.diary-title >>> em,
+.diary-content >>> em {
+  font-style: normal;
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+  padding: 0 2px;
+  border-radius: 2px;
 }
 
 .diary-date {

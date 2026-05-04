@@ -63,3 +63,28 @@ export function getFiltter() {
         method: 'get'
     })
 }
+
+/**
+ * 按筛选条件查询文章列表（ES搜索）
+ * @param {Object} data - GetArticleVo { startTime, endTime, title, content, keyValueObj }
+ * @returns {*}
+ */
+/**
+ * 获取本年活跃度（每月日记数量）
+ * @returns {*}
+ */
+export function getYearlyActivity(params) {
+    return request({
+        url: '/article/getYearlyActivity',
+        method: 'get',
+        params
+    })
+}
+
+export function getArticleByFiltter(data) {
+    return request({
+        url: '/article/getArticleByFiltter',
+        method: 'post',
+        data
+    })
+}

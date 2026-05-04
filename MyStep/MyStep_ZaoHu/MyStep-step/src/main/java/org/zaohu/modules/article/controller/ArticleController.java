@@ -68,4 +68,10 @@ public class ArticleController extends BaseController {
         List<Article> photoList = articleService.getArticleByFiltter(getArticleVo);
         return Result.success(photoList);
     }
+
+    @GetMapping("/getYearlyActivity")
+    public Result getYearlyActivity(String startTime, String endTime) {
+        List<Map<String, Object>> activity = articleService.getYearlyActivity(startTime, endTime);
+        return Result.success(activity);
+    }
 }
