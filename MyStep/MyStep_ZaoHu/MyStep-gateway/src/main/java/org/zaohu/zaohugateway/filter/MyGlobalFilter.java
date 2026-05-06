@@ -1,7 +1,6 @@
 package org.zaohu.zaohugateway.filter;
 
 import com.alibaba.fastjson.JSONObject;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -9,15 +8,13 @@ import org.springframework.core.Ordered;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
-import org.zaohu.zaohugateway.Utils.threadUtils.ThreadPoolUtils;
-import org.zaohu.zaohugateway.jobs.threadJob.VisitorTask;
 import reactor.core.publisher.Mono;
-
-import static org.zaohu.zaohugateway.constant.Constant.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
+
+import static org.zaohu.zaohugateway.constant.Constant.*;
 
 /**
  * 自定义全局过滤器，统计接口调用时间
@@ -27,7 +24,6 @@ public class MyGlobalFilter implements GlobalFilter, Ordered {
     @SuppressWarnings("rawtypes")//抑制警告：使用介绍：https://blog.csdn.net/euyy1029/article/details/52511773
     @Autowired
     private RedisTemplate redisTemplate;
-
 
 
     @Override
@@ -54,7 +50,7 @@ public class MyGlobalFilter implements GlobalFilter, Ordered {
             }
             Long aLong = redisTemplate.opsForList().leftPush(REDIS_VISIT_INFO, jsonObject);
 //            if (aLong>3){
-                //这里开线程去存储redis中的数据并且删除已经存储的 2024年11月17日 发现多线程引入redisTemplate优点问题，暂时使用定时任务来解决
+            //这里开线程去存储redis中的数据并且删除已经存储的 2024年11月17日 发现多线程引入redisTemplate优点问题，暂时使用定时任务来解决
 //                ThreadPoolUtils newInstance = ThreadPoolUtils.getNewInstance();
 //                newInstance.executor(new VisitorTask());
 //            }

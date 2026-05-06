@@ -1,7 +1,10 @@
 package com.org.zaohu.security.config;
 
+import com.org.zaohu.security.filter.JwtAuthenticationTokenFilter;
+import com.org.zaohu.security.handler.LoginUnAccessDeniedHandler;
+import com.org.zaohu.security.handler.LoginUnAuthenticationEntryPointHandler;
+import com.org.zaohu.security.handler.LogoutStatusSuccessHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,10 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.zaohu.security.handler.LoginUnAccessDeniedHandler;
-import org.zaohu.security.handler.LogoutStatusSuccessHandler;
-import org.zaohu.security.filter.JwtAuthenticationTokenFilter;
-import org.zaohu.security.handler.LoginUnAuthenticationEntryPointHandler;
+
+import javax.annotation.Resource;
 
 /**
  * SpringSecurity 配置类
@@ -29,13 +30,13 @@ import org.zaohu.security.handler.LoginUnAuthenticationEntryPointHandler;
 @EnableMethodSecurity(securedEnabled = true)//开启方法权限
 public class SecurityConfig {
 
-    @Autowired
+    @Resource
     private LoginUnAuthenticationEntryPointHandler loginUnAuthenticationEntryPointHandler;
-    @Autowired
+    @Resource
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
-    @Autowired
+    @Resource
     private LogoutStatusSuccessHandler logoutStatusSuccessHandler;
-    @Autowired
+    @Resource
     private LoginUnAccessDeniedHandler loginUnAccessDeniedHandler;
 
     /**

@@ -6,8 +6,10 @@ import co.elastic.clients.elasticsearch._types.FieldValue;
 import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch.core.search.HighlightField;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.json.JsonData;
+import co.elastic.clients.util.NamedValue;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -433,8 +435,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                             .index("article_index")
                             .query(q -> q.bool(boolQuery.build()))
                             .highlight(h -> h
-                                    .fields("title", hf -> hf.preTags("<em>").postTags("</em>").numberOfFragments(0))
-                                    .fields("content", hf -> hf.preTags("<em>").postTags("</em>").numberOfFragments(1).fragmentSize(30))
+                                    .fields(NamedValue.of("title", HighlightField.of(hf -> hf.preTags("<em>").postTags("</em>").numberOfFragments(0))),
+                                            NamedValue.of("content", HighlightField.of(hf -> hf.preTags("<em>").postTags("</em>").numberOfFragments(1).fragmentSize(30))))
                             )
                             .size(100),
                     Map.class

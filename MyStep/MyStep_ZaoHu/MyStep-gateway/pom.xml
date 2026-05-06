@@ -11,7 +11,6 @@
     <artifactId>MyStep-gateway</artifactId>
 
     <properties>
-        <gateway.version>4.3.3</gateway.version>
     </properties>
     <dependencies>
 
@@ -24,8 +23,7 @@
         <!-- gateway网关 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
-            <version>${gateway.version}</version>
+            <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
         </dependency>
 
         <!--nacos-discovery  注册中心依赖-->
@@ -51,6 +49,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+        <!-- Spring Boot Cache Starter: Spring Cache抽象支持 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
         <!--fastjson-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -73,7 +76,7 @@
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
         </dependency>
 
         <!--lombok 因为JDK很新 这里lombok也用的很新的-->
