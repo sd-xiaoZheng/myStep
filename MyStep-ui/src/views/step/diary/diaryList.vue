@@ -333,6 +333,17 @@ export default {
     resumeScroll() {
       this._scrollPaused = false
     },
+    formatTime(writeTime) {
+      if (!writeTime) return ''
+      if (typeof writeTime === 'string') {
+        return writeTime.split('T')[0]
+      }
+      if (Array.isArray(writeTime) && writeTime.length >= 3) {
+        const [year, month, day] = writeTime
+        return year + '-' + String(month).padStart(2, '0') + '-' + String(day).padStart(2, '0')
+      }
+      return ''
+    },
     async loadArticles() {
       try {
         const params = this.buildFilterParams()
@@ -341,7 +352,7 @@ export default {
           this.diaries = res.data.map(item => ({
             id: item.id,
             title: item.title,
-            date: item.writeTime ? item.writeTime.split('T')[0] : (item.writeTime ? item.writeTime.split('T')[0] : ''),
+            date: this.formatTime(item.writeTime),
             preview: item.content,
             tags: item.tags,
             color: item.color,
