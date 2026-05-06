@@ -234,10 +234,10 @@
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
         <!--es 需要用到jackson-->
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.datatype</groupId>-->
+<!--            <artifactId>jackson-datatype-jsr310</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>co.elastic.clients</groupId>
@@ -259,18 +259,18 @@
         </dependency>
 
         <!--ollama AI模型-->
-<!--        <dependency>-->
-<!--            <groupId>dev.langchain4j</groupId>-->
-<!--            <artifactId>langchain4j-ollama-spring-boot-starter</artifactId>-->
-<!--            <version>1.14.0-beta24</version>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
-        <!--AiService相关依赖-->
-<!--        <dependency>-->
-<!--            <groupId>dev.langchain4j</groupId>-->
-<!--            <artifactId>langchain4j-spring-boot-starter</artifactId>-->
-<!--            <version>1.14.0-beta24</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-ollama-spring-boot4-starter</artifactId>
+            <version>1.14.0-beta24</version>
+            <scope>compile</scope>
+        </dependency>
+<!--        AiService相关依赖-->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-spring-boot4-starter</artifactId>
+            <version>1.14.0-beta24</version>
+        </dependency>
         <!--流式相应-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -300,6 +300,22 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
 
     </dependencies>
