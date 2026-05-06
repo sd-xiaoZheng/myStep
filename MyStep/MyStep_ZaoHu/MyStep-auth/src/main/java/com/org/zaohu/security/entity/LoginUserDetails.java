@@ -1,4 +1,4 @@
-package org.zaohu.security.entity;
+package com.org.zaohu.security.entity;
 
 import cn.hutool.core.collection.CollectionUtil;
 import lombok.AllArgsConstructor;

@@ -5,17 +5,15 @@
     <parent>
         <groupId>org.zaohu</groupId>
         <artifactId>MyStep_2024</artifactId>
-        <version>${revision}</version>
+        <version>1.0.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <artifactId>MyStep-step</artifactId>
 
     <properties>
-        <java.version>21</java.version>
-
-        <elasticsearch-client.version>8.17.4</elasticsearch-client.version>
-        <elasticsearch.version>8.17.4</elasticsearch.version>
+        <elasticsearch-client.version>9.3.4</elasticsearch-client.version>
+        <elasticsearch.version>9.3.4</elasticsearch.version>
     </properties>
     <dependencies>
 
@@ -58,13 +56,13 @@
         <dependency>
             <groupId>org.zaohu</groupId>
             <artifactId>MyStep-common</artifactId>
-            <version>${revision}</version>
+            <version>1.0.1</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
         </dependency>
 
         <dependency>
@@ -97,38 +95,28 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
 
         <!-- mybatisPlus 核心库 最新版，哈哈-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.5.9</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
-            <version>3.5.9</version>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
         <!--mybatisPlus分页插件-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-jsqlparser</artifactId>
-            <version>3.5.9</version> <!-- 确保版本和 MyBatis Plus 主包一致 -->
             <exclusions>
                 <exclusion>
                     <groupId>com.github.pagehelper</groupId>
                     <artifactId>pagehelper</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <!--mybatisPlus生成器 -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.5.9</version>
         </dependency>
         <!-- mybatisPlus生成器依赖 -->
         <dependency>
@@ -146,7 +134,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
-            <version>2.3.5.RELEASE</version>
+<!--            <version>2.3.5.RELEASE</version>-->
         </dependency>
 
         <!--爬虫 jsoup-->
@@ -252,17 +240,18 @@
         </dependency>
 
         <!--ollama AI模型-->
-        <dependency>
-            <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-ollama-spring-boot-starter</artifactId>
-            <version>1.0.1-beta6</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>dev.langchain4j</groupId>-->
+<!--            <artifactId>langchain4j-ollama-spring-boot-starter</artifactId>-->
+<!--            <version>1.14.0-beta24</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
         <!--AiService相关依赖-->
-        <dependency>
-            <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-spring-boot-starter</artifactId>
-            <version>1.0.1-beta6</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>dev.langchain4j</groupId>-->
+<!--            <artifactId>langchain4j-spring-boot-starter</artifactId>-->
+<!--            <version>1.14.0-beta24</version>-->
+<!--        </dependency>-->
         <!--流式相应-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -300,8 +289,8 @@
                     <compilerArgs>
                         <arg>-parameters</arg>
                     </compilerArgs>
-                    <source>16</source>
-                    <target>16</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>

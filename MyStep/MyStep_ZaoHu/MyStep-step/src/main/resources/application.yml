@@ -38,6 +38,21 @@ spring:
             enable: true
           socketFactory:
             port: 465
+  elasticsearch:
+    # Elasticsearch连接URI
+    uris: http://localhost:9200
+    # 连接超时时间(毫秒)
+    connection-timeout: 5s
+    # 套接字超时时间(毫秒)
+    socket-timeout: 60s
+    # 用户名和密码(如果启用了安全认证)
+    # username: elastic
+    # password: yourpassword
+    # 是否启用SSL
+    # ssl:
+    #   enabled: false
+    #   certificate-authorities: /path/to/ca.crt
+
 #langchain4j:
 #  open-ai:
 #    chat-model:

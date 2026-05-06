@@ -2,15 +2,12 @@ package org.zaohu.jobs.webSocket;
 
 
 import com.alibaba.fastjson2.JSONObject;
-import dev.langchain4j.service.TokenStream;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.zaohu.ai.service.ConsultantService;
-import org.zaohu.common.ApplicationHelper;
 import org.zaohu.constant.WebSocketOnMessageStatus;
 
 import java.io.IOException;
@@ -22,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class WebSocketService {
 
 
-    private final ConsultantService consultantService = (ConsultantService) ApplicationHelper.getBean("consultantService");
+//    private final ConsultantService consultantService = (ConsultantService) ApplicationHelper.getBean("consultantService");
 
     private static Logger log = LoggerFactory.getLogger(WebSocketService.class);
     private static final AtomicInteger OnlineCount = new AtomicInteger(0);
@@ -67,10 +64,10 @@ public class WebSocketService {
         String type = jsonObject.get("type").toString();
         switch (type) {//type=1的情况不要了 因为谁会用不记住上下文的情况呢？
             case WebSocketOnMessageStatus.AI_CHAT:
-                handleStreamingChat(jsonObject, session);
+//                handleStreamingChat(jsonObject, session);
                 return;
             case WebSocketOnMessageStatus.AI_CHAT_MEMORY:
-                handleStreamingChatWithMemory(jsonObject, session);
+//                handleStreamingChatWithMemory(jsonObject, session);
                 return;
             default:
                 break;
@@ -78,52 +75,52 @@ public class WebSocketService {
         session.getBasicRemote().sendText("请匹配正确的type哦~");
     }
 
-    private void handleStreamingChatWithMemory(JSONObject jsonObject, Session session) {
-        String content = jsonObject.get("content").toString();
-        consultantService.chatWithMemory(content)
-                .onPartialResponse(token -> {
-                    try {
-                        session.getBasicRemote().sendText(token);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .onCompleteResponse(chatResponse -> {
-                    try {
-                        session.getBasicRemote().sendText("[DONE]");
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .onError(Throwable::printStackTrace)
-                .start();
-    }
+//    private void handleStreamingChatWithMemory(JSONObject jsonObject, Session session) {
+//        String content = jsonObject.get("content").toString();
+//        consultantService.chatWithMemory(content)
+//                .onPartialResponse(token -> {
+//                    try {
+//                        session.getBasicRemote().sendText(token);
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                })
+//                .onCompleteResponse(chatResponse -> {
+//                    try {
+//                        session.getBasicRemote().sendText("[DONE]");
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                })
+//                .onError(Throwable::printStackTrace)
+//                .start();
+//    }
 
-    private void handleStreamingChat(JSONObject jsonObject, Session session) {
-        String content = jsonObject.get("content").toString();
-        consultantService.chat(content)
-                .onPartialResponse(token -> {
-                    try {
-                        session.getBasicRemote().sendText(token);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .onCompleteResponse(chatResponse -> {
-                    try {
-                        session.getBasicRemote().sendText("[DONE]");
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .onError(Throwable::printStackTrace)
-                .start();
-    }
-    private TokenStream chat2Ai(JSONObject jsonObject) {
-        String content = jsonObject.get("content").toString();
-        TokenStream chat = consultantService.chat(content);
-        return chat;
-    }
+//    private void handleStreamingChat(JSONObject jsonObject, Session session) {
+//        String content = jsonObject.get("content").toString();
+//        consultantService.chat(content)
+//                .onPartialResponse(token -> {
+//                    try {
+//                        session.getBasicRemote().sendText(token);
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                })
+//                .onCompleteResponse(chatResponse -> {
+//                    try {
+//                        session.getBasicRemote().sendText("[DONE]");
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                })
+//                .onError(Throwable::printStackTrace)
+//                .start();
+//    }
+//    private TokenStream chat2Ai(JSONObject jsonObject) {
+//        String content = jsonObject.get("content").toString();
+//        TokenStream chat = consultantService.chat(content);
+//        return chat;
+//    }
 
 
     /**

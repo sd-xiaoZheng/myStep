@@ -5,27 +5,29 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.zaohu</groupId>
     <artifactId>MyStep_2024</artifactId>
-    <version>${revision}</version>
+    <version>1.0.1</version>
     <!--jar/war/pom-->
     <packaging>pom</packaging>
 
     <properties>
 
-        <java.version>21</java.version>
+        <java.version>25</java.version>
         <!-- Project revision -->
         <revision>1.0.1</revision>
 
         <druid.version>1.1.10</druid.version>
-        <mybatis.version>3.0.3</mybatis.version>
+        <mybatis.version>3.0.8</mybatis.version>
 
         <!-- 微服务版本 -->
-        <spring.boot.version>3.2.4</spring.boot.version>
-        <spring-cloud.version>2023.0.1</spring-cloud.version>
-        <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
+        <spring.boot.version>4.0.0</spring.boot.version>
+        <spring-cloud.version>2025.1.0</spring-cloud.version>
+        <spring-cloud-alibaba.version>2025.1.0.0</spring-cloud-alibaba.version>
         <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
         <spring-ai.version>1.0.0-M6</spring-ai.version>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+        <lombok-version>1.18.42</lombok-version>
+
     </properties>
 
 
@@ -51,7 +53,7 @@
             <!-- Spring Boot Starter父依赖 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
+                <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -75,21 +77,61 @@
             </dependency>
 
             <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.5.16</version>
+                <scope>compile</scope>
             </dependency>
-
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <version>2.3.5.RELEASE</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>3.5.16</version>
+                <scope>compile</scope>
             </dependency>
-
-
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-jsqlparser</artifactId>
+                <version>3.5.16</version>
+                <scope>compile</scope>
+            </dependency>
         </dependencies>
 
+
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                </plugin>
+
+                <!-- ✅ 加这个 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <annotationProcessorPaths>
+                            <!-- Lombok 的注解处理器 -->
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok-version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
 
 
 </project>

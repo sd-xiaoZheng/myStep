@@ -5,26 +5,27 @@
     <parent>
         <groupId>org.zaohu</groupId>
         <artifactId>MyStep_2024</artifactId>
-        <version>${revision}</version>
+        <version>1.0.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>MyStep-gateway</artifactId>
 
     <properties>
-        <java.version>21</java.version>
+        <gateway.version>4.3.3</gateway.version>
     </properties>
     <dependencies>
 
         <dependency>
             <groupId>org.zaohu</groupId>
             <artifactId>MyStep-common</artifactId>
-            <version>${revision}</version>
+            <version>1.0.1</version>
             <scope>compile</scope>
         </dependency>
         <!-- gateway网关 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
+            <version>${gateway.version}</version>
         </dependency>
 
         <!--nacos-discovery  注册中心依赖-->
@@ -69,12 +70,10 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.5.9</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
-            <version>3.5.9</version>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
 
         <!--lombok 因为JDK很新 这里lombok也用的很新的-->

@@ -1,7 +1,6 @@
 package org.zaohu.modules.photo.controller;
 
 import com.drew.imaging.ImageProcessingException;
-import org.checkerframework.checker.mustcall.qual.MustCallAlias;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.zaohu.common.ResultCommon.Result;
@@ -9,13 +8,9 @@ import org.zaohu.common.page.TableDataInfo;
 import org.zaohu.constant.controller.BaseController;
 import org.zaohu.modules.photo.entity.Photo;
 import org.zaohu.modules.photo.service.PhotoService;
-import org.zaohu.modules.photoType.entity.PhotoType;
-import org.zaohu.modules.photoType.service.PhotoTypeService;
 
 import java.io.IOException;
 import java.util.List;
-
-import static org.zaohu.utils.PageUtils.startPageNoCount;
 
 /**
  * <p>

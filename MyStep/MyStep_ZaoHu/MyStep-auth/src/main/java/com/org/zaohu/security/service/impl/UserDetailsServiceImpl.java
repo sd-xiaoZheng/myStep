@@ -1,4 +1,4 @@
-package org.zaohu.security.service.impl;
+package com.org.zaohu.security.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import jakarta.annotation.Resource;
