@@ -4,6 +4,14 @@ server:
 spring:
   application:
     name: MyStep-step
+  cloud:
+    nacos:
+      #      discovery:
+      #        server-addr: MyStep-nacos-server:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yml   #\u6307\u5B9A\u914D\u7F6E\u6587\u4EF6\u6269\u5C55\u540D\u4E3Ayml
+
   servlet:
     multipart:
       enabled: true
@@ -16,7 +24,7 @@ spring:
     import:
       - optional:nacos:${spring.application.name}.yml
       - optional:nacos:db-common.yml
-      - nacos:nacos-discovery.yml
+      - optional:nacos:nacos-discovery.yml
 
 # 各位大佬我这里给出了qq邮箱隐私信息，如果您发现请不要乱用，感谢🤭
   mail:

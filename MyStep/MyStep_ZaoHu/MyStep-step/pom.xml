@@ -69,11 +69,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -122,14 +129,24 @@
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
-            <version>2.0</version>
+            <version>2.4.1</version>
+            <scope>compile</scope>
         </dependency>
         <!--pagehelper-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>2.1.0</version>
+            <version>4.0.0</version>
+            <scope>compile</scope>
         </dependency>
+        <!--pagehelper中有一个依赖版本太低所以这里要指定一下mybatis版本-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>4.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!--websocket-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -167,13 +184,15 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>2.0.61</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- hutool-->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.8.33</version>
+            <version>5.8.44</version>
+            <scope>compile</scope>
         </dependency>
 
         <!--rocketmq-->
@@ -271,6 +290,11 @@
             <artifactId>tika-core</artifactId>
             <version>3.3.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

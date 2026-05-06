@@ -9,9 +9,9 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.stereotype.Component;
 import org.zaohu.constant.RedisKey;
-import org.zaohu.modules.userLogin.entity.User;
 import org.zaohu.utils.text.StringUtils;
 
+import javax.annotation.Resource;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
@@ -23,10 +23,12 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisUtils {
 
-    /** redis 操作模板 */
+    /**
+     * redis 操作模板
+     */
     @Autowired
     private StringRedisTemplate redisTemplate;
-    @Autowired
+    @Resource
     private ObjectMapper objectMapper;
 
 //    public RedisUtils(StringRedisTemplate redisTemplate) {
@@ -57,7 +59,6 @@ public class RedisUtils {
      * 序列化key
      *
      * @param key key
-     *
      * @return 字节数组
      */
     public byte[] dump(String key) {
@@ -68,7 +69,6 @@ public class RedisUtils {
      * 是否存在key
      *
      * @param key key
-     *
      * @return 是否存在
      */
     public Boolean hasKey(String key) {
@@ -81,7 +81,6 @@ public class RedisUtils {
      * @param key     key
      * @param timeout 过期时间
      * @param unit    时间单位
-     *
      * @return 是否成功
      */
     public Boolean expire(String key, long timeout, TimeUnit unit) {
@@ -93,7 +92,6 @@ public class RedisUtils {
      *
      * @param key  key
      * @param date 过期日期
-     *
      * @return 是否成功
      */
     public Boolean expireAt(String key, Date date) {
@@ -104,7 +102,6 @@ public class RedisUtils {
      * 查找匹配的key
      *
      * @param pattern 匹配规则
-     *
      * @return 结果集合
      */
     public Set<String> keys(String pattern) {
@@ -116,7 +113,6 @@ public class RedisUtils {
      *
      * @param key     key
      * @param dbIndex 目标DB
-     *
      * @return 是否成功
      */
     public Boolean move(String key, int dbIndex) {
@@ -127,7 +123,6 @@ public class RedisUtils {
      * 移除 key 的过期时间，key 将持久保持
      *
      * @param key key
-     *
      * @return 是否成功
      */
     public Boolean persist(String key) {
@@ -139,7 +134,6 @@ public class RedisUtils {
      *
      * @param key  key
      * @param unit 时间单位
-     *
      * @return 过期时间
      */
     public Long getExpire(String key, TimeUnit unit) {
@@ -150,7 +144,6 @@ public class RedisUtils {
      * 返回 key 的剩余的过期时间（s）
      *
      * @param key key
-     *
      * @return 过期时间
      */
     public Long getExpire(String key) {
@@ -181,7 +174,6 @@ public class RedisUtils {
      *
      * @param oldKey 原 key 名称
      * @param newKey 新 key 名称
-     *
      * @return 是否成功
      */
     public Boolean renameIfAbsent(String oldKey, String newKey) {
@@ -192,7 +184,6 @@ public class RedisUtils {
      * 返回 key 所储存的值的类型
      *
      * @param key key
-     *
      * @return 数据类型
      */
     public DataType type(String key) {
@@ -215,7 +206,6 @@ public class RedisUtils {
      * 获取指定 key 的值
      *
      * @param key key
-     *
      * @return 值
      */
     public String get(String key) {
@@ -228,7 +218,6 @@ public class RedisUtils {
      * @param key   key
      * @param start 开始位置
      * @param end   结束位置
-     *
      * @return 值
      */
     public String getRange(String key, long start, long end) {
@@ -240,7 +229,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值
-     *
      * @return 旧值
      */
     public String getAndSet(String key, String value) {
@@ -252,7 +240,6 @@ public class RedisUtils {
      *
      * @param key    key
      * @param offset 偏移量
-     *
      * @return 是否是1
      */
     public Boolean getBit(String key, long offset) {
@@ -263,7 +250,6 @@ public class RedisUtils {
      * 批量获取
      *
      * @param keys key 集合
-     *
      * @return 值列表
      */
     public List<String> multiGet(Collection<String> keys) {
@@ -275,7 +261,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值,true为1, false为0
-     *
      * @return 是否成功
      */
     public Boolean setBit(String key, long offset, boolean value) {
@@ -300,7 +285,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值
-     *
      * @return 之前已经存在返回false, 不存在返回true
      */
     public Boolean setIfAbsent(String key, String value) {
@@ -322,7 +306,6 @@ public class RedisUtils {
      * 获取字符串的长度
      *
      * @param key key
-     *
      * @return 长度
      */
     public Long size(String key) {
@@ -342,7 +325,6 @@ public class RedisUtils {
      * 同时设置一个或多个 key-value 对，当且仅当所有给定 key 都不存在
      *
      * @param maps k-v Map
-     *
      * @return 之前已经存在返回false, 不存在返回true
      */
     public Boolean multiSetIfAbsent(Map<String, String> maps) {
@@ -353,7 +335,6 @@ public class RedisUtils {
      * 增加(自增长), 负数则为自减
      *
      * @param key key
-     *
      * @return 变化后的值
      */
     public Long incrBy(String key, long increment) {
@@ -364,7 +345,6 @@ public class RedisUtils {
      * 增加(自增长), 负数则为自减
      *
      * @param key key
-     *
      * @return 变化后的值
      */
     public Double incrByFloat(String key, double increment) {
@@ -376,7 +356,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值
-     *
      * @return 结果
      */
     public Integer append(String key, String value) {
@@ -390,7 +369,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param field 字段
-     *
      * @return 对象
      */
     public Object hGet(String key, String field) {
@@ -401,7 +379,6 @@ public class RedisUtils {
      * 获取所有给定字段的值
      *
      * @param key key
-     *
      * @return 字段-值
      */
     public Map<Object, Object> hGetAll(String key) {
@@ -413,7 +390,6 @@ public class RedisUtils {
      *
      * @param key    key
      * @param fields 字段集合
-     *
      * @return 值列表
      */
     public List<Object> hMultiGet(String key, Collection<Object> fields) {
@@ -447,7 +423,6 @@ public class RedisUtils {
      * @param key   key
      * @param field 字段
      * @param value 值
-     *
      * @return 是否成功
      */
     public Boolean hPutIfAbsent(String key, String field, String value) {
@@ -459,7 +434,6 @@ public class RedisUtils {
      *
      * @param key    key
      * @param fields 字段数组
-     *
      * @return 删除个数
      */
     public Long hDelete(String key, Object... fields) {
@@ -471,7 +445,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param field 字段
-     *
      * @return 是否存在
      */
     public Boolean hExists(String key, String field) {
@@ -484,7 +457,6 @@ public class RedisUtils {
      * @param key       key
      * @param field     字段
      * @param increment 增量
-     *
      * @return 变化后的值
      */
     public Long hIncrBy(String key, Object field, long increment) {
@@ -497,7 +469,6 @@ public class RedisUtils {
      * @param key       key
      * @param field     字段
      * @param increment 增量
-     *
      * @return 变化后的值
      */
     public Double hIncrByFloat(String key, Object field, double increment) {
@@ -508,7 +479,6 @@ public class RedisUtils {
      * 获取哈希表中字段的数量
      *
      * @param key key
-     *
      * @return 数量
      */
     public Long hSize(String key) {
@@ -519,7 +489,6 @@ public class RedisUtils {
      * 获取哈希表中所有字段
      *
      * @param key key
-     *
      * @return key集合
      */
     public Set<Object> hKeys(String key) {
@@ -530,7 +499,6 @@ public class RedisUtils {
      * 获取哈希表中所有值
      *
      * @param key key
-     *
      * @return 值集合
      */
     public List<Object> hValues(String key) {
@@ -542,7 +510,6 @@ public class RedisUtils {
      *
      * @param key     key
      * @param options 扫描条件
-     *
      * @return 游标数据
      */
     public Cursor<Entry<Object, Object>> hScan(String key, ScanOptions options) {
@@ -556,7 +523,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param index 索引
-     *
      * @return 值
      */
     public String lIndex(String key, long index) {
@@ -569,7 +535,6 @@ public class RedisUtils {
      * @param key   key
      * @param start 开始位置, 0是开始位置
      * @param end   结束位置, -1返回所有
-     *
      * @return 值集合
      */
     public List<String> lRange(String key, long start, long end) {
@@ -581,7 +546,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值
-     *
      * @return 操作后 list 长度
      */
     public Long lLeftPush(String key, String value) {
@@ -593,7 +557,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值数组
-     *
      * @return 操作后 list 长度
      */
     public Long lLeftPushAll(String key, String... value) {
@@ -605,7 +568,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值集合
-     *
      * @return 操作后 list 长度
      */
     public Long lLeftPushAll(String key, Collection<String> value) {
@@ -617,7 +579,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值
-     *
      * @return 操作后 list 长度
      */
     public Long lLeftPushIfPresent(String key, String value) {
@@ -630,7 +591,6 @@ public class RedisUtils {
      * @param key   key
      * @param pivot 节点
      * @param value 值
-     *
      * @return 操作后 list 长度
      */
     public Long lLeftPush(String key, String pivot, String value) {
@@ -642,7 +602,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值
-     *
      * @return 操作后 list 长度
      */
     public Long lRightPush(String key, String value) {
@@ -654,7 +613,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值数组
-     *
      * @return 操作后 list 长度
      */
     public Long lRightPushAll(String key, String... value) {
@@ -666,7 +624,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值集合
-     *
      * @return 操作后 list 长度
      */
     public Long lRightPushAll(String key, Collection<String> value) {
@@ -678,7 +635,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值
-     *
      * @return 操作后 list 长度
      */
     public Long lRightPushIfPresent(String key, String value) {
@@ -691,7 +647,6 @@ public class RedisUtils {
      * @param key   key
      * @param pivot 节点
      * @param value 值
-     *
      * @return 操作后 list 长度
      */
     public Long lRightPush(String key, String pivot, String value) {
@@ -713,7 +668,6 @@ public class RedisUtils {
      * 移出并获取列表的第一个元素
      *
      * @param key key
-     *
      * @return 删除的元素
      */
     public String lLeftPop(String key) {
@@ -726,7 +680,6 @@ public class RedisUtils {
      * @param key     key
      * @param timeout 等待时间
      * @param unit    时间单位
-     *
      * @return 值
      */
     public String lBLeftPop(String key, long timeout, TimeUnit unit) {
@@ -737,7 +690,6 @@ public class RedisUtils {
      * 移除并获取列表最后一个元素
      *
      * @param key key
-     *
      * @return 删除的元素
      */
     public String lRightPop(String key) {
@@ -750,7 +702,6 @@ public class RedisUtils {
      * @param key     key
      * @param timeout 等待时间
      * @param unit    时间单位
-     *
      * @return 值
      */
     public String lBRightPop(String key, long timeout, TimeUnit unit) {
@@ -762,7 +713,6 @@ public class RedisUtils {
      *
      * @param sourceKey      源 key
      * @param destinationKey 目标 key
-     *
      * @return 值
      */
     public String lRightPopAndLeftPush(String sourceKey, String destinationKey) {
@@ -777,7 +727,6 @@ public class RedisUtils {
      * @param destinationKey 目标 key
      * @param timeout        等待时间
      * @param unit           时间单位
-     *
      * @return 值
      */
     public String lBRightPopAndLeftPush(String sourceKey, String destinationKey,
@@ -793,7 +742,6 @@ public class RedisUtils {
      * @param index index=0, 删除所有值等于value的元素; index>0, 从头部开始删除第一个值等于value的元素;
      *              index<0, 从尾部开始删除第一个值等于value的元素;
      * @param value 值
-     *
      * @return 操作后 list 长度
      */
     public Long lRemove(String key, long index, String value) {
@@ -815,7 +763,6 @@ public class RedisUtils {
      * 获取列表长度
      *
      * @param key key
-     *
      * @return 长度
      */
     public Long lLen(String key) {
@@ -829,7 +776,6 @@ public class RedisUtils {
      *
      * @param key    key
      * @param values 值（变长）
-     *
      * @return 剩余数量
      */
     public Long sAdd(String key, String... values) {
@@ -841,7 +787,6 @@ public class RedisUtils {
      *
      * @param key    key
      * @param values 值（变长）
-     *
      * @return 剩余数量
      */
     public Long sRemove(String key, Object... values) {
@@ -852,7 +797,6 @@ public class RedisUtils {
      * 移除并返回集合的一个随机元素
      *
      * @param key key
-     *
      * @return 值
      */
     public String sPop(String key) {
@@ -865,7 +809,6 @@ public class RedisUtils {
      * @param key     源 key
      * @param value   值
      * @param destKey 目标 key
-     *
      * @return 是否成功
      */
     public Boolean sMove(String key, String value, String destKey) {
@@ -876,7 +819,6 @@ public class RedisUtils {
      * 获取集合的大小
      *
      * @param key key
-     *
      * @return 数量
      */
     public Long sSize(String key) {
@@ -888,7 +830,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值
-     *
      * @return 是否包含
      */
     public Boolean sIsMember(String key, Object value) {
@@ -900,7 +841,6 @@ public class RedisUtils {
      *
      * @param key      key
      * @param otherKey 另一个 key
-     *
      * @return 值集合
      */
     public Set<String> sIntersect(String key, String otherKey) {
@@ -912,7 +852,6 @@ public class RedisUtils {
      *
      * @param key       key
      * @param otherKeys 另外的key集合
-     *
      * @return 值集合
      */
     public Set<String> sIntersect(String key, Collection<String> otherKeys) {
@@ -925,7 +864,6 @@ public class RedisUtils {
      * @param key      key
      * @param otherKey 另一个 key
      * @param destKey  目标 key
-     *
      * @return 数量
      */
     public Long sIntersectAndStore(String key, String otherKey, String destKey) {
@@ -939,7 +877,6 @@ public class RedisUtils {
      * @param key       key
      * @param otherKeys 另外的key集合
      * @param destKey   目标 key
-     *
      * @return 数量
      */
     public Long sIntersectAndStore(String key, Collection<String> otherKeys,
@@ -953,7 +890,6 @@ public class RedisUtils {
      *
      * @param key      key
      * @param otherKey 另一个 key
-     *
      * @return 值集合
      */
     public Set<String> sUnion(String key, String otherKey) {
@@ -965,7 +901,6 @@ public class RedisUtils {
      *
      * @param key       key
      * @param otherKeys 另外的key集合
-     *
      * @return 值集合
      */
     public Set<String> sUnion(String key, Collection<String> otherKeys) {
@@ -978,7 +913,6 @@ public class RedisUtils {
      * @param key      key
      * @param otherKey 另一个 key
      * @param destKey  目标 key
-     *
      * @return 数量
      */
     public Long sUnionAndStore(String key, String otherKey, String destKey) {
@@ -991,7 +925,6 @@ public class RedisUtils {
      * @param key       key
      * @param otherKeys 另外的 key 集合
      * @param destKey   目标 key
-     *
      * @return 数量
      */
     public Long sUnionAndStore(String key, Collection<String> otherKeys,
@@ -1004,7 +937,6 @@ public class RedisUtils {
      *
      * @param key      key
      * @param otherKey 另一个 key
-     *
      * @return 值集合
      */
     public Set<String> sDifference(String key, String otherKey) {
@@ -1016,7 +948,6 @@ public class RedisUtils {
      *
      * @param key       key
      * @param otherKeys 另外的 key 集合
-     *
      * @return 值集合
      */
     public Set<String> sDifference(String key, Collection<String> otherKeys) {
@@ -1029,7 +960,6 @@ public class RedisUtils {
      * @param key      key
      * @param otherKey 另一个 key
      * @param destKey  目标 key
-     *
      * @return 数量
      */
     public Long sDifference(String key, String otherKey, String destKey) {
@@ -1043,7 +973,6 @@ public class RedisUtils {
      * @param key       key
      * @param otherKeys 另外的 key 集合
      * @param destKey   目标 key
-     *
      * @return 数量
      */
     public Long sDifference(String key, Collection<String> otherKeys,
@@ -1056,7 +985,6 @@ public class RedisUtils {
      * 获取集合所有元素
      *
      * @param key key
-     *
      * @return 值集合
      */
     public Set<String> setMembers(String key) {
@@ -1067,7 +995,6 @@ public class RedisUtils {
      * 随机获取集合中的一个元素
      *
      * @param key key
-     *
      * @return 值
      */
     public String sRandomMember(String key) {
@@ -1079,7 +1006,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param count 要获取的数量
-     *
      * @return 值集合
      */
     public List<String> sRandomMembers(String key, long count) {
@@ -1091,7 +1017,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param count 要获取的数量
-     *
      * @return 值集合
      */
     public Set<String> sDistinctRandomMembers(String key, long count) {
@@ -1103,7 +1028,6 @@ public class RedisUtils {
      *
      * @param key     key
      * @param options 遍历条件
-     *
      * @return 游标数据
      */
     public Cursor<String> sScan(String key, ScanOptions options) {
@@ -1118,7 +1042,6 @@ public class RedisUtils {
      * @param key   key
      * @param value 值
      * @param score 权值
-     *
      * @return 是否成功
      */
     public Boolean zAdd(String key, String value, double score) {
@@ -1128,7 +1051,6 @@ public class RedisUtils {
     /**
      * @param key    key
      * @param values 值集合
-     *
      * @return 数量
      */
     public Long zAdd(String key, Set<TypedTuple<String>> values) {
@@ -1138,7 +1060,6 @@ public class RedisUtils {
     /**
      * @param key    key
      * @param values 值数组
-     *
      * @return 数量
      */
     public Long zRemove(String key, Object... values) {
@@ -1151,7 +1072,6 @@ public class RedisUtils {
      * @param key   key
      * @param value 值
      * @param delta 增加的权值
-     *
      * @return 操作的权值
      */
     public Double zIncrementScore(String key, String value, double delta) {
@@ -1163,7 +1083,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值
-     *
      * @return 0表示第一位
      */
     public Long zRank(String key, Object value) {
@@ -1175,7 +1094,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值
-     *
      * @return 0表示第一位
      */
     public Long zReverseRank(String key, Object value) {
@@ -1188,7 +1106,6 @@ public class RedisUtils {
      * @param key   key
      * @param start 开始位置
      * @param end   结束位置, -1查询所有
-     *
      * @return 值集合
      */
     public Set<String> zRange(String key, long start, long end) {
@@ -1201,7 +1118,6 @@ public class RedisUtils {
      * @param key   key
      * @param start 开始位置
      * @param end   结束位置
-     *
      * @return 值集合
      */
     public Set<TypedTuple<String>> zRangeWithScores(String key, long start,
@@ -1215,7 +1131,6 @@ public class RedisUtils {
      * @param key key
      * @param min 最小值
      * @param max 最大值
-     *
      * @return 值集合
      */
     public Set<String> zRangeByScore(String key, double min, double max) {
@@ -1228,7 +1143,6 @@ public class RedisUtils {
      * @param key key
      * @param min 最小值
      * @param max 最大值
-     *
      * @return 值集合
      */
     public Set<TypedTuple<String>> zRangeByScoreWithScores(String key,
@@ -1244,7 +1158,6 @@ public class RedisUtils {
      * @param max   最大值
      * @param start 开始位置
      * @param end   结束位置
-     *
      * @return 值集合
      */
     public Set<TypedTuple<String>> zRangeByScoreWithScores(String key,
@@ -1259,7 +1172,6 @@ public class RedisUtils {
      * @param key   key
      * @param start 开始位置
      * @param end   结束位置
-     *
      * @return 值集合
      */
     public Set<String> zReverseRange(String key, long start, long end) {
@@ -1272,7 +1184,6 @@ public class RedisUtils {
      * @param key   key
      * @param start 开始位置
      * @param end   结束位置
-     *
      * @return 值集合
      */
     public Set<TypedTuple<String>> zReverseRangeWithScores(String key,
@@ -1287,7 +1198,6 @@ public class RedisUtils {
      * @param key key
      * @param min 最小值
      * @param max 最大值
-     *
      * @return 值集合
      */
     public Set<String> zReverseRangeByScore(String key, double min,
@@ -1301,7 +1211,6 @@ public class RedisUtils {
      * @param key key
      * @param min 最小值
      * @param max 最大值
-     *
      * @return 值集合
      */
     public Set<TypedTuple<String>> zReverseRangeByScoreWithScores(
@@ -1318,7 +1227,6 @@ public class RedisUtils {
      * @param max   最大值
      * @param start 开始位置
      * @param end   结束位置
-     *
      * @return 值集合
      */
     public Set<String> zReverseRangeByScore(String key, double min,
@@ -1333,7 +1241,6 @@ public class RedisUtils {
      * @param key key
      * @param min 最小值
      * @param max 最大值
-     *
      * @return 值集合
      */
     public Long zCount(String key, double min, double max) {
@@ -1344,7 +1251,6 @@ public class RedisUtils {
      * 获取集合大小
      *
      * @param key key
-     *
      * @return 长度
      */
     public Long zSize(String key) {
@@ -1355,7 +1261,6 @@ public class RedisUtils {
      * 获取集合大小
      *
      * @param key key
-     *
      * @return 长度
      */
     public Long zZCard(String key) {
@@ -1367,7 +1272,6 @@ public class RedisUtils {
      *
      * @param key   key
      * @param value 值
-     *
      * @return 权重值
      */
     public Double zScore(String key, Object value) {
@@ -1380,7 +1284,6 @@ public class RedisUtils {
      * @param key   key
      * @param start 开始位置
      * @param end   结束位置
-     *
      * @return 剩余数量
      */
     public Long zRemoveRange(String key, long start, long end) {
@@ -1393,7 +1296,6 @@ public class RedisUtils {
      * @param key key
      * @param min 最小值
      * @param max 最大值
-     *
      * @return 剩余数量
      */
     public Long zRemoveRangeByScore(String key, double min, double max) {
@@ -1406,7 +1308,6 @@ public class RedisUtils {
      * @param key      key
      * @param otherKey 另一个 key
      * @param destKey  目标 key
-     *
      * @return 数量
      */
     public Long zUnionAndStore(String key, String otherKey, String destKey) {
@@ -1419,7 +1320,6 @@ public class RedisUtils {
      * @param key       key
      * @param otherKeys 另外的 key 集合
      * @param destKey   目标 key
-     *
      * @return 数量
      */
     public Long zUnionAndStore(String key, Collection<String> otherKeys,
@@ -1434,7 +1334,6 @@ public class RedisUtils {
      * @param key      key
      * @param otherKey 另一个 key
      * @param destKey  目标 key
-     *
      * @return 数量
      */
     public Long zIntersectAndStore(String key, String otherKey,
@@ -1449,7 +1348,6 @@ public class RedisUtils {
      * @param key       key
      * @param otherKeys 另外的 key 集合
      * @param destKey   目标 key
-     *
      * @return 数量
      */
     public Long zIntersectAndStore(String key, Collection<String> otherKeys,
@@ -1463,15 +1361,14 @@ public class RedisUtils {
      *
      * @param key     key
      * @param options 遍历条件
-     *
      * @return 游标数据
      */
     public Cursor<TypedTuple<String>> zScan(String key, ScanOptions options) {
         return redisTemplate.opsForZSet().scan(key, options);
     }
 
-    public  <T> T get(String token, Class<T> clazz) {
-        String json = redisTemplate.opsForValue().get(RedisKey.LOGIN_TOKEN+token);
+    public <T> T get(String token, Class<T> clazz) {
+        String json = redisTemplate.opsForValue().get(RedisKey.LOGIN_TOKEN + token);
         if (StringUtils.isEmpty(json)) {
             return null;
         }

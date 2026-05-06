@@ -1,6 +1,5 @@
 package org.zaohu.utils;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.zaohu.common.page.PageDomain;
 import org.zaohu.common.page.TableSupport;
