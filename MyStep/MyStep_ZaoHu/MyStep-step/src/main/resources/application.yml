@@ -61,6 +61,7 @@ spring:
     #   enabled: false
     #   certificate-authorities: /path/to/ca.crt
 
+
 langchain4j:
   open-ai:
     chat-model:
