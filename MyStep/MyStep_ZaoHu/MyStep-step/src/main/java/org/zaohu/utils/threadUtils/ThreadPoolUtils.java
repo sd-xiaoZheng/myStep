@@ -6,11 +6,6 @@ import org.zaohu.config.threadConfig.ThreadRejectedExecutionHandler;
 import java.util.List;
 import java.util.concurrent.*;
 
-/**
- * @Author ScholarTang
- * @Date 2021/11/3 下午1:03
- * @Desc 单例的线程池工具类
- */
 
 public class ThreadPoolUtils {
 

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.zaohu.constant.RedisKey;
 import org.zaohu.utils.text.StringUtils;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
