@@ -39,12 +39,6 @@
 当前状态: 全项目0处使用，所有线程池均使用平台线程(ThreadPoolExecutor)
 
 可优化位置:
-- `ThreadPoolUtils.java` (step + gateway各一份重复代码): 将 `ThreadPoolExecutor` 替换为 `Executors.newVirtualThreadPerTaskExecutor()`
-- `ImageThumbConsumer.java`: 图片转换是IO密集型任务，使用虚拟线程可大幅提升吞吐
-- `LoginCodeConsumer.java` / `ForgetCodeConsumer.java`: 邮件发送是网络IO，天然适合虚拟线程
-- `MyGlobalFilter.java`: Gateway中的 `Mono.fromRunnable()` 内部如果用虚拟线程可提升并发
-- `WebSocketService.java`: 每个WebSocket连接的消息处理可用虚拟线程
-- `Redis2Mysql.java`: 定时任务中批量处理访问记录，虚拟线程可加速
 
 预期收益: 去掉平台线程池的复杂配置(核心线程数/最大线程数/队列/拒绝策略)，代码更简洁，高并发IO场景吞吐量成倍提升
 
@@ -59,19 +53,7 @@
 **3. javax → jakarta 命名空间迁移**
 
 JDK 25 + Spring Boot 4.0 要求完全迁移到 Jakarta EE:
-- `RedisUtils.java:14`: `import javax.annotation.Resource` → `import jakarta.annotation.Resource`
 - `application.yml:44`: `javax.net.ssl.SSLSocketFactory` → 去除或改为 Jakarta 兼容配置
-- auth模块 `SecurityConfig.java:20`: 同样有 `javax.annotation.Resource`
-
-**4. fastjson 1.x 残留清理**
-
-Gateway已升级到fastjson 2.0.61，但多处代码仍用旧import:
-- `MyGlobalFilter.java:3`: `import com.alibaba.fastjson.JSONObject` → 应改为 `com.alibaba.fastjson2.JSONObject`
-- `RocketMQTemplateProducerUtils.java:3`: `import com.alibaba.fastjson.JSON`
-- `LoginCodeConsumer.java`, `ForgetCodeConsumer.java`, `Redis2Mysql.java`(多处): 全部用的fastjson 1.x import
-- `DistanceUtils.java`, `GetIPAddrUtil.java`: 同样问题
-
-说明: pom中依赖已是fastjson 2.0.61，但源码import没改过来，实际运行的可能是2.x的兼容模式
 
 #### 中优先级
 
@@ -97,7 +79,6 @@ Gateway已升级到fastjson 2.0.61，但多处代码仍用旧import:
 
 `LoginController.java:91`: 密码错误时 `Thread.sleep(500)` 阻塞平台线程500ms
 - 如果是虚拟线程则无影响，但当前是平台线程
-- 建议改用 Bucket4j 限流替代sleep防暴力破解(LoginRateLimitInterceptor已做登录限流，这个sleep可能是多余的)
 
 #### 低优先级
 
@@ -110,7 +91,6 @@ Gateway已升级到fastjson 2.0.61，但多处代码仍用旧import:
 **9. Sequenced Collections**
 
 JDK 21+ 引入，可简化:
-- `PhotoTypeServiceImpl.getPhraseByTypeId()`: ArrayList操作
 - 多处List/Set的首尾操作
 
 **10. String Templates (JDK 25 正式特性)**
@@ -125,7 +105,6 @@ JDK 21+ 引入，可简化:
 
 #### Bug
 1. **ThreadPoolUtils (step模块) KEEP_ALIVE_SECONDS = 30000000000L, TimeUnit被注释为null**: 这相当于约347天的keep-alive，且传入null会导致线程池行为异常
-2. **Pom.xml step模块**: `spring-boot-autoconfigure` 依赖重复声明4次，`lombok` 重复2次(scope还不一致: compile vs provided)
 
 #### 代码重复
 3. **ThreadPoolUtils**: step和gateway模块各有一份完全重复的代码，应抽取到MyStep-common
