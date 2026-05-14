@@ -109,7 +109,7 @@ MyStep 是一个基于 Spring Cloud 微服务架构的个人成长记录系统�
 
 | 技术 | 版本 | 说明 |
 |------|------|------|
-| JDK | 21 | Java 开发工具包 |
+| JDK | 25 | Java 开发工具包 |
 | Spring Boot | 3.2.4 | 基础框架 |
 | Spring Cloud | 2023.0.1 | 微服务框架 |
 | Spring Cloud Alibaba | 2023.0.1.0 | 微服务组件 |
