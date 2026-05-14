@@ -12,42 +12,56 @@ definePage({
   },
 })
 
-const description = ref(
-  'unibest 是一个集成了多种工具和技术的 uniapp 开发模板，由 uniapp + Vue3 + Ts + Vite5 + UnoCss + VSCode 构建，模板具有代码提示、自动格式化、统一配置、代码片段等功能，并内置了许多常用的基本组件和基本功能，让你编写 uniapp 拥有 best 体验。',
-)
+// 定义方块选项
+const menuItems = ref([
+  { id: 1, title: '日记', icon: 'i-carbon-document', path: '/pages/diary/index' },
+  { id: 2, title: '照片', icon: 'i-carbon-image', path: '/pages/photo/index' },
+  { id: 3, title: '玩具', icon: 'i-carbon-game', path: '/pages/toy/index' },
+  { id: 4, title: '留言墙', icon: 'i-carbon-chat', path: '/pages/message-wall/index' }
+])
+
 console.log('index/index 首页打印了')
 
 onLoad(() => {
   console.log('测试 uni API 自动引入: onLoad')
 })
+
+// 处理方块点击事件
+const handleItemClick = (item) => {
+  console.log('点击了:', item.title)
+  // 这里可以添加路由跳转逻辑
+  uni.showToast({
+    title: `点击了${item.title}`,
+    icon: 'none'
+  })
+  // uni.navigateTo({ url: item.path })
+}
 </script>
 
 <template>
-  <view class="bg-white px-4 pt-safe">
-    <view class="mt-10">
-      <image src="/static/logo.svg" alt="" class="mx-auto block h-28 w-28" />
-    </view>
-    <view class="mt-4 text-center text-4xl text-[#d14328]">
-      unibest
-    </view>
-    <view class="mb-8 mt-2 text-center text-2xl">
-      最好用的 uniapp 开发模板
+  <view class="bg-gray-50 min-h-screen">
+    <!-- 顶部标题 -->
+    <view class="pt-safe pb-4 px-4 bg-white shadow-sm">
+      <text class="text-xl font-bold text-gray-800">我的应用</text>
     </view>
 
-    <view class="m-auto mb-2 max-w-100 text-justify indent text-4">
-      {{ description }}
-    </view>
-    <view class="mt-4 text-center">
-      作者：
-      <text class="text-green-500">
-        菲鸽
-      </text>
-    </view>
-    <view class="mt-4 text-center">
-      官网地址：
-      <text class="text-green-500">
-        https://unibest.tech
-      </text>
+    <!-- 方块网格布局 -->
+    <view class="p-4">
+      <view class="grid grid-cols-2 gap-4">
+        <view 
+          v-for="item in menuItems" 
+          :key="item.id"
+          class="bg-white rounded-lg p-6 flex flex-col items-center justify-center shadow-sm active:bg-gray-50 transition-colors"
+          @click="handleItemClick(item)"
+        >
+          <!-- 图标 -->
+          <view class="w-16 h-16 mb-3 flex items-center justify-center">
+            <view :class="[item.icon, 'text-3xl text-blue-500']"></view>
+          </view>
+          <!-- 标题 -->
+          <text class="text-base font-medium text-gray-700">{{ item.title }}</text>
+        </view>
+      </view>
     </view>
   </view>
 </template>
