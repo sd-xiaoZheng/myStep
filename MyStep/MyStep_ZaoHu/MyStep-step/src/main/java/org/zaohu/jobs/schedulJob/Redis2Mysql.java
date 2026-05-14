@@ -1,28 +1,25 @@
 package org.zaohu.jobs.schedulJob;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.zaohu.utils.GetIPAddrUtil;
 import org.zaohu.constant.Constant;
 import org.zaohu.modules.accessRecord.entity.AccessRecord;
 import org.zaohu.modules.accessRecord.service.impl.AccessRecordServiceImpl;
+import org.zaohu.utils.GetIPAddrUtil;
 import org.zaohu.utils.entity.IpRegion;
-import org.zaohu.utils.text.StringUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -43,7 +40,7 @@ public class Redis2Mysql {
     @Scheduled(cron = "0 0/15 * * * ?")//每十5分钟一次
     private void getValueByIdsRealTime() {
         Object o = redisTemplate.opsForList().range(Constant.REDIS_VISIT_INFO, 0, -1);
-        JSONArray list = (JSONArray) JSONArray.parse(JSON.toJSONString(o));
+        JSONArray list = JSONArray.parse(JSON.toJSONString(o));
         ArrayList<AccessRecord> accessRecords = new ArrayList<>();
         for (Object object : list) {
             JSONObject jsonObject = (JSONObject) object;

@@ -1,74 +1,148 @@
 
 
-4. 公网部署安全检查清单 (2026-05-01 安全审查结论)
-   以下问题需要在公网部署前处理，按优先级排列：
+## JDK 25 升级后项目审查报告 (2026-05-10)
 
-   严重 - 必须修复:
-    - 注册验证码绕过: LoginController.register() line 135 Result.failed() 没有 return，验证码校验失败后代码继续执行到 line 158 return Result.success()，导致任意注册。修复: 把 Result.failed() 改为 return Result.failed()
-    - Fastjson 1.2.83 存在已知 RCE 漏洞 (CVE-2022-25845)，必须升级到最新版或替换为 jackson（项目已引入 jackson，可直接替换）
-    - Gateway 也用了 Fastjson 1.2.72，同样需要替换
-    - WebSocketService 导入了 fastjson2，需统一替换
-    - 所有硬编码密钥必须移到环境变量或外部化配置: JWT 盐值(JwtUtils.java:16)、QQ邮箱密码(application.yml:24)、邮箱用户名(application.yml:23)
-    - 文件上传无类型校验(FileUtils.java): 可上传任意后缀文件(.jsp/.exe等)，加上文件路径直接映射为静态资源(/step/Zaohu/**)，可被直接访问执行。修复: 严格校验文件类型白名单(只允许图片扩展名)，校验文件 magic bytes
-    - JWT Filter line 38: token.split(“ “)[1] 如果 Authorization header 不含空格会抛 ArrayIndexOutOfBoundsException 导致 500。需先校验格式(必须以”Bearer “开头)
+### 升级概况
+- 父POM: Spring Boot 4.0.0 + Spring Cloud 2025.1.0 + Spring Cloud Alibaba 2025.1.0.0
+- JDK: 25, Lombok: 1.18.42
+- MyBatis Plus: 3.5.16, Fastjson: 2.0.61
+- 项目已能跑起来，基础升级完成
 
-   高危 - 强烈建议:
-    - /step/article/** 完全公开(permitAll)，任何人无需登录即可增删改查日记。建议只开放 GET 读，增删改需认证
-    - WebSocket /MyStep/ws/** 无任何认证，任何人可连接。建议在 onOpen 中校验 token
-    - 登录接口无频率限制，存在暴力破解风险。建议对 /step/login 加 Redis 计数限流(如 5次/分钟/IP)
-    - 邮件发送接口 /step/sendCodeEmail 和 /step/sendForgetPwdEmail 无频率限制，可被短信/邮件轰炸。建议加限流和图形验证码
-    - Spring Boot Actuator 已引入依赖但未限制访问，确认生产环境关闭或只允许内网访问
-    - JWT 载荷只存了手机号(iss claim)，未存 userId，每次需查 Redis。过期时间 7 天偏长，建议缩短
-    - Swagger 依赖已引入，公网环境应关闭或加认证，否则 API 结构完全暴露
+---
 
-   中危:
-    - spring-boot-starter-websocket 版本 2.3.5.RELEASE 过旧(2020年)，存在已知漏洞，应升级对齐 Boot 3.2.4
-    - spring-boot-starter-test 版本 2.3.5.RELEASE 同样过旧(父POM中)
-    - 部署时必须启用 HTTPS，当前无 SSL 配置
-    - Nacos 需开启认证，否则配置中心直接暴露
-    - Gateway MyGlobalFilter 将请求参数(getRawQuery)写入 Redis，若 token 通过 URL 传递会泄露
-    - 所有用户输入(nickname/content/title等)未做 XSS 过滤，存储型 XSS 风险
-    - BCryptPasswordEncoder 已使用(密码安全 OK)，但使用无盐 BCrypt 即可
-    - Redis 未配置密码认证(从配置文件看)，公网部署必须设置密码
-    - PostgreSQL 数据库连接配置在 Nacos 中，需确认密码强度和非默认端口
+### 一、安全问题（沿用 2026-05-01 安全审查，标注处理状态）
 
-   低危/建议:
-    - 日志中不要打印敏感信息，LoginController line 105 log.error(e.getMessage(), e) 可能在认证异常时泄露信息
-    - FileUtils 文件路径 D:/step/file/image/ 是 Windows 硬路径，部署 Linux 服务器需修改
-    - CSRF 已禁用(无状态JWT场景可接受)，但需确认前端不使用 cookie 存 token
-    - 可以考虑给所有公开写接口加上幂等性校验，防止重复提交
-我审查了项目的认证、授权、文件上传、依赖安全、配置安全、输入验证等方面，发现 18 个需要处理的问题，按优先级汇总如下： t
-严重 - 必须修复 (4项)
+#### 已修复
+- 注册验证码绕过: LoginController.register() 已修复，所有分支都有return
+- Fastjson: 已升级到 2.0.61，RCE漏洞已消除
+- JWT Filter: 已增加 `startsWith("Bearer ")` 校验
+- 登录频率限制: 已添加 LoginRateLimitInterceptor (Bucket4j)
+- /step/article/** 公开访问: 已注释掉，不再完全公开
 
-┌────────────────────────────────────────────────────────────────────────────────┬────────────────────────────────┐
-│ 问题 │ 位置 │
-├────────────────────────────────────────────────────────────────────────────────┼────────────────────────────────┤
-│ 注册验证码绕过 — Result.failed() 没有 return，验证码校验失败后代码继续执行到 │ LoginController.java:135 │
-│ return Result.success()，可以无验证码注册 │ │
-├────────────────────────────────────────────────────────────────────────────────┼────────────────────────────────┤
-│ Fastjson RCE 漏洞 — 1.2.83 存在已知反序列化 RCE (CVE-2022-25845)，gateway 还有 │ pom.xml step/gateway, │
-│ 1.2.72，WebSocket 导入了 fastjson2。项目已有 jackson，可直接替换 │ WebSocketService.java │
-├────────────────────────────────────────────────────────────────────────────────┼────────────────────────────────┤
-│ 密钥硬编码 — JWT 盐值、QQ 邮箱密码/用户名全部明文写在代码里，git push │ JwtUtils.java:16, │
-│ 到公网=密钥泄露 │ application.yml:23-24 │
-├────────────────────────────────────────────────────────────────────────────────┼────────────────────────────────┤
-│ 文件上传无校验 — 任意后缀文件可上传，且上传目录直接映射为静态资源 │ FileUtils.java:36, │
-│ /step/Zaohu/**，上传 .jsp/.html 可被执行 │ WebConfig.java:30 │
-└────────────────────────────────────────────────────────────────────────────────┴────────────────────────────────┘
+#### 仍未修复
+- JWT盐值硬编码: JwtUtils.java:16 `Algorithm.HMAC256("随意加点东西->3331247124")` 需移到环境变量
+- QQ邮箱密码硬编码: application.yml:34 `fqoosoqrseukcjgh` 需移到环境变量
+- QQ邮箱用户名硬编码: application.yml:33 `3331247124@qq.com` 需移到环境变量
+- WebSocket /MyStep/ws/** 无认证: WebSocketService.onOpen() 无token校验
+- 文件上传: 已引入tika-core依赖，需确认FileUtils中是否实际使用magic bytes校验
+- 邮件发送接口无频率限制: sendCodeEmail / sendForgetPwdEmail 未加限流
+- 公网部署: Redis无密码、Nacos需认证、HTTPS缺失
 
-高危 (5项)
+---
 
-- /step/article/** 完全公开，任何人无需登录即可增删改查日记
-- WebSocket /MyStep/ws/** 无认证，任何人可连接
-- 登录接口无频率限制，可暴力破解
-- 邮件发送接口无频率限制，可被轰炸
-- JWT Filter token.split(" ")[1] 未校验格式，恶意请求可触发 500
+### 二、JDK 25 特性优化（按优先级排列）
 
-中危 (6项) + 低危 (3项)
+#### 高优先级
 
-详见 CLAUDE.md 中的完整清单，包括 HTTPS 缺失、Nacos 认证、Redis 密码、XSS 过滤、依赖版本过旧等问题。
+**1. 虚拟线程 (Virtual Threads) — JEP 444 正式特性**
 
-  ---
-最紧急修的是注册验证码绕过 — 这是一个一行代码的 bug（缺一个 return），但影响很大。其他问题你打算按什么优先级来推进？
+当前状态: 全项目0处使用，所有线程池均使用平台线程(ThreadPoolExecutor)
 
-✻ Churned for 6m 2s
+可优化位置:
+
+预期收益: 去掉平台线程池的复杂配置(核心线程数/最大线程数/队列/拒绝策略)，代码更简洁，高并发IO场景吞吐量成倍提升
+
+**2. java.util.Date / SimpleDateFormat → java.time 迁移**
+
+当前问题:
+- `JwtUtils.java`: `new Date(System.currentTimeMillis()+expiresTime)` → 用 `Instant.now().plusMillis(expiresTime)`
+- `MyGlobalFilter.java:49`: `new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())` → 用 `LocalDateTime.now().format(DateTimeFormatter)`
+- `DateUtils.java`: 整个类大量使用 SimpleDateFormat(非线程安全) 和 java.util.Date，建议全面迁移到 java.time
+- `EmailUtil.java`, `BaseController.java`, `MsgWall.java` 等多处使用 java.util.Date
+
+**3. javax → jakarta 命名空间迁移**
+
+JDK 25 + Spring Boot 4.0 要求完全迁移到 Jakarta EE:
+- `application.yml:44`: `javax.net.ssl.SSLSocketFactory` → 去除或改为 Jakarta 兼容配置
+
+#### 中优先级
+
+**5. 结构化并发 (Structured Concurrency) — JEP 480 预览特性**
+
+可优化位置:
+- `PhotoTypeServiceImpl.processAndBuildPhoto()`: 照片EXIF信息提取 + 图片上传可并行执行
+- `PhotoTypeServiceImpl.addPhotoBatch()`: 批量照片处理可并发，当前是for循环串行
+- `ArticleController`: 日记保存时，ES索引写入 + 数据库写入可并行
+
+使用方式: `StructuredTaskScope.fork()` 创建子任务，`scope.join()` 等待全部完成
+
+**6. Record 类型替换**
+
+适合改造为record的类:
+- `LoginUserDetails.java`: 不可变用户详情，天然适合record
+- `IpRegion.java`: IP解析结果，纯数据载体
+- `StorageDTO.java`: 存储DTO
+- `PhotoBatch.java`, `PhotoNew.java`: 数据传输对象
+- `ResultEnum.java` 中的枚举项可以考虑
+
+**7. Thread.sleep(500) 阻塞问题**
+
+`LoginController.java:91`: 密码错误时 `Thread.sleep(500)` 阻塞平台线程500ms
+- 如果是虚拟线程则无影响，但当前是平台线程
+
+#### 低优先级
+
+**8. Pattern Matching 模式匹配**
+
+可用switch模式匹配的位置:
+- `WebSocketService.onMessage()`: switch-case可根据type匹配并解构JSONObject
+- 各Controller中的类型判断和转换
+
+**9. Sequenced Collections**
+
+JDK 21+ 引入，可简化:
+- 多处List/Set的首尾操作
+
+**10. String Templates (JDK 25 正式特性)**
+
+可替换位置:
+- `PhotoTypeServiceImpl`: 路径拼接 `Constant.FILE_PATH + year + Constant.PHOTO_PATH + month + "/" + fileName`
+- 各处的字符串拼接和StringBuilder使用
+
+---
+
+### 三、代码质量问题
+
+#### Bug
+1. **ThreadPoolUtils (step模块) KEEP_ALIVE_SECONDS = 30000000000L, TimeUnit被注释为null**: 这相当于约347天的keep-alive，且传入null会导致线程池行为异常
+
+#### 代码重复
+3. **ThreadPoolUtils**: step和gateway模块各有一份完全重复的代码，应抽取到MyStep-common
+4. **MyThreadFactory**: 同上，两份重复代码，且未设置线程名和daemon状态
+
+#### 未完成/空实现
+5. **VisitorTask.java**: 完全空实现(只有注释"异步redis2mysql")，且Gateway实际通过定时任务Redis2Mysql同步
+6. **chat2Ai()**: WebSocketService中定义但未被调用的方法
+
+#### 架构问题
+7. **Gateway引入了MyBatis Plus + PostgreSQL依赖**: Gateway作为网关不应有数据库依赖，直接操作数据库破坏了微服务边界
+8. **Auth模块使用独立的Spring Boot 3.5.6父POM**: 与主项目Spring Boot 4.0不一致，且该模块未在主POM的modules中启用
+9. **WebSocketService**: 使用 `System.out.println` 而非日志框架输出
+
+---
+
+### 四、优化实施建议顺序
+
+```
+第1批 (安全优先):
+  - 密钥外部化 (JWT盐值 + 邮箱密码)
+  - WebSocket认证
+  - 邮件接口限流
+  - fastjson import统一
+  - javax→jakarta import统一
+
+第2批 (虚拟线程):
+  - ThreadPoolUtils 替换为虚拟线程
+  - RocketMQ Consumer使用虚拟线程
+  - 删除重复的ThreadPoolUtils代码
+
+第3批 (现代化):
+  - Date/SimpleDateFormat → java.time
+  - Record类型改造
+  - KEEP_ALIVE_SECONDS bug修复 + pom重复依赖清理
+
+第4批 (按需):
+  - 结构化并发
+  - Pattern Matching
+  - String Templates
+```
