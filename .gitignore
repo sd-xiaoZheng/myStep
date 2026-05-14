@@ -60,6 +60,7 @@ info.log.*.gz
 doc/deploy/**/data/
 doc/deploy/**/logs/
 doc/deploy/**/store/
+doc/reference/
 
 #ai:
 .claude/
