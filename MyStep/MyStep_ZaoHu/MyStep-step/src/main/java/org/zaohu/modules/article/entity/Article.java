@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.zaohu.modules.tag.entity.Tag;
 
@@ -67,7 +66,6 @@ public class Article {
     private String color;
 
     @TableField("image_urls")
-    @Transient
     private String imageUrls;
 
     @TableField("is_star")
@@ -77,15 +75,12 @@ public class Article {
     private String address;
 
     @TableField(exist = false)
-    @Transient
     private String typeName;
 
     @TableField(exist = false)
-    @Transient
     private String weatherName;
 
     @TableField(exist = false)
-    @Transient
     private String moodName;
 
     @TableField(exist = false)
