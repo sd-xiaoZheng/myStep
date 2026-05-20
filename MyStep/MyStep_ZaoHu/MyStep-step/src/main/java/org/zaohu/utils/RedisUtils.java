@@ -1,6 +1,6 @@
 package org.zaohu.utils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.core.Cursor;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.zaohu.constant.RedisKey;
 import org.zaohu.utils.text.StringUtils;
 
-import jakarta.annotation.Resource;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
@@ -28,8 +27,6 @@ public class RedisUtils {
      */
     @Autowired
     private StringRedisTemplate redisTemplate;
-    @Resource
-    private ObjectMapper objectMapper;
 
 //    public RedisUtils(StringRedisTemplate redisTemplate) {
 //        this.redisTemplate = redisTemplate;
@@ -1374,7 +1371,7 @@ public class RedisUtils {
         }
 
         try {
-            return objectMapper.readValue(json, clazz);
+            return JSON.parseObject(json, clazz);
         } catch (Exception e) {
             throw new RuntimeException("Redis 数据反序列化失败", e);
         }
