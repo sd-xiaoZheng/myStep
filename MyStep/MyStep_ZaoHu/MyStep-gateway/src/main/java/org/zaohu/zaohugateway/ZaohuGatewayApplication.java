@@ -1,11 +1,9 @@
 package org.zaohu.zaohugateway;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("org.zaohu.*.*.*.mapper")
 //@MapperScan("org.zaohu.*.*.*")
 public class ZaohuGatewayApplication {
 

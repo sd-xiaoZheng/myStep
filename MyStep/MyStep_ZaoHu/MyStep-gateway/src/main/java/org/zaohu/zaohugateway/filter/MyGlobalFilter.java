@@ -50,7 +50,7 @@ public class MyGlobalFilter implements GlobalFilter, Ordered {
             }
             Long aLong = redisTemplate.opsForList().leftPush(REDIS_VISIT_INFO, jsonObject);
 //            if (aLong>3){
-            //这里开线程去存储redis中的数据并且删除已经存储的 2024年11月17日 发现多线程引入redisTemplate优点问题，暂时使用定时任务来解决
+            //这里开线程去存储redis中的数据并且删除已经存储的 2024年11月17日 发现多线程引入redisTemplate有点问题，暂时使用定时任务来解决
 //                ThreadPoolUtils newInstance = ThreadPoolUtils.getNewInstance();
 //                newInstance.executor(new VisitorTask());
 //            }
