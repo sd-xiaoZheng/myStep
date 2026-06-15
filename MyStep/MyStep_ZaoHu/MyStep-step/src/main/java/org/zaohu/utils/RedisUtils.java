@@ -1,6 +1,7 @@
 package org.zaohu.utils;
 
-import com.alibaba.fastjson.JSON;
+
+import com.alibaba.fastjson2.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.core.Cursor;
@@ -17,7 +18,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Redis工具类
- *
  */
 @Component
 public class RedisUtils {
@@ -28,7 +28,7 @@ public class RedisUtils {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-//    public RedisUtils(StringRedisTemplate redisTemplate) {
+//    public RedisUtils(StringRedisTemplate redisTemplate)
 //        this.redisTemplate = redisTemplate;
 //    }
 

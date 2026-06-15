@@ -148,9 +148,9 @@ public class SyncDataBase2Es {
         esDoc.put("color", article.getColor());
         esDoc.put("imageUrls", article.getImageUrls());
         esDoc.put("authorAvatar", article.getAuthorAvatar());
-        esDoc.put("typeName", article.getTypeName());
-        esDoc.put("weatherName", article.getWeatherName());
-        esDoc.put("moodName", article.getMoodName());
+//        esDoc.put("typeName", article.getTypeName());
+//        esDoc.put("weatherName", article.getWeatherName());
+//        esDoc.put("moodName", article.getMoodName());
 
         List<Map<String, Object>> tagList = tags.stream().map(tag -> {
             Map<String, Object> tagMap = new HashMap<>();
