@@ -20,7 +20,7 @@
         </div>
         <div class="card-buttons">
           <button class="btn btn-blue" @click="goToDiaryCreate">+ 新建日记</button>
-          <button class="btn btn-grey"><span></span>心情日记</button>
+          <button class="btn btn-grey" @click="goToTodoCreate"><span></span>新建代办</button>
         </div>
       </div>
 
@@ -157,6 +157,9 @@ export default {
     },
     goToDiaryCreate() {
       this.$router.push('/diaryCreate');
+    },
+    goToTodoCreate() {
+      this.$router.push('/diaryTodoCreate');
     }
   }
 }
@@ -282,28 +285,43 @@ a {
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
-.btn-grey {
-  background: rgba(236, 240, 241, 0.7);
-  color: #2c3e50;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.btn-grey:hover {
-  background: rgba(236, 240, 241, 0.9);
-}
-
 .btn-grey span {
   display: inline-block;
   width: 10px;
   height: 10px;
-  border-radius: 50%;
-  background-color: #f1c40f;
+  position: relative;
   margin-right: 8px;
+  background: transparent; /* 去掉原圆点背景 */
 }
+/* 横向线条 */
+.btn-grey span::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #f1c40f;
+  transform: translateY(-50%);
+}
+/* 纵向线条 */
+.btn-grey span::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: #f1c40f;
+  transform: translateX(-50%);
+}
+
+.btn-grey span {
+  width: 12px;   /* 改大小 */
+  height: 12px;
+  background-color: #27ae60; /* 改颜色 */
+}
+
 
 .card-buttons {
   display: flex;

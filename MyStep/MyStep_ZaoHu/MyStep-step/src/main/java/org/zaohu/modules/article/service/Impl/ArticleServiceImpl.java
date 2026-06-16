@@ -170,7 +170,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             }
         }
         boolean b = articleMapper.insertOrUpdate(article);
-        if (b) {
+        if (article.getTypeId() != 8 && b) {
             //添加文章标签对应关系
             Integer[] tags = articleVO.getTagIds();
             if (Objects.nonNull(tags)) {

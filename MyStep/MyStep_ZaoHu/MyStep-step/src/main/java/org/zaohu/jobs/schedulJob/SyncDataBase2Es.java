@@ -57,6 +57,7 @@ public class SyncDataBase2Es {
 
         while (true) {
             LambdaQueryWrapper<Article> wrapper = new LambdaQueryWrapper<>();
+            wrapper.ne(Article::getTypeId, 8);//代办不入ES
             wrapper.last("LIMIT " + PAGE_SIZE + " OFFSET " + offset);
             List<Article> articles = articleMapper.selectList(wrapper);
 

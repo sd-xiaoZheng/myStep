@@ -54,6 +54,13 @@ const handleNewDiary = () => {
   })
 }
 
+// 新建代办
+const handleNewTodo = () => {
+  uni.navigateTo({
+    url: '/pages/diary/todoWrite'
+  })
+}
+
 // 心情记录
 const handleMood = () => {
   uni.showToast({
@@ -81,6 +88,7 @@ const tabbarItems = ref([
   { id: 'home', title: '首页', icon: 'i-carbon-home', path: '/pages/index/index' },
   { id: 'diary', title: '日记', icon: 'i-carbon-document', path: '/pages/diary/index', active: true },
   { id: 'write', title: '写日记', icon: 'i-carbon-add', path: '/pages/diary/write' },
+  { id: 'todo', title: '代办', icon: 'i-carbon-task', path: '/pages/diary/todoWrite' },
   { id: 'read', title: '阅读', icon: 'i-carbon-book', path: '/pages/diary/read' }
 ])
 
@@ -90,6 +98,9 @@ const switchTab = (item) => {
     uni.switchTab({
       url: item.path
     })
+  } else if (item.id === 'diary') {
+    // 当前已在日记页，无需跳转
+    return
   } else {
     uni.navigateTo({
       url: item.path
@@ -119,6 +130,10 @@ const switchTab = (item) => {
         <view class="btn-primary" @click="handleNewDiary">
           <view class="i-carbon-add btn-icon"></view>
           <text class="btn-text">新建日记</text>
+        </view>
+        <view class="btn-todo" @click="handleNewTodo">
+          <view class="i-carbon-task btn-icon"></view>
+          <text class="btn-text">新建代办</text>
         </view>
         <view class="btn-secondary" @click="handleMood">
           <view class="i-carbon-face-satisfied btn-icon"></view>
@@ -281,6 +296,18 @@ const switchTab = (item) => {
   background: linear-gradient(135deg, rgba(52, 152, 219, 1), rgba(41, 128, 185, 1));
   border-radius: 12px;
   box-shadow: 0px 4px 16px rgba(52, 152, 219, 0.35);
+}
+
+.btn-todo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  background: linear-gradient(135deg, rgba(230, 126, 34, 1), rgba(211, 84, 0, 1));
+  border-radius: 12px;
+  box-shadow: 0px 4px 16px rgba(230, 126, 34, 0.35);
 }
 
 .btn-secondary {

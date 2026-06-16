@@ -29,6 +29,7 @@
           <el-dropdown-menu>
             <el-dropdown-item class="item" command="diaryHome">首页</el-dropdown-item>
             <el-dropdown-item class="item" command="diaryCreate">编辑</el-dropdown-item>
+            <el-dropdown-item class="item" command="diaryTodoCreate">代办</el-dropdown-item>
             <el-dropdown-item class="item" command="diaryList">列表</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -142,6 +143,9 @@ export default {
           path = '/diaryEdit';
         case "diaryCreate":
           path = '/diaryCreate';
+          break;
+        case "diaryTodoCreate":
+          path = '/diaryTodoCreate';
           break;
         case "diaryList":
           path = '/diaryList';
