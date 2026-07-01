@@ -117,7 +117,7 @@ export default {
         formData.append('content', this.todo.content)
         formData.append('typeId', 8) // 强制选择代办类型
         formData.append('isStar', this.todo.isStar)
-        formData.append('title', '代办标题')
+        formData.append('title', '1')
 
         const res = await addArticle(formData)
         if (res.code === 200) {

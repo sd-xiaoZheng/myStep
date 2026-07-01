@@ -88,3 +88,51 @@ export function getArticleByFiltter(data) {
         data
     })
 }
+
+/**
+ * 获取当前用户的代办列表
+ * @returns {*}
+ */
+export function getTodoList() {
+    return request({
+        url: '/article/getTodoList',
+        method: 'get'
+    })
+}
+
+/**
+ * 将代办标记为已完成（title 1 -> -1）
+ * @param {string} id 代办ID
+ * @returns {*}
+ */
+export function completeTodo(id) {
+    return request({
+        url: '/article/completeTodo',
+        method: 'post',
+        data: { id }
+    })
+}
+
+/**
+ * 删除代办
+ * @param {string} id 代办ID
+ * @returns {*}
+ */
+export function deleteTodo(id) {
+    return request({
+        url: '/article/deleteTodo',
+        method: 'post',
+        data: { id }
+    })
+}
+
+/**
+ * 获取当前用户各类型的文章数量统计
+ * @returns {*}
+ */
+export function getTypeStats() {
+    return request({
+        url: '/article/getTypeStats',
+        method: 'get'
+    })
+}

@@ -1,8 +1,12 @@
 package org.zaohu.modules.article.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.zaohu.modules.article.entity.Article;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -14,4 +18,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 @Mapper
 public interface ArticleMapper extends BaseMapper<Article> {
+
+    List<Map<String, Object>> getTypeStats(@Param("authorId") Long authorId);
 }

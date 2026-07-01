@@ -248,7 +248,9 @@ export default {
     }
   },
   async mounted() {
-    await Promise.all([this.loadArticles(), this.loadFilterOptions(), this.loadActivityData()])
+    await this.loadFilterOptions()
+    this.applyRouteQueryFilter()
+    await Promise.all([this.loadArticles(), this.loadActivityData()])
     this.$nextTick(() => {
       this.startAutoScroll()
     })
@@ -455,6 +457,15 @@ export default {
       this.filters.dateRange = [item.startDate, item.endDate]
       this.filters.quickTime = ''
       this.loadArticles()
+    },
+    applyRouteQueryFilter() {
+      const typeId = this.$route.query.typeId
+      if (!typeId) return
+      const typeItem = this.filterOptions.type.find(t => String(t.id) === String(typeId))
+      if (typeItem) {
+        const newItem = { ...typeItem, _key: 'type_' + typeItem.id + '_' + (++_keyCounter), _hover: false, _flash: false }
+        this.activeFilterItems.push(newItem)
+      }
     },
     goToCreateDiary() {
       this.$router.push('/diaryCreate');

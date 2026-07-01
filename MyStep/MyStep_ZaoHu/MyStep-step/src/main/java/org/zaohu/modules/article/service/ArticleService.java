@@ -34,4 +34,12 @@ public interface ArticleService extends IService<Article> {
     List<Article> getArticleByFiltter(GetArticleVo getArticleVo);
 
     List<Map<String, Object>> getYearlyActivity(String startTime, String endTime);
+
+    List<Article> getTodoList();
+
+    void completeTodo(String id);
+
+    void deleteTodo(String id);
+
+    List<Map<String, Object>> getTypeStats();
 }

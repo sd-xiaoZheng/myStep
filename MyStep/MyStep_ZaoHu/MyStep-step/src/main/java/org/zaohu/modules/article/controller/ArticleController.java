@@ -74,4 +74,30 @@ public class ArticleController extends BaseController {
         List<Map<String, Object>> activity = articleService.getYearlyActivity(startTime, endTime);
         return Result.success(activity);
     }
+
+    @GetMapping("/getTodoList")
+    public Result getTodoList() {
+        List<Article> todoList = articleService.getTodoList();
+        return Result.success(todoList);
+    }
+
+    @PostMapping("/completeTodo")
+    public Result completeTodo(@RequestBody Map<String, String> params) {
+        String id = params.get("id");
+        articleService.completeTodo(id);
+        return Result.success();
+    }
+
+    @PostMapping("/deleteTodo")
+    public Result deleteTodo(@RequestBody Map<String, String> params) {
+        String id = params.get("id");
+        articleService.deleteTodo(id);
+        return Result.success();
+    }
+
+    @GetMapping("/getTypeStats")
+    public Result getTypeStats() {
+        List<Map<String, Object>> stats = articleService.getTypeStats();
+        return Result.success(stats);
+    }
 }

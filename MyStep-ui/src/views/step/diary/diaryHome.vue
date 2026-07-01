@@ -1,5 +1,6 @@
 <template>
-  <div class="diary-home">
+  <div>
+    <div class="diary-home">
     <!-- 顶部欢迎栏 -->
     <header class="welcome-bar">
       <div class="welcome-text">
@@ -31,15 +32,17 @@
             <img src="@/assets/icon/daiban.png" alt="待办" class="card-image-icon">
           </div>
           <h2>今日待办</h2>
-          <button class="add-todo">+</button>
+          <button class="add-todo" @click="goToTodoCreate">+</button>
         </div>
         <ul>
-          <li><input type="checkbox" id="task1"><label for="task1">完成日记应用设计</label><span
-              class="delete-task">×</span></li>
-          <li><input type="checkbox" id="task2" checked><label for="task2">同步昨日工作</label><span
-              class="delete-task">×</span></li>
+          <li v-for="todo in displayTodoList" :key="todo.id">
+            <input type="checkbox" :id="'card-' + todo.id" :checked="todo.title === '-1'" @change="toggleTodo(todo)">
+            <label :for="'card-' + todo.id">{{ todo.content }}</label>
+            <span class="delete-task" @click="deleteTodoItem(todo.id)">×</span>
+          </li>
+          <li v-if="todoList.length === 0" class="empty-todo">暂无待办，点击 + 添加</li>
         </ul>
-        <a href="#" class="view-all">查看所有待办→</a>
+        <a class="view-all" @click="showAllDialog = true">查看所有待办→</a>
       </div>
 
       <!-- 模块 3: 本月统计 -->
@@ -67,40 +70,21 @@
     <section class="diary-modules">
       <h2>日记模块</h2>
       <div class="module-cards">
-        <div class="module-card">
-          <div class="module-icon">📖</div>
-          <div class="module-info">
-            <h3>日记</h3>
-            <p>记录日常生活点滴</p>
+        <div
+          v-for="item in moduleList"
+          :key="item.typeId"
+          :class="['module-card', { active: selectedTypeId === item.typeId }]"
+          @click="filterDiaryByType(item.typeId)"
+        >
+          <div class="module-icon">
+            <img v-if="item.icon" :src="item.icon" alt="" class="module-icon-img">
+            <span v-else>📋</span>
           </div>
-          <div class="module-count">12 篇</div>
-          <div class="module-arrow">→</div>
-        </div>
-        <div class="module-card">
-          <div class="module-icon">❤️</div>
           <div class="module-info">
-            <h3>记忆</h3>
-            <p>写下记忆中的一切</p>
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.description || '' }}</p>
           </div>
-          <div class="module-count">8 篇</div>
-          <div class="module-arrow">→</div>
-        </div>
-        <div class="module-card">
-          <div class="module-icon">📁</div>
-          <div class="module-info">
-            <h3>阶段总结</h3>
-            <p>阶段性回顾与总结</p>
-          </div>
-          <div class="module-count">5 篇</div>
-          <div class="module-arrow">→</div>
-        </div>
-        <div class="module-card">
-          <div class="module-icon">📍</div>
-          <div class="module-info">
-            <h3>畅想</h3>
-            <p>未来规划与憧憬</p>
-          </div>
-          <div class="module-count">3 篇</div>
+          <div class="module-count">{{ item.count }} 篇</div>
           <div class="module-arrow">→</div>
         </div>
       </div>
@@ -109,43 +93,85 @@
     <!-- 最新日记区 -->
     <section class="latest-diaries">
       <div class="section-header">
-        <h2>最新日记</h2>
-        <a href="#" class="view-all-link">查看全部→</a>
+        <h2>{{ selectedTypeId ? (typeMap[selectedTypeId] && typeMap[selectedTypeId].name) || '筛选日记' : '最新日记' }}</h2>
+        <a class="view-all-link" @click="goToDiaryList">查看全部→</a>
       </div>
       <div class="diary-cards">
-        <div class="diary-card">
-          <h3>今天的工作总结</h3>
-          <p class="excerpt">完成了日记应用的首页设计...</p>
+        <div
+          v-for="diary in latestDiaries"
+          :key="diary.id"
+          class="diary-card"
+        >
+          <h3>{{ diary.title }}</h3>
+          <p class="excerpt">{{ diary.preview }}</p>
           <div class="meta">
-            <span class="date-time">2025-11-4 18:30</span>
-            <span class="tag diary-tag">日记</span>
-            <span class="time-ago">5 分钟前</span>
+            <span class="date-time">{{ diary.date }}</span>
+            <span v-if="diary.typeName" class="tag" :class="'type-tag-' + diary.typeId">{{ diary.typeName }}</span>
           </div>
         </div>
-        <div class="diary-card">
-          <h3>周末的思考</h3>
-          <p class="excerpt">思考了人生方向的问题...</p>
-          <div class="meta">
-            <span class="date-time">2025-11-3 14:20</span>
-            <span class="tag reflection-tag">感言</span>
-            <span class="time-ago">1 天前</span>
-          </div>
-        </div>
+        <div v-if="latestDiaries.length === 0" class="empty-diary">暂无日记</div>
       </div>
     </section>
   </div>
+
+  <!-- 所有待办弹窗 -->
+  <el-dialog title="所有待办" :visible.sync="showAllDialog" width="600px" :close-on-click-modal="false" :append-to-body="true">
+    <ul class="dialog-todo-list">
+      <li v-for="todo in todoList" :key="todo.id">
+        <input type="checkbox" :id="'dialog-' + todo.id" :checked="todo.title === '-1'" @change="toggleTodo(todo)">
+        <label :for="'dialog-' + todo.id">{{ todo.content }}</label>
+        <span class="delete-task" @click="deleteTodoItem(todo.id)">×</span>
+      </li>
+      <li v-if="todoList.length === 0" class="empty-todo">暂无待办</li>
+    </ul>
+  </el-dialog>
+</div>
 </template>
 
 <script>
+import { getTodoList, completeTodo, deleteTodo, getTypeStats, getFiltter, getArticleByFiltter } from '@/apis/api/article'
+
 export default {
   name: 'CreateDiary',
   data() {
     return {
       currentDate: '',//今日日期
+      todoList: [],//代办列表
+      showAllDialog: false,//所有待办弹窗
+      typeMap: {},//typeId → type对象（name、icon等）
+      typeStats: [],//各type的文章数量统计
+      selectedTypeId: null,//当前选中的类型（null=全部）
+      latestDiaries: [],//最新日记列表
+    }
+  },
+  computed: {
+    // 只展示前3条
+    displayTodoList() {
+      return this.todoList.slice(0, 3)
+    },
+    // 按sort_no排序、带名称和图标的模块列表
+    moduleList() {
+      return this.typeStats.map(s => {
+        const typeId = s.type_id || s.TYPE_ID
+        const typeInfo = this.typeMap[typeId] || {}
+        return {
+          typeId: typeId,
+          name: typeInfo.name || '未知',
+          icon: typeInfo.icon || '',
+          description: typeInfo.description || '',
+          count: s.count || s.COUNT || 0
+        }
+      }).sort((a, b) => {
+        const aSort = (this.typeMap[a.typeId] && this.typeMap[a.typeId].sortNo) || 99
+        const bSort = (this.typeMap[b.typeId] && this.typeMap[b.typeId].sortNo) || 99
+        return aSort - bSort
+      })
     }
   },
   mounted() {
     this.onMounted();
+    this.fetchTodoList();
+    this.fetchModuleData();
   },
   methods: {
     onMounted() {
@@ -155,8 +181,108 @@ export default {
       const day = now.getDate()
       this.currentDate= `${year} 年 ${month} 月 ${day} 日`
     },
+    async fetchTodoList() {
+      try {
+        const res = await getTodoList()
+        if (res.code === 200) {
+          // 未完成的(title=1)排前面，已完成的(title=-1)排后面
+          const list = res.data || []
+          list.sort((a, b) => {
+            if (a.title === '1' && b.title === '-1') return -1
+            if (a.title === '-1' && b.title === '1') return 1
+            return 0
+          })
+          this.todoList = list
+        }
+      } catch (e) {
+        console.error('获取代办列表失败:', e)
+      }
+    },
+    async toggleTodo(todo) {
+      try {
+        const res = await completeTodo(todo.id)
+        if (res.code === 200) {
+          todo.title = todo.title === '1' ? '-1' : '1'
+          this.fetchTodoList()
+        }
+      } catch (e) {
+        console.error('切换代办状态失败:', e)
+      }
+    },
+    async deleteTodoItem(id) {
+      try {
+        const res = await deleteTodo(id)
+        if (res.code === 200) {
+          this.todoList = this.todoList.filter(t => t.id !== id)
+        }
+      } catch (e) {
+        console.error('删除代办失败:', e)
+      }
+    },
     goToDiaryCreate() {
       this.$router.push('/diaryCreate');
+    },
+    async fetchModuleData() {
+      try {
+        const [statsRes, filterRes] = await Promise.all([getTypeStats(), getFiltter()])
+        if (statsRes.code === 200) {
+          this.typeStats = statsRes.data || []
+        }
+        if (filterRes.code === 200 && filterRes.data) {
+          const types = filterRes.data.type || []
+          const map = {}
+          types.forEach(t => { map[t.id] = t })
+          this.typeMap = map
+        }
+      } catch (e) {
+        console.error('获取模块数据失败:', e)
+      }
+      this.fetchLatestDiaries()
+    },
+    async fetchLatestDiaries() {
+      try {
+        const params = { startTime: null, endTime: null, title: null, content: null, keyValueObj: [] }
+        if (this.selectedTypeId) {
+          params.keyValueObj.push({ key: 'type', value: this.selectedTypeId })
+        }
+        const res = await getArticleByFiltter(params)
+        if (res.code === 200) {
+          this.latestDiaries = (res.data || []).slice(0, 6).map(item => ({
+            id: item.id,
+            title: item.title,
+            date: this.formatWriteTime(item.writeTime),
+            preview: this.truncateContent(item.content, 80),
+            typeName: item.typeName,
+            typeId: item.typeId
+          }))
+        }
+      } catch (e) {
+        console.error('获取最新日记失败:', e)
+      }
+    },
+    formatWriteTime(writeTime) {
+      if (!writeTime) return ''
+      const s = typeof writeTime === 'string' ? writeTime : ''
+      return s.split('T')[0]
+    },
+    truncateContent(content, maxLen) {
+      if (!content) return ''
+      return content.length > maxLen ? content.substring(0, maxLen) + '...' : content
+    },
+    filterDiaryByType(typeId) {
+      if (this.selectedTypeId === typeId) {
+        this.selectedTypeId = null
+      } else {
+        this.selectedTypeId = typeId
+      }
+      this.fetchLatestDiaries()
+    },
+    goToDiaryList() {
+      if (this.selectedTypeId) {
+        this.$router.push({ path: '/diaryList', query: { typeId: String(this.selectedTypeId) } })
+      } else {
+        this.$router.push('/diaryList')
+      }
     },
     goToTodoCreate() {
       this.$router.push('/diaryTodoCreate');
@@ -398,11 +524,58 @@ a {
   opacity: 1;
 }
 
+.empty-todo {
+  color: #95a5a6;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 1rem 0;
+  border-bottom: none !important;
+}
+
 .view-all {
   font-size: 0.9rem;
   align-self: flex-end;
   color: #3498db;
   font-weight: 500;
+  cursor: pointer;
+}
+
+/* 弹窗内的代办列表 */
+.dialog-todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.dialog-todo-list li {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 0;
+  color: #34495e;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dialog-todo-list li:last-child {
+  border-bottom: none;
+}
+
+.dialog-todo-list li input[type="checkbox"] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.dialog-todo-list li label {
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.dialog-todo-list li input[type="checkbox"]:checked + label {
+  text-decoration: line-through;
+  color: #7f8c8d;
 }
 
 /* Monthly Stats */
@@ -475,8 +648,26 @@ a {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
+.module-card.active {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #3498db;
+  box-shadow: 0 8px 32px rgba(52, 152, 219, 0.2);
+}
+
 .module-icon {
   font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.module-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .module-info {
@@ -528,6 +719,7 @@ a {
   font-size: 0.9rem;
   color: #3498db;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .diary-cards {
@@ -551,6 +743,14 @@ a {
   transform: translateY(-5px);
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.empty-diary {
+  color: #95a5a6;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 2rem 0;
+  grid-column: 1 / -1;
 }
 
 .diary-card h3 {

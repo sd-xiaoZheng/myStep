@@ -632,6 +632,36 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         return result;
     }
 
+    @Override
+    public List<Article> getTodoList() {
+        User user = SecurityUtils.getUser();
+        LambdaQueryWrapper<Article> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Article::getTypeId, 8)
+               .eq(Article::getAuthorId, user.getUserId())
+               .orderByDesc(Article::getWriteTime);
+        return articleMapper.selectList(wrapper);
+    }
+
+    @Override
+    public void completeTodo(String id) {
+        Article article = articleMapper.selectById(id);
+        if (Objects.nonNull(article)) {
+            article.setTitle("1".equals(article.getTitle()) ? "-1" : "1");
+            articleMapper.updateById(article);
+        }
+    }
+
+    @Override
+    public void deleteTodo(String id) {
+        articleMapper.deleteById(id);
+    }
+
+    @Override
+    public List<Map<String, Object>> getTypeStats() {
+        User user = SecurityUtils.getUser();
+        return articleMapper.getTypeStats(user.getUserId());
+    }
+
     private static Integer toInt(Object value) {
         if (value instanceof Integer i) return i;
         if (value instanceof Number n) return n.intValue();

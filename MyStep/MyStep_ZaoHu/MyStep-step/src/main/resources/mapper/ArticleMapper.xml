@@ -2,4 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zaohu.modules.article.mapper.ArticleMapper">
 
+    <select id="getTypeStats" resultType="java.util.HashMap">
+        SELECT type_id, COUNT(*) as count
+        FROM article
+        WHERE author_id = #{authorId} AND type_id != 8
+        GROUP BY type_id
+        ORDER BY count DESC
+    </select>
+
 </mapper>
